@@ -5,15 +5,14 @@ System Requirements
 
 The [R programming language](https://www.r-project.org/) can be
 downloaded at <https://cran.rstudio.com/>. The current available version
-of R is 3.5.0, but any version greater than or equal to 3.4.0 should
-suffice.
+of R is 3.5.0, but you don't need to upgrade if you already have version 
+3.4 or later installed.
 
-You can use these links to jump directly to the download page for each
-platform.
+Jump directly to the download page for each platform:
 
-  - [Windows](https://cran.rstudio.com/bin/windows/base/)
-  - [MacOS](https://cran.rstudio.com/bin/macosx/)
-  - [Unix](https://cran.rstudio.com/bin/linux/)
+  - [R for Windows](https://cran.rstudio.com/bin/windows/base/)
+  - [R for MacOS](https://cran.rstudio.com/bin/macosx/)
+  - [R for Unix](https://cran.rstudio.com/bin/linux/)
 
 For an interactive guide, the following videos by Roger Peng of Johns
 Hopkins Biostatistics are slightly outdated but cover the essential
@@ -46,8 +45,7 @@ following into the **Console** pane and hit enter to run.
 install.packages("devtools")
 ```
 
-![Installing a package from the RStudio
-Console.](images/install-devtools-rstudio-1.png)
+![Installing a package from the RStudio Console.](images/install-devtools-rstudio-1.png)
 
 R will output messages while it works to install the package.
 
@@ -59,4 +57,5 @@ If you have any issues, copy the output and email to
 ## Access to GitHub
 
 We will also use GitHub to host course materials and to dicuss issues
-that come up during the course.
+that come up during the course, so please make sure that you can browse
+to <https://github.com/gerkelab/core-r-course>.

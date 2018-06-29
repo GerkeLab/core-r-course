@@ -51,6 +51,14 @@ R will output messages while it works to install the package.
 
 ![The package has installed.](images/install-devtools-rstudio-2.png)
 
+If this installation worked for you, you can go ahead and install the R package [tidyverse](https://tidyverse.org).
+This package is actually a collection of packages that work together for a cohesive data processing workflow, and we will be using many of the packages included throughout the course.
+Because `tidyverse` installs many packages, the installation may take a little while to complete.
+
+```r
+install.packages("tidyverse")
+```
+
 If you have any issues, copy the output and email to
 <Garrick.AdenBuie@moffitt.org> or <Travis.Gerke@moffitt.org>.
 

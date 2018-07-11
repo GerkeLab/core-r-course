@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Fira+Mono|Fira+Sans:300,300i,400,400i,500,500i,600,600i');
+@import url('https://fonts.googleapis.com/css?family=Fira+Mono|Fira+Sans:400,400i');
 
 html {
   font-size: 16px;
@@ -13,14 +13,18 @@ pre {
 }
 
 html > * {
-  font-family: 'Helvetica', sans serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;;
 }
 
 p, ul, ol {
   line-height: 1.9rem;
   font-size: 1.25rem;
-  font-weight: 200;
+  font-weight: 400;
   margin-bottom: 1rem;
+}
+
+table {
+  font-size: 1.1rem;
 }
 
 h1, h2, h3, h4 {
@@ -64,9 +68,16 @@ pre > code {
 blockquote {
   background-color: #f9f9f9;
 }
+.sourceCode {
+  overflow-x: scroll;
+}
 
 a {
   color: #eb1455;
+}
+a:hover, a:focus {
+  color: #eb1455;
+  text-decoration: underline;
 }
 
 .list-group-item.active,

@@ -24,7 +24,7 @@ session_list <- tibble(
 
 **Travis Gerke**, Thursday, June 28, 2018
 
-> We are pleased to announce the launch of a training series, “Data Processing with R,” for any of you who may be interested.  Beginning on July 18, there will be 8 weekly sessions held on Wednesday mornings, 9:15-11:15. Four bi-weekly sessions will follow the initial series. The first session is in MKE-1308, and the remaining sessions are in MKE-1022. A draft of the course outline is attached to give a high-level overview.
+> We are pleased to announce the launch of a training series, “Data Processing with R,” for any of you who may be interested.  Beginning on July 18, there will be 8 weekly sessions held on Wednesday mornings, 9:15-11:15. Four bi-weekly sessions will follow the initial series. The first session is in MKE-1308, and the remaining sessions are in MKE-1022.
 >
 > The goal of the training series is to develop core proficiencies in the R programming language for data processing tasks that are common to CDS core staff, honest brokers, and other team members who undertake similar data querying and provisioning activities. No prior experience is necessary! Garrick Aden-Buie, an expert R developer in my group, will be leading the sessions (and I may join as a student when my schedule permits, so that I can learn some new tricks too!).
 >

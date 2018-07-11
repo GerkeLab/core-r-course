@@ -1,0 +1,20 @@
+name: "Core R Course"
+navbar:
+  title: "Core R Course"
+  left:
+    - text: "About"
+      menu:
+        - text: "About this course"
+          href: proposal.html
+        - text: "System Requirements"
+          href: system-requirements.html
+  right:
+    - icon: fa-github
+      href: https://github.com/gerkelab/core-r-course
+output_dir: "docs"
+output:
+  html_document:
+    theme: cosmo
+    template: default
+    css: custom.css
+    highlight: kate

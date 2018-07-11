@@ -1,5 +1,6 @@
-Data processing with R: Enhancing efficiency and reproducibility in data queries and provisioning
-=================================================================================================
+---
+title: "Data processing with R: Enhancing efficiency and reproducibility in data queries and provisioning"
+---
 
 Course Objectives 
 -----------------

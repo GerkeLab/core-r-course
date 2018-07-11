@@ -1,0 +1,43 @@
+---
+title: "Data processing with R"
+---
+
+```{r setup, include=FALSE, warning=FALSE, message=FALSE}
+# Global Setup
+knitr::opts_chunk$set(
+  echo = FALSE
+)
+
+library(tidyverse)
+```
+
+```{r}
+session_list <- tibble(
+  Date = seq(lubridate::ymd("2018-07-18"), lubridate::ymd("2018-07-18") + lubridate::weeks(7), by = "7 day"),
+  Location = c("MKE-1308", rep("MKE-1022", 7)),
+  `Start Time` = "09:15",
+  Link = ""
+)
+```
+
+## Announcements
+
+**Travis Gerke**, Thursday, June 28, 2018
+
+> We are pleased to announce the launch of a training series, “Data Processing with R,” for any of you who may be interested.  Beginning on July 18, there will be 8 weekly sessions held on Wednesday mornings, 9:15-11:15. Four bi-weekly sessions will follow the initial series. The first session is in MKE-1308, and the remaining sessions are in MKE-1022. A draft of the course outline is attached to give a high-level overview.
+>
+> The goal of the training series is to develop core proficiencies in the R programming language for data processing tasks that are common to CDS core staff, honest brokers, and other team members who undertake similar data querying and provisioning activities. No prior experience is necessary! Garrick Aden-Buie, an expert R developer in my group, will be leading the sessions (and I may join as a student when my schedule permits, so that I can learn some new tricks too!).
+>
+> If you would like to attend, plan to bring a laptop, as the sessions will be interactive. We ask that you install R, Rstudio, and the devtools package prior to the first day ([instructions available here](system-requirements.html)). Garrick can describe/answer any questions about that process in the first session; the reason for completing the task in advance is to ensure that no security permissions on your machine block you from getting up and running.
+
+## Next Session
+
+```{r results='asis'}
+next_session <- session_list %>%
+  filter(Date > Sys.Date()) %>%
+  arrange(Date) %>%
+  slice(1) %>%
+  mutate(Date = strftime(Date, "%A, %b %d, %Y"))
+
+knitr::kable(next_session)
+```

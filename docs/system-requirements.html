@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>System Requirements</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Core R Course</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    About
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="proposal.html">About this course</a>
+    </li>
+    <li>
+      <a href="system-requirements.html">System Requirements</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/gerkelab/core-r-course">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">System Requirements</h1>
+
+</div>
+
+
+<div id="r" class="section level2">
+<h2>R</h2>
+<p>The <a href="https://www.r-project.org/">R programming language</a> can be downloaded at <a href="https://cran.rstudio.com/" class="uri">https://cran.rstudio.com/</a>. The current available version of R is 3.5.0, but you don’t need to upgrade if you already have version 3.4 or later installed.</p>
+<p>Jump directly to the download page for each platform:</p>
+<ul>
+<li><a href="https://cran.rstudio.com/bin/windows/base/">R for Windows</a></li>
+<li><a href="https://cran.rstudio.com/bin/macosx/">R for MacOS</a></li>
+<li><a href="https://cran.rstudio.com/bin/linux/">R for Unix</a></li>
+</ul>
+<p>For an interactive guide, the following videos by Roger Peng of Johns Hopkins Biostatistics are slightly outdated but cover the essential process.</p>
+<ul>
+<li><a href="https://youtu.be/watch?v=mfGFv-iB724">Installing R on Windows</a></li>
+<li><a href="http://youtu.be/Icawuhf0Yqo">Installing R on Mac</a></li>
+</ul>
+</div>
+<div id="rstudio" class="section level2">
+<h2>RStudio</h2>
+<p>RStudio is an <em>integrated development environment</em> (IDE) for R that makes it much easier to use R. It includes a code editor, debugging and visualization tool, a file manager, and much more.</p>
+<p>Download and install RStudio from the <a href="https://www.rstudio.com/products/rstudio/download/#download">RStudio download page</a>.</p>
+<p>The current version of RStudio is 1.1.453 and any version greater than 1.1.0 will work. (Version 1.0+ will also work if already installed.)</p>
+</div>
+<div id="installing-packages" class="section level2">
+<h2>Installing Packages</h2>
+<p>The R language is extended via user-created <em>packages</em>. You will need to be able to download and install packages for the course.</p>
+<p>To test if you can install an R package, open RStudio, type the following into the <strong>Console</strong> pane and hit enter to run.</p>
+<pre class="r"><code>install.packages(&quot;devtools&quot;)</code></pre>
+<div class="figure">
+<img src="images/install-devtools-rstudio-1.png" alt="Installing a package from the RStudio Console." />
+<p class="caption">Installing a package from the RStudio Console.</p>
+</div>
+<p>R will output messages while it works to install the package.</p>
+<div class="figure">
+<img src="images/install-devtools-rstudio-2.png" alt="The package has installed." />
+<p class="caption">The package has installed.</p>
+</div>
+<p>If this installation worked for you, you can go ahead and install the R package <a href="https://tidyverse.org">tidyverse</a>. This package is actually a collection of packages that work together for a cohesive data processing workflow, and we will be using many of the packages included throughout the course. Because <code>tidyverse</code> installs many packages, the installation may take a little while to complete.</p>
+<pre class="r"><code>install.packages(&quot;tidyverse&quot;)</code></pre>
+<p>If you have any issues, copy the output and email to <a href="mailto:Garrick.AdenBuie@moffitt.org">Garrick.AdenBuie@moffitt.org</a> or <a href="mailto:Travis.Gerke@moffitt.org">Travis.Gerke@moffitt.org</a>.</p>
+</div>
+<div id="access-to-github" class="section level2">
+<h2>Access to GitHub</h2>
+<p>We will also use GitHub to host course materials and to dicuss issues that come up during the course, so please make sure that you can browse to <a href="https://github.com/gerkelab/core-r-course" class="uri">https://github.com/gerkelab/core-r-course</a>.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

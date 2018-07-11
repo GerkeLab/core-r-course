@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Data processing with R: Enhancing efficiency and reproducibility in data queries and provisioning</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Core R Course</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    About
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="proposal.html">About this course</a>
+    </li>
+    <li>
+      <a href="system-requirements.html">System Requirements</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/gerkelab/core-r-course">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Data processing with R: Enhancing efficiency and reproducibility in data queries and provisioning</h1>
+
+</div>
+
+
+<div id="course-objectives" class="section level2">
+<h2>Course Objectives</h2>
+<p>This course will develop core proficiencies in data processing in the R programming language. Through a series of 8 interactive weekly sessions and 4 bi-weekly follow-up sessions, the Collaborative Data Services Core team will learn to:</p>
+<ul>
+<li><p>Import data from varying formats (CSV, Excel, SAS, txt) into RStudio.</p></li>
+<li><p>Perform common data transformation steps in R, including manipulating, processing, cleaning, de-identifying, and merging data sources.</p></li>
+<li><p>Output data in flexible formats (CSV, Excel, SAS, txt, etc.), as required by CDS clients from R/RStudio.</p></li>
+<li><p>Save and document data processing steps as an R script that can be repeated or modified later.</p></li>
+</ul>
+<p>These objectives will be tailored and refined prior to the course offering through conversations with the CDS Core team about their requirements and current workflows.</p>
+<div id="additional-goals" class="section level3">
+<h3>Additional Goals</h3>
+<p>Additional goals dependent on the needs of CDS Core and the scope of previous projects chosen by the team to serve as exemplary challenges.</p>
+<ul>
+<li><p>Visualize data using ggplot2</p></li>
+<li><p>String manipulation via stringr with regular expressions</p></li>
+<li><p>Interacting with databases using dbplyr</p></li>
+<li><p>Documenting data analyses and process with R Markdown</p></li>
+<li><p>Version control with git</p></li>
+</ul>
+</div>
+<div id="long-term-goals" class="section level3">
+<h3>Long-term Goals</h3>
+<p>Looking forward (e.g. once core R proficiencies are incorporated into routine practice), a needs assessment could identify whether the following further goals would be useful in a follow-up series:</p>
+<ul>
+<li><p>Organizing and collecting functions for common CDS data actions, processes and interface interactions into an R Package</p></li>
+<li>Advanced topics in data manipulation:
+<ul>
+<li>Principles of functional programming</li>
+<li>List and Map/Reduce operations with purrr</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="overall-structure" class="section level2">
+<h2>Overall Structure</h2>
+<p>The overall structure of the course will take the form of 8 weekly ~2 hour sessions. Each session will be structured to support a core CDS learning goal drawn from previously completed projects with the intention of having participants leave the session having learned a new core skill that can be applied to CDS workflows. At each additional session we will build on the skills learned in the previous session, increasing at each session the breadth of tasks that can be accomplished.</p>
+<p>Overall, the first 2-4 sessions will be designed to be focused on getting to “productive” as quickly as possible, relative to the goals and requirements of CDS workflows. These sessions will about 70% presentation and 30% “try-it-yourself” interactive examples. Rather than focus on teaching discrete units – e.g. data types; subsetting; control structures – concepts will be introduced “just-in-time” for the session goals. As the complexity of the targeted outcome skill grows, the level of the concepts explored can increase to include more difficult or comprehensive tasks.</p>
+<p>After the initial learning period (8 sessions), the course will shift to more informal “workgroup” sessions centered around recent applications of R programming to actual CDS queries. These 4 bi-weekly follow-up sessions will be used to help troubleshoot problems or issues that arise while integrating R into CDS tasks. A goal in the design of this course is that, after each initial session, the participants will be able to use RStudio and R tools to fully replace at least one critical task. Along the way, participants will be able to recognize areas where R can generally be applied to streamline their daily tasks and these observations can be used to guide later content in conjunction with the list of topics in the <a href="#additional-goals">additional goals section</a> above.</p>
+<p>From a technical perspective, the course will feature modern R packages and tools, namely <strong>RStudio</strong> and the <strong>tidyverse</strong> packages and programming styles, in favor of base R methods. Fundamental concepts from base R will be included as needed, but the course will favor productive data engineering over technical completeness.</p>
+</div>
+<div id="example-session" class="section level2">
+<h2>Example Session</h2>
+<div id="session-1" class="section level3">
+<h3>Session 1</h3>
+<ul>
+<li>Setup basics
+<ul>
+<li>Installing R, RStudio, basic packages</li>
+<li><a href="https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf">RStudio</a></li>
+<li>Using RStudio Projects</li>
+</ul></li>
+<li>Crash Course in R Syntax
+<ul>
+<li><code>library(``)</code> and <code>pkg``::function()</code></li>
+<li>Working directories</li>
+<li>Assignment operator <code>&lt;-</code></li>
+<li>Function syntax</li>
+<li>Atomic data structure basics: logical, integer, double, character, factor</li>
+<li>Missing types: <code>NA</code> and <code>NULL</code></li>
+</ul></li>
+<li>Data basics
+<ul>
+<li>Easy data import via RStudio + <code>readr</code> and <code>readxl</code></li>
+<li>Import a typical TransMed export</li>
+</ul></li>
+<li>Data manipulation
+<ul>
+<li>Pipe operator</li>
+<li>Basic Single Table Dplyr Verbs
+<ul>
+<li><code>filter(``)</code>, <code>arrange()</code>, <code>select()</code>, <code>rename()</code>, <code>mutate()</code></li>
+<li><a href="https://dplyr.tidyverse.org/" class="uri">https://dplyr.tidyverse.org/</a></li>
+</ul></li>
+</ul></li>
+<li>Project
+<ul>
+<li>Merge the knowledge gained around TransMed exports/imports in the “Data basics” portion with basic verbs from the “Data manipulation” section to reproduce a simple CDS query (e.g. one that the team previously completed and was scored 1 or 2 in difficulty).</li>
+</ul></li>
+</ul>
+</div>
+<div id="further-session-topics" class="section level3">
+<h3>Further Session Topics</h3>
+<ul>
+<li>Setup basics
+<ul>
+<li>Installing R, RStudio, basic packages</li>
+<li><a href="https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf">RStudio</a></li>
+<li>Using RStudio Projects</li>
+</ul></li>
+<li>Crash Course in R Syntax
+<ul>
+<li><code>library()</code> and <code>pkg::function()</code></li>
+<li>Working directories</li>
+<li>Assignment operator <code>&lt;-</code></li>
+<li>Function syntax</li>
+<li>Atomic data structure basics: logical, integer, double, character, factor</li>
+<li>Missing types: <code>NA</code> and <code>NULL</code></li>
+</ul></li>
+<li>Data basics
+<ul>
+<li>Meet <code>mpg</code> and <code>flights</code></li>
+<li>Easy data import via RStudio + <code>readr</code> and <code>readxl</code></li>
+</ul></li>
+<li>Visualization basics
+<ul>
+<li>Basic ggplot2</li>
+<li><code>ggplot() + geom_point()</code></li>
+<li>Mapping data to vis elements: <code>aes()</code></li>
+<li><code>+ geom_&lt;GEOM&gt;()</code>
+<ul>
+<li><code>geom_point()</code></li>
+<li><code>geom_line()</code></li>
+<li><code>geom_smooth()</code></li>
+</ul></li>
+<li><code>+ facet_wrap()</code></li>
+</ul></li>
+<li>Data Manipulation
+<ul>
+<li>Pipe operator (maybe keep until session 2)</li>
+<li>Basic Single Table Dplyr Verbs
+<ul>
+<li><code>filter()</code>, <code>arrange()</code>, <code>select()</code>, <code>rename()</code>, <code>mutate()</code></li>
+<li><a href="https://dplyr.tidyverse.org/" class="uri">https://dplyr.tidyverse.org/</a></li>
+</ul></li>
+</ul></li>
+<li>Pipe Operator</li>
+<li>More Single-Table Data Manipulation
+<ul>
+<li><code>select()</code> helpers</li>
+<li>more <code>mutate()</code></li>
+<li><code>summarize()</code>, <code>count()</code>, <code>sample_n()</code>, <code>sample_frac()</code>, <code>top_n()</code></li>
+<li>Groups: <code>group_by()</code> + <code>summarize()</code>, <code>count()</code>, <code>mutate()</code></li>
+<li>Mutate vs select semantics
+<ul>
+<li>e.g. <code>select(flights, year:dep_time)</code> vs <code>mutate(df, &quot;year&quot;, 2)</code></li>
+</ul></li>
+</ul></li>
+<li>Tidy Data
+<ul>
+<li>What is tidy data?</li>
+<li>How to get to tidy data with tidyr: <code>spread()</code> and <code>gather()</code></li>
+<li>Resources
+<ul>
+<li><a href="http://vita.had.co.nz/papers/tidy-data.pdf" class="uri">http://vita.had.co.nz/papers/tidy-data.pdf</a></li>
+<li><a href="http://vita.had.co.nz/papers/tidy-data-pres.pdf" class="uri">http://vita.had.co.nz/papers/tidy-data-pres.pdf</a></li>
+<li><a href="http://r4ds.had.co.nz/tidy-data.html#tidy-data-1" class="uri">http://r4ds.had.co.nz/tidy-data.html#tidy-data-1</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

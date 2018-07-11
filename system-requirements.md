@@ -43,14 +43,14 @@ To test if you can install an R package, open RStudio, type the
 following into the **Console** pane and hit enter to run.
 
 ``` r
-install.packages("devtools")
+install.packages("readxl")
 ```
 
-![Installing a package from the RStudio Console.](images/install-devtools-rstudio-1.png)
+![Installing a package from the RStudio Console.](images/install-readxl-rstudio-1.png)
 
 R will output messages while it works to install the package.
 
-![The package has installed.](images/install-devtools-rstudio-2.png)
+![The package has installed.](images/install-readxl-rstudio-2.png)
 
 If this installation worked for you, you can go ahead and install the R package [tidyverse](https://tidyverse.org).
 This package is actually a collection of packages that work together for a cohesive data processing workflow, and we will be using many of the packages included throughout the course.

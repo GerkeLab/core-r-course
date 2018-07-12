@@ -1,0 +1,90 @@
+---
+title: Resources and Links
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+---
+
+[course-github]: https://github.com/gerkelab/core-r-course
+[course-page]: https://gerkelab.github.io/core-r-course
+[r-project]: https://www.r-project.org/
+[cran]: https://cran.rstudio.com/
+[metacran]: https://www.r-pkg.org
+[r-windows]: https://cran.rstudio.com/bin/windows/base/
+[r-macos]: https://cran.rstudio.com/bin/macosx/
+[r-unix]: https://cran.rstudio.com/bin/linux/
+[rstudio]: https://www.rstudio.com/
+[rstudio-download]: https://www.rstudio.com/products/rstudio/download/#download
+
+## Getting R, RStudio, and R Packages
+
+- [R-Project Home Page][r-project] [r-project.org]{.muted}
+    - [R for Windows][r-windows]
+    - [R for MacOS][r-macos]
+    - [R for Unix][r-unix]
+    
+- [RStudio] [rstudio.com]{.muted}
+    - [RStudio Download][rstudio-download]
+    
+- R Software Packages
+    - [CRAN] [cran.rstudio.com]{.muted}
+    - [MetaCRAN] [r-pkg.org]{.muted}
+
+
+## Online Books, Courses, or Blogs
+
+- [Stat545](http://stat545.com/index.html) [<br>Data wrangling, exploration, and analysis with R<br>Jenny Bryan]{.muted}
+
+- [Modern Dive](http://moderndive.com/) [<br>An introduction to Statistical Data Sciences via R<br>Chester Ismay and Albert Y. Kim]{.muted}
+
+- [R for Data Science](http://r4ds.had.co.nz) [<br>Garrett Grolemund and Hadley Wickham]{.muted}
+ 
+- [YaRrr! The Pirate’s Guide to R](https://bookdown.org/ndphillips/YaRrr/) [<br>Nathanial Phillips]{.muted}
+
+- [The Tidyverse R Style Guide](http://style.tidyverse.org/)
+
+- [Data Carpentry Blog](https://datacarpentry.org/blog/)
+
+## Get Help
+
+- [R Seek](http://rseek.org/)
+
+- [RDocumentation](https://www.rdocumentation.org/)
+
+- [Stack Overflow](https://stackoverflow.com/questions/tagged/r) [R & programming]{.muted}
+
+- [Cross Validated](https://stats.stackexchange.com/) [stats]{.muted}
+
+## Cheat Sheets
+
+- [RStudio IDE](https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf)
+- [RStudio Keyboard Shortcuts](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts)
+- [Base R](https://paulvanderlaken.files.wordpress.com/2017/08/base-r-cheetsheat.pdf)
+- [Data Import](https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf) [readr]{.pkg} [tidyr]{.pkg} [tibble]{.pkg}
+- [Data Transformation](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf) [dplyr]{.pkg}
+- [Data Visualization](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf) [ggplot2]{.pkg}
+- [Data Wrangling](https://paulvanderlaken.files.wordpress.com/2017/08/ddplyr-cheatsheet-data-wrangling-plyr.pdf) [dplyr]{.pkg} [tidyr]{.pkg}
+- [Character String Manipulation](https://github.com/rstudio/cheatsheets/raw/master/strings.pdf) [stringr]{.pkg}
+- [Dates and Times](https://github.com/rstudio/cheatsheets/raw/master/lubridate.pdf) [lubridate]{.pkg}
+- [R Markdown](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf) [rmarkdown]{.pkg} [knitr]{.pkg}
+- [R Markdown Reference](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf) [R Markdown Syntax]{.muted}
+- [Functional Programming](https://github.com/rstudio/cheatsheets/raw/master/purrr.pdf) [purrr]{.pkg}
+
+## Articles
+
+- [Good Enough Practices in Scientific Computing](https://arxiv.org/abs/1609.00037)
+
+- [Our path to better science in less time using open data science tools](https://www.nature.com/articles/s41559-017-0160)
+
+- [Where do things live in R? R for Excel Users by Steph De Silva](http://rex-analytics.com/things-live-r-r-excel-users/)
+
+- [Getting Used to R, RStudio, and R Markdown](http://rbasics.netlify.com/index.html) a short online book by Chester Ismay and Patrick Kennedy
+
+## Practice Data
+
+- [TidyTuesday](https://github.com/rfordatascience/tidytuesday#datasets) A collection of data sources for practicing data analysis and visualization. New releases each Tuesday.
+
+- [Example Data Sets for data-to-viz.com](https://github.com/holtzy/data_to_viz/tree/master/Example_dataset) A collection of data sets used for the excellent data visualization guide [data-to-viz.com](https://www.data-to-viz.com/).
+
+- [FiveThrityEight Data](https://github.com/fivethirtyeight/data) Data from articles published on [fivethirtyeight.com](https://fivethirtyeight.com)

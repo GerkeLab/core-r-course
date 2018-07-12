@@ -9,6 +9,8 @@ navbar:
         - text: "System Requirements"
           href: system-requirements.html
   right:
+    - text: "Resources"
+      href: resources.html
     - icon: fa-github
       href: https://github.com/gerkelab/core-r-course
 output_dir: "docs"

@@ -68,3 +68,4 @@ If you have any issues, copy the output and email to
 We will also use GitHub to host course materials and to dicuss issues
 that come up during the course, so please make sure that you can browse
 to <https://github.com/gerkelab/core-r-course>.
+(You don't need a GitHub account, you just need to be able to open the page in your browser.)

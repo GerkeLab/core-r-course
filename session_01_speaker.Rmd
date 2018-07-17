@@ -1,0 +1,43 @@
+---
+title: Session 1 — Speaker Notes
+date: "July 18, 2018"
+---
+
+## Learning Objectives
+
+1. Why R and the tidyverse?
+1. Joining the community
+    - My expectations
+    - Coding myths
+    - Meet the community
+1. Where do things go?
+    - RStudio walk through
+    - Commands
+    - Scripts
+    - Working directories
+    - Projects (preview)
+1. Syntax Overview
+    - Variable Names
+    - `<-`
+    - Strings and numbers
+    - Functions
+    - Vectors
+    - Data Frames
+    - `%>%` (preview)
+1. Packages
+    - install.packages()
+    - library()
+    - library(tidyverse)
+    - pkg::function()
+1. Projects
+    - Creating new projects
+    - Data as read only
+    - Interactive vs Scripts
+1. Getting Help
+    - `?help` and `??help`
+    - tidyverse.org
+    - stackoverflow
+1. Intro data processing
+    - tidyverse: readr and dplyr
+    - readr: read_csv
+    - dplyr: group_by, count, summarize, filter

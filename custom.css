@@ -112,6 +112,13 @@ a:hover, a:focus {
   background-color: #58b0e3;
 }
 
+.tocify .list-group-item {
+  border-radius: 0px;
+  text-indent: -10px;
+  padding-left: 20px;
+  padding-right: 10px;
+}
+
 /* ---- Navbar ---- */
 ul.nav.navbar-nav.navbar-right {
   font-size: 1rem;

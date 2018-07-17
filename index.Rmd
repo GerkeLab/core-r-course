@@ -18,7 +18,10 @@ session_list <- tibble(
   `Start Time` = "09:15",
   Link = ""
 )
+session_list[1, "Link"] <- "session_01.html"
 ```
+
+<!-- Emoji: https://afeld.github.io/emoji-css/ -->
 
 ## Announcements
 
@@ -37,7 +40,10 @@ next_session <- session_list %>%
   filter(Date > Sys.Date()) %>%
   arrange(Date) %>%
   slice(1) %>%
-  mutate(Date = strftime(Date, "%A, %b %d, %Y"))
+  mutate(
+    Date = strftime(Date, "%A, %B %d, %Y"),
+    Link = ifelse(Link != "", glue::glue('<a href="{Link}">Session Page</a>'), "")
+  )
 
-knitr::kable(next_session)
+knitr::kable(next_session, escape = FALSE)
 ```

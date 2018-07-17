@@ -1,0 +1,32 @@
+---
+title: Session 1 — Materials
+date: "July 18, 2018"
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, results = 'asis')
+make_listing <- function(filename, path_rel, base_url = "https://gerkelab.github.io") {
+  cat(glue::glue('\n- [{filename}]({path_rel})\n\n  ```\n  "{file.path(base_url, path_rel)}"\n  ```\n\n'))
+}
+```
+
+## Zip File
+
+```{r}
+zipfile <- "core-r_session-01_materials.zip"
+xfun::in_dir(here::here("materials"), {
+  zip::zip(zipfile, "../materials/01/")
+})
+
+make_listing(zipfile, file.path("materials", zipfile))
+```
+
+## Individual Files
+
+```{r}
+fs::file_info(fs::dir_ls(here::here("materials", "01"))) %>% 
+  mutate(path_rel = fs::path_rel(path, here::here())) %>% 
+  select(path_rel) %>% 
+  mutate(filename = basename(path_rel)) %>% 
+  purrr::pwalk(make_listing)
+```

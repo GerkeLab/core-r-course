@@ -5,7 +5,7 @@ date: "July 18, 2018"
 
 ```{r include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, results = 'asis')
-make_listing <- function(filename, path_rel, base_url = "https://gerkelab.github.io") {
+make_listing <- function(filename, path_rel, base_url = "https://gerkelab.github.io/core-r-course") {
   cat(glue::glue('\n- [{filename}]({path_rel})\n\n  ```\n  "{file.path(base_url, path_rel)}"\n  ```\n\n'))
 }
 ```

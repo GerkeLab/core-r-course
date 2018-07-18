@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<meta name="date" content="2018-07-18" />
+
+<title>Session 1 — Getting Started</title>
+
+<script src="site_libs/jquery/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap/shim/respond.min.js"></script>
+<script src="site_libs/navigation/tabsets.js"></script>
+<link href="site_libs/font-awesome/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome/js/fa-v4-shims.min.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span. { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+<link rel="stylesheet" href="https://afeld.github.io/emoji-css/emoji.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Core R Course</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    About
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="proposal.html">About this course</a>
+    </li>
+    <li>
+      <a href="system-requirements.html">System Requirements</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Sessions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="session_01.html">Session 1 — July 18</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="resources.html">Resources</a>
+</li>
+<li>
+  <a href="https://github.com/gerkelab/core-r-course">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Session 1 — Getting Started</h1>
+<h4 class="date"><em>July 18, 2018</em></h4>
+
+</div>
+
+
+<div id="links" class="section level2">
+<h2>Links</h2>
+<ul>
+<li><a href="session_01_materials.html">Materials</a></li>
+<li><a href="slides/session_01_slides.html">Slides</a></li>
+</ul>
+</div>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>See <a href="slides/session_01_slides.html">slides</a> for the course introduction covering some background on R, why programming can be more effective than point-and-click GUI software, and our expectations for the course.</p>
+</div>
+<div id="sources-for-this-session" class="section level2">
+<h2>Sources for this session</h2>
+<p>The material for this session is drawn from the following sources. We’ll walk through a version of these introductions together. When we’re done it may seem like we don’t know much, but we can already do some <a href="#lets-process-some-data">basic data processing</a></p>
+<ul>
+<li><a href="http://swcarpentry.github.io/swc-releases/2016.06/r-novice-gapminder/">Software Carpentry: R for Early Programmers</a>
+<ul>
+<li><a href="http://swcarpentry.github.io/swc-releases/2016.06/r-novice-gapminder/01-rstudio-intro/">Introduction to R and RStudio</a></li>
+<li><a href="http://swcarpentry.github.io/swc-releases/2016.06/r-novice-gapminder/02-project-intro/">Project Management with RStudio</a></li>
+<li><a href="http://swcarpentry.github.io/swc-releases/2016.06/r-novice-gapminder/03-seeking-help/">Seeking Help</a></li>
+</ul></li>
+<li><a href="https://stat545-ubc.github.io/">STATS545 at UBC</a>
+<ul>
+<li><a href="http://stat545-ubc.github.io/block002_hello-r-workspace-wd-project.html">R basics, workspace and working directory, RStudio projects</a></li>
+<li><a href="http://stat545-ubc.github.io/block006_care-feeding-data.html">Basic care and feeding of data in R</a></li>
+</ul></li>
+</ul>
+<!--
+## Introduction to RStudio and R
+
+### Layout of RStudio
+
+![](/images/rstudio-01-plain.png)
+-->
+</div>
+<div id="lets-process-some-data" class="section level2">
+<h2>Let’s Process Some Data</h2>
+<p>This example builds on an excerpt of the <a href="http://www.gapminder.org/data/">Gapminder</a> data, and contains the following columns.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">variable</th>
+<th align="left">meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>country</code></td>
+<td align="left">Country</td>
+</tr>
+<tr class="even">
+<td align="left"><code>continent</code></td>
+<td align="left">Continent</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>year</code></td>
+<td align="left">Year</td>
+</tr>
+<tr class="even">
+<td align="left"><code>life_expectancy</code></td>
+<td align="left">Life Expectancy at Birth</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>population</code></td>
+<td align="left">Total Population</td>
+</tr>
+<tr class="even">
+<td align="left"><code>gdp_per_capita</code></td>
+<td align="left">Per-Capita GDP</td>
+</tr>
+</tbody>
+</table>
+<div id="importing-the-data" class="section level3">
+<h3>Importing the data</h3>
+<p>Download the data from <a href="session_01_materials.html">materials</a>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">gapminder &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;materials/01/gapminder.csv&quot;</span>)</a></code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   country = col_character(),
+##   continent = col_character(),
+##   year = col_integer(),
+##   life_expectancy = col_double(),
+##   population = col_integer(),
+##   gdp_per_capita = col_double()
+## )</code></pre>
+</div>
+<div id="viewing-the-data" class="section level3">
+<h3>Viewing the data</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">gapminder</a></code></pre></div>
+<pre><code>## # A tibble: 1,704 x 6
+##    country     continent  year life_expectancy population gdp_per_capita
+##    &lt;chr&gt;       &lt;chr&gt;     &lt;int&gt;           &lt;dbl&gt;      &lt;int&gt;          &lt;dbl&gt;
+##  1 Afghanistan Asia       1952            28.8    8425333           779.
+##  2 Afghanistan Asia       1957            30.3    9240934           821.
+##  3 Afghanistan Asia       1962            32.0   10267083           853.
+##  4 Afghanistan Asia       1967            34.0   11537966           836.
+##  5 Afghanistan Asia       1972            36.1   13079460           740.
+##  6 Afghanistan Asia       1977            38.4   14880372           786.
+##  7 Afghanistan Asia       1982            39.9   12881816           978.
+##  8 Afghanistan Asia       1987            40.8   13867957           852.
+##  9 Afghanistan Asia       1992            41.7   16317921           649.
+## 10 Afghanistan Asia       1997            41.8   22227415           635.
+## # ... with 1,694 more rows</code></pre>
+</div>
+<div id="using-dplyr" class="section level3">
+<h3>Using dplyr</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(continent) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">  </span><span class="kw">count</span>()</a></code></pre></div>
+<pre><code>## # A tibble: 5 x 2
+## # Groups:   continent [5]
+##   continent     n
+##   &lt;chr&gt;     &lt;int&gt;
+## 1 Africa      624
+## 2 Americas    300
+## 3 Asia        396
+## 4 Europe      360
+## 5 Oceania      24</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="st">  </span><span class="kw">count</span>()</a></code></pre></div>
+<pre><code>## # A tibble: 12 x 2
+## # Groups:   year [12]
+##     year     n
+##    &lt;int&gt; &lt;int&gt;
+##  1  1952   142
+##  2  1957   142
+##  3  1962   142
+##  4  1967   142
+##  5  1972   142
+##  6  1977   142
+##  7  1982   142
+##  8  1987   142
+##  9  1992   142
+## 10  1997   142
+## 11  2002   142
+## 12  2007   142</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 142 x 6
+##    country     continent  year life_expectancy population gdp_per_capita
+##    &lt;chr&gt;       &lt;chr&gt;     &lt;int&gt;           &lt;dbl&gt;      &lt;int&gt;          &lt;dbl&gt;
+##  1 Afghanistan Asia       2007            43.8   31889923           975.
+##  2 Albania     Europe     2007            76.4    3600523          5937.
+##  3 Algeria     Africa     2007            72.3   33333216          6223.
+##  4 Angola      Africa     2007            42.7   12420476          4797.
+##  5 Argentina   Americas   2007            75.3   40301927         12779.
+##  6 Australia   Oceania    2007            81.2   20434176         34435.
+##  7 Austria     Europe     2007            79.8    8199783         36126.
+##  8 Bahrain     Asia       2007            75.6     708573         29796.
+##  9 Bangladesh  Asia       2007            64.1  150448339          1391.
+## 10 Belgium     Europe     2007            79.4   10392226         33693.
+## # ... with 132 more rows</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(continent) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">population =</span> <span class="kw">sum</span>(population))</a></code></pre></div>
+<pre><code>## Warning in summarise_impl(.data, dots): integer overflow - use
+## sum(as.numeric(.))</code></pre>
+<pre><code>## # A tibble: 5 x 2
+##   continent population
+##   &lt;chr&gt;          &lt;int&gt;
+## 1 Africa     929539692
+## 2 Americas   898871184
+## 3 Asia              NA
+## 4 Europe     586098529
+## 5 Oceania     24549947</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(continent) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean_life_exp =</span> <span class="kw">mean</span>(life_expectancy))</a></code></pre></div>
+<pre><code>## # A tibble: 5 x 2
+##   continent mean_life_exp
+##   &lt;chr&gt;             &lt;dbl&gt;
+## 1 Africa             54.8
+## 2 Americas           73.6
+## 3 Asia               70.7
+## 4 Europe             77.6
+## 5 Oceania            80.7</code></pre>
+</div>
+<div id="exporting-data" class="section level3">
+<h3>Exporting Data</h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">life_expectancy_summarized &lt;-<span class="st"> </span>gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(continent, year) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean_life_exp =</span> <span class="kw">mean</span>(life_expectancy))</a>
+<a class="sourceLine" id="cb16-4" data-line-number="4">  </a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="kw">write_csv</span>(life_expectancy_summarized,</a>
+<a class="sourceLine" id="cb16-6" data-line-number="6">          <span class="st">&quot;life_expectancy_summarized.csv&quot;</span>)</a></code></pre></div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

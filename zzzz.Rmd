@@ -1,0 +1,11 @@
+---
+title: "Notes For Myself"
+---
+
+[Some datasets for teaching data science](https://simplystatistics.org/2018/01/22/the-dslabs-package-provides-datasets-for-teaching-data-science/)
+
+https://rafalab.github.io/dsbook/distributions.html
+
+https://speakerdeck.com/jennybc/workflow-you-should-have-one
+
+https://speakerdeck.com/jennybc/code-smells-and-feels

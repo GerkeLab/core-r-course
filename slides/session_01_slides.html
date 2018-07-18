@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data Processing with R Session 1</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Garrick Aden-Buie" />
+    <meta name="date" content="2018-07-18" />
+    <link rel="stylesheet" href="moffitt-theme.css" type="text/css" />
+    <link rel="stylesheet" href="extra.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: bottom, left, title-slide
+
+# Data Processing with R<br><small>Session 1</small>
+### Garrick Aden-Buie
+### July 18, 2018
+
+---
+
+
+
+
+class: inverse center middle
+
+# Who are we?
+
+???
+
+- Name, what do you do here?,  cat/dog/none, first computer
+
+---
+class: center middle
+
+&lt;img src="/images/garrick.png" width="20%" /&gt;
+
+## Garrick Aden-Buie
+
+### Cancer Epidemiology&lt;br&gt;Dr. Travis Gerke
+
+#### Garrick.Aden-Buie@moffitt.org
+
+&amp;commat;grrrck&lt;br&gt;
+garrickadenbuie.com
+
+---
+class: inverse center middle
+
+# What's so cool about R?
+
+---
+background-image: url("/images/r-logo.svg")
+background-position: 90% 60%
+background-size: 350px
+
+## What is R?
+
+&gt; R is a free software environment for statistical computing and graphics.
+
+- Both interactive environment and programming language
+
+- Designed by Statisticians
+
+- Quirky
+
+- &lt;http://r-project.org&gt;
+
+???
+
+Ross and Robert
+
+---
+background-image: url("/images/tidyverse-hex-logo.png")
+background-position: 90% 80%
+background-size: 300px
+
+## tidyverse
+
+&gt; The tidyverse is an opinionated collection of R packages designed for data science.
+
+- Consistent data structure and grammar
+
+- A common design philosophy
+
+- Everything fits together nicely
+
+- &lt;https://tidyverse.org&gt;
+
+---
+
+## Falling into the Pit of Despair
+
+.center[
+![](/images/typing-hurts.gif)
+]
+
+---
+
+## Falling into the Pit of ~~Despair~~ Success
+
+.center[
+![](/images/typing-awesome.gif)
+]
+
+---
+
+## Two options for data processing
+
+.pull-left.center[
+![](/images/excel.png)
+**GUI**
+]
+
+.pull-right.center[
+![](/images/command-line.png)
+**Command Line**
+]
+
+---
+
+## Two options for data processing
+
+.pull-left.center[
+![](/images/excel-sort-warning.png)
+.big[&amp;#x1F914;]
+]
+
+.pull-right.center[
+![](/images/command-line.png)
+**Command Line**
+]
+
+---
+layout: true
+## Why learn how to program?
+---
+
+.footer[https://speakerdeck.com/hadley/should-all-statistics-students-be-programmers]
+
+.third.left-column[
+### Code is text
+]
+--
+.two-third.right-column[
+.large[&lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;C&lt;/kbd&gt; &amp; &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;P&lt;/kbd&gt;]
+]
+
+---
+
+.third.left-column[
+### Code is text
+### Code is read-able
+]
+.two-third.right-column[
+```r
+bookings %&gt;% 
+  mutate(
+    total_price = price_per_night * room_nights
+  ) %&gt;% 
+  summarise(
+    n          = n(),
+    n_stayed   = sum(status == "stayed"),
+    mean_price = mean(total_price)
+  )
+```
+]
+
+---
+
+.third.left-column[
+### Code is text
+### Code is read-able
+### Code is shareable
+]
+.two-third.right-column.center[
+![](/images/github-gerkelab-repos.png)
+]
+
+---
+
+.third.left-column[
+### Code is text
+### Code is read-able
+### Code is shareable
+]
+.two-third.right-column.center[
+![](/images/github-gerkelab-r-code.png)
+]
+
+
+---
+
+.third.left-column[
+### Code is text
+### Code is read-able
+### Code is shareable
+### Code is open
+]
+.two-third.right-column.center[
+![](/images/hexwall-user2018.jpg)
+]
+
+.footer[&lt;https://blog.mitchelloharawild.com/blog/user-2018-feature-wall/&gt;]
+
+---
+layout: false
+class: inverse center middle
+
+# Joining the R Community
+
+---
+
+# Goals for this course
+
+.large[
+1. Hands-on, applicable
+
+2. Empowering
+
+3. Collaborative
+]
+
+---
+## Learning
+
+.center[
+&lt;img src="/images/tweet_kierisi_learning_r.jpg" width="32%" class="bordered top" /&gt;
+&lt;img src="/images/tweet_google_gather.jpg" width="32%" class="bordered top" /&gt;
+&lt;img src="/images/tweet_phd_google.jpg" width="32%" class="bordered top" /&gt;
+]
+
+.footer.muted[
+https://twitter.com/kierisi/status/898534740051062785  
+https://twitter.com/kaelen_medeiros/status/1018636793221189632  
+https://twitter.com/_roryturnbull/status/1018180596965621760
+]
+
+---
+## Community Leaders
+
+.card[
+.card-img[![](/images/r-people-hadleywickham.jpg)]
+
+## Hadley Wickham
+
+### [hadley.nz](http://hadley.nz/)
+
+Chief Scientist at RStudio, I build tools (computational and cognitive) that make data science easier, faster, and more fun.
+]
+
+.card[
+.card-img[![](/images/r-people-jennybryan.jpg)]
+
+## Jenny&lt;br&gt;Bryan
+
+### [github.com/jennybc](https://github.com/jennybc)
+
+Software engineer @rstudio, humane #rstats, adjunct prof @UBC where I created @STAT545, part of @ropensci
+]
+
+.card[
+.card-img[![](/images/r-people-juliasilge.jpg)]
+
+## Julia&lt;br&gt;Silge
+
+### [juliasilge.com](https://juliasilge.com)
+
+Data science and visualization at @StackOverflow, #rstats, author of Tidy Text Mining with R
+]
+
+.card[
+.card-img[![](/images/r-people-drob.jpg)]
+
+## David Robinson
+
+### [varianceexplained.org](https://varianceexplained.org)
+
+Chief Data Scientist at @DataCamp, #rstats fan/evangelist
+]
+
+---
+
+## Online Community
+
+.card[
+![](/images/r4dscommunity.jpg)
+
+### [@R4DScommunity](https://twitter.com/R4DScommunity)
+
+Online community working through [R for Data Science](http://r4ds.had.co.nz/)
+]
+
+.right-column.center[
+![](/images/tweet_tidytuesday.jpg)
+]
+
+---
+# Before we get started...
+
+.big[
+- &amp;#x1F64B;&amp;#x1F3FB;&amp;#x200D;&amp;#x2640; Installed **R**
+
+- &amp;#x1F64B;&amp;#x1F3FD;&amp;#x200D;&amp;#x2642;&amp;#xFE0F; Installed **RStudio**
+
+- &amp;#x1F44F;&amp;#x1F3FD; Installed .pkg[tidyverse]
+]
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%",
+"highlightStyle": "github",
+"highlightLines": true,
+"ratio": "16:9",
+"countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

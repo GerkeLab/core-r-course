@@ -1,0 +1,119 @@
+---
+title: Session 1 — Getting Started
+date: "July 18, 2018"
+---
+
+[materials]: session_01_materials.html
+[slides]: slides/session_01_slides.html
+[gapminder]: http://www.gapminder.org/data/
+
+## Links
+
+- [Materials]
+- [Slides]
+
+## Introduction
+
+See [slides] for the course introduction covering some background on R, why programming can be more effective than point-and-click GUI software, and our expectations for the course.
+
+## Sources for this session
+
+The material for this session is drawn from the following sources.
+We'll walk through a version of these introductions together.
+When we're done it may seem like we don't know much, but we can already do some [basic data processing](#lets-process-some-data)
+
+- [Software Carpentry: R for Early Programmers](http://swcarpentry.github.io/swc-releases/2016.06/r-novice-gapminder/)
+    - [Introduction to R and RStudio](http://swcarpentry.github.io/swc-releases/2016.06/r-novice-gapminder/01-rstudio-intro/)
+    - [Project Management with RStudio](http://swcarpentry.github.io/swc-releases/2016.06/r-novice-gapminder/02-project-intro/)
+    - [Seeking Help](http://swcarpentry.github.io/swc-releases/2016.06/r-novice-gapminder/03-seeking-help/)
+- [STATS545 at UBC](https://stat545-ubc.github.io/)
+    - [R basics, workspace and working directory, RStudio projects](http://stat545-ubc.github.io/block002_hello-r-workspace-wd-project.html)
+    - [Basic care and feeding of data in R](http://stat545-ubc.github.io/block006_care-feeding-data.html)
+
+<!--
+## Introduction to RStudio and R
+
+### Layout of RStudio
+
+![](/images/rstudio-01-plain.png)
+-->
+
+
+## Let's Process Some Data
+
+This example builds on an excerpt of the [Gapminder] data, and contains the following columns.
+
+```{r echo=FALSE}
+tibble::tribble(
+    ~variable, ~meaning,
+    "country",       "Country",
+    "continent",       "Continent",
+    "year",       "Year",
+    "life_expectancy",       "Life Expectancy at Birth",
+    "population",       "Total Population",
+    "gdp_per_capita",       "Per-Capita GDP"
+) %>% 
+  mutate(variable = paste0("`", variable, "`")) %>% 
+  knitr::kable()
+```
+
+
+### Importing the data
+
+Download the data from [materials].
+
+```{r}
+gapminder <- read_csv("materials/01/gapminder.csv")
+```
+
+
+### Viewing the data
+
+```{r}
+gapminder
+```
+
+
+### Using dplyr
+
+```{r}
+gapminder %>% 
+  group_by(continent) %>% 
+  count()
+```
+
+```{r}
+gapminder %>% 
+  group_by(year) %>% 
+  count()
+```
+
+```{r}
+gapminder %>% 
+  filter(year == 2007)
+```
+
+```{r}
+gapminder %>% 
+  filter(year == 2007) %>% 
+  group_by(continent) %>% 
+  summarize(population = sum(population))
+```
+
+```{r}
+gapminder %>% 
+  filter(year == 2007) %>% 
+  group_by(continent) %>% 
+  summarize(mean_life_exp = mean(life_expectancy))
+```
+
+### Exporting Data
+
+```r
+life_expectancy_summarized <- gapminder %>% 
+  group_by(continent, year) %>% 
+  summarize(mean_life_exp = mean(life_expectancy))
+  
+write_csv(life_expectancy_summarized,
+          "life_expectancy_summarized.csv")
+```

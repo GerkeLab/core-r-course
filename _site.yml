@@ -8,15 +8,20 @@ navbar:
           href: proposal.html
         - text: "System Requirements"
           href: system-requirements.html
+    - text: "Sessions"
+      menu:
+        - text: "Session 1 — July 18"
+          href: session_01.html
   right:
     - text: "Resources"
       href: resources.html
     - icon: fa-github
       href: https://github.com/gerkelab/core-r-course
 output_dir: "docs"
+include: ["zzzz.html", "slides", "materials"]
 output:
   html_document:
     theme: cosmo
     template: default
-    css: custom.css
+    css: ["custom.css", "https://afeld.github.io/emoji-css/emoji.css"]
     highlight: kate

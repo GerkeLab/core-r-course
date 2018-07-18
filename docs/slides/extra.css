@@ -1,0 +1,46 @@
+kbd {
+padding:0.1em 0.6em;
+border:1px solid #ccc;
+font-family:Arial,Helvetica,sans-serif;
+font-family:"IBM Plex Mono",monospace;
+background-color:#f7f7f7;
+color:#333;
+-moz-box-shadow:0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
+-webkit-box-shadow:0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
+box-shadow:0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
+-moz-border-radius:3px;
+-webkit-border-radius:3px;
+border-radius:3px;
+display:inline-block;
+margin:0 0.1em;
+text-shadow:0 1px 0 #fff;
+line-height:1.4;
+white-space:nowrap;
+}
+
+.card {
+    width: 20%;
+    padding: 0px 5px;
+    /*border: #777 solid 2px;*/
+    border-radius: 15px;
+    text-align: center;
+    float: left;
+    margin: -1em 2% 0 2%;
+}
+.card h2 {
+    font-size: 1.5em;
+    margin-top: 0px;
+}
+.card img {
+    max-width: 150px;
+    border-radius: 50%;
+    text-align: center;
+    border: #777 solid 2px;
+}
+.card h3 {
+    font-size: 1em;
+}
+.card p {
+    font-size: 0.9em;
+    color: #777;
+}

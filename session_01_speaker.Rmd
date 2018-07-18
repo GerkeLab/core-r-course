@@ -3,7 +3,9 @@ title: Session 1 — Speaker Notes
 date: "July 18, 2018"
 ---
 
-## Learning Objectives
+## Introduction
+
+Using [slides](slides/session_01_slides.html)
 
 1. Meet and greet
     - Group sharing
@@ -21,34 +23,189 @@ date: "July 18, 2018"
     - Expectations
     - Coding myth
     - Meet the community
-1. Where do things go?
-    - RStudio walk through
-    - Commands
-    - Scripts
-    - Working directories
-    - Projects (preview)
-1. Syntax Overview
-    - Variable Names
-    - `<-`
-    - Strings and numbers
-    - Functions
-    - Vectors
-    - Data Frames
-    - `%>%` (preview)
-1. Packages
-    - install.packages()
-    - library()
-    - library(tidyverse)
-    - pkg::function()
-1. Projects
-    - Creating new projects
-    - Data as read only
-    - Interactive vs Scripts
-1. Getting Help
-    - `?help` and `??help`
-    - tidyverse.org
-    - stackoverflow
-1. Intro data processing
-    - tidyverse: readr and dplyr
-    - readr: read_csv
-    - dplyr: group_by, count, summarize, filter
+    
+## Lay of the Land
+
+Walk through open panes in plain RStudio
+
+### Console
+
+#### Calculator
+
+```r
+1 + 100
+
+1 +
+
+3 + 5 * 2
+
+(3 + 5) * 2
+
+(3 + (5 * (2 ^ 2))) # hard to read
+3 + 5 * 2 ^ 2       # clear, if you remember the rules
+3 + 5 * (2 ^ 2)     # if you forget some rules, this might help
+
+2/10000 # scientific notation
+
+5e3
+```
+
+#### Advanced Calculator
+
+```r
+sin(1)
+log(1)
+```
+
+#### Comparing Things
+
+```r
+1 == 1
+1 != 2
+1 < 2
+4 <= 5
+4 > 5   # FALSE
+10 >= 1
+FALSE == F
+TRUE == T
+```
+
+### Environment
+
+Demonstrate how objecst are stored in your environment
+
+```r
+x <- 1/40
+log(x)
+x <- round(x, 1)
+y <- x
+```
+
+### Script
+
+Scripts hold code, demonstrate how to enter in file and how to run from file.
+
+#### Variable Names
+
+- Numbers, letters, underscores, periods
+- Can't start with number
+- Can use spaces but not recommended
+
+```r
+name.with.dots <- 3
+nameWithCamelHumps <- 2
+name_with_underscores <- 1
+```
+
+#### History
+
+Previously run commands show up in the history.
+
+### More syntax
+
+#### Vectors
+
+```r
+c(1, 2)
+
+c(1, 2, 3, 4, 5)
+
+1:5
+
+c(1, 2, 3) * 2
+
+x <- seq(1, 10, by = 2)
+x * 2
+mean(x)
+```
+
+#### Strings or character
+
+```r
+word1 <- "Core"
+word2 <- 'Data'     # " or '
+word3 <- "Services"
+
+c(word1, word2, word3)
+
+cds <- paste(word1, word2, word3)
+
+tolower(cds)
+```
+
+#### Vectors vs Lists
+
+At this point, we've seen `integer`, `numeric`, `logical` and `character`.
+
+```r
+typeof(3.14)
+typeof(1)      #<< double
+typeof(1L)     #<< integer
+typeof(TRUE)
+typeof("apple")
+```
+
+Vectors can only have things of the same type
+
+```r
+c(2, 4, 6)
+c(2, 4, 6L)
+typeof(c(2, 4, 6L))
+
+c(1L, "1")
+
+c("a", TRUE)
+```
+
+Lists can have anything you want
+
+```r
+list("a", 1L, 3.14, 1:5, FALSE)
+
+list("a", 1:5, c("a", 1:5))
+
+list(1:5, c("a", "b", "c", "d", "e"))
+```
+
+### Data Frames
+
+```r
+data.frame(1:5, c("a", "b", "c", "d", "e"))
+
+data.frame(x = 1:5, y = c("a", "b", "c", "d", "e"))
+```
+
+### Working directories
+
+`getwd()` and `setwd()` set where your current session of R looks for files.
+
+### RStudio Projects
+
+- Organize your code and data together
+- Treat input data as read-only inside a project
+- Easy to switch "contexts"
+- Restart from scratch often!
+- Creating new projects
+- Interactive vs Scripts
+- create a project for this course
+
+## Packages
+
+- `install.packages()`
+- `library()`
+- `library(tidyverse)`
+- `pkg::function()`
+
+## Getting Help
+
+- `?help` and `??help`
+- tidyverse.org
+- stackoverflow
+
+## Intro data processing
+
+Go back to the [session page](session_01.html#lets-process-some-data)
+
+- tidyverse: readr and dplyr
+- readr: read_csv
+- dplyr: group_by, count, summarize, filter

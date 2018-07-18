@@ -49,3 +49,17 @@ next_session <- session_list %>%
 
 knitr::kable(next_session, escape = FALSE)
 ```
+
+## Previous Sessions
+
+```{r results='asis'}
+prev_sessions <- session_list %>%
+  filter(Date <= Sys.Date()) %>%
+  arrange(desc(Date)) %>%
+  mutate(
+    Date = strftime(Date, "%A, %B %d, %Y"),
+    Link = ifelse(Link != "", glue::glue('<a href="{Link}">Session Page</a>'), "")
+  )
+
+knitr::kable(prev_sessions, escape = FALSE)
+```

@@ -12,60 +12,31 @@ date: "July 18, 2018"
 - [Materials]
 - [Slides]
 
-## Outline
+## Introduction
 
-1. Who am I? Who are you? What are we doing here?
-
-<!-- https://www.thoughtco.com/icebreaker-understand-student-expectations-31374 -->
-
-1. Show of hands...
-
-    - <i class="em em-woman-raising-hand"></i> Installed **R**
-    
-    - <i class="em em-man-raising-hand"></i> Installed **RStudio**
-    
-    - <i class="em em-clap"></i> Installed **tidyverse**
-    
-1. RStudio walk through
-
-1. Workspaces and projects
+See [slides] for the course introduction covering some background on R, why programming can be more effective than point-and-click GUI software, and our expectations for the course.
 
 ## Sources for this session
 
-- http://swcarpentry.github.io/swc-releases/2016.06/r-novice-gapminder/
+The material for this session is drawn from the following sources.
+We'll walk through a version of these introductions together.
+When we're done it may seem like we don't know much, but we can already do some [basic data processing](#lets-process-some-data)
+
+- [Software Carpentry: R for Early Programmers](http://swcarpentry.github.io/swc-releases/2016.06/r-novice-gapminder/)
     - [Introduction to R and RStudio](http://swcarpentry.github.io/swc-releases/2016.06/r-novice-gapminder/01-rstudio-intro/)
     - [Project Management with RStudio](http://swcarpentry.github.io/swc-releases/2016.06/r-novice-gapminder/02-project-intro/)
     - [Seeking Help](http://swcarpentry.github.io/swc-releases/2016.06/r-novice-gapminder/03-seeking-help/)
-- [stat545-ubc.github.io](https://stat545-ubc.github.io/)
+- [STATS545 at UBC](https://stat545-ubc.github.io/)
     - [R basics, workspace and working directory, RStudio projects](http://stat545-ubc.github.io/block002_hello-r-workspace-wd-project.html)
     - [Basic care and feeding of data in R](http://stat545-ubc.github.io/block006_care-feeding-data.html)
 
-## Why R?
+<!--
+## Introduction to RStudio and R
 
-- Nature: [Our path to better science in less time using open data science tools](https://www.nature.com/articles/s41559-017-0160)
+### Layout of RStudio
 
-    ![](images/nature_Lowndes2017_figure1.jpg)
-
-- Hadley Wickham [Should all statistics students be programmers?](https://speakerdeck.com/hadley/should-all-statistics-students-be-programmers)
-
-    - In particular, code is text slides and Excel: "fear of clicking the wrong thing"
-    - Interesting code snippet for gif: https://twitter.com/ricardokriebel/status/849626401611411458
-    - Includes small example from `tidycensus`
-
-
-
-## RStudio Skills
-
-- RStudio Panes
-    - Run some R commands
-    - Find your files
-    - Environment
-    - Source Pane
-    - Viewer (`View()`)
-    - History
-    - Packages
-    - Plots
-- Tab Completion!
+![](/images/rstudio-01-plain.png)
+-->
 
 
 ## Let's Process Some Data
@@ -134,4 +105,15 @@ gapminder %>%
   filter(year == 2007) %>% 
   group_by(continent) %>% 
   summarize(mean_life_exp = mean(life_expectancy))
+```
+
+### Exporting Data
+
+```r
+life_expectancy_summarized <- gapminder %>% 
+  group_by(continent, year) %>% 
+  summarize(mean_life_exp = mean(life_expectancy))
+  
+write_csv(life_expectancy_summarized,
+          "life_expectancy_summarized.csv")
 ```

@@ -103,6 +103,14 @@ background-size: 300px
 ![](../images/typing-awesome.gif)
 ]
 
+--
+
+.center[
+The biggest bottleneck is cognitive:
+
+what you want to do, and<br>how you tell the computer to do that
+]
+
 ---
 
 ## Two options for data processing
@@ -294,6 +302,32 @@ Online community working through [R for Data Science](http://r4ds.had.co.nz/)
 .right-column.center[
 ![](../images/tweet_tidytuesday.jpg)
 ]
+
+---
+class: inverse center middle
+
+# Course Overview
+
+---
+background-image: url("../images/tidyverse-workflow-01.png") 
+background-size: contain
+background-color: #FAF8F2
+
+.footer[[R4DS](http://r4ds.had.co.nz/)]
+
+---
+background-image: url("../images/tidyverse-workflow-02.png") 
+background-size: contain
+background-color: #FAF8F2
+
+.footer[[R4DS](http://r4ds.had.co.nz/)]
+
+---
+background-image: url("../images/tidyverse-workflow-03.png") 
+background-size: contain
+background-color: #FAF8F2
+
+.footer[[R4DS](http://r4ds.had.co.nz/)]
 
 ---
 # Before we get started...

@@ -6,7 +6,9 @@ date: 'July 18, 2018'
 output:
   xaringan::moon_reader:
     lib_dir: libs
-    css: moffitt-theme.css
+    css: 
+      - moffitt-theme.css
+      - extra.css
     nature:
       titleSlideClass: ["bottom", "left"]
       slideNumberFormat: "%current%"
@@ -31,7 +33,7 @@ class: inverse center middle
 ---
 class: center middle
 
-<img src="https://www.garrickadenbuie.com/images/garrick.png" width="20%" />
+<img src="/images/garrick.png" width="20%" />
 
 ## Garrick Aden-Buie
 
@@ -48,11 +50,10 @@ class: inverse center middle
 # What's so cool about R?
 
 ---
-class: middle
+background-image: url("/images/r-logo.svg")
+background-position: 90% 60%
+background-size: 350px
 
-.pull-left[![](/images/r-logo.svg)]
-
-.pull-right[
 ## What is R?
 
 > R is a free software environment for statistical computing and graphics.
@@ -62,109 +63,245 @@ class: middle
 - Designed by Statisticians
 
 - Quirky
-]
+
+- <http://r-project.org>
 
 ???
 
 Ross and Robert
 
 ---
-class: middle
+background-image: url("/images/tidyverse-hex-logo.png")
+background-position: 90% 80%
+background-size: 300px
 
-.pull-left.center[
-<img src='/images/tidyverse-hex-logo.png' height="90%" width="60%" />
-]
-
-.pull-right[
 ## tidyverse
 
 > The tidyverse is an opinionated collection of R packages designed for data science.
 
-- A collective agreement about design
-
 - Consistent data structure and grammar
 
+- A common design philosophy
+
 - Everything fits together nicely
+
+- <https://tidyverse.org>
+
+---
+
+## Falling into the Pit of Despair
+
+.center[
+![](/images/typing-hurts.gif)
+]
+
+---
+
+## Falling into the Pit of ~~Despair~~ Success
+
+.center[
+![](/images/typing-awesome.gif)
+]
+
+---
+
+## Two options for data processing
+
+.pull-left.center[
+![](/images/excel.png)
+**GUI**
+]
+
+.pull-right.center[
+![](/images/command-line.png)
+**Command Line**
+]
+
+---
+
+## Two options for data processing
+
+.pull-left.center[
+![](/images/excel-sort-warning.png)
+.big[&#x1F914;]
+]
+
+.pull-right.center[
+![](/images/command-line.png)
+**Command Line**
 ]
 
 ---
 layout: true
-# Learning
+## Why learn how to program?
 ---
 
-.center[<img src="/images/tweet_kierisi_learning_r.jpg" width="40%" />]
+.footer[https://speakerdeck.com/hadley/should-all-statistics-students-be-programmers]
 
-.footer[https://twitter.com/kierisi/status/898534740051062785]
-
----
-
-.center[<img src="/images/tweet_google_gather.jpg" width="40%" />]
-
-.footer[https://twitter.com/kaelen_medeiros/status/1018636793221189632]
-
----
-
-.center[<img src="/images/tweet_phd_google.jpg" width="40%" />]
-
-.footer[https://twitter.com/_roryturnbull/status/1018180596965621760]
+.third.left-column[
+### Code is text
+]
+--
+.two-third.right-column[
+.large[<kbd>Ctrl</kbd>+<kbd>C</kbd> & <kbd>Ctrl</kbd>+<kbd>P</kbd>]
+]
 
 ---
 
-## Outline
-
-1. Who am I? Who are you? What are we doing here?
-
-<!-- https://www.thoughtco.com/icebreaker-understand-student-expectations-31374 -->
-
-1. Show of hands...
-
-    - <i class="em em-woman-raising-hand"></i> Installed **R**
-    
-    - <i class="em em-man-raising-hand"></i> Installed **RStudio**
-    
-    - <i class="em em-clap"></i> Installed <span class="pkg">tidyverse</span>
-    
-1. RStudio walk through
-
-1. Workspaces and projects
-
----
-
-## Sources for this session
-
-- http://swcarpentry.github.io/swc-releases/2016.06/r-novice-gapminder/
-    - [Introduction to R and RStudio](http://swcarpentry.github.io/swc-releases/2016.06/r-novice-gapminder/01-rstudio-intro/)
-    - [Project Management with RStudio](http://swcarpentry.github.io/swc-releases/2016.06/r-novice-gapminder/02-project-intro/)
-    - [Seeking Help](http://swcarpentry.github.io/swc-releases/2016.06/r-novice-gapminder/03-seeking-help/)
-- [stat545-ubc.github.io](https://stat545-ubc.github.io/)
-    - [R basics, workspace and working directory, RStudio projects](http://stat545-ubc.github.io/block002_hello-r-workspace-wd-project.html)
-    - [Basic care and feeding of data in R](http://stat545-ubc.github.io/block006_care-feeding-data.html)
-    
----
-
-## Why R?
-
-- Nature: [Our path to better science in less time using open data science tools](https://www.nature.com/articles/s41559-017-0160)
-
-    ![](images/nature_Lowndes2017_figure1.jpg)
-
-- Hadley Wickham [Should all statistics students be programmers?](https://speakerdeck.com/hadley/should-all-statistics-students-be-programmers)
-
-    - In particular, code is text slides and Excel: "fear of clicking the wrong thing"
-    - Interesting code snippet for gif: https://twitter.com/ricardokriebel/status/849626401611411458
-    - Includes small example from <span class="pkg">tidycensus</span>
+.third.left-column[
+### Code is text
+### Code is read-able
+]
+.two-third.right-column[
+```r
+bookings %>% 
+  mutate(
+    total_price = price_per_night * room_nights
+  ) %>% 
+  summarise(
+    n          = n(),
+    n_stayed   = sum(status == "stayed"),
+    mean_price = mean(total_price)
+  )
+```
+]
 
 ---
 
-## RStudio Skills
+.third.left-column[
+### Code is text
+### Code is read-able
+### Code is shareable
+]
+.two-third.right-column.center[
+![](/images/github-gerkelab-repos.png)
+]
 
-- RStudio Panes
-    - Run some R commands
-    - Find your files
-    - Environment
-    - Source Pane
-    - Viewer (`View()`)
-    - History
-    - Packages
-    - Plots
-- Tab Completion!
+---
+
+.third.left-column[
+### Code is text
+### Code is read-able
+### Code is shareable
+]
+.two-third.right-column.center[
+![](/images/github-gerkelab-r-code.png)
+]
+
+
+---
+
+.third.left-column[
+### Code is text
+### Code is read-able
+### Code is shareable
+### Code is open
+]
+.two-third.right-column.center[
+![](/images/hexwall-user2018.jpg)
+]
+
+.footer[<https://blog.mitchelloharawild.com/blog/user-2018-feature-wall/>]
+
+---
+layout: false
+class: inverse center middle
+
+# Joining the R Community
+
+---
+
+# Goals for this course
+
+.large[
+1. Hands-on, applicable
+
+2. Empowering
+
+3. Collaborative
+]
+
+---
+## Learning
+
+.center[
+<img src="/images/tweet_kierisi_learning_r.jpg" width="32%" class="bordered top" />
+<img src="/images/tweet_google_gather.jpg" width="32%" class="bordered top" />
+<img src="/images/tweet_phd_google.jpg" width="32%" class="bordered top" />
+]
+
+.footer.muted[
+https://twitter.com/kierisi/status/898534740051062785  
+https://twitter.com/kaelen_medeiros/status/1018636793221189632  
+https://twitter.com/_roryturnbull/status/1018180596965621760
+]
+
+---
+## Community Leaders
+
+.card[
+.card-img[![](/images/r-people-hadleywickham.jpg)]
+
+## Hadley Wickham
+
+### [hadley.nz](http://hadley.nz/)
+
+Chief Scientist at RStudio, I build tools (computational and cognitive) that make data science easier, faster, and more fun.
+]
+
+.card[
+.card-img[![](/images/r-people-jennybryan.jpg)]
+
+## Jenny<br>Bryan
+
+### [github.com/jennybc](https://github.com/jennybc)
+
+Software engineer @rstudio, humane #rstats, adjunct prof @UBC where I created @STAT545, part of @ropensci
+]
+
+.card[
+.card-img[![](/images/r-people-juliasilge.jpg)]
+
+## Julia<br>Silge
+
+### [juliasilge.com](https://juliasilge.com)
+
+Data science and visualization at @StackOverflow, #rstats, author of Tidy Text Mining with R
+]
+
+.card[
+.card-img[![](/images/r-people-drob.jpg)]
+
+## David Robinson
+
+### [varianceexplained.org](https://varianceexplained.org)
+
+Chief Data Scientist at @DataCamp, #rstats fan/evangelist
+]
+
+---
+
+## Online Community
+
+.card[
+![](/images/r4dscommunity.jpg)
+
+### [@R4DScommunity](https://twitter.com/R4DScommunity)
+
+Online community working through [R for Data Science](http://r4ds.had.co.nz/)
+]
+
+.right-column.center[
+![](/images/tweet_tidytuesday.jpg)
+]
+
+---
+# Before we get started...
+
+.big[
+- &#x1F64B;&#x1F3FB;&#x200D;&#x2640; Installed **R**
+
+- &#x1F64B;&#x1F3FD;&#x200D;&#x2642;&#xFE0F; Installed **RStudio**
+
+- &#x1F44F;&#x1F3FD; Installed .pkg[tidyverse]
+]

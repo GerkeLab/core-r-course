@@ -29,6 +29,9 @@ duo_accent(
       "border-radius"     = "4px",
       "border"            = "1px solid #82c878"
     ),
+    ".muted" = list(
+      color = "#777"
+    ),
     ".hl" = list(
       "background-color" = "rgba(255, 255, 0, 0.5)",
       padding            = "1px 4px"
@@ -38,6 +41,32 @@ duo_accent(
       bottom = "3%",
       left = "5%",
       opacity = "75%"
+    ),
+    ".bordered" = list(
+      border = "#777 solid 2px"
+    ),
+    ".top" = list(
+      "vertical-align" = "top"
+    ),
+    blockquote = list(
+      "font-style" = "italic",
+      color = "#777"
+    ),
+    ".large" = list(
+      "font-size" = "1.5em"
+    ),
+    ".big" = list(
+      "font-size" = "2em"
+    ),
+    ".third" = list(
+      width = "33%"
+    ),
+    ".two-third" = list(
+      width = "66%"
+    ),
+    ".right-column img" = list(
+      "max-height" = "55vh",
+      "margin-top" = "-2em"
     )
   )
 )

@@ -6,6 +6,7 @@
     <meta name="author" content="Garrick Aden-Buie" />
     <meta name="date" content="2018-07-18" />
     <link rel="stylesheet" href="moffitt-theme.css" type="text/css" />
+    <link rel="stylesheet" href="extra.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -31,7 +32,7 @@ class: inverse center middle
 ---
 class: center middle
 
-&lt;img src="https://www.garrickadenbuie.com/images/garrick.png" width="20%" /&gt;
+&lt;img src="/images/garrick.png" width="20%" /&gt;
 
 ## Garrick Aden-Buie
 
@@ -48,11 +49,10 @@ class: inverse center middle
 # What's so cool about R?
 
 ---
-class: middle
+background-image: url("/images/r-logo.svg")
+background-position: 90% 60%
+background-size: 350px
 
-.pull-left[![](/images/r-logo.svg)]
-
-.pull-right[
 ## What is R?
 
 &gt; R is a free software environment for statistical computing and graphics.
@@ -62,112 +62,248 @@ class: middle
 - Designed by Statisticians
 
 - Quirky
-]
+
+- &lt;http://r-project.org&gt;
 
 ???
 
 Ross and Robert
 
 ---
-class: middle
+background-image: url("/images/tidyverse-hex-logo.png")
+background-position: 90% 80%
+background-size: 300px
 
-.pull-left.center[
-&lt;img src='/images/tidyverse-hex-logo.png' height="90%" width="60%" /&gt;
-]
-
-.pull-right[
 ## tidyverse
 
 &gt; The tidyverse is an opinionated collection of R packages designed for data science.
 
-- A collective agreement about design
-
 - Consistent data structure and grammar
 
+- A common design philosophy
+
 - Everything fits together nicely
+
+- &lt;https://tidyverse.org&gt;
+
+---
+
+## Falling into the Pit of Despair
+
+.center[
+![](/images/typing-hurts.gif)
+]
+
+---
+
+## Falling into the Pit of ~~Despair~~ Success
+
+.center[
+![](/images/typing-awesome.gif)
+]
+
+---
+
+## Two options for data processing
+
+.pull-left.center[
+![](/images/excel.png)
+**GUI**
+]
+
+.pull-right.center[
+![](/images/command-line.png)
+**Command Line**
+]
+
+---
+
+## Two options for data processing
+
+.pull-left.center[
+![](/images/excel-sort-warning.png)
+.big[&amp;#x1F914;]
+]
+
+.pull-right.center[
+![](/images/command-line.png)
+**Command Line**
 ]
 
 ---
 layout: true
-# Learning
+## Why learn how to program?
 ---
 
-.center[&lt;img src="/images/tweet_kierisi_learning_r.jpg" width="40%" /&gt;]
+.footer[https://speakerdeck.com/hadley/should-all-statistics-students-be-programmers]
 
-.footer[https://twitter.com/kierisi/status/898534740051062785]
-
----
-
-.center[&lt;img src="/images/tweet_google_gather.jpg" width="40%" /&gt;]
-
-.footer[https://twitter.com/kaelen_medeiros/status/1018636793221189632]
-
----
-
-.center[&lt;img src="/images/tweet_phd_google.jpg" width="40%" /&gt;]
-
-.footer[https://twitter.com/_roryturnbull/status/1018180596965621760]
+.third.left-column[
+### Code is text
+]
+--
+.two-third.right-column[
+.large[&lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;C&lt;/kbd&gt; &amp; &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;P&lt;/kbd&gt;]
+]
 
 ---
 
-## Outline
-
-1. Who am I? Who are you? What are we doing here?
-
-&lt;!-- https://www.thoughtco.com/icebreaker-understand-student-expectations-31374 --&gt;
-
-1. Show of hands...
-
-    - &lt;i class="em em-woman-raising-hand"&gt;&lt;/i&gt; Installed **R**
-    
-    - &lt;i class="em em-man-raising-hand"&gt;&lt;/i&gt; Installed **RStudio**
-    
-    - &lt;i class="em em-clap"&gt;&lt;/i&gt; Installed &lt;span class="pkg"&gt;tidyverse&lt;/span&gt;
-    
-1. RStudio walk through
-
-1. Workspaces and projects
-
----
-
-## Sources for this session
-
-- http://swcarpentry.github.io/swc-releases/2016.06/r-novice-gapminder/
-    - [Introduction to R and RStudio](http://swcarpentry.github.io/swc-releases/2016.06/r-novice-gapminder/01-rstudio-intro/)
-    - [Project Management with RStudio](http://swcarpentry.github.io/swc-releases/2016.06/r-novice-gapminder/02-project-intro/)
-    - [Seeking Help](http://swcarpentry.github.io/swc-releases/2016.06/r-novice-gapminder/03-seeking-help/)
-- [stat545-ubc.github.io](https://stat545-ubc.github.io/)
-    - [R basics, workspace and working directory, RStudio projects](http://stat545-ubc.github.io/block002_hello-r-workspace-wd-project.html)
-    - [Basic care and feeding of data in R](http://stat545-ubc.github.io/block006_care-feeding-data.html)
-    
----
-
-## Why R?
-
-- Nature: [Our path to better science in less time using open data science tools](https://www.nature.com/articles/s41559-017-0160)
-
-    ![](images/nature_Lowndes2017_figure1.jpg)
-
-- Hadley Wickham [Should all statistics students be programmers?](https://speakerdeck.com/hadley/should-all-statistics-students-be-programmers)
-
-    - In particular, code is text slides and Excel: "fear of clicking the wrong thing"
-    - Interesting code snippet for gif: https://twitter.com/ricardokriebel/status/849626401611411458
-    - Includes small example from &lt;span class="pkg"&gt;tidycensus&lt;/span&gt;
+.third.left-column[
+### Code is text
+### Code is read-able
+]
+.two-third.right-column[
+```r
+bookings %&gt;% 
+  mutate(
+    total_price = price_per_night * room_nights
+  ) %&gt;% 
+  summarise(
+    n          = n(),
+    n_stayed   = sum(status == "stayed"),
+    mean_price = mean(total_price)
+  )
+```
+]
 
 ---
 
-## RStudio Skills
+.third.left-column[
+### Code is text
+### Code is read-able
+### Code is shareable
+]
+.two-third.right-column.center[
+![](/images/github-gerkelab-repos.png)
+]
 
-- RStudio Panes
-    - Run some R commands
-    - Find your files
-    - Environment
-    - Source Pane
-    - Viewer (`View()`)
-    - History
-    - Packages
-    - Plots
-- Tab Completion!
+---
+
+.third.left-column[
+### Code is text
+### Code is read-able
+### Code is shareable
+]
+.two-third.right-column.center[
+![](/images/github-gerkelab-r-code.png)
+]
+
+
+---
+
+.third.left-column[
+### Code is text
+### Code is read-able
+### Code is shareable
+### Code is open
+]
+.two-third.right-column.center[
+![](/images/hexwall-user2018.jpg)
+]
+
+.footer[&lt;https://blog.mitchelloharawild.com/blog/user-2018-feature-wall/&gt;]
+
+---
+layout: false
+class: inverse center middle
+
+# Joining the R Community
+
+---
+
+# Goals for this course
+
+.large[
+1. Hands-on, applicable
+
+2. Empowering
+
+3. Collaborative
+]
+
+---
+## Learning
+
+.center[
+&lt;img src="/images/tweet_kierisi_learning_r.jpg" width="32%" class="bordered top" /&gt;
+&lt;img src="/images/tweet_google_gather.jpg" width="32%" class="bordered top" /&gt;
+&lt;img src="/images/tweet_phd_google.jpg" width="32%" class="bordered top" /&gt;
+]
+
+.footer.muted[
+https://twitter.com/kierisi/status/898534740051062785  
+https://twitter.com/kaelen_medeiros/status/1018636793221189632  
+https://twitter.com/_roryturnbull/status/1018180596965621760
+]
+
+---
+## Community Leaders
+
+.card[
+.card-img[![](/images/r-people-hadleywickham.jpg)]
+
+## Hadley Wickham
+
+### [hadley.nz](http://hadley.nz/)
+
+Chief Scientist at RStudio, I build tools (computational and cognitive) that make data science easier, faster, and more fun.
+]
+
+.card[
+.card-img[![](/images/r-people-jennybryan.jpg)]
+
+## Jenny&lt;br&gt;Bryan
+
+### [github.com/jennybc](https://github.com/jennybc)
+
+Software engineer @rstudio, humane #rstats, adjunct prof @UBC where I created @STAT545, part of @ropensci
+]
+
+.card[
+.card-img[![](/images/r-people-juliasilge.jpg)]
+
+## Julia&lt;br&gt;Silge
+
+### [juliasilge.com](https://juliasilge.com)
+
+Data science and visualization at @StackOverflow, #rstats, author of Tidy Text Mining with R
+]
+
+.card[
+.card-img[![](/images/r-people-drob.jpg)]
+
+## David Robinson
+
+### [varianceexplained.org](https://varianceexplained.org)
+
+Chief Data Scientist at @DataCamp, #rstats fan/evangelist
+]
+
+---
+
+## Online Community
+
+.card[
+![](/images/r4dscommunity.jpg)
+
+### [@R4DScommunity](https://twitter.com/R4DScommunity)
+
+Online community working through [R for Data Science](http://r4ds.had.co.nz/)
+]
+
+.right-column.center[
+![](/images/tweet_tidytuesday.jpg)
+]
+
+---
+# Before we get started...
+
+.big[
+- &amp;#x1F64B;&amp;#x1F3FB;&amp;#x200D;&amp;#x2640; Installed **R**
+
+- &amp;#x1F64B;&amp;#x1F3FD;&amp;#x200D;&amp;#x2642;&amp;#xFE0F; Installed **RStudio**
+
+- &amp;#x1F44F;&amp;#x1F3FD; Installed .pkg[tidyverse]
+]
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({

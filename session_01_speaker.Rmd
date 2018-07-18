@@ -5,10 +5,21 @@ date: "July 18, 2018"
 
 ## Learning Objectives
 
+1. Meet and greet
+    - Group sharing
+        - Name/Role
+        - First computer
+        - Wildest dreams
+    - About me
 1. Why R and the tidyverse?
+    - What is R, what is the tidyverse
+    - Pit of success
+    - GUIs vs code
+    - Code is text
+    - Sharing, reading, copy paste, manipulate
 1. Joining the community
-    - My expectations
-    - Coding myths
+    - Expectations
+    - Coding myth
     - Meet the community
 1. Where do things go?
     - RStudio walk through

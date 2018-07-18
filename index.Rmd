@@ -9,6 +9,8 @@ knitr::opts_chunk$set(
 )
 
 library(tidyverse)
+if (!requireNamespace("zip", quietly = TRUE)) install.packages("zip")
+if (!requireNamespace("xaringan", quietly = TRUE)) install.packages("xaringan")
 ```
 
 ```{r}

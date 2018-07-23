@@ -16,13 +16,13 @@
  *    - remarkjs wiki: https://github.com/gnab/remark/wiki
  *
  * ------------------------------------------------------- */
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,300);
-@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,300,300i);
-@import url(https://fonts.googleapis.com/css?family=IBM+Plex+Mono);
-
+@import url(https://fonts.googleapis.com/css?family=Overpass:400,300);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400);
+@import url(https://fonts.googleapis.com/css?family=IBM+Plex+Mono:300,400);
+@import url(https://fonts.googleapis.com/css?family=Lora:300,300i,400,400i);
 
 body {
-  font-family: Roboto, 'Palatino Linotype', 'Book Antiqua', Palatino, 'Microsoft YaHei', 'Songti SC', serif;
+  font-family: Overpass, 'Palatino Linotype', 'Book Antiqua', Palatino, 'Microsoft YaHei', 'Songti SC', serif;
   font-weight: 400;
   color: #000000;
 }
@@ -215,6 +215,8 @@ table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
   vertical-align: top;
 }
 blockquote {
+  font-family: Lora;
+  font-weight: 400;
   font-style: italic;
   color: #777;
 }
@@ -231,6 +233,6 @@ blockquote {
   width: 66%;
 }
 .right-column img {
-  max-height: 55vh;
+  max-height: 35vh;
   margin-top: -2em;
 }

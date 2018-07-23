@@ -5,7 +5,7 @@ title: "Data processing with R"
 ```{r setup, include=FALSE, warning=FALSE, message=FALSE}
 # Global Setup
 knitr::opts_chunk$set(
-  echo = FALSE
+  echo = FALSE, comment = ""
 )
 
 library(tidyverse)

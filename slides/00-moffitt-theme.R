@@ -6,11 +6,14 @@ duo_accent(
   inverse_header_color = "white",
   inverse_text_color   = "white",
   text_font_size       = "24px",
-  text_font_google     = google_font("Roboto", "400", "300"),
-  header_font_google   = google_font("Roboto Slab", "400", "300", "300i"),
-  code_font_google     = google_font("IBM Plex Mono"),
+  text_font_google     = google_font("Overpass", "400", "300"),
+  header_font_google   = google_font("Roboto Slab", "400"),
+  code_font_google     = google_font("IBM Plex Mono", "300", "400"),
   text_font_weight     = "400",
   text_slide_number_font_size = "15px",
+  extra_fonts = list(
+    google_font("Lora", "300", "300i", "400", "400i")
+  ),
   extra_css = list(
     ".remark-slide-content" = list(padding = "0px 70px 0 50px"),
     '.title-slide' = list(
@@ -49,6 +52,8 @@ duo_accent(
       "vertical-align" = "top"
     ),
     blockquote = list(
+      "font-family" = "Lora",
+      "font-weight" = 400,
       "font-style" = "italic",
       color = "#777"
     ),
@@ -65,7 +70,7 @@ duo_accent(
       width = "66%"
     ),
     ".right-column img" = list(
-      "max-height" = "55vh",
+      "max-height" = "35vh",
       "margin-top" = "-2em"
     )
   )

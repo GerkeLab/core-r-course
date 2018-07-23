@@ -20,6 +20,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
 <script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
@@ -229,6 +232,101 @@ $(document).ready(function () {
 
 
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
 
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
@@ -331,9 +429,192 @@ $(document).ready(function () {
 ![](/images/rstudio-01-plain.png)
 -->
 </div>
+<div id="getting-to-know-rstudio-and-r" class="section level2">
+<h2>Getting to Know RStudio and R</h2>
+<p>In this session we started working with RStudio and started to learn the syntax of the R programming language.</p>
+<div id="rstudio" class="section level3">
+<h3>RStudio</h3>
+<p>When you open RStudio for the first time, it will look something like this.</p>
+<p><img src="/images/rstudio-01-plain.png" /></p>
+</div>
+<div id="console" class="section level3">
+<h3>Console</h3>
+<p>On the left side of the RStudio window is the <span class="rstudio-tab">Console</span> pane. This pane contains a direct interface to your R session. In other words, you can enter commands at the R prompt after the <code>&gt;</code> and see the results right there.</p>
+<div id="calculator" class="section level4">
+<h4>Calculator</h4>
+<p>Try entering the following lines, hitting enter after each line. These commands treat your R prompt like a calculator: you enter the expression you want to compute, hit enter and R gives you a value. (Don’t worry about entering the things after the <code>#</code>.)</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">100</span></a></code></pre></div>
+<pre><code>[1] 101</code></pre>
+<p>When you enter <code>1 + 100</code> at the prompt and press <kbd>Enter ↵</kbd>, R runs the expression, computes the value, and gives you the answer – which is thankfully <code>101</code>. Throughout these pages, I’ll use the above styling to denote code that you should enter into the command prompt (colored text with grey background) and the output that you should see when you run the code yourself (black monospace text on a white background).</p>
+<p>In this next example, suppose you press <kbd>Enter ↵</kbd> too early. What happens?</p>
+<p>R knows that the expression isn’t complete, so it starts a new line for you, indicated by replacing the <code>&gt;</code> with a <code>+</code>. Remember this for later: usually you see this when you forget to close a pair of parenthesis <code>()</code> or brackets <code>{}</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="op">+</span><span class="st"> </span><span class="dv">1</span></a></code></pre></div>
+<pre><code>[1] 2</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span></a></code></pre></div>
+<pre><code>[1] 13</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span>(<span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span>) <span class="op">*</span><span class="st"> </span><span class="dv">2</span></a></code></pre></div>
+<pre><code>[1] 16</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span>(<span class="dv">3</span> <span class="op">+</span><span class="st"> </span>(<span class="dv">5</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))) <span class="co"># hard to read</span></a></code></pre></div>
+<pre><code>[1] 23</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">^</span><span class="st"> </span><span class="dv">2</span>       <span class="co"># clear, if you remember the rules</span></a></code></pre></div>
+<pre><code>[1] 23</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)     <span class="co"># if you forget some rules, this might help</span></a></code></pre></div>
+<pre><code>[1] 23</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span><span class="op">/</span><span class="dv">10000</span> <span class="co"># scientific notation</span></a></code></pre></div>
+<pre><code>[1] 2e-04</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="fl">5e3</span></a></code></pre></div>
+<pre><code>[1] 5000</code></pre>
+</div>
+<div id="advanced-calculator-functions" class="section level4">
+<h4>Advanced Calculator (Functions)</h4>
+<p>R comes with a wide range of built-in functions that let you compute a wide range of stastically- and scientifically-relevant values. Try the following commands.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">sin</span>(<span class="dv">1</span>)</a></code></pre></div>
+<pre><code>[1] 0.841471</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">log</span>(<span class="dv">1</span>)</a></code></pre></div>
+<pre><code>[1] 0</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>)</a></code></pre></div>
+<pre><code>[1] 0.2091797</code></pre>
+<p>These are functions: the function <strong>name</strong> is the part that comes first – <code>sin</code> – and the function <strong>arguments</strong> are entered inside the parenthesis.</p>
+<p>As you start typing, you may have noticed that RStudio jumps in to help out. Even within the console, RStudio helps make coding more convenient.</p>
+<p>The first two functions do what their names suggest: <code>sin</code> calculates the value <span class="math inline">\(sin(x)\)</span> and <code>log</code> calculates the value <span class="math inline">\(log_e(x)\)</span>.</p>
+<p>The third function <code>rnorm()</code> is a little more complicated. If we start typing <code>rnor</code>, we can see the help box that RStudio provides. From here we learn that <code>rnorm()</code> does something related to the normal distribution and that it takes three arguments: <code>n</code>, <code>mean</code>, and <code>sd</code>.</p>
+<p><img src="/images/rstudio-02-function-help.png" /></p>
+<p>From this menu you can press <kbd>↑</kbd> and <kbd>↓</kbd> to browse through available functions. When you stop on a function, R Studio will give you some information about the function, its overall purpose, and the expected arguments that the function accepts.</p>
+<p>In this particular example, the help text only gets you part of the way, so I’ll fill in meaning of <code>rnorm()</code> for you. This function is used to generate a <em>random number from the normal distribution</em>.</p>
+<p><span class="muted">Note that whenever you run <code>rnorm()</code> you’ll get a randomly selected number, so the numbers you see below won’t match your output on your computer exactly.</span></p>
+<p>From this menu, pick <code>rnorm</code> and press <kbd>Tab</kbd> to complete the name, or you can type out <code>rnorm(</code>. Then, within the function, press <kbd>Tab</kbd> again to bring up the RStudio helper menu. This time, it shows you information about the arguments to the <code>rnorm()</code> function.</p>
+<p><img src="/images/rstudio-03-function-arg-help.png" /></p>
+<p>There are three ways to specify the value of a function argument in R:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>By position</strong>. Enter the values for <code>n</code>, <code>mean</code>, and <code>sd</code> in the order they appear in the function.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">1</span>)</a></code></pre></div>
+<pre><code>[1] 9.556493</code></pre></li>
+<li><p><strong>By name</strong>. Use the name of the argument and the <code>=</code> sign to give values to the function.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">mean =</span> <span class="dv">10</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a></code></pre></div>
+<pre><code>[1] 12.52664</code></pre>
+<p>As you can see, explicitly naming function arguments can be more clear to read than using positions, but it can also be somewhat “wordy”.</p></li>
+<li><p><strong>By default value</strong>. If a value for a function is not specified, R will use the default value from the function’s definition.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">mean =</span> <span class="dv">10</span>)</a></code></pre></div>
+<pre><code>[1] 10.75969</code></pre>
+<p>Here the default value for <code>sd</code> is <code>1</code>, so we didn’t need to specify it. To be reminded of the default values of a function, we can hover over the function with the mouse and RStudio gives another tooltip.</p>
+<p><img src="/images/rstudio-04-function-tooltip.png" /></p>
+<p>Note that there is no default value for <code>n</code>, which means that you are <em>required</em> to give a value for this one and you can’t rely on the default value.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">mean =</span> <span class="dv">1</span>)</a></code></pre></div>
+<pre><code>Error in rnorm(mean = 1): argument &quot;n&quot; is missing, with no default</code></pre></li>
+</ol>
+<p>In practice, you’ll find that typically the first one or two arguments to a function are clearly related to the meaning of the function and usually you don’t need to give those arguments names. Arguments that are later in the function definition can be considered “options” and it’s often useful to explicitly mention the argument name.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dt">mean =</span> <span class="dv">100</span>, <span class="dt">sd =</span> <span class="dv">25</span>)</a></code></pre></div>
+<pre><code>[1] 114.4277</code></pre>
+</div>
+<div id="comparing-things" class="section level4">
+<h4>Comparing Things</h4>
+<p>In R, we can also compare two numbers or values to see if they’re the same.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span></a></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> <span class="op">!=</span><span class="st"> </span><span class="dv">2</span></a></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span></a></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span> <span class="op">&lt;=</span><span class="st"> </span><span class="dv">5</span></a></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span></a></code></pre></div>
+<pre><code>[1] FALSE</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span></a></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<p>This introduces a new data value type: the <code>logical</code> or <code>boolean</code> value. In R, this is expressed as <code>TRUE</code> or <code>FALSE</code> – always uppercase and (almost) always the full word.</p>
+<p>It is possible to abbreviate <code>TRUE</code> as <code>T</code> and <code>FALSE</code> as <code>F</code>, but this isn’t a good idea. Why not? R will never let you store a variable or function with the name <code>TRUE</code>, but it will let you store a variable with the name <code>T</code>. To avoid confusion, just use the full name.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="ot">FALSE</span> <span class="op">==</span><span class="st"> </span>F</a></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="ot">TRUE</span> <span class="op">==</span><span class="st"> </span>T</a></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<div id="environment" class="section level3">
+<h3>Environment</h3>
+<p>So far, everything we’ve entered into the console has given us output, but the results aren’t saved. In order to be useful, we need to be able to store values in variables and objects and use them again in later computations.</p>
+<p>R is somewhat unique in it’s use of the arrow <code>&lt;-</code> as the assigment operator. I read it as “is going to be”, so</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">40</span></a></code></pre></div>
+<p>means <code>x</code> <em>is going to be</em> <code>1/40</code>.</p>
+<p>When assign a value to a variable at the console, R doesn’t show you anything</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span>x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">40</span></a></code></pre></div>
+<p>but if you enter the variable name, R will print out the value it stores.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span>x</a></code></pre></div>
+<pre><code>[1] 0.025</code></pre>
+<p>Now you can use that variable in functions and other expressions, even creating new variables with values computed using previous values.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">log</span>(x)</a></code></pre></div>
+<pre><code>[1] -3.688879</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span>y &lt;-<span class="st"> </span><span class="op">-</span><span class="kw">log</span>(x)</a>
+<a class="sourceLine" id="cb57-2" data-line-number="2"><span class="op">&gt;</span><span class="st"> </span>y</a></code></pre></div>
+<pre><code>[1] 3.688879</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span>z &lt;-<span class="st"> </span><span class="kw">round</span>(y, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb59-2" data-line-number="2"><span class="op">&gt;</span><span class="st"> </span>z</a></code></pre></div>
+<pre><code>[1] 3.69</code></pre>
+<p>Notice that the values <code>x</code>, <code>y</code>, and <code>z</code> are now stored in your <em>Environment</em>. The environment is like the working memory of your R session. RStudio tracks everything that’s stored in your environment in the <span class="rstudio-tab">Environment</span> pane in the upper right corner.</p>
+<div class="img-center">
+<div class="figure">
+<img src="/images/rstudio-05-environment.png" alt="RStudio Environment Pane" class="img-mw500" />
+<p class="caption">RStudio Environment Pane</p>
+</div>
+</div>
+<div id="variable-names-what-makes-a-name" class="section level4">
+<h4>Variable Names: What makes a name?</h4>
+<p>There are only three important rules about names:</p>
+<ul>
+<li>Can only contain numbers, letters, underscores, and periods</li>
+<li>Can’t start with number</li>
+<li>Be descriptive!</li>
+</ul>
+<p>Okay, so the last rule isn’t a rule as much as a style guide. Variable names are both for the computer and for the humans! The computer doesn’t care what the name is as long as you follow the rules, so you descriptive words that make it clear to <em>you</em> what you meant with your code.</p>
+<p>There are a few choices for how to write out the variable name you choose when it contains multiple words.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1">name.with.dots &lt;-<span class="st"> </span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb61-2" data-line-number="2">nameWithCamelHumps &lt;-<span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb61-3" data-line-number="3">name_with_underscores &lt;-<span class="st"> </span><span class="dv">1</span></a></code></pre></div>
+<p>The preference in the <span class="pkg">tidyverse</span> (and my personal preference) is to use <code>names_in_snake_case</code> where words are separated by <code>_</code>. In bioinformatics, it is also common to see <code>namesInCamelCase</code>, too. Using dots is common but not recommended for technical reasons.</p>
+<p>The final rule of naming things in R is that you can break all the rules if you wrap your name in backticks (<code>`</code>). You’re allowed to use special characters and spaces if you write them like <code>`Dollars Spent ($)`</code>.</p>
+<p>You’ll likely see this when importing external data that were formatted in Excel or other software, but it’s not as easy to type these specially-formatted names in your code, so you’ll probably want to avoid them.</p>
+</div>
+</div>
+<div id="history" class="section level3">
+<h3>History</h3>
+<p>As you run each command, RStudio keeps track of the commands you’ve run in the <span class="rstudio-tab">History</span> pane.</p>
+<div class="img-center">
+<div class="figure">
+<img src="/images/rstudio-06-history.png" alt="RStudio History Pane" class="img-mw500" />
+<p class="caption">RStudio History Pane</p>
+</div>
+</div>
+<p>You can also press <kbd>↑</kbd> and <kbd>↓</kbd> at the command prompt to walk through your previous commands.</p>
+</div>
+<div id="scripts" class="section level3">
+<h3>Scripts</h3>
+<p>Up to this point, the commands we’ve entered have ben <em>ephemeral</em>. If we’d like to run a command again, or start from the beginning, we would need to search through our command history.</p>
+<p>Writing your code inside <strong>scripts</strong> lets you track the procedures you’re running. During a data analysis you’ll often need to try out different processing ideas to find the correct set of procedures that work. Your goal is to keep a record of how to repeat your data processing from start to finish by storing each step in a script file.</p>
+<p>To create a new script, select <span class="menu-item">File</span> ▸ <span class="menu-item">New File</span> ▸ <span class="menu-item selected">R Script</span> and an empty text file will open up.</p>
+<p>R scripts are just plain text files, and they typically end with the <code>.R</code> or <code>.r</code> extension.</p>
+<p>To use an R script, you simply enter your commands in the order they should be run in the text area. There are several ways to run code from inside an R script:</p>
+<ol style="list-style-type: decimal">
+<li><p>Highlight the code you want to run, or put your cursor on the line you want to run, and press <kbd>Ctrl</kbd> + <kbd>Enter ↵</kbd> (Windows) or <kbd>⌘</kbd> + <kbd>Enter ↵</kbd> (Mac).</p>
+<p>You can also press the <img src="/images/rstudio-buttons-source-run.png" style="height:25px"/> button at the top of the source file pane.</p></li>
+<li><p>You can run the entire script using the <img src="/images/rstudio-buttons-source.png" style="height:25px"/> button as well.</p>
+<p>This is the same as running <code>source(&quot;filename.R&quot;)</code> in your console.</p></li>
+</ol>
+</div>
+<div id="clearing-your-session" class="section level3">
+<h3>Clearing your session</h3>
+<p>When you run your script, or the code inside your script, the commands build on top of previous code you’ve already run.</p>
+<p>When you’re working on a data processing task, you want to make sure that your code works from scratch. Sometimes when you’re working on code though, you’ll try ouy a number of different ways of performing a task. When you copy your code into your R script, it’s easy to forget to include variables that you created or to leave out a step.</p>
+<p>Clearing your R session and starting over completely is easy and highly recommended to make sure your scripts work as intended. It’s a two step process:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Clear your workspace</strong> by pressing the <img src="/images/rstudio-buttons-clear.png" class="img-inline" /> button in the <span class="rstudio-tab">Environment</span> pane, or select <span class="menu-item">Session</span> ▸ <span class="menu-item">Clear Workspace…</span> from the RStudio menu bar.</p></li>
+<li><p><strong>Restart your R session</strong> by choosing <span class="menu-item">Session</span> ▸ <span class="menu-item">Restart R</span>.</p></li>
+</ol>
+<p>At this point, you’ll have an empty workspace and a fresh R session and you can run your script as new.</p>
+</div>
+</div>
 <div id="lets-process-some-data" class="section level2">
 <h2>Let’s Process Some Data</h2>
-<p>This example builds on an excerpt of the <a href="http://www.gapminder.org/data/">Gapminder</a> data, and contains the following columns.</p>
+<p>In this and our next session, we’ll be using an excerpt of the <a href="http://www.gapminder.org/data/">Gapminder</a> data which contains the following columns.</p>
 <table>
 <thead>
 <tr class="header">
@@ -370,125 +651,98 @@ $(document).ready(function () {
 </table>
 <div id="importing-the-data" class="section level3">
 <h3>Importing the data</h3>
-<p>Download the data from <a href="session_01_materials.html">materials</a>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">gapminder &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;materials/01/gapminder.csv&quot;</span>)</a></code></pre></div>
-<pre><code>## Parsed with column specification:
-## cols(
-##   country = col_character(),
-##   continent = col_character(),
-##   year = col_integer(),
-##   life_expectancy = col_double(),
-##   population = col_integer(),
-##   gdp_per_capita = col_double()
-## )</code></pre>
+<p>Before we get started, make sure you’re using a <a href="#clearing-your-session">clean R session</a>.</p>
+<p>The first step is to copy the full url to the <code>gapminder.csv</code> file from the <a href="session_01_materials.html">materials</a> page. We’re going to use a function called <code>read_csv()</code> from the <span class="pkg">readr</span> package. This package is included in the <span class="pkg">tidyverse</span> package and is automatically loaded when you run</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">library</span>(tidyverse)</a></code></pre></div>
+<p><img src="/images/console-library-tidyverse.png" /></p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">gapminder &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://gerkelab.github.io/core-r-course/materials/01/gapminder.csv&quot;</span>)</a></code></pre></div>
+<pre><code>Parsed with column specification:
+cols(
+  country = col_character(),
+  continent = col_character(),
+  year = col_integer(),
+  life_expectancy = col_double(),
+  population = col_integer(),
+  gdp_per_capita = col_double()
+)</code></pre>
+<p><code>read_csv()</code> writes out a few messages to the console, letting us know how each column was parsed.</p>
 </div>
 <div id="viewing-the-data" class="section level3">
 <h3>Viewing the data</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">gapminder</a></code></pre></div>
-<pre><code>## # A tibble: 1,704 x 6
-##    country     continent  year life_expectancy population gdp_per_capita
-##    &lt;chr&gt;       &lt;chr&gt;     &lt;int&gt;           &lt;dbl&gt;      &lt;int&gt;          &lt;dbl&gt;
-##  1 Afghanistan Asia       1952            28.8    8425333           779.
-##  2 Afghanistan Asia       1957            30.3    9240934           821.
-##  3 Afghanistan Asia       1962            32.0   10267083           853.
-##  4 Afghanistan Asia       1967            34.0   11537966           836.
-##  5 Afghanistan Asia       1972            36.1   13079460           740.
-##  6 Afghanistan Asia       1977            38.4   14880372           786.
-##  7 Afghanistan Asia       1982            39.9   12881816           978.
-##  8 Afghanistan Asia       1987            40.8   13867957           852.
-##  9 Afghanistan Asia       1992            41.7   16317921           649.
-## 10 Afghanistan Asia       1997            41.8   22227415           635.
-## # ... with 1,694 more rows</code></pre>
+<p>To view the data, simply call the variable <code>gapminder</code> to print out an overview.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span>gapminder</a></code></pre></div>
+<p><img src="/images/console-tibble-print.png" /></p>
+<p>You can also click on the <img src="/images/rstudio-buttons-view-dataset.png" class="img-inline" /> button in the <span class="rstudio-tab">Environment</span> pane next the the <code>gapminder</code> entry.</p>
+<div class="img-center">
+<p><img src="/images/rstudio-07-environment-gapminder.png" class="img-mw500" /></p>
+</div>
+<p>This pulls up the RStudio data viewer where you can interactively explore the dataset.</p>
+<div class="img-center">
+<p><img src="/images/rstudio-08-view-dataset.png" class="img-mw500" /></p>
+</div>
 </div>
 <div id="using-dplyr" class="section level3">
 <h3>Using dplyr</h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(continent) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">  </span><span class="kw">count</span>()</a></code></pre></div>
-<pre><code>## # A tibble: 5 x 2
-## # Groups:   continent [5]
-##   continent     n
-##   &lt;chr&gt;     &lt;int&gt;
-## 1 Africa      624
-## 2 Americas    300
-## 3 Asia        396
-## 4 Europe      360
-## 5 Oceania      24</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="st">  </span><span class="kw">count</span>()</a></code></pre></div>
-<pre><code>## # A tibble: 12 x 2
-## # Groups:   year [12]
-##     year     n
-##    &lt;int&gt; &lt;int&gt;
-##  1  1952   142
-##  2  1957   142
-##  3  1962   142
-##  4  1967   142
-##  5  1972   142
-##  6  1977   142
-##  7  1982   142
-##  8  1987   142
-##  9  1992   142
-## 10  1997   142
-## 11  2002   142
-## 12  2007   142</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>)</a></code></pre></div>
-<pre><code>## # A tibble: 142 x 6
-##    country     continent  year life_expectancy population gdp_per_capita
-##    &lt;chr&gt;       &lt;chr&gt;     &lt;int&gt;           &lt;dbl&gt;      &lt;int&gt;          &lt;dbl&gt;
-##  1 Afghanistan Asia       2007            43.8   31889923           975.
-##  2 Albania     Europe     2007            76.4    3600523          5937.
-##  3 Algeria     Africa     2007            72.3   33333216          6223.
-##  4 Angola      Africa     2007            42.7   12420476          4797.
-##  5 Argentina   Americas   2007            75.3   40301927         12779.
-##  6 Australia   Oceania    2007            81.2   20434176         34435.
-##  7 Austria     Europe     2007            79.8    8199783         36126.
-##  8 Bahrain     Asia       2007            75.6     708573         29796.
-##  9 Bangladesh  Asia       2007            64.1  150448339          1391.
-## 10 Belgium     Europe     2007            79.4   10392226         33693.
-## # ... with 132 more rows</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(continent) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">population =</span> <span class="kw">sum</span>(population))</a></code></pre></div>
-<pre><code>## Warning in summarise_impl(.data, dots): integer overflow - use
-## sum(as.numeric(.))</code></pre>
-<pre><code>## # A tibble: 5 x 2
-##   continent population
-##   &lt;chr&gt;          &lt;int&gt;
-## 1 Africa     929539692
-## 2 Americas   898871184
-## 3 Asia              NA
-## 4 Europe     586098529
-## 5 Oceania     24549947</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(year <span class="op">==</span><span class="st"> </span><span class="dv">2007</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(continent) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean_life_exp =</span> <span class="kw">mean</span>(life_expectancy))</a></code></pre></div>
-<pre><code>## # A tibble: 5 x 2
-##   continent mean_life_exp
-##   &lt;chr&gt;             &lt;dbl&gt;
-## 1 Africa             54.8
-## 2 Americas           73.6
-## 3 Asia               70.7
-## 4 Europe             77.6
-## 5 Oceania            80.7</code></pre>
+<p>Just to get a small taste of data processing in R, try running the following commands.</p>
+<p>First, let’s count the number of observations for each year in our dataset. To do this, we are going to use <span class="pkg">dplyr</span>, which provides a wide range of data processing functions (each named as a <em>verb</em>).</p>
+<p><span class="pkg">dplyr</span> also gives us a new symbol called the “pipe” <code>%&gt;%</code> that we will talk about more in our next session. For now, just read this symbol as <em>and then</em>.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span>gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb66-2" data-line-number="2"><span class="op">+</span><span class="st">   </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb66-3" data-line-number="3"><span class="op">+</span><span class="st">   </span><span class="kw">count</span>()</a></code></pre></div>
+<pre><code># A tibble: 12 x 2
+# Groups:   year [12]
+    year     n
+   &lt;int&gt; &lt;int&gt;
+ 1  1952   142
+ 2  1957   142
+ 3  1962   142
+ 4  1967   142
+ 5  1972   142
+ 6  1977   142
+ 7  1982   142
+ 8  1987   142
+ 9  1992   142
+10  1997   142
+11  2002   142
+12  2007   142</code></pre>
+<p>As another example, let’s</p>
+<ol style="list-style-type: decimal">
+<li>Pick out the <code>continent</code> and <code>country</code> columns</li>
+<li>Choose only the unique combinations of each</li>
+<li>Count the number of countries in each <code>continent</code> by grouping by <code>continent</code> and counting the number of entries in each group.</li>
+</ol>
+<p>In R code using the <span class="pkg">dplyr</span> from the <span class="pkg">tidyverse</span>, it looks like this:</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span>gapminder <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb68-2" data-line-number="2"><span class="op">+</span><span class="st">   </span><span class="kw">select</span>(continent, country) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb68-3" data-line-number="3"><span class="op">+</span><span class="st">   </span><span class="kw">distinct</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb68-4" data-line-number="4"><span class="op">+</span><span class="st">   </span><span class="kw">group_by</span>(continent) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb68-5" data-line-number="5"><span class="op">+</span><span class="st">   </span><span class="kw">count</span>()</a></code></pre></div>
+<pre><code># A tibble: 5 x 2
+# Groups:   continent [5]
+  continent     n
+  &lt;chr&gt;     &lt;int&gt;
+1 Africa       52
+2 Americas     25
+3 Asia         33
+4 Europe       30
+5 Oceania       2</code></pre>
 </div>
 <div id="exporting-data" class="section level3">
 <h3>Exporting Data</h3>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">life_expectancy_summarized &lt;-<span class="st"> </span>gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(continent, year) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean_life_exp =</span> <span class="kw">mean</span>(life_expectancy))</a>
-<a class="sourceLine" id="cb16-4" data-line-number="4">  </a>
-<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="kw">write_csv</span>(life_expectancy_summarized,</a>
-<a class="sourceLine" id="cb16-6" data-line-number="6">          <span class="st">&quot;life_expectancy_summarized.csv&quot;</span>)</a></code></pre></div>
+<p>To export the data, we can simply add another step</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1">gapminder <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb70-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(continent, country) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb70-3" data-line-number="3"><span class="st">  </span><span class="kw">distinct</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb70-4" data-line-number="4"><span class="st">  </span><span class="kw">group_by</span>(continent) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb70-5" data-line-number="5"><span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb70-6" data-line-number="6"><span class="st">  </span><span class="kw">write_csv</span>(<span class="st">&quot;number_of_countries_in_each_continent.csv&quot;</span>)</a></code></pre></div>
 </div>
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 

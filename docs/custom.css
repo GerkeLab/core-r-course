@@ -139,6 +139,43 @@ line-height:1.4;
 white-space:nowrap;
 }
 
+.menu-item {
+  background-color: #f0f0f0;
+  border-color: #c2c2c2;
+  font-size: 0.9em;
+  padding: 4px 6px;
+  border: 1px solid #c2c2c2;
+  white-space: nowrap;
+}
+.menu-item.selected {
+  background-color: #d1e2f2;
+  padding: 3px 5px;
+  outline: 1px solid #c2c2c2;
+  border: 2px solid #78aee5;
+}
+.rstudio-tab {
+  background: #f4f8f9;
+  padding: 5px 8px;
+  border: 2px solid #d6dadc;
+  border-bottom: none;
+  font-weight: bold;
+  border-radius: 7px 7px 0px 0px;
+  font-size: 0.90em;
+}
+
+.img-inline {
+  max-height: 25px;
+}
+
+.img-center {
+  width: 100%;
+  text-align: center;
+}
+
+.img-mw500 {
+  max-width: 500px;
+}
+
 /* ---- Navbar ---- */
 ul.nav.navbar-nav.navbar-right {
   font-size: 1rem;

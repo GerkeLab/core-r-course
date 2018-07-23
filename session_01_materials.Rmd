@@ -8,23 +8,34 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 make_listing <- function(filename, path_rel, base_url = "https://gerkelab.github.io/core-r-course") {
   cat(glue::glue('\n- [{filename}]({path_rel})\n\n  ```\n  "{file.path(base_url, path_rel)}"\n  ```\n\n'))
 }
+
+needs_zip <- function(zipfile, dirpath) {
+  zip_modtime <- fs::file_info(here::here("materials", zipfile))$modification_time
+  files_modtime <- fs::file_info(fs::dir_ls(dirpath)) %>% pull(modification_time) %>% max()
+  zip_modtime < files_modtime
+}
+
+ZIPFILE <- "core-r_session-01_materials.zip"
+SESSION <- "01"
+SESSION_DIR <- here::here("materials/01")
 ```
 
 ## Zip File
 
 ```{r}
-zipfile <- "core-r_session-01_materials.zip"
-xfun::in_dir(here::here("materials"), {
-  zip::zip(zipfile, "../materials/01/")
-})
+if (needs_zip(ZIPFILE, SESSION_DIR)) {
+  xfun::in_dir(here::here("materials"), {
+    zip::zip(ZIPFILE, file.path("../materials", SESSION))
+  })
+}
 
-make_listing(zipfile, file.path("materials", zipfile))
+make_listing(ZIPFILE, file.path("materials", ZIPFILE))
 ```
 
 ## Individual Files
 
 ```{r}
-fs::file_info(fs::dir_ls(here::here("materials", "01"))) %>% 
+fs::file_info(fs::dir_ls(SESSION_DIR)) %>% 
   mutate(path_rel = fs::path_rel(path, here::here())) %>% 
   select(path_rel) %>% 
   mutate(filename = basename(path_rel)) %>% 

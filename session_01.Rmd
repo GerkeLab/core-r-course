@@ -13,6 +13,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(comment = "", prompt = TRUE)
+set.seed(42)
 ```
 
 ## Links

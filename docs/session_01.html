@@ -474,7 +474,7 @@ div.tocify {
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">log</span>(<span class="dv">1</span>)</a></code></pre></div>
 <pre><code>[1] 0</code></pre>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>)</a></code></pre></div>
-<pre><code>[1] 0.2091797</code></pre>
+<pre><code>[1] 1.370958</code></pre>
 <p>These are functions: the function <strong>name</strong> is the part that comes first – <code>sin</code> – and the function <strong>arguments</strong> are entered inside the parenthesis.</p>
 <p>As you start typing, you may have noticed that RStudio jumps in to help out. Even within the console, RStudio helps make coding more convenient.</p>
 <p>The first two functions do what their names suggest: <code>sin</code> calculates the value <span class="math inline">\(sin(x)\)</span> and <code>log</code> calculates the value <span class="math inline">\(log_e(x)\)</span>.</p>
@@ -489,14 +489,14 @@ div.tocify {
 <ol style="list-style-type: decimal">
 <li><p><strong>By position</strong>. Enter the values for <code>n</code>, <code>mean</code>, and <code>sd</code> in the order they appear in the function.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">1</span>)</a></code></pre></div>
-<pre><code>[1] 9.556493</code></pre></li>
+<pre><code>[1] 9.435302</code></pre></li>
 <li><p><strong>By name</strong>. Use the name of the argument and the <code>=</code> sign to give values to the function.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">mean =</span> <span class="dv">10</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a></code></pre></div>
-<pre><code>[1] 12.52664</code></pre>
+<pre><code>[1] 10.36313</code></pre>
 <p>As you can see, explicitly naming function arguments can be more clear to read than using positions, but it can also be somewhat “wordy”.</p></li>
 <li><p><strong>By default value</strong>. If a value for a function is not specified, R will use the default value from the function’s definition.</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">mean =</span> <span class="dv">10</span>)</a></code></pre></div>
-<pre><code>[1] 10.75969</code></pre>
+<pre><code>[1] 10.63286</code></pre>
 <p>Here the default value for <code>sd</code> is <code>1</code>, so we didn’t need to specify it. To be reminded of the default values of a function, we can hover over the function with the mouse and RStudio gives another tooltip.</p>
 <p><img src="/images/rstudio-04-function-tooltip.png" /></p>
 <p>Note that there is no default value for <code>n</code>, which means that you are <em>required</em> to give a value for this one and you can’t rely on the default value.</p>
@@ -505,7 +505,7 @@ div.tocify {
 </ol>
 <p>In practice, you’ll find that typically the first one or two arguments to a function are clearly related to the meaning of the function and usually you don’t need to give those arguments names. Arguments that are later in the function definition can be considered “options” and it’s often useful to explicitly mention the argument name.</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dt">mean =</span> <span class="dv">100</span>, <span class="dt">sd =</span> <span class="dv">25</span>)</a></code></pre></div>
-<pre><code>[1] 114.4277</code></pre>
+<pre><code>[1] 110.1067</code></pre>
 </div>
 <div id="comparing-things" class="section level4">
 <h4>Comparing Things</h4>

@@ -44,7 +44,7 @@ When we're done it may seem like we don't know much, but we can already do some 
 
 ### Layout of RStudio
 
-![](/images/rstudio-01-plain.png)
+![](images/rstudio-01-plain.png)
 -->
 
 ## Getting to Know RStudio and R
@@ -55,7 +55,7 @@ In this session we started working with RStudio and started to learn the syntax 
 
 When you open RStudio for the first time, it will look something like this.
 
-![](/images/rstudio-01-plain.png)
+![](images/rstudio-01-plain.png)
 
 ### Console
 
@@ -123,7 +123,7 @@ The third function `rnorm()` is a little more complicated.
 If we start typing `rnor`, we can see the help box that RStudio provides.
 From here we learn that `rnorm()` does something related to the normal distribution and that it takes three arguments: `n`, `mean`, and `sd`.
 
-![](/images/rstudio-02-function-help.png)
+![](images/rstudio-02-function-help.png)
 
 From this menu you can press <kbd>&#8593;</kbd> and <kbd>&#8595;</kbd> to browse through available functions.
 When you stop on a function, R Studio will give you some information about the function, its overall purpose, and the expected arguments that the function accepts.
@@ -137,7 +137,7 @@ From this menu, pick `rnorm` and press <kbd>Tab</kbd> to complete the name, or y
 Then, within the function, press <kbd>Tab</kbd> again to bring up the RStudio helper menu.
 This time, it shows you information about the arguments to the `rnorm()` function.
 
-![](/images/rstudio-03-function-arg-help.png)
+![](images/rstudio-03-function-arg-help.png)
 
 There are three ways to specify the value of a function argument in R:
 
@@ -164,7 +164,7 @@ There are three ways to specify the value of a function argument in R:
    Here the default value for `sd` is `1`, so we didn't need to specify it.
    To be reminded of the default values of a function, we can hover over the function with the mouse and RStudio gives another tooltip.
 
-   ![](/images/rstudio-04-function-tooltip.png)
+   ![](images/rstudio-04-function-tooltip.png)
    
    Note that there is no default value for `n`, which means that you are _required_ to give a value for this one and you can't rely on the default value.
    
@@ -246,7 +246,7 @@ The environment is like the working memory of your R session.
 RStudio tracks everything that's stored in your environment in the [Environment]{.rstudio-tab} pane in the upper right corner.
 
 ::: {.img-center}
-![RStudio Environment Pane](/images/rstudio-05-environment.png){.img-mw500}
+![RStudio Environment Pane](images/rstudio-05-environment.png){.img-mw500}
 :::
 
 #### Variable Names: What makes a name?
@@ -283,7 +283,7 @@ You'll likely see this when importing external data that were formatted in Excel
 As you run each command, RStudio keeps track of the commands you've run in the [History]{.rstudio-tab} pane.
 
 ::: {.img-center}
-![RStudio History Pane](/images/rstudio-06-history.png){.img-mw500}
+![RStudio History Pane](images/rstudio-06-history.png){.img-mw500}
 :::
 
 You can also press <kbd>&#8593;</kbd> and <kbd>&#8595;</kbd> at the command prompt to walk through your previous commands.
@@ -306,9 +306,9 @@ There are several ways to run code from inside an R script:
 
 1. Highlight the code you want to run, or put your cursor on the line you want to run, and press <kbd>Ctrl</kbd> + <kbd>Enter &crarr;</kbd> (Windows) or <kbd>&#8984;</kbd> + <kbd>Enter &crarr;</kbd> (Mac).
    
-   You can also press the <img src="/images/rstudio-buttons-source-run.png" style="height:25px"/> button at the top of the source file pane.
+   You can also press the <img src="images/rstudio-buttons-source-run.png" style="height:25px"/> button at the top of the source file pane.
 
-2. You can run the entire script using the <img src="/images/rstudio-buttons-source.png" style="height:25px"/> button as well.
+2. You can run the entire script using the <img src="images/rstudio-buttons-source.png" style="height:25px"/> button as well.
 
    This is the same as running `source("filename.R")` in your console.
 
@@ -323,7 +323,7 @@ When you copy your code into your R script, it's easy to forget to include varia
 Clearing your R session and starting over completely is easy and highly recommended to make sure your scripts work as intended.
 It's a two step process:
 
-1. **Clear your workspace** by pressing the ![](/images/rstudio-buttons-clear.png){.img-inline} button in the [Environment]{.rstudio-tab} pane, 
+1. **Clear your workspace** by pressing the ![](images/rstudio-buttons-clear.png){.img-inline} button in the [Environment]{.rstudio-tab} pane, 
    or select [Session]{.menu-item} &rtrif; [Clear Workspace...]{.menu-item} from the RStudio menu bar.
 
 2. **Restart your R session** by choosing [Session]{.menu-item} &rtrif; [Restart R]{.menu-item}.
@@ -360,7 +360,7 @@ This package is included in the [tidyverse]{.pkg} package and is automatically l
 > library(tidyverse)
 ```
 
-![](/images/console-library-tidyverse.png)
+![](images/console-library-tidyverse.png)
 
 ```r
 gapminder <- read_csv("https://gerkelab.github.io/core-r-course/materials/01/gapminder.csv")
@@ -380,18 +380,18 @@ To view the data, simply call the variable `gapminder` to print out an overview.
 > gapminder
 ```
 
-![](/images/console-tibble-print.png)
+![](images/console-tibble-print.png)
 
-You can also click on the ![](/images/rstudio-buttons-view-dataset.png){.img-inline} button in the [Environment]{.rstudio-tab} pane next the the `gapminder` entry.
+You can also click on the ![](images/rstudio-buttons-view-dataset.png){.img-inline} button in the [Environment]{.rstudio-tab} pane next the the `gapminder` entry.
 
 ::: {.img-center}
-![](/images/rstudio-07-environment-gapminder.png){.img-mw500}
+![](images/rstudio-07-environment-gapminder.png){.img-mw500}
 :::
 
 This pulls up the RStudio data viewer where you can interactively explore the dataset.
 
 ::: {.img-center}
-![](/images/rstudio-08-view-dataset.png){.img-mw500}
+![](images/rstudio-08-view-dataset.png){.img-mw500}
 :::
 
 ### Using dplyr

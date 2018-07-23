@@ -426,7 +426,7 @@ div.tocify {
 
 ### Layout of RStudio
 
-![](/images/rstudio-01-plain.png)
+![](images/rstudio-01-plain.png)
 -->
 </div>
 <div id="getting-to-know-rstudio-and-r" class="section level2">
@@ -435,7 +435,7 @@ div.tocify {
 <div id="rstudio" class="section level3">
 <h3>RStudio</h3>
 <p>When you open RStudio for the first time, it will look something like this.</p>
-<p><img src="/images/rstudio-01-plain.png" /></p>
+<p><img src="images/rstudio-01-plain.png" /></p>
 </div>
 <div id="console" class="section level3">
 <h3>Console</h3>
@@ -479,12 +479,12 @@ div.tocify {
 <p>As you start typing, you may have noticed that RStudio jumps in to help out. Even within the console, RStudio helps make coding more convenient.</p>
 <p>The first two functions do what their names suggest: <code>sin</code> calculates the value <span class="math inline">\(sin(x)\)</span> and <code>log</code> calculates the value <span class="math inline">\(log_e(x)\)</span>.</p>
 <p>The third function <code>rnorm()</code> is a little more complicated. If we start typing <code>rnor</code>, we can see the help box that RStudio provides. From here we learn that <code>rnorm()</code> does something related to the normal distribution and that it takes three arguments: <code>n</code>, <code>mean</code>, and <code>sd</code>.</p>
-<p><img src="/images/rstudio-02-function-help.png" /></p>
+<p><img src="images/rstudio-02-function-help.png" /></p>
 <p>From this menu you can press <kbd>↑</kbd> and <kbd>↓</kbd> to browse through available functions. When you stop on a function, R Studio will give you some information about the function, its overall purpose, and the expected arguments that the function accepts.</p>
 <p>In this particular example, the help text only gets you part of the way, so I’ll fill in meaning of <code>rnorm()</code> for you. This function is used to generate a <em>random number from the normal distribution</em>.</p>
 <p><span class="muted">Note that whenever you run <code>rnorm()</code> you’ll get a randomly selected number, so the numbers you see below won’t match your output on your computer exactly.</span></p>
 <p>From this menu, pick <code>rnorm</code> and press <kbd>Tab</kbd> to complete the name, or you can type out <code>rnorm(</code>. Then, within the function, press <kbd>Tab</kbd> again to bring up the RStudio helper menu. This time, it shows you information about the arguments to the <code>rnorm()</code> function.</p>
-<p><img src="/images/rstudio-03-function-arg-help.png" /></p>
+<p><img src="images/rstudio-03-function-arg-help.png" /></p>
 <p>There are three ways to specify the value of a function argument in R:</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>By position</strong>. Enter the values for <code>n</code>, <code>mean</code>, and <code>sd</code> in the order they appear in the function.</p>
@@ -498,7 +498,7 @@ div.tocify {
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">mean =</span> <span class="dv">10</span>)</a></code></pre></div>
 <pre><code>[1] 10.63286</code></pre>
 <p>Here the default value for <code>sd</code> is <code>1</code>, so we didn’t need to specify it. To be reminded of the default values of a function, we can hover over the function with the mouse and RStudio gives another tooltip.</p>
-<p><img src="/images/rstudio-04-function-tooltip.png" /></p>
+<p><img src="images/rstudio-04-function-tooltip.png" /></p>
 <p>Note that there is no default value for <code>n</code>, which means that you are <em>required</em> to give a value for this one and you can’t rely on the default value.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">mean =</span> <span class="dv">1</span>)</a></code></pre></div>
 <pre><code>Error in rnorm(mean = 1): argument &quot;n&quot; is missing, with no default</code></pre></li>
@@ -553,7 +553,7 @@ div.tocify {
 <p>Notice that the values <code>x</code>, <code>y</code>, and <code>z</code> are now stored in your <em>Environment</em>. The environment is like the working memory of your R session. RStudio tracks everything that’s stored in your environment in the <span class="rstudio-tab">Environment</span> pane in the upper right corner.</p>
 <div class="img-center">
 <div class="figure">
-<img src="/images/rstudio-05-environment.png" alt="RStudio Environment Pane" class="img-mw500" />
+<img src="images/rstudio-05-environment.png" alt="RStudio Environment Pane" class="img-mw500" />
 <p class="caption">RStudio Environment Pane</p>
 </div>
 </div>
@@ -580,7 +580,7 @@ div.tocify {
 <p>As you run each command, RStudio keeps track of the commands you’ve run in the <span class="rstudio-tab">History</span> pane.</p>
 <div class="img-center">
 <div class="figure">
-<img src="/images/rstudio-06-history.png" alt="RStudio History Pane" class="img-mw500" />
+<img src="images/rstudio-06-history.png" alt="RStudio History Pane" class="img-mw500" />
 <p class="caption">RStudio History Pane</p>
 </div>
 </div>
@@ -595,8 +595,8 @@ div.tocify {
 <p>To use an R script, you simply enter your commands in the order they should be run in the text area. There are several ways to run code from inside an R script:</p>
 <ol style="list-style-type: decimal">
 <li><p>Highlight the code you want to run, or put your cursor on the line you want to run, and press <kbd>Ctrl</kbd> + <kbd>Enter ↵</kbd> (Windows) or <kbd>⌘</kbd> + <kbd>Enter ↵</kbd> (Mac).</p>
-<p>You can also press the <img src="/images/rstudio-buttons-source-run.png" style="height:25px"/> button at the top of the source file pane.</p></li>
-<li><p>You can run the entire script using the <img src="/images/rstudio-buttons-source.png" style="height:25px"/> button as well.</p>
+<p>You can also press the <img src="images/rstudio-buttons-source-run.png" style="height:25px"/> button at the top of the source file pane.</p></li>
+<li><p>You can run the entire script using the <img src="images/rstudio-buttons-source.png" style="height:25px"/> button as well.</p>
 <p>This is the same as running <code>source(&quot;filename.R&quot;)</code> in your console.</p></li>
 </ol>
 </div>
@@ -606,7 +606,7 @@ div.tocify {
 <p>When you’re working on a data processing task, you want to make sure that your code works from scratch. Sometimes when you’re working on code though, you’ll try ouy a number of different ways of performing a task. When you copy your code into your R script, it’s easy to forget to include variables that you created or to leave out a step.</p>
 <p>Clearing your R session and starting over completely is easy and highly recommended to make sure your scripts work as intended. It’s a two step process:</p>
 <ol style="list-style-type: decimal">
-<li><p><strong>Clear your workspace</strong> by pressing the <img src="/images/rstudio-buttons-clear.png" class="img-inline" /> button in the <span class="rstudio-tab">Environment</span> pane, or select <span class="menu-item">Session</span> ▸ <span class="menu-item">Clear Workspace…</span> from the RStudio menu bar.</p></li>
+<li><p><strong>Clear your workspace</strong> by pressing the <img src="images/rstudio-buttons-clear.png" class="img-inline" /> button in the <span class="rstudio-tab">Environment</span> pane, or select <span class="menu-item">Session</span> ▸ <span class="menu-item">Clear Workspace…</span> from the RStudio menu bar.</p></li>
 <li><p><strong>Restart your R session</strong> by choosing <span class="menu-item">Session</span> ▸ <span class="menu-item">Restart R</span>.</p></li>
 </ol>
 <p>At this point, you’ll have an empty workspace and a fresh R session and you can run your script as new.</p>
@@ -654,7 +654,7 @@ div.tocify {
 <p>Before we get started, make sure you’re using a <a href="#clearing-your-session">clean R session</a>.</p>
 <p>The first step is to copy the full url to the <code>gapminder.csv</code> file from the <a href="session_01_materials.html">materials</a> page. We’re going to use a function called <code>read_csv()</code> from the <span class="pkg">readr</span> package. This package is included in the <span class="pkg">tidyverse</span> package and is automatically loaded when you run</p>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">library</span>(tidyverse)</a></code></pre></div>
-<p><img src="/images/console-library-tidyverse.png" /></p>
+<p><img src="images/console-library-tidyverse.png" /></p>
 <div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">gapminder &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://gerkelab.github.io/core-r-course/materials/01/gapminder.csv&quot;</span>)</a></code></pre></div>
 <pre><code>Parsed with column specification:
 cols(
@@ -671,14 +671,14 @@ cols(
 <h3>Viewing the data</h3>
 <p>To view the data, simply call the variable <code>gapminder</code> to print out an overview.</p>
 <div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span>gapminder</a></code></pre></div>
-<p><img src="/images/console-tibble-print.png" /></p>
-<p>You can also click on the <img src="/images/rstudio-buttons-view-dataset.png" class="img-inline" /> button in the <span class="rstudio-tab">Environment</span> pane next the the <code>gapminder</code> entry.</p>
+<p><img src="images/console-tibble-print.png" /></p>
+<p>You can also click on the <img src="images/rstudio-buttons-view-dataset.png" class="img-inline" /> button in the <span class="rstudio-tab">Environment</span> pane next the the <code>gapminder</code> entry.</p>
 <div class="img-center">
-<p><img src="/images/rstudio-07-environment-gapminder.png" class="img-mw500" /></p>
+<p><img src="images/rstudio-07-environment-gapminder.png" class="img-mw500" /></p>
 </div>
 <p>This pulls up the RStudio data viewer where you can interactively explore the dataset.</p>
 <div class="img-center">
-<p><img src="/images/rstudio-08-view-dataset.png" class="img-mw500" /></p>
+<p><img src="images/rstudio-08-view-dataset.png" class="img-mw500" /></p>
 </div>
 </div>
 <div id="using-dplyr" class="section level3">

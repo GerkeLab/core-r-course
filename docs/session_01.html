@@ -611,6 +611,42 @@ div.tocify {
 </ol>
 <p>At this point, you’ll have an empty workspace and a fresh R session and you can run your script as new.</p>
 </div>
+<div id="data-types" class="section level3">
+<h3>Data Types</h3>
+<p>Let’s talk quickly about the ways that R represents and stores data. We’ve already seen a few of the most common data types in R, for example for values like <code>3.14</code> and <code>TRUE</code>.</p>
+<div id="numbers-integers-and-doubles" class="section level4">
+<h4>Numbers: Integers and Doubles</h4>
+<p>There are two basic numeric values: <em>integer</em> and <em>double</em> (or <em>numeric</em>). An integer is simply an integer value like <code>0</code>, <code>1</code>, <code>2</code>, etc. and a double is any number with decimal-place precision, like <code>3.14159</code>.</p>
+<p>When you need to be explicit about the difference, for example to tell the difference between the integer and the decimal value <code>1</code>, you have to write the integer like <code>1L</code>. The extra <code>L</code> at the end is how you mark a value as an integer.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span>1L</a></code></pre></div>
+<pre><code>[1] 1</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="fl">1.0000000000</span></a></code></pre></div>
+<pre><code>[1] 1</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span>1L <span class="op">==</span><span class="st"> </span><span class="fl">1.00000000000</span></a></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<p>R knows that these are basically the same thing, which is why they print out in the same way and they are assumed to be equal.</p>
+<p>But we can use a function called <code>identical()</code> to check that they are not actually the same value.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">identical</span>(1L, <span class="fl">1.000000000</span>)</a></code></pre></div>
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div id="logical" class="section level4">
+<h4>Logical</h4>
+<p>Boolean or <em>logical</em> values are stored as <code>TRUE</code> and <code>FALSE</code>, and we’ve seen a <a href="#comparing-things">number of ways to create logical values</a> by comparing two values.</p>
+</div>
+<div id="character-strings" class="section level4">
+<h4>Character Strings</h4>
+<p>Character strings store text and in R these are denoted using single <code>'</code> or double <code>&quot;</code> quotes. As long as you are consistent, they are considered the equivalent.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> &quot;apple&quot;</span> <span class="op">==</span><span class="st"> &#39;apple&#39;</span></a></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<p>This also lets you include an apostrophe inside a character string, or to include quotes:</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> &quot;Ryan&#39;s apple&quot;</span></a></code></pre></div>
+<pre><code>[1] &quot;Ryan&#39;s apple&quot;</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> &#39;&quot;Looks like rain today,&quot; she said&#39;</span></a></code></pre></div>
+<pre><code>[1] &quot;\&quot;Looks like rain today,\&quot; she said&quot;</code></pre>
+<p>Notice that another way that you can include double quotes inside a character string is to <em>escape</em> the internal quotes. To escape a character, add a <code>\</code> (backslash) before that character and R will “pause” processing for that character.</p>
+<p>In this case, putting <code>\&quot;</code> inside a string wrapped in <code>&quot;</code> tells R to ignore the escaped quote so that it isn’t treated like the end of the string.</p>
+</div>
+</div>
 </div>
 <div id="lets-process-some-data" class="section level2">
 <h2>Let’s Process Some Data</h2>
@@ -653,9 +689,9 @@ div.tocify {
 <h3>Importing the data</h3>
 <p>Before we get started, make sure you’re using a <a href="#clearing-your-session">clean R session</a>.</p>
 <p>The first step is to copy the full url to the <code>gapminder.csv</code> file from the <a href="session_01_materials.html">materials</a> page. We’re going to use a function called <code>read_csv()</code> from the <span class="pkg">readr</span> package. This package is included in the <span class="pkg">tidyverse</span> package and is automatically loaded when you run</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">library</span>(tidyverse)</a></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">library</span>(tidyverse)</a></code></pre></div>
 <p><img src="images/console-library-tidyverse.png" /></p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">gapminder &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://gerkelab.github.io/core-r-course/materials/01/gapminder.csv&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1">gapminder &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://gerkelab.github.io/core-r-course/materials/01/gapminder.csv&quot;</span>)</a></code></pre></div>
 <pre><code>Parsed with column specification:
 cols(
   country = col_character(),
@@ -670,7 +706,7 @@ cols(
 <div id="viewing-the-data" class="section level3">
 <h3>Viewing the data</h3>
 <p>To view the data, simply call the variable <code>gapminder</code> to print out an overview.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span>gapminder</a></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span>gapminder</a></code></pre></div>
 <p><img src="images/console-tibble-print.png" /></p>
 <p>You can also click on the <img src="images/rstudio-buttons-view-dataset.png" class="img-inline" /> button in the <span class="rstudio-tab">Environment</span> pane next the the <code>gapminder</code> entry.</p>
 <div class="img-center">
@@ -686,9 +722,9 @@ cols(
 <p>Just to get a small taste of data processing in R, try running the following commands.</p>
 <p>First, let’s count the number of observations for each year in our dataset. To do this, we are going to use <span class="pkg">dplyr</span>, which provides a wide range of data processing functions (each named as a <em>verb</em>).</p>
 <p><span class="pkg">dplyr</span> also gives us a new symbol called the “pipe” <code>%&gt;%</code> that we will talk about more in our next session. For now, just read this symbol as <em>and then</em>.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span>gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb66-2" data-line-number="2"><span class="op">+</span><span class="st">   </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb66-3" data-line-number="3"><span class="op">+</span><span class="st">   </span><span class="kw">count</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span>gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb80-2" data-line-number="2"><span class="op">+</span><span class="st">   </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb80-3" data-line-number="3"><span class="op">+</span><span class="st">   </span><span class="kw">count</span>()</a></code></pre></div>
 <pre><code># A tibble: 12 x 2
 # Groups:   year [12]
     year     n
@@ -712,11 +748,11 @@ cols(
 <li>Count the number of countries in each <code>continent</code> by grouping by <code>continent</code> and counting the number of entries in each group.</li>
 </ol>
 <p>In R code using the <span class="pkg">dplyr</span> from the <span class="pkg">tidyverse</span>, it looks like this:</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span>gapminder <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb68-2" data-line-number="2"><span class="op">+</span><span class="st">   </span><span class="kw">select</span>(continent, country) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb68-3" data-line-number="3"><span class="op">+</span><span class="st">   </span><span class="kw">distinct</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb68-4" data-line-number="4"><span class="op">+</span><span class="st">   </span><span class="kw">group_by</span>(continent) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb68-5" data-line-number="5"><span class="op">+</span><span class="st">   </span><span class="kw">count</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span>gapminder <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb82-2" data-line-number="2"><span class="op">+</span><span class="st">   </span><span class="kw">select</span>(continent, country) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb82-3" data-line-number="3"><span class="op">+</span><span class="st">   </span><span class="kw">distinct</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb82-4" data-line-number="4"><span class="op">+</span><span class="st">   </span><span class="kw">group_by</span>(continent) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb82-5" data-line-number="5"><span class="op">+</span><span class="st">   </span><span class="kw">count</span>()</a></code></pre></div>
 <pre><code># A tibble: 5 x 2
 # Groups:   continent [5]
   continent     n
@@ -730,12 +766,12 @@ cols(
 <div id="exporting-data" class="section level3">
 <h3>Exporting Data</h3>
 <p>To export the data, we can simply add another step</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1">gapminder <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb70-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(continent, country) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb70-3" data-line-number="3"><span class="st">  </span><span class="kw">distinct</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb70-4" data-line-number="4"><span class="st">  </span><span class="kw">group_by</span>(continent) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb70-5" data-line-number="5"><span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb70-6" data-line-number="6"><span class="st">  </span><span class="kw">write_csv</span>(<span class="st">&quot;number_of_countries_in_each_continent.csv&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1">gapminder <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb84-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(continent, country) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb84-3" data-line-number="3"><span class="st">  </span><span class="kw">distinct</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb84-4" data-line-number="4"><span class="st">  </span><span class="kw">group_by</span>(continent) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb84-5" data-line-number="5"><span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb84-6" data-line-number="6"><span class="st">  </span><span class="kw">write_csv</span>(<span class="st">&quot;number_of_countries_in_each_continent.csv&quot;</span>)</a></code></pre></div>
 </div>
 </div>
 

@@ -330,6 +330,59 @@ It's a two step process:
 
 At this point, you'll have an empty workspace and a fresh R session and you can run your script as new.
 
+### Data Types
+
+Let's talk quickly about the ways that R represents and stores data.
+We've already seen a few of the most common data types in R, for example for values like `3.14` and `TRUE`.
+
+#### Numbers: Integers and Doubles
+
+There are two basic numeric values: _integer_ and _double_ (or _numeric_).
+An integer is simply an integer value like `0`, `1`, `2`, etc. and a double is any number with decimal-place precision, like `3.14159`.
+
+When you need to be explicit about the difference, for example to tell the difference between the integer and the decimal value `1`, you have to write the integer like `1L`.
+The extra `L` at the end is how you mark a value as an integer.
+
+```{r}
+1L
+1.0000000000
+1L == 1.00000000000
+```
+
+R knows that these are basically the same thing, which is why they print out in the same way and they are assumed to be equal.
+
+But we can use a function called `identical()` to check that they are not actually the same value.
+
+```{r}
+identical(1L, 1.000000000)
+```
+
+#### Logical
+
+Boolean or _logical_ values are stored as `TRUE` and `FALSE`, and we've seen a [number of ways to create logical values](#comparing-things) by comparing two values.
+
+#### Character Strings
+
+Character strings store text and in R these are denoted using single `'` or double `"` quotes.
+As long as you are consistent, they are considered the equivalent.
+
+```{r}
+"apple" == 'apple'
+```
+
+This also lets you include an apostrophe inside a character string, or to include quotes:
+
+```{r}
+"Ryan's apple"
+
+'"Looks like rain today," she said'
+```
+
+Notice that another way that you can include double quotes inside a character string is to _escape_ the internal quotes.
+To escape a character, add a `\` (backslash) before that character and R will "pause" processing for that character.
+
+In this case, putting `\"` inside a string wrapped in `"` tells R to ignore the escaped quote so that it isn't treated like the end of the string.
+
 ## Let's Process Some Data
 
 In this and our next session, we'll be using an excerpt of the [Gapminder] data which contains the following columns.

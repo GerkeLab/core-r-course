@@ -175,6 +175,34 @@ white-space:nowrap;
 .img-mw500 {
   max-width: 500px;
 }
+details[open] SUMMARY ~ * {
+  animation: sweep .5s ease-in-out;
+}
+details[open] {
+  border-bottom: 2px solid #ddd;
+  margin-bottom: 25px;
+}
+@keyframes sweep {
+  0% {opacity: 0; margin-top: -20px}
+  100% {opacity: 1; margin-top: 0px}
+}
+details summary {
+  font-size: 1.25em;
+  font-weight: 500;
+  margin-bottom: 25px;
+}
+@supports (-moz-appearance:meterbar) and (display:flex) {
+  details summary:before {
+    font-family: "Consolas";
+    content: "\25b8  ";
+  }
+}
+@supports (-moz-appearance:meterbar) and (display:flex) {
+  details[open] summary:before {
+    font-family: "Consolas";
+    content: "\25be  ";
+  }
+}
 
 /* ---- Navbar ---- */
 ul.nav.navbar-nav.navbar-right {

@@ -1,0 +1,119 @@
+---
+title: Session 2
+date: "July 25, 2018"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+---
+
+[materials]: session_01_materials.html
+[slides]: slides/session_01_slides.html
+[gapminder]: http://www.gapminder.org/data/
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(comment = "", prompt = FALSE)
+set.seed(42)
+```
+
+## Links
+
+- [Materials]
+
+## Review
+
+What kind of values are each of the following?
+
+```r
+10L
+1.2345
+"three"
+```
+
+What can you tell me about the value that will be returned when I run:
+
+```{r review01, results='hide'}
+runif(1, min = -1)
+```
+
+<details><summary>Result</summary>
+```{r ref.label="review01", echo=FALSE}
+```
+</details>
+
+Which of these are valid variable names?
+
+```r
+min_height
+min.height
+minHeight
+MINHEIGHT
+min-height
+.min.height
+_min_height
+0height
+min0height
+`Minimum Height`
+```
+
+<details><summary>Results</summary>
+
+These are all fine:
+
+```r
+min_height <- 14
+min.height <- 14
+minHeight <- 14
+MINHEIGHT <- 14
+
+min0height <- 14
+`Minimum Height` <- 14
+```
+
+This one works, but creates a hidden variable.
+
+```r
+.min.height <- 14
+```
+
+These don't work and will cause an error.
+
+```r
+# Can't start with an `_`
+_min_height <- 14
+
+# This is subtraction
+min-height <- 14
+
+# Can't start with a number
+0height <- 14
+```
+</details>
+
+What is the value of each variable after each of the following statements?
+
+```{r review03, results="hide"}
+todays_temp <- 31.6666
+offset <- 32L
+coef <- 1.8
+intermed_temp <- todays_temp * coef
+todays_temp <- intermed_temp + offset
+round(todays_temp, 2)
+```
+
+<details><summary>Result</summary>
+```{r ref.label="review03", echo=FALSE}
+```
+</details>
+
+## Topics
+
+1. Data types: `is`, `as`, `class`
+
+1. Collections: vectors, lists, data frames
+
+2. Packages
+
+3. Workspaces & RStudio Projects
+
+4. dplyr

@@ -21,6 +21,7 @@ session_list <- tibble(
   Link = ""
 )
 session_list[1, "Link"] <- "session_01.html"
+session_list[2, "Link"] <- "session_02.html"
 ```
 
 <!-- Emoji: https://afeld.github.io/emoji-css/ -->
@@ -34,6 +35,7 @@ session_list[1, "Link"] <- "session_01.html"
 > The goal of the training series is to develop core proficiencies in the R programming language for data processing tasks that are common to CDS core staff, honest brokers, and other team members who undertake similar data querying and provisioning activities. No prior experience is necessary! Garrick Aden-Buie, an expert R developer in my group, will be leading the sessions (and I may join as a student when my schedule permits, so that I can learn some new tricks too!).
 >
 > If you would like to attend, plan to bring a laptop, as the sessions will be interactive. We ask that you install R, Rstudio, and the devtools package prior to the first day ([instructions available here](system-requirements.html)). Garrick can describe/answer any questions about that process in the first session; the reason for completing the task in advance is to ensure that no security permissions on your machine block you from getting up and running.
+
 
 ## Next Session
 

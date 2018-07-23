@@ -10,8 +10,10 @@ navbar:
           href: system-requirements.html
     - text: "Sessions"
       menu:
-        - text: "Session 1 — July 18"
+        - text: "Session 1 – July 18"
           href: session_01.html
+        - text: "Session 2 – July 25"
+          href: session_02.html
   right:
     - text: "Resources"
       href: resources.html

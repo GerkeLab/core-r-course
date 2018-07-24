@@ -10,23 +10,25 @@ make_listing <- function(filename, path_rel, base_url = "https://gerkelab.github
 }
 
 needs_zip <- function(zipfile, dirpath) {
-  zip_modtime <- fs::file_info(here::here("materials", zipfile))$modification_time
+  zipfile <- here::here(dirpath, "..", zipfile)
+  if (!file.exists(zipfile)) return(TRUE)
+  zip_modtime <- fs::file_info(zipfile)$modification_time
   files_modtime <- fs::file_info(fs::dir_ls(dirpath)) %>% pull(modification_time) %>% max()
   zip_modtime < files_modtime
 }
 
-ZIPFILE <- "core-r_session-01_materials.zip"
 SESSION <- "01"
-SESSION_DIR <- here::here("materials/01")
+ZIPFILE <- glue::glue("core-r_session-{SESSION}_materials.zip")
+SESSION_DIR <- here::here("materials", SESSION)
 ```
 
 ## Zip File
 
 ```{r}
 if (needs_zip(ZIPFILE, SESSION_DIR)) {
-  xfun::in_dir(here::here("materials"), {
-    zip::zip(ZIPFILE, file.path("../materials", SESSION))
-  })
+  utils::zip(zipfile = file.path("materials", ZIPFILE), 
+             files = file.path("materials", SESSION),
+             extras = "-x *.DS_Store")
 }
 
 make_listing(ZIPFILE, file.path("materials", ZIPFILE))

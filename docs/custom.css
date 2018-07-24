@@ -171,6 +171,10 @@ white-space:nowrap;
   width: 100%;
   text-align: center;
 }
+.img-center > .twitter-tweet {
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .img-mw500 {
   max-width: 500px;

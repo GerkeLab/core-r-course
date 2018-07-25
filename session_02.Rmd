@@ -5,6 +5,8 @@ output:
   html_document:
     toc: yes
     toc_float: yes
+editor_options: 
+  chunk_output_type: console
 ---
 
 [materials]: session_01_materials.html
@@ -575,17 +577,20 @@ Run the following command to download the `gapminder.csv` file into your `data` 
 Create a new R script.
 Add the following code to it.
 
-```{r eval=c(-1)}
+```{r example-single-patient-file, eval=FALSE}
 library(tidyverse)
 
 patient_id <- 5554321
 age_at_diagnosis <- 54
 age_at_visit <- 54:58
 tumor_size <- c(9.5, 9.5, 9.7, 9.9, 10.1)
-site_code <- c("C220", "C220", "C412", "C400", "C400")
+site_code <- c("C220", "C400", "C412", "C220", "C400")
 ```
 
-Save the file as `example_single_patient.R`.
+```{r ref.label="example-single-patient-file", results="hide", echo=FALSE, eval=-1}
+```
+
+Save the file as `example_single_patient.R` in your project directory.
 
 Source the file. 
 
@@ -668,3 +673,109 @@ The `...` is used in two ways:
    rep.int(1L, times = 4)
    ```
    
+## Data Processing
+
+Open the file `example_single_patient.R` and add the following lines.
+
+```{r example-single-patient-file-2}
+example <- data_frame(
+  patient_id = patient_id,
+  age_dx = age_at_diagnosis,
+  age_visit = age_at_visit,
+  tumor_size = tumor_size,
+  site_code = site_code
+)
+```
+
+Clear your workspace ([quick refresher here](session_01.html#clearing_your_session)) and then source the script.
+
+View the tibble that is stored in `example`.
+
+```{r echo=FALSE}
+example
+```
+
+### The "pipe" operator `%>%`
+
+It looks like this:
+
+<div style="font-size: 5em; width: 100%; text-align: center;"><code>%>%</code></div>
+
+You can type it with
+
+::: {.img-center}
+<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd>  (Windows)  
+
+<kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd>  (Mac)
+:::
+
+You say it like
+
+<div style="font-size: 3em; width: 100%; text-align: center;">...and then...</div>
+
+```{r}
+x <- 1:2
+x <- rep(x, times = 3)
+x <- mean(x)
+x
+
+y <- mean(rep(1:2, times = 3))
+y
+
+z <- 1:2 %>% 
+  rep(times = 3) %>% 
+  mean()
+z
+```
+
+### Some Examples
+
+#### `filter()`
+
+```{r}
+example %>% 
+  filter(site_code == "C400")
+
+example %>% 
+  filter(tumor_size > 9.5)
+
+example %>% 
+  filter(age_visit > min(age_dx))
+
+example %>% 
+  pull(age_dx) %>% 
+  min()
+```
+
+#### `arrange()`
+
+```{r}
+example %>% 
+  arrange(site_code)
+
+example %>% 
+  arrange(desc(site_code))
+
+example %>% 
+  arrange(site_code, tumor_size)
+
+example %>% 
+  arrange(desc(tumor_size), site_code)
+```
+
+#### `summarize()`
+
+```{r}
+example %>% 
+  summarize(min(age_dx))
+
+example %>% 
+  summarize(max_tumor_size = max(tumor_size))
+
+example %>% 
+  summarize(
+    tumor_size_median = median(tumor_size),
+    tumor_size_mean = mean(tumor_size),
+    age_visit = max(age_visit)
+  )
+```

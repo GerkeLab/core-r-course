@@ -57,6 +57,8 @@ h4 {
 
 pre > code {
   font-size: 1.25rem;
+  overflow-x: auto;
+  white-space: pre;
 }
 
 .caption {
@@ -95,7 +97,7 @@ blockquote {
   background-color: #f9f9f9;
 }
 .sourceCode {
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 
 a {

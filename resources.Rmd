@@ -81,6 +81,8 @@ output:
 
 - [Getting Used to R, RStudio, and R Markdown](http://rbasics.netlify.com/index.html) a short online book by Chester Ismay and Patrick Kennedy
 
+- [Good Small Datasets](http://veekaybee.github.io/2018/07/23/small-datasets/)
+
 ## Practice Data
 
 - [TidyTuesday](https://github.com/rfordatascience/tidytuesday#datasets) A collection of data sources for practicing data analysis and visualization. New releases each Tuesday.

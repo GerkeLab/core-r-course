@@ -1,0 +1,176 @@
+## Review
+
+### Data Types
+
+What kind of values are each of the following?
+
+```r
+10L
+1.2345
+"three"
+```
+
+### Functions and Arguments
+
+What can you tell me about the value that will be returned when I run:
+
+```{r review01, results='hide'}
+runif(1, min = -1)
+```
+
+<details><summary>Result</summary>
+```{r ref.label="review01", echo=FALSE, results="show"}
+```
+</details>
+
+### Variable Names
+
+Which of these are valid variable names?
+
+```r
+min_height
+min.height
+minHeight
+MINHEIGHT
+min-height
+.min.height
+_min_height
+0height
+min0height
+`Minimum Height`
+```
+
+<details><summary>Results</summary>
+
+These are all fine:
+
+```r
+min_height <- 14
+min.height <- 14
+minHeight <- 14
+MINHEIGHT <- 14
+
+min0height <- 14
+`Minimum Height` <- 14
+```
+
+This one works, but creates a hidden variable.
+
+```r
+.min.height <- 14
+```
+
+These don't work and will cause an error.
+
+```r
+# Can't start with an `_`
+_min_height <- 14
+
+# This is subtraction
+min-height <- 14
+
+# Can't start with a number
+0height <- 14
+```
+</details>
+
+### Variables & Environment
+
+What is the value of each variable after each of the following statements?
+
+```{r review03, results="hide"}
+todays_temp <- 31.6666
+offset <- 32L
+coef <- 1.8
+intermed_temp <- todays_temp * coef
+todays_temp <- intermed_temp + offset
+round(todays_temp, 2)
+```
+
+<details><summary>Result</summary>
+```{r ref.label="review03", echo=FALSE, results="show"}
+```
+</details>
+
+### Getting Help
+
+What do the following functions do?
+Use `?`, `??` or the [Help]{.rstudio-tab} pane to learn about each function.
+Come up with 1-3 examples of each function in action.
+
+```r
+identical(___)
+
+tolower(___)
+
+rep(___)
+
+seq(___)
+```
+
+<details><summary>`identical`</summary>
+
+> The safe and reliable way to test two objects for being exactly equal. It returns TRUE in this case, FALSE in every other case.
+
+```{r review-identical, results="show"}
+identical(1, 1L)
+
+identical(-0, +0, num.eq = FALSE)
+
+identical(1, NULL)
+```
+</details>
+
+<details><summary>`tolower`</summary>
+
+> Translate characters in character vectors, in particular from upper to lower case or vice versa.
+
+```{r review-tolower, results="show"}
+tolower("APPLE")
+
+tolower("Help")
+
+toupper("banana")
+```
+</details>
+
+<details><summary>`rep`</summary>
+
+> `rep()` replicates the values in `x`.
+
+```{r review-rep, results="show"}
+rep(1:4, 2)
+rep(1:4, each = 2)       # not the same.
+rep(1:4, c(2,2,2,2))     # same as second.
+rep(1:4, c(2,1,2,1))
+rep(1:4, each = 2, len = 4)    # first 4 only.
+rep(1:4, each = 2, len = 10)   # 8 integers plus two recycled 1's.
+rep(1:4, each = 2, times = 3)  # length 24, 3 complete replications
+```
+</details>
+
+<details><summary>`seq`</summary>
+
+> Generate regular sequences. seq is a standard generic with a default method. seq.int is a primitive which can be much faster but has a few restrictions. seq_along and seq_len are very fast primitives for two common cases.
+
+```{r review-seq, results="show"}
+seq(1, 9)
+seq(0, 1, by = 0.1)
+seq(0, 1, length.out = 11)
+seq(1, 9, by = 2)     # matches 'end'
+seq(1, 9, by = pi)    # stays below 'end'
+seq(1, 6, by = 3)
+seq(1.575, 5.125, by = 0.05)
+seq(17) # same as 1:17, or even better seq_len(17)
+```
+</details>
+
+### Highlighting New Concepts
+
+These examples gave us a chance to review the things that we talked about during the last session, and they also introduced us to several new concepts that we will cover today.
+
+1. Vectors
+
+1. What are the `...`? (_further arguments passed to or from other methods_)
+
+1. `NULL` and `NA`

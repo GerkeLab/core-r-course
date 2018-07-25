@@ -1,0 +1,635 @@
+## Packages
+
+### Installing Packages
+
+```r
+install.packages("tidyverse")
+install.packages("readxl")
+```
+
+![](images/install-readxl-rstudio-2.png)
+
+Most packages are hosted on [CRAN] [(cran.rstudio.com)]{.muted}.
+
+How do you find packages?
+Besides Google, you can use [MetaCRAN] [(r-pkg.org)]{.muted} to search for available packages.
+Or you can use the [CRAN Task View][cran-task-view].
+
+### Attaching (Loading) Packages
+
+```r
+library(tidyverse)
+```
+
+![](images/console-library-tidyverse.png)
+
+```{r echo=FALSE}
+tidyverse_pkgs <-
+tidyverse_packages(include_self = FALSE) %>%
+  str_replace("\n.+", "") %>%
+  paste0("`", ., "`") %>%
+  knitr::combine_words()
+```
+
+Includes the following packages: `r tidyverse_pkgs`.
+
+```r
+library(readr)
+library(dplyr)
+library(stringr, tibble) #<< Doesn't do what you think
+```
+
+::: {.img-center}
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/ijlyttle?ref_src=twsrc%5Etfw">@ijlyttle</a> a package is a like a book, a library is like a library; you use library() to check a package out of the library <a href="https://twitter.com/hashtag/rsats?src=hash&amp;ref_src=twsrc%5Etfw">#rsats</a></p>&mdash; Hadley Wickham (@hadleywickham) <a href="https://twitter.com/hadleywickham/status/541948905009586176?ref_src=twsrc%5Etfw">December 8, 2014</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+:::
+
+
+### Using RStudio
+
+You can also use the [Packages]{.rstudio-tab} pane to install and update,
+
+::: {.img-center}
+![RStudio Packages Pane](images/rstudio-09-packages.png){.img-mw500}
+:::
+
+or [Tools]{.menu-item} &rtrif; [Install Packages...]{.menu-item}.
+
+::: {.img-center}
+![RStudio Install Packages Menu](images/rstudio-10-install-packages.png){.img-mw500}
+:::
+
+### Behind the Scenes
+
+A package contains:
+
+1. Functions
+1. Documentation
+1. *Vignettes*
+1. *Data*
+
+```r
+library(babynames)
+
+install.packages("babynames")
+```
+
+```{r error=TRUE}
+babynames
+
+babynames::babynames
+
+library(babynames)
+babynames
+births
+
+ls("package:babynames")
+
+detach("package:babynames", unload = TRUE)
+```
+
+![](images/console-sessionInfo.png)
+
+## Collections
+
+### Vectors
+
+```{r}
+1:3
+
+c(1, 2, 3)
+
+identical(1:3, c(1, 2, 3))
+
+identical(1:3, c(1L, 2L, 3L))
+
+c(1L, 2L, 3L, pi)
+
+fruits <- c("apple", "banana")
+fruits
+
+fruits <- c(fruits, "cherimoya")
+```
+
+![[A cherimoya](https://en.wikipedia.org/wiki/Cherimoya)](images/cherimoya.jpg)
+
+```{r echo_if_show_results=TRUE}
+fruits
+```
+
+```{r}
+month_days <- c("March" = 31, "April" = 30, May = 31)
+
+month_days
+
+names(month_days) <- c("August", "September", "October")
+month_days
+
+month_days["October"]
+```
+
+### Lists
+
+```{r}
+x <- list(
+  fruits = fruits,
+  months = names(month_days),
+  month_days = month_days
+)
+
+x
+```
+
+### Data Frames and Tibbles
+
+```{r}
+y <- data.frame(
+  fruits = fruits,
+  months = names(month_days),
+  month_days = month_days
+)
+y
+
+y2 <- data.frame(
+  fruits = fruits,
+  months = names(month_days),
+  month_days = month_days,
+  stringsAsFactors = FALSE,
+  row.names = NULL
+)
+y2
+
+z <- data_frame(             #<< tibble()
+  fruits = fruits,
+  months = names(month_days),
+  mont_days = month_days
+)
+z
+```
+
+## Data Types Continued
+
+### Review
+
+| Type | Example |
+|:----:|:--------|
+| integer | `1L` |
+| double | `3.14`, `1.23e-4` |
+| character | `"apple"` |
+| logical | `TRUE`, `FALSE` |
+| vector | `c(...)` |
+| list | `list(...)` |
+| data.frame | `data.frame(...)` |
+| tibble | `data_frame(...)` |
+| N/A | `NA` |
+| null | `NULL` |
+| factor | `factor(letters)` |
+
+### Special Data Types
+
+```{r}
+c(1, 2, NA, 4)
+
+c(1, 2, NULL, 4)
+```
+
+### Factors
+
+We'll talk about this later, but it's basically a vector with an additional **label** and sometimes an **order**.
+
+<details><summary>Sneak Peek</summary>
+
+```{r factor-sneak-peek, results="show"}
+factor(1:3)
+factor(1:3,
+       levels = 1:3)
+factor(1:3,
+       levels = 1:3,
+       labels = c("a", "b", "c"))
+factor(1:3,
+       levels = 1:3,
+       labels = c("a", "b", "c"),
+       ordered = TRUE)
+factor(1:3,
+       levels = 3:1,
+       labels = c("a", "b", "c"),
+       ordered = TRUE)
+```
+</details>
+
+
+### Working with Data Types
+
+#### What is this thing?
+
+```{r}
+x <- 1L
+y <- pi
+z <- "apple"
+
+class(x)
+class(y)
+class(z)
+typeof(z)
+
+class(mtcars)
+```
+
+
+#### Are you this thing?
+
+```{r}
+is.integer(1L)
+is.numeric(pi)
+is.numeric(1L)
+is.double(1L)
+is.character("one")
+is.logical("TRUE")
+```
+
+#### Are you even there?
+
+```{r}
+is.na(c(1, 2, NA, 4))
+
+is.null(c(1, 2, NULL, 4))
+
+xyz <- NULL
+is.null(xyz)
+```
+
+#### Turn you into this thing.
+
+```{r}
+as.character(1)
+as.integer(pi)
+as.double(10L)
+as.logical(2)
+```
+
+
+## Workspaces & RStudio Projects
+
+### Working Directory
+
+The working directory is where R looks when it tries to find a file or where it writes a file.
+
+You can check where your R process is "living" -- i.e. your working directory -- with
+
+```r
+getwd()
+```
+
+and you can set it with
+
+```r
+setwd("~/myCoolProject")
+```
+
+But **this is not recommended**!
+
+You can also use [More]{.menu-item} &rtrif; [Set As Working Directory]{.menu-item} or [Go To Working Directory]{.menu-item} in the [Files]{.rstudio-tab} pane to set the working directory, but this is **also not recommended**.
+
+[When should you? When you get lost.]{.muted}
+
+### Using RStudio Projects
+
+Without some kind of organization scheme, you'll very quickly end up writing all of your R scripts in a single folder.
+Multiple analysis will write out files, exporting data and creating plots, each of these writing into the same folder.
+
+![Life without RStudio Projects](images/messy-desktop.png)
+
+Instead, RStudio offers an excellent method of organization called **Projects**.
+Using RStudio projects, each analysis is self-contained and organized, each in its own way, and it's easy to switch from one project to another and know that your files will be organized, your environment will be clean, and you can pick everything back up from where you started.
+
+![Life _with_ RStudio Projects, [credit](https://www.citi.io/2016/04/06/if-you-think-you-are-obsessively-organized-think-again-with-these/)](images/obsessively-organized.jpg)
+
+### Create an RStudio Project
+
+Select [File]{.menu-item} &rtrif; [New Project]{.menu-item} or choose [New Project]{.menu-item} from the drop-down menu in the upper right corner of the RStudio window.
+
+::: {.img-center}
+![](images/rstudio-project-01-new.png){.img-mw500}
+:::
+
+Select **New Directory** to create your project in a new directory.
+If you already have files in a directory that you want to use, choose _Existing Directory_.
+
+::: {.img-center}
+![](images/rstudio-project-02-create-project.png){.img-mw500}
+:::
+
+Select the type of project you want to start -- this will generally be **New Project**.
+
+::: {.img-center}
+![](images/rstudio-project-03-project-type.png){.img-mw500}
+:::
+
+Choose the name for the folder that will be created to house your project and pick the folder where the project folder will be created.
+
+Here we give the new project folder the name **`cds-r-course`**.
+This will also be the name of the project itself.
+
+::: {.img-center}
+![](images/rstudio-project-04-create-new-project.png){.img-mw500}
+:::
+
+Your project will be created and you'll be dropped into a new R/RStudio session.
+
+![](images/rstudio-project-05-blank-project.png)
+
+### Work with your project
+
+Use the [Files]{.rstudio-tab} to create a folder called `data` in your project folder.
+
+Run the following command to download the `gapminder.csv` file into your `data` folder.
+
+```r
+> download.file("https://gerkelab.github.io/core-r-course/materials/01/gapminder.csv", "data/gapminder.csv")
+```
+
+Create a new R script.
+Add the following code to it.
+
+```{r example-single-patient-file, eval=FALSE}
+library(tidyverse)
+
+patient_id <- 5554321
+age_at_diagnosis <- 54
+age_at_visit <- 54:58
+tumor_size <- c(9.5, 9.5, 9.7, 9.9, 10.1)
+site_code <- c("C220", "C400", "C412", "C220", "C400")
+```
+
+```{r ref.label="example-single-patient-file", results="hide", echo=FALSE, eval=-1}
+```
+
+Save the file as `example_single_patient.R` in your project directory.
+
+Source the file.
+
+Close the project.
+Take a deep breath.
+Re-open the project.
+
+## Functions
+
+### Functions that work with vectors
+
+So far we've primarily seen vectors that operate on single values or that take single-valued arguments.
+
+But as we've seen, R is a _vectorized language_.
+
+Try using the following functions on the variables we created in `example_single_patient.R`.
+
+```{r}
+min(tumor_size)
+max(tumor_size)
+mean(tumor_size)
+median(tumor_size)
+var(tumor_size)
+sd(tumor_size)
+IQR(tumor_size)
+```
+
+Those functions all come from base R (standard R library).
+
+The following functions are given to us from `dplyr`.
+We have dplyr loaded if we've run `library(tidyverse)`, but I'll include the `dplyr::` first as a reminder that that's where these functions come from.
+
+```{r}
+dplyr::first(site_code)
+dplyr::last(age_at_visit)
+dplyr::nth(site_code, 2)
+dplyr::n_distinct(site_code)
+```
+
+All of these functions return a single value.
+Try the following.
+What happens and why?
+
+```{r}
+tumor_size * 10
+
+age_at_visit - age_at_diagnosis
+
+paste("Site Code:", site_code)
+```
+
+Because R is vectorized, operations are applied to the whole vector.
+
+### Dot, dot, dot
+
+R has a somewhat unique addition for writing and using functions: the dot-dot-dot (`...`).
+
+The `...` is used in two ways:
+
+1. To allow you to include an unknown number of values.
+
+   ```{r results='asis', echo=FALSE}
+   cat("\n   ```", paste("paste <-", capture.output(print(paste))[1]), "```", sep = "\n   ")
+   ```
+
+   ```{r}
+   paste("a", "b", "c")
+   paste("a", "b", "c", "d")
+   ```
+
+2. To allow you to pass arguments to an underlying function.
+
+   ```{r results='asis', echo=FALSE}
+   cat("\n   ```", paste("rep <-", capture.output(print(rep))[1]), "```", sep = "\n   ")
+   ```
+
+   ```{r}
+   rep(1L, 4)
+   rep(1L, times = 4)
+   rep.int(1L, times = 4)
+   ```
+
+## Data Processing
+
+Open the file `example_single_patient.R` and add the following lines.
+
+```{r example-single-patient-file-2}
+example <- data_frame(
+  patient_id = patient_id,
+  age_dx = age_at_diagnosis,
+  age_visit = age_at_visit,
+  tumor_size = tumor_size,
+  site_code = site_code
+)
+```
+
+Clear your workspace ([quick refresher here](session_01.html#clearing_your_session)) and then source the script.
+
+View the tibble that is stored in `example`.
+
+```{r echo=FALSE}
+example
+```
+
+### The "pipe" operator `%>%`
+
+It looks like this:
+
+<div style="font-size: 5em; width: 100%; text-align: center;"><code>%>%</code></div>
+
+You can type it with
+
+::: {.img-center}
+<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd>  (Windows)
+
+<kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd>  (Mac)
+:::
+
+You say it like
+
+<div style="font-size: 3em; width: 100%; text-align: center;">...and then...</div>
+
+```{r}
+x <- 1:2
+x <- rep(x, times = 3)
+x <- mean(x)
+x
+
+y <- mean(rep(1:2, times = 3))
+y
+
+z <- 1:2 %>%
+  rep(times = 3) %>%
+  mean()
+z
+```
+
+::: {.alert .alert-info}
+Requires [tidyverse]{.pkg} or [dplyr]{.pkg}!
+:::
+
+### dplyr verbs
+
+#### `filter()`
+
+![](images/dplyr-filter.png)
+
+```{r}
+example %>%
+  filter(site_code == "C400")
+
+example %>%
+  filter(tumor_size > 9.5)
+
+example %>%
+  filter(age_visit > min(age_dx))
+
+example %>%
+  pull(age_dx) %>%
+  min()
+```
+
+#### `arrange()`
+
+```{r}
+example %>%
+  arrange(site_code)
+
+example %>%
+  arrange(desc(site_code))
+
+example %>%
+  arrange(site_code, tumor_size)
+
+example %>%
+  arrange(desc(tumor_size), site_code)
+```
+
+#### `group_by()` + `count()`
+
+```{r}
+example %>% 
+  group_by(patient_id)
+
+example %>% 
+  group_by(patient_id, site_code)
+
+example %>% 
+  group_by(patient_id) %>% 
+  count()
+
+example %>% 
+  group_by(patient_id, site_code) %>% 
+  count()
+```
+
+#### `summarize()`
+
+![](images/dplyr-summarize.png)
+
+![](images/dplyr-summary-function.png)
+
+
+```{r}
+example %>%
+  summarize(min(age_dx))
+
+example %>%
+  summarize(max_tumor_size = max(tumor_size))
+
+example %>%
+  summarize(
+    tumor_size_median = median(tumor_size),
+    tumor_size_mean = mean(tumor_size),
+    age_visit = max(age_visit)
+  )
+```
+
+
+#### `mutate()`
+
+![](images/dplyr-mutate.png)
+
+![](images/dplyr-window-function.png)
+
+
+```{r}
+example %>% 
+  mutate(follow_up = age_visit - age_dx)
+
+example %>% 
+  mutate(tumor_size = tumor_size * 100)
+
+example %>% 
+  mutate(
+    tumor_size = tumor_size * 10,
+    tumor_size_mm = tumor_size * 100
+  )
+```
+
+#### `group_by()` + `summarize()`
+
+![](images/dplyr-group_by.png)
+
+```{r error=TRUE}
+example %>% 
+  group_by(site_code) %>% 
+  summarize(
+    tumor_size_mean = mean(tumor_size),
+    age_mean = mean(age)
+  )
+
+example %>% 
+  group_by(site_code, patient_id) %>% 
+  summarize(
+    tumor_size_mean = mean(tumor_size),
+    age_mean = mean(age)
+  )
+
+example %>% 
+  group_by(site_code) %>% 
+  summarize(
+    #patient_id = patient_id,
+    patient_id = first(patient_id),
+    tumor_size_mean = mean(tumor_size),
+    age_mean = mean(age)
+  )
+```

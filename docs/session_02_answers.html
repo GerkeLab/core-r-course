@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<meta name="date" content="2018-07-25" />
+
+<title>Session 2</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span. { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+<link rel="stylesheet" href="https://afeld.github.io/emoji-css/emoji.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Core R Course</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    About
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="proposal.html">About this course</a>
+    </li>
+    <li>
+      <a href="system-requirements.html">System Requirements</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Sessions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="session_01.html">Session 1 – July 18</a>
+    </li>
+    <li>
+      <a href="session_02.html">Session 2 – July 25</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="resources.html">Resources</a>
+</li>
+<li>
+  <a href="https://github.com/gerkelab/core-r-course">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Session 2</h1>
+<h4 class="date"><em>July 25, 2018</em></h4>
+
+</div>
+
+
+<div id="links" class="section level2">
+<h2>Links</h2>
+<ul>
+<li><a href="session_01_materials.html">Materials</a></li>
+<li><a href="session_02.html">This page without answers</a></li>
+</ul>
+</div>
+<div id="review" class="section level2">
+<h2>Review</h2>
+<div id="data-types" class="section level3">
+<h3>Data Types</h3>
+<p>What kind of values are each of the following?</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">10L</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="fl">1.2345</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="st">&quot;three&quot;</span></a></code></pre></div>
+</div>
+<div id="functions-and-arguments" class="section level3">
+<h3>Functions and Arguments</h3>
+<p>What can you tell me about the value that will be returned when I run:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">runif</span>(<span class="dv">1</span>, <span class="dt">min =</span> <span class="dv">-1</span>)</a></code></pre></div>
+<details>
+<p><summary>Result</summary></p>
+<pre><code>[1] 0.8741508</code></pre>
+</details>
+</div>
+<div id="variable-names" class="section level3">
+<h3>Variable Names</h3>
+<p>Which of these are valid variable names?</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">min_height</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">min.height</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">minHeight</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">MINHEIGHT</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">min<span class="op">-</span>height</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">.min.height</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">_min_height</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">0height</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">min0height</a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="st">`</span><span class="dt">Minimum Height</span><span class="st">`</span></a></code></pre></div>
+<details>
+<p><summary>Results</summary></p>
+<p>These are all fine:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">min_height &lt;-<span class="st"> </span><span class="dv">14</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">min.height &lt;-<span class="st"> </span><span class="dv">14</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">minHeight &lt;-<span class="st"> </span><span class="dv">14</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">MINHEIGHT &lt;-<span class="st"> </span><span class="dv">14</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">min0height &lt;-<span class="st"> </span><span class="dv">14</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="st">`</span><span class="dt">Minimum Height</span><span class="st">`</span> &lt;-<span class="st"> </span><span class="dv">14</span></a></code></pre></div>
+<p>This one works, but creates a hidden variable.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">.min.height &lt;-<span class="st"> </span><span class="dv">14</span></a></code></pre></div>
+<p>These don’t work and will cause an error.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># Can&#39;t start with an `_`</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">_min_height &lt;-<span class="st"> </span><span class="dv">14</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co"># This is subtraction</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">min<span class="op">-</span>height &lt;-<span class="st"> </span><span class="dv">14</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co"># Can&#39;t start with a number</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">0height &lt;-<span class="st"> </span><span class="dv">14</span></a></code></pre></div>
+</details>
+</div>
+<div id="variables-environment" class="section level3">
+<h3>Variables &amp; Environment</h3>
+<p>What is the value of each variable after each of the following statements?</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">todays_temp &lt;-<span class="st"> </span><span class="fl">31.6666</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">offset &lt;-<span class="st"> </span>32L</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">coef &lt;-<span class="st"> </span><span class="fl">1.8</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">intermed_temp &lt;-<span class="st"> </span>todays_temp <span class="op">*</span><span class="st"> </span>coef</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">todays_temp &lt;-<span class="st"> </span>intermed_temp <span class="op">+</span><span class="st"> </span>offset</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="kw">round</span>(todays_temp, <span class="dv">2</span>)</a></code></pre></div>
+<details>
+<p><summary>Result</summary></p>
+<pre><code>[1] 89</code></pre>
+</details>
+</div>
+<div id="getting-help" class="section level3">
+<h3>Getting Help</h3>
+<p>What do the following functions do? Use <code>?</code>, <code>??</code> or the <span class="rstudio-tab">Help</span> pane to learn about each function. Come up with 1-3 examples of each function in action.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">identical</span>(___)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw">tolower</span>(___)</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="kw">rep</span>(___)</a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="kw">seq</span>(___)</a></code></pre></div>
+<details>
+<p><summary><code>identical</code></summary></p>
+<blockquote>
+<p>The safe and reliable way to test two objects for being exactly equal. It returns TRUE in this case, FALSE in every other case.</p>
+</blockquote>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">identical</span>(<span class="dv">1</span>, 1L)</a></code></pre></div>
+<pre><code>[1] FALSE</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">identical</span>(<span class="op">-</span><span class="dv">0</span>, <span class="op">+</span><span class="dv">0</span>, <span class="dt">num.eq =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>[1] FALSE</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">identical</span>(<span class="dv">1</span>, <span class="ot">NULL</span>)</a></code></pre></div>
+<pre><code>[1] FALSE</code></pre>
+</details>
+<details>
+<p><summary><code>tolower</code></summary></p>
+<blockquote>
+<p>Translate characters in character vectors, in particular from upper to lower case or vice versa.</p>
+</blockquote>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">tolower</span>(<span class="st">&quot;APPLE&quot;</span>)</a></code></pre></div>
+<pre><code>[1] &quot;apple&quot;</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">tolower</span>(<span class="st">&quot;Help&quot;</span>)</a></code></pre></div>
+<pre><code>[1] &quot;help&quot;</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">toupper</span>(<span class="st">&quot;banana&quot;</span>)</a></code></pre></div>
+<pre><code>[1] &quot;BANANA&quot;</code></pre>
+</details>
+<details>
+<p><summary><code>rep</code></summary></p>
+<blockquote>
+<p><code>rep()</code> replicates the values in <code>x</code>.</p>
+</blockquote>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">2</span>)</a></code></pre></div>
+<pre><code>[1] 1 2 3 4 1 2 3 4</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">each =</span> <span class="dv">2</span>)       <span class="co"># not the same.</span></a></code></pre></div>
+<pre><code>[1] 1 1 2 2 3 3 4 4</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>))     <span class="co"># same as second.</span></a></code></pre></div>
+<pre><code>[1] 1 1 2 2 3 3 4 4</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>))</a></code></pre></div>
+<pre><code>[1] 1 1 2 3 3 4</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">each =</span> <span class="dv">2</span>, <span class="dt">len =</span> <span class="dv">4</span>)    <span class="co"># first 4 only.</span></a></code></pre></div>
+<pre><code>[1] 1 1 2 2</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">each =</span> <span class="dv">2</span>, <span class="dt">len =</span> <span class="dv">10</span>)   <span class="co"># 8 integers plus two recycled 1&#39;s.</span></a></code></pre></div>
+<pre><code> [1] 1 1 2 2 3 3 4 4 1 1</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">each =</span> <span class="dv">2</span>, <span class="dt">times =</span> <span class="dv">3</span>)  <span class="co"># length 24, 3 complete replications</span></a></code></pre></div>
+<pre><code> [1] 1 1 2 2 3 3 4 4 1 1 2 2 3 3 4 4 1 1 2 2 3 3 4 4</code></pre>
+</details>
+<details>
+<p><summary><code>seq</code></summary></p>
+<blockquote>
+<p>Generate regular sequences. seq is a standard generic with a default method. seq.int is a primitive which can be much faster but has a few restrictions. seq_along and seq_len are very fast primitives for two common cases.</p>
+</blockquote>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">9</span>)</a></code></pre></div>
+<pre><code>[1] 1 2 3 4 5 6 7 8 9</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)</a></code></pre></div>
+<pre><code> [1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">length.out =</span> <span class="dv">11</span>)</a></code></pre></div>
+<pre><code> [1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">9</span>, <span class="dt">by =</span> <span class="dv">2</span>)     <span class="co"># matches &#39;end&#39;</span></a></code></pre></div>
+<pre><code>[1] 1 3 5 7 9</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">9</span>, <span class="dt">by =</span> pi)    <span class="co"># stays below &#39;end&#39;</span></a></code></pre></div>
+<pre><code>[1] 1.000000 4.141593 7.283185</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">6</span>, <span class="dt">by =</span> <span class="dv">3</span>)</a></code></pre></div>
+<pre><code>[1] 1 4</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">seq</span>(<span class="fl">1.575</span>, <span class="fl">5.125</span>, <span class="dt">by =</span> <span class="fl">0.05</span>)</a></code></pre></div>
+<pre><code> [1] 1.575 1.625 1.675 1.725 1.775 1.825 1.875 1.925 1.975 2.025 2.075
+[12] 2.125 2.175 2.225 2.275 2.325 2.375 2.425 2.475 2.525 2.575 2.625
+[23] 2.675 2.725 2.775 2.825 2.875 2.925 2.975 3.025 3.075 3.125 3.175
+[34] 3.225 3.275 3.325 3.375 3.425 3.475 3.525 3.575 3.625 3.675 3.725
+[45] 3.775 3.825 3.875 3.925 3.975 4.025 4.075 4.125 4.175 4.225 4.275
+[56] 4.325 4.375 4.425 4.475 4.525 4.575 4.625 4.675 4.725 4.775 4.825
+[67] 4.875 4.925 4.975 5.025 5.075 5.125</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="kw">seq</span>(<span class="dv">17</span>) <span class="co"># same as 1:17, or even better seq_len(17)</span></a></code></pre></div>
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17</code></pre>
+</details>
+</div>
+<div id="highlighting-new-concepts" class="section level3">
+<h3>Highlighting New Concepts</h3>
+<p>These examples gave us a chance to review the things that we talked about during the last session, and they also introduced us to several new concepts that we will cover today.</p>
+<ol style="list-style-type: decimal">
+<li><p>Vectors</p></li>
+<li><p>What are the <code>...</code>? (<em>further arguments passed to or from other methods</em>)</p></li>
+<li><p><code>NULL</code> and <code>NA</code></p></li>
+</ol>
+</div>
+</div>
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<ol style="list-style-type: decimal">
+<li><p><a href="#packages">Packages</a></p></li>
+<li><p><a href="#collections">Collections</a>: <a href="#vectors">vectors</a>, <a href="#lists">lists</a>, <a href="#data_frames_and_tibbles">data frames</a></p></li>
+<li><a href="#data_types_continued">Data Types Continued</a>
+<ul>
+<li><a href="#special_data_types">Special data types</a>: <code>NA</code>, <code>NULL</code></li>
+<li><a href="#working_with_data-types">Working with data types</a>: <code>is</code>, <code>as</code>, <code>class</code></li>
+</ul></li>
+<li><p><a href="#workspaces__rstudio_projects">Workspaces &amp; RStudio Projects</a></p></li>
+<li><p><a href="#functions">More Functions</a></p></li>
+<li><p><a href="#data_processing">Data Processing with <code>dplyr</code></a></p></li>
+</ol>
+</div>
+<div id="packages" class="section level2">
+<h2>Packages</h2>
+<div id="installing-packages" class="section level3">
+<h3>Installing Packages</h3>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</a>
+<a class="sourceLine" id="cb53-2" data-line-number="2"><span class="kw">install.packages</span>(<span class="st">&quot;readxl&quot;</span>)</a></code></pre></div>
+<p><img src="images/install-readxl-rstudio-2.png" /></p>
+<p>Most packages are hosted on <a href="https://cran.rstudio.com/">CRAN</a> <span class="muted">(cran.rstudio.com)</span>.</p>
+<p>How do you find packages? Besides Google, you can use <a href="https://www.r-pkg.org">MetaCRAN</a> <span class="muted">(r-pkg.org)</span> to search for available packages. Or you can use the <a href="https://cran.r-project.org/web/views/">CRAN Task View</a>.</p>
+</div>
+<div id="attaching-loading-packages" class="section level3">
+<h3>Attaching (Loading) Packages</h3>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
+<p><img src="images/console-library-tidyverse.png" /></p>
+<p>Includes the following packages: <code>broom</code>, <code>cli</code>, <code>crayon</code>, <code>dplyr</code>, <code>dbplyr</code>, <code>forcats</code>, <code>ggplot2</code>, <code>haven</code>, <code>hms</code>, <code>httr</code>, <code>jsonlite</code>, <code>lubridate</code>, <code>magrittr</code>, <code>modelr</code>, <code>purrr</code>, <code>readr</code>, <code>readxl</code>, <code>reprex</code>, <code>rlang</code>, <code>rstudioapi</code>, <code>rvest</code>, <code>stringr</code>, <code>tibble</code>, <code>tidyr</code>, and <code>xml2</code>.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="kw">library</span>(readr)</a>
+<a class="sourceLine" id="cb55-2" data-line-number="2"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb55-3" data-line-number="3"><span class="kw">library</span>(stringr, tibble) <span class="co">#&lt;&lt; Doesn&#39;t do what you think</span></a></code></pre></div>
+<div class="img-center">
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+<p lang="en" dir="ltr">
+<a href="https://twitter.com/ijlyttle?ref_src=twsrc%5Etfw"><span class="citation">@ijlyttle</span></a> a package is a like a book, a library is like a library; you use library() to check a package out of the library <a href="https://twitter.com/hashtag/rsats?src=hash&amp;ref_src=twsrc%5Etfw">#rsats</a>
+</p>
+— Hadley Wickham (<span class="citation">@hadleywickham</span>) <a href="https://twitter.com/hadleywickham/status/541948905009586176?ref_src=twsrc%5Etfw">December 8, 2014</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+</div>
+<div id="using-rstudio" class="section level3">
+<h3>Using RStudio</h3>
+<p>You can also use the <span class="rstudio-tab">Packages</span> pane to install and update,</p>
+<div class="img-center">
+<div class="figure">
+<img src="images/rstudio-09-packages.png" alt="RStudio Packages Pane" class="img-mw500" />
+<p class="caption">RStudio Packages Pane</p>
+</div>
+</div>
+<p>or <span class="menu-item">Tools</span> ▸ <span class="menu-item">Install Packages…</span>.</p>
+<div class="img-center">
+<div class="figure">
+<img src="images/rstudio-10-install-packages.png" alt="RStudio Install Packages Menu" class="img-mw500" />
+<p class="caption">RStudio Install Packages Menu</p>
+</div>
+</div>
+</div>
+<div id="behind-the-scenes" class="section level3">
+<h3>Behind the Scenes</h3>
+<p>A package contains:</p>
+<ol style="list-style-type: decimal">
+<li>Functions</li>
+<li>Documentation</li>
+<li><em>Vignettes</em></li>
+<li><em>Data</em></li>
+</ol>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="kw">library</span>(babynames)</a>
+<a class="sourceLine" id="cb56-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb56-3" data-line-number="3"><span class="kw">install.packages</span>(<span class="st">&quot;babynames&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1">babynames</a></code></pre></div>
+<pre><code>Error in eval(expr, envir, enclos): object &#39;babynames&#39; not found</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1">babynames<span class="op">::</span>babynames</a></code></pre></div>
+<pre><code># A tibble: 1,858,689 x 5
+    year sex   name          n   prop
+   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;int&gt;  &lt;dbl&gt;
+ 1  1880 F     Mary       7065 0.0724
+ 2  1880 F     Anna       2604 0.0267
+ 3  1880 F     Emma       2003 0.0205
+ 4  1880 F     Elizabeth  1939 0.0199
+ 5  1880 F     Minnie     1746 0.0179
+ 6  1880 F     Margaret   1578 0.0162
+ 7  1880 F     Ida        1472 0.0151
+ 8  1880 F     Alice      1414 0.0145
+ 9  1880 F     Bertha     1320 0.0135
+10  1880 F     Sarah      1288 0.0132
+# ... with 1,858,679 more rows</code></pre>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1"><span class="kw">library</span>(babynames)</a>
+<a class="sourceLine" id="cb61-2" data-line-number="2">babynames</a></code></pre></div>
+<pre><code># A tibble: 1,858,689 x 5
+    year sex   name          n   prop
+   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;int&gt;  &lt;dbl&gt;
+ 1  1880 F     Mary       7065 0.0724
+ 2  1880 F     Anna       2604 0.0267
+ 3  1880 F     Emma       2003 0.0205
+ 4  1880 F     Elizabeth  1939 0.0199
+ 5  1880 F     Minnie     1746 0.0179
+ 6  1880 F     Margaret   1578 0.0162
+ 7  1880 F     Ida        1472 0.0151
+ 8  1880 F     Alice      1414 0.0145
+ 9  1880 F     Bertha     1320 0.0135
+10  1880 F     Sarah      1288 0.0132
+# ... with 1,858,679 more rows</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1">births</a></code></pre></div>
+<pre><code># A tibble: 119 x 2
+    year  births
+   &lt;int&gt;   &lt;int&gt;
+ 1  1909 2718000
+ 2  1910 2777000
+ 3  1911 2809000
+ 4  1912 2840000
+ 5  1913 2869000
+ 6  1914 2966000
+ 7  1915 2965000
+ 8  1916 2964000
+ 9  1917 2944000
+10  1918 2948000
+# ... with 109 more rows</code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1"><span class="kw">ls</span>(<span class="st">&quot;package:babynames&quot;</span>)</a></code></pre></div>
+<pre><code>[1] &quot;applicants&quot; &quot;babynames&quot;  &quot;births&quot;     &quot;lifetables&quot;</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1"><span class="kw">detach</span>(<span class="st">&quot;package:babynames&quot;</span>, <span class="dt">unload =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="images/console-sessionInfo.png" /></p>
+</div>
+</div>
+<div id="collections" class="section level2">
+<h2>Collections</h2>
+<div id="vectors" class="section level3">
+<h3>Vectors</h3>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1"><span class="dv">1</span><span class="op">:</span><span class="dv">3</span></a></code></pre></div>
+<pre><code>[1] 1 2 3</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</a></code></pre></div>
+<pre><code>[1] 1 2 3</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1"><span class="kw">identical</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</a></code></pre></div>
+<pre><code>[1] FALSE</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1"><span class="kw">identical</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="kw">c</span>(1L, 2L, 3L))</a></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1"><span class="kw">c</span>(1L, 2L, 3L, pi)</a></code></pre></div>
+<pre><code>[1] 1.000000 2.000000 3.000000 3.141593</code></pre>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1">fruits &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>)</a>
+<a class="sourceLine" id="cb78-2" data-line-number="2">fruits</a></code></pre></div>
+<pre><code>[1] &quot;apple&quot;  &quot;banana&quot;</code></pre>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1">fruits &lt;-<span class="st"> </span><span class="kw">c</span>(fruits, <span class="st">&quot;cherimoya&quot;</span>)</a></code></pre></div>
+<div class="figure">
+<img src="images/cherimoya.jpg" alt="A cherimoya" />
+<p class="caption"><a href="https://en.wikipedia.org/wiki/Cherimoya">A cherimoya</a></p>
+</div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1">fruits</a></code></pre></div>
+<pre><code>[1] &quot;apple&quot;     &quot;banana&quot;    &quot;cherimoya&quot;</code></pre>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1">month_days &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;March&quot;</span> =<span class="st"> </span><span class="dv">31</span>, <span class="st">&quot;April&quot;</span> =<span class="st"> </span><span class="dv">30</span>, <span class="dt">May =</span> <span class="dv">31</span>)</a>
+<a class="sourceLine" id="cb83-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb83-3" data-line-number="3">month_days</a></code></pre></div>
+<pre><code>March April   May 
+   31    30    31 </code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1"><span class="kw">names</span>(month_days) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;August&quot;</span>, <span class="st">&quot;September&quot;</span>, <span class="st">&quot;October&quot;</span>)</a>
+<a class="sourceLine" id="cb85-2" data-line-number="2">month_days</a></code></pre></div>
+<pre><code>   August September   October 
+       31        30        31 </code></pre>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1">month_days[<span class="st">&quot;October&quot;</span>]</a></code></pre></div>
+<pre><code>October 
+     31 </code></pre>
+</div>
+<div id="lists" class="section level3">
+<h3>Lists</h3>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb89-2" data-line-number="2">  <span class="dt">fruits =</span> fruits,</a>
+<a class="sourceLine" id="cb89-3" data-line-number="3">  <span class="dt">months =</span> <span class="kw">names</span>(month_days),</a>
+<a class="sourceLine" id="cb89-4" data-line-number="4">  <span class="dt">month_days =</span> month_days</a>
+<a class="sourceLine" id="cb89-5" data-line-number="5">)</a>
+<a class="sourceLine" id="cb89-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb89-7" data-line-number="7">x</a></code></pre></div>
+<pre><code>$fruits
+[1] &quot;apple&quot;     &quot;banana&quot;    &quot;cherimoya&quot;
+
+$months
+[1] &quot;August&quot;    &quot;September&quot; &quot;October&quot;  
+
+$month_days
+   August September   October 
+       31        30        31 </code></pre>
+</div>
+<div id="data-frames-and-tibbles" class="section level3">
+<h3>Data Frames and Tibbles</h3>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1">y &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb91-2" data-line-number="2">  <span class="dt">fruits =</span> fruits,</a>
+<a class="sourceLine" id="cb91-3" data-line-number="3">  <span class="dt">months =</span> <span class="kw">names</span>(month_days),</a>
+<a class="sourceLine" id="cb91-4" data-line-number="4">  <span class="dt">month_days =</span> month_days</a>
+<a class="sourceLine" id="cb91-5" data-line-number="5">)</a>
+<a class="sourceLine" id="cb91-6" data-line-number="6">y</a></code></pre></div>
+<pre><code>             fruits    months month_days
+August        apple    August         31
+September    banana September         30
+October   cherimoya   October         31</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1">y2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb93-2" data-line-number="2">  <span class="dt">fruits =</span> fruits,</a>
+<a class="sourceLine" id="cb93-3" data-line-number="3">  <span class="dt">months =</span> <span class="kw">names</span>(month_days),</a>
+<a class="sourceLine" id="cb93-4" data-line-number="4">  <span class="dt">month_days =</span> month_days,</a>
+<a class="sourceLine" id="cb93-5" data-line-number="5">  <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb93-6" data-line-number="6">  <span class="dt">row.names =</span> <span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb93-7" data-line-number="7">)</a>
+<a class="sourceLine" id="cb93-8" data-line-number="8">y2</a></code></pre></div>
+<pre><code>     fruits    months month_days
+1     apple    August         31
+2    banana September         30
+3 cherimoya   October         31</code></pre>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1">z &lt;-<span class="st"> </span><span class="kw">data_frame</span>(             <span class="co">#&lt;&lt; tibble()</span></a>
+<a class="sourceLine" id="cb95-2" data-line-number="2">  <span class="dt">fruits =</span> fruits,</a>
+<a class="sourceLine" id="cb95-3" data-line-number="3">  <span class="dt">months =</span> <span class="kw">names</span>(month_days),</a>
+<a class="sourceLine" id="cb95-4" data-line-number="4">  <span class="dt">mont_days =</span> month_days</a>
+<a class="sourceLine" id="cb95-5" data-line-number="5">)</a>
+<a class="sourceLine" id="cb95-6" data-line-number="6">z</a></code></pre></div>
+<pre><code># A tibble: 3 x 3
+  fruits    months    mont_days
+  &lt;chr&gt;     &lt;chr&gt;         &lt;dbl&gt;
+1 apple     August           31
+2 banana    September        30
+3 cherimoya October          31</code></pre>
+</div>
+</div>
+<div id="data-types-continued" class="section level2">
+<h2>Data Types Continued</h2>
+<div id="review-1" class="section level3">
+<h3>Review</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Type</th>
+<th align="left">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">integer</td>
+<td align="left"><code>1L</code></td>
+</tr>
+<tr class="even">
+<td align="center">double</td>
+<td align="left"><code>3.14</code>, <code>1.23e-4</code></td>
+</tr>
+<tr class="odd">
+<td align="center">character</td>
+<td align="left"><code>&quot;apple&quot;</code></td>
+</tr>
+<tr class="even">
+<td align="center">logical</td>
+<td align="left"><code>TRUE</code>, <code>FALSE</code></td>
+</tr>
+<tr class="odd">
+<td align="center">vector</td>
+<td align="left"><code>c(...)</code></td>
+</tr>
+<tr class="even">
+<td align="center">list</td>
+<td align="left"><code>list(...)</code></td>
+</tr>
+<tr class="odd">
+<td align="center">data.frame</td>
+<td align="left"><code>data.frame(...)</code></td>
+</tr>
+<tr class="even">
+<td align="center">tibble</td>
+<td align="left"><code>data_frame(...)</code></td>
+</tr>
+<tr class="odd">
+<td align="center">N/A</td>
+<td align="left"><code>NA</code></td>
+</tr>
+<tr class="even">
+<td align="center">null</td>
+<td align="left"><code>NULL</code></td>
+</tr>
+<tr class="odd">
+<td align="center">factor</td>
+<td align="left"><code>factor(letters)</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="special-data-types" class="section level3">
+<h3>Special Data Types</h3>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NA</span>, <span class="dv">4</span>)</a></code></pre></div>
+<pre><code>[1]  1  2 NA  4</code></pre>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" data-line-number="1"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NULL</span>, <span class="dv">4</span>)</a></code></pre></div>
+<pre><code>[1] 1 2 4</code></pre>
+</div>
+<div id="factors" class="section level3">
+<h3>Factors</h3>
+<p>We’ll talk about this later, but it’s basically a vector with an additional <strong>label</strong> and sometimes an <strong>order</strong>.</p>
+<details>
+<p><summary>Sneak Peek</summary></p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" data-line-number="1"><span class="kw">factor</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a></code></pre></div>
+<pre><code>[1] 1 2 3
+Levels: 1 2 3</code></pre>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" data-line-number="1"><span class="kw">factor</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb103-2" data-line-number="2">       <span class="dt">levels =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a></code></pre></div>
+<pre><code>[1] 1 2 3
+Levels: 1 2 3</code></pre>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1"><span class="kw">factor</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb105-2" data-line-number="2">       <span class="dt">levels =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb105-3" data-line-number="3">       <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>))</a></code></pre></div>
+<pre><code>[1] a b c
+Levels: a b c</code></pre>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" data-line-number="1"><span class="kw">factor</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb107-2" data-line-number="2">       <span class="dt">levels =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb107-3" data-line-number="3">       <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>),</a>
+<a class="sourceLine" id="cb107-4" data-line-number="4">       <span class="dt">ordered =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>[1] a b c
+Levels: a &lt; b &lt; c</code></pre>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" data-line-number="1"><span class="kw">factor</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb109-2" data-line-number="2">       <span class="dt">levels =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb109-3" data-line-number="3">       <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>),</a>
+<a class="sourceLine" id="cb109-4" data-line-number="4">       <span class="dt">ordered =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>[1] c b a
+Levels: a &lt; b &lt; c</code></pre>
+</details>
+</div>
+<div id="working-with-data-types" class="section level3">
+<h3>Working with Data Types</h3>
+<div id="what-is-this-thing" class="section level4">
+<h4>What is this thing?</h4>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" data-line-number="1">x &lt;-<span class="st"> </span>1L</a>
+<a class="sourceLine" id="cb111-2" data-line-number="2">y &lt;-<span class="st"> </span>pi</a>
+<a class="sourceLine" id="cb111-3" data-line-number="3">z &lt;-<span class="st"> &quot;apple&quot;</span></a>
+<a class="sourceLine" id="cb111-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb111-5" data-line-number="5"><span class="kw">class</span>(x)</a></code></pre></div>
+<pre><code>[1] &quot;integer&quot;</code></pre>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" data-line-number="1"><span class="kw">class</span>(y)</a></code></pre></div>
+<pre><code>[1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" data-line-number="1"><span class="kw">class</span>(z)</a></code></pre></div>
+<pre><code>[1] &quot;character&quot;</code></pre>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" data-line-number="1"><span class="kw">typeof</span>(z)</a></code></pre></div>
+<pre><code>[1] &quot;character&quot;</code></pre>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1"><span class="kw">class</span>(mtcars)</a></code></pre></div>
+<pre><code>[1] &quot;data.frame&quot;</code></pre>
+</div>
+<div id="are-you-this-thing" class="section level4">
+<h4>Are you this thing?</h4>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" data-line-number="1"><span class="kw">is.integer</span>(1L)</a></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1"><span class="kw">is.numeric</span>(pi)</a></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" data-line-number="1"><span class="kw">is.numeric</span>(1L)</a></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1"><span class="kw">is.double</span>(1L)</a></code></pre></div>
+<pre><code>[1] FALSE</code></pre>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" data-line-number="1"><span class="kw">is.character</span>(<span class="st">&quot;one&quot;</span>)</a></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" data-line-number="1"><span class="kw">is.logical</span>(<span class="st">&quot;TRUE&quot;</span>)</a></code></pre></div>
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div id="are-you-even-there" class="section level4">
+<h4>Are you even there?</h4>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" data-line-number="1"><span class="kw">is.na</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NA</span>, <span class="dv">4</span>))</a></code></pre></div>
+<pre><code>[1] FALSE FALSE  TRUE FALSE</code></pre>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" data-line-number="1"><span class="kw">is.null</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NULL</span>, <span class="dv">4</span>))</a></code></pre></div>
+<pre><code>[1] FALSE</code></pre>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" data-line-number="1">xyz &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb137-2" data-line-number="2"><span class="kw">is.null</span>(xyz)</a></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div id="turn-you-into-this-thing." class="section level4">
+<h4>Turn you into this thing.</h4>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" data-line-number="1"><span class="kw">as.character</span>(<span class="dv">1</span>)</a></code></pre></div>
+<pre><code>[1] &quot;1&quot;</code></pre>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" data-line-number="1"><span class="kw">as.integer</span>(pi)</a></code></pre></div>
+<pre><code>[1] 3</code></pre>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" data-line-number="1"><span class="kw">as.double</span>(10L)</a></code></pre></div>
+<pre><code>[1] 10</code></pre>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" data-line-number="1"><span class="kw">as.logical</span>(<span class="dv">2</span>)</a></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</div>
+<div id="workspaces-rstudio-projects" class="section level2">
+<h2>Workspaces &amp; RStudio Projects</h2>
+<div id="working-directory" class="section level3">
+<h3>Working Directory</h3>
+<p>The working directory is where R looks when it tries to find a file or where it writes a file.</p>
+<p>You can check where your R process is “living” – i.e. your working directory – with</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" data-line-number="1"><span class="kw">getwd</span>()</a></code></pre></div>
+<p>and you can set it with</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" data-line-number="1"><span class="kw">setwd</span>(<span class="st">&quot;~/myCoolProject&quot;</span>)</a></code></pre></div>
+<p>But <strong>this is not recommended</strong>!</p>
+<p>You can also use <span class="menu-item">More</span> ▸ <span class="menu-item">Set As Working Directory</span> or <span class="menu-item">Go To Working Directory</span> in the <span class="rstudio-tab">Files</span> pane to set the working directory, but this is <strong>also not recommended</strong>.</p>
+<p><span class="muted">When should you? When you get lost.</span></p>
+</div>
+<div id="using-rstudio-projects" class="section level3">
+<h3>Using RStudio Projects</h3>
+<p>Without some kind of organization scheme, you’ll very quickly end up writing all of your R scripts in a single folder. Multiple analysis will write out files, exporting data and creating plots, each of these writing into the same folder.</p>
+<div class="figure">
+<img src="images/messy-desktop.png" alt="Life without RStudio Projects" />
+<p class="caption">Life without RStudio Projects</p>
+</div>
+<p>Instead, RStudio offers an excellent method of organization called <strong>Projects</strong>. Using RStudio projects, each analysis is self-contained and organized, each in its own way, and it’s easy to switch from one project to another and know that your files will be organized, your environment will be clean, and you can pick everything back up from where you started.</p>
+<div class="figure">
+<img src="images/obsessively-organized.jpg" alt="Life with RStudio Projects, credit" />
+<p class="caption">Life <em>with</em> RStudio Projects, <a href="https://www.citi.io/2016/04/06/if-you-think-you-are-obsessively-organized-think-again-with-these/">credit</a></p>
+</div>
+</div>
+<div id="create-an-rstudio-project" class="section level3">
+<h3>Create an RStudio Project</h3>
+<p>Select <span class="menu-item">File</span> ▸ <span class="menu-item">New Project</span> or choose <span class="menu-item">New Project</span> from the drop-down menu in the upper right corner of the RStudio window.</p>
+<div class="img-center">
+<p><img src="images/rstudio-project-01-new.png" class="img-mw500" /></p>
+</div>
+<p>Select <strong>New Directory</strong> to create your project in a new directory. If you already have files in a directory that you want to use, choose <em>Existing Directory</em>.</p>
+<div class="img-center">
+<p><img src="images/rstudio-project-02-create-project.png" class="img-mw500" /></p>
+</div>
+<p>Select the type of project you want to start – this will generally be <strong>New Project</strong>.</p>
+<div class="img-center">
+<p><img src="images/rstudio-project-03-project-type.png" class="img-mw500" /></p>
+</div>
+<p>Choose the name for the folder that will be created to house your project and pick the folder where the project folder will be created.</p>
+<p>Here we give the new project folder the name <strong><code>cds-r-course</code></strong>. This will also be the name of the project itself.</p>
+<div class="img-center">
+<p><img src="images/rstudio-project-04-create-new-project.png" class="img-mw500" /></p>
+</div>
+<p>Your project will be created and you’ll be dropped into a new R/RStudio session.</p>
+<p><img src="images/rstudio-project-05-blank-project.png" /></p>
+</div>
+<div id="work-with-your-project" class="section level3">
+<h3>Work with your project</h3>
+<p>Use the <span class="rstudio-tab">Files</span> to create a folder called <code>data</code> in your project folder.</p>
+<p>Run the following command to download the <code>gapminder.csv</code> file into your <code>data</code> folder.</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">download.file</span>(<span class="st">&quot;https://gerkelab.github.io/core-r-course/materials/01/gapminder.csv&quot;</span>, <span class="st">&quot;data/gapminder.csv&quot;</span>)</a></code></pre></div>
+<p>Create a new R script. Add the following code to it.</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb150-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb150-3" data-line-number="3">patient_id &lt;-<span class="st"> </span><span class="dv">5554321</span></a>
+<a class="sourceLine" id="cb150-4" data-line-number="4">age_at_diagnosis &lt;-<span class="st"> </span><span class="dv">54</span></a>
+<a class="sourceLine" id="cb150-5" data-line-number="5">age_at_visit &lt;-<span class="st"> </span><span class="dv">54</span><span class="op">:</span><span class="dv">58</span></a>
+<a class="sourceLine" id="cb150-6" data-line-number="6">tumor_size &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">9.5</span>, <span class="fl">9.5</span>, <span class="fl">9.7</span>, <span class="fl">9.9</span>, <span class="fl">10.1</span>)</a>
+<a class="sourceLine" id="cb150-7" data-line-number="7">site_code &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;C220&quot;</span>, <span class="st">&quot;C400&quot;</span>, <span class="st">&quot;C412&quot;</span>, <span class="st">&quot;C220&quot;</span>, <span class="st">&quot;C400&quot;</span>)</a></code></pre></div>
+<p>Save the file as <code>example_single_patient.R</code> in your project directory.</p>
+<p>Source the file.</p>
+<p>Close the project. Take a deep breath. Re-open the project.</p>
+</div>
+</div>
+<div id="functions" class="section level2">
+<h2>Functions</h2>
+<div id="functions-that-work-with-vectors" class="section level3">
+<h3>Functions that work with vectors</h3>
+<p>So far we’ve primarily seen vectors that operate on single values or that take single-valued arguments.</p>
+<p>But as we’ve seen, R is a <em>vectorized language</em>.</p>
+<p>Try using the following functions on the variables we created in <code>example_single_patient.R</code>.</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" data-line-number="1"><span class="kw">min</span>(tumor_size)</a></code></pre></div>
+<pre><code>[1] 9.5</code></pre>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" data-line-number="1"><span class="kw">max</span>(tumor_size)</a></code></pre></div>
+<pre><code>[1] 10.1</code></pre>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" data-line-number="1"><span class="kw">mean</span>(tumor_size)</a></code></pre></div>
+<pre><code>[1] 9.74</code></pre>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1"><span class="kw">median</span>(tumor_size)</a></code></pre></div>
+<pre><code>[1] 9.7</code></pre>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" data-line-number="1"><span class="kw">var</span>(tumor_size)</a></code></pre></div>
+<pre><code>[1] 0.068</code></pre>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" data-line-number="1"><span class="kw">sd</span>(tumor_size)</a></code></pre></div>
+<pre><code>[1] 0.2607681</code></pre>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" data-line-number="1"><span class="kw">IQR</span>(tumor_size)</a></code></pre></div>
+<pre><code>[1] 0.4</code></pre>
+<p>Those functions all come from base R (standard R library).</p>
+<p>The following functions are given to us from <code>dplyr</code>. We have dplyr loaded if we’ve run <code>library(tidyverse)</code>, but I’ll include the <code>dplyr::</code> first as a reminder that that’s where these functions come from.</p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" data-line-number="1">dplyr<span class="op">::</span><span class="kw">first</span>(site_code)</a></code></pre></div>
+<pre><code>[1] &quot;C220&quot;</code></pre>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" data-line-number="1">dplyr<span class="op">::</span><span class="kw">last</span>(age_at_visit)</a></code></pre></div>
+<pre><code>[1] 58</code></pre>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" data-line-number="1">dplyr<span class="op">::</span><span class="kw">nth</span>(site_code, <span class="dv">2</span>)</a></code></pre></div>
+<pre><code>[1] &quot;C400&quot;</code></pre>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" data-line-number="1">dplyr<span class="op">::</span><span class="kw">n_distinct</span>(site_code)</a></code></pre></div>
+<pre><code>[1] 3</code></pre>
+<p>All of these functions return a single value. Try the following. What happens and why?</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" data-line-number="1">tumor_size <span class="op">*</span><span class="st"> </span><span class="dv">10</span></a></code></pre></div>
+<pre><code>[1]  95  95  97  99 101</code></pre>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" data-line-number="1">age_at_visit <span class="op">-</span><span class="st"> </span>age_at_diagnosis</a></code></pre></div>
+<pre><code>[1] 0 1 2 3 4</code></pre>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" data-line-number="1"><span class="kw">paste</span>(<span class="st">&quot;Site Code:&quot;</span>, site_code)</a></code></pre></div>
+<pre><code>[1] &quot;Site Code: C220&quot; &quot;Site Code: C400&quot; &quot;Site Code: C412&quot; &quot;Site Code: C220&quot;
+[5] &quot;Site Code: C400&quot;</code></pre>
+<p>Because R is vectorized, operations are applied to the whole vector.</p>
+</div>
+<div id="dot-dot-dot" class="section level3">
+<h3>Dot, dot, dot</h3>
+<p>R has a somewhat unique addition for writing and using functions: the dot-dot-dot (<code>...</code>).</p>
+<p>The <code>...</code> is used in two ways:</p>
+<ol style="list-style-type: decimal">
+<li><p>To allow you to include an unknown number of values.</p>
+<pre><code>paste &lt;- function (..., sep = &quot; &quot;, collapse = NULL) </code></pre>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" data-line-number="1"><span class="kw">paste</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>)</a></code></pre></div>
+<pre><code>[1] &quot;a b c&quot;</code></pre>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" data-line-number="1"><span class="kw">paste</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>)</a></code></pre></div>
+<pre><code>[1] &quot;a b c d&quot;</code></pre></li>
+<li><p>To allow you to pass arguments to an underlying function.</p>
+<pre><code>rep &lt;- function (x, ...)  .Primitive(&quot;rep&quot;)</code></pre>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" data-line-number="1"><span class="kw">rep</span>(1L, <span class="dv">4</span>)</a></code></pre></div>
+<pre><code>[1] 1 1 1 1</code></pre>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" data-line-number="1"><span class="kw">rep</span>(1L, <span class="dt">times =</span> <span class="dv">4</span>)</a></code></pre></div>
+<pre><code>[1] 1 1 1 1</code></pre>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" data-line-number="1"><span class="kw">rep.int</span>(1L, <span class="dt">times =</span> <span class="dv">4</span>)</a></code></pre></div>
+<pre><code>[1] 1 1 1 1</code></pre></li>
+</ol>
+</div>
+</div>
+<div id="data-processing" class="section level2">
+<h2>Data Processing</h2>
+<p>Open the file <code>example_single_patient.R</code> and add the following lines.</p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb191-1" data-line-number="1">example &lt;-<span class="st"> </span><span class="kw">data_frame</span>(</a>
+<a class="sourceLine" id="cb191-2" data-line-number="2">  <span class="dt">patient_id =</span> patient_id,</a>
+<a class="sourceLine" id="cb191-3" data-line-number="3">  <span class="dt">age_dx =</span> age_at_diagnosis,</a>
+<a class="sourceLine" id="cb191-4" data-line-number="4">  <span class="dt">age_visit =</span> age_at_visit,</a>
+<a class="sourceLine" id="cb191-5" data-line-number="5">  <span class="dt">tumor_size =</span> tumor_size,</a>
+<a class="sourceLine" id="cb191-6" data-line-number="6">  <span class="dt">site_code =</span> site_code</a>
+<a class="sourceLine" id="cb191-7" data-line-number="7">)</a></code></pre></div>
+<p>Clear your workspace (<a href="session_01.html#clearing_your_session">quick refresher here</a>) and then source the script.</p>
+<p>View the tibble that is stored in <code>example</code>.</p>
+<pre><code># A tibble: 5 x 5
+  patient_id age_dx age_visit tumor_size site_code
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
+1    5554321     54        54        9.5 C220     
+2    5554321     54        55        9.5 C400     
+3    5554321     54        56        9.7 C412     
+4    5554321     54        57        9.9 C220     
+5    5554321     54        58       10.1 C400     </code></pre>
+<div id="the-pipe-operator" class="section level3">
+<h3>The “pipe” operator <code>%&gt;%</code></h3>
+<p>It looks like this:</p>
+<div style="font-size: 5em; width: 100%; text-align: center;">
+<code>%&gt;%</code>
+</div>
+<p>You can type it with</p>
+<div class="img-center">
+<p><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd> (Windows)</p>
+<p><kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd> (Mac)</p>
+</div>
+<p>You say it like</p>
+<div style="font-size: 3em; width: 100%; text-align: center;">
+…and then…
+</div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb193-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb193-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="kw">rep</span>(x, <span class="dt">times =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb193-3" data-line-number="3">x &lt;-<span class="st"> </span><span class="kw">mean</span>(x)</a>
+<a class="sourceLine" id="cb193-4" data-line-number="4">x</a></code></pre></div>
+<pre><code>[1] 1.5</code></pre>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" data-line-number="1">y &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">times =</span> <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb195-2" data-line-number="2">y</a></code></pre></div>
+<pre><code>[1] 1.5</code></pre>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" data-line-number="1">z &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span> <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb197-2" data-line-number="2"><span class="st">  </span><span class="kw">rep</span>(<span class="dt">times =</span> <span class="dv">3</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb197-3" data-line-number="3"><span class="st">  </span><span class="kw">mean</span>()</a>
+<a class="sourceLine" id="cb197-4" data-line-number="4">z</a></code></pre></div>
+<pre><code>[1] 1.5</code></pre>
+<div class="alert alert-info">
+<p>Requires <span class="pkg">tidyverse</span> or <span class="pkg">dplyr</span>!</p>
+</div>
+</div>
+<div id="dplyr-verbs" class="section level3">
+<h3>dplyr verbs</h3>
+<div id="filter" class="section level4">
+<h4><code>filter()</code></h4>
+<p><img src="images/dplyr-filter.png" /></p>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" data-line-number="1">example <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb199-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(site_code <span class="op">==</span><span class="st"> &quot;C400&quot;</span>)</a></code></pre></div>
+<pre><code># A tibble: 2 x 5
+  patient_id age_dx age_visit tumor_size site_code
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
+1    5554321     54        55        9.5 C400     
+2    5554321     54        58       10.1 C400     </code></pre>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" data-line-number="1">example <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb201-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(tumor_size <span class="op">&gt;</span><span class="st"> </span><span class="fl">9.5</span>)</a></code></pre></div>
+<pre><code># A tibble: 3 x 5
+  patient_id age_dx age_visit tumor_size site_code
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
+1    5554321     54        56        9.7 C412     
+2    5554321     54        57        9.9 C220     
+3    5554321     54        58       10.1 C400     </code></pre>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" data-line-number="1">example <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb203-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(age_visit <span class="op">&gt;</span><span class="st"> </span><span class="kw">min</span>(age_dx))</a></code></pre></div>
+<pre><code># A tibble: 4 x 5
+  patient_id age_dx age_visit tumor_size site_code
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
+1    5554321     54        55        9.5 C400     
+2    5554321     54        56        9.7 C412     
+3    5554321     54        57        9.9 C220     
+4    5554321     54        58       10.1 C400     </code></pre>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" data-line-number="1">example <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb205-2" data-line-number="2"><span class="st">  </span><span class="kw">pull</span>(age_dx) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb205-3" data-line-number="3"><span class="st">  </span><span class="kw">min</span>()</a></code></pre></div>
+<pre><code>[1] 54</code></pre>
+</div>
+<div id="arrange" class="section level4">
+<h4><code>arrange()</code></h4>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" data-line-number="1">example <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb207-2" data-line-number="2"><span class="st">  </span><span class="kw">arrange</span>(site_code)</a></code></pre></div>
+<pre><code># A tibble: 5 x 5
+  patient_id age_dx age_visit tumor_size site_code
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
+1    5554321     54        54        9.5 C220     
+2    5554321     54        57        9.9 C220     
+3    5554321     54        55        9.5 C400     
+4    5554321     54        58       10.1 C400     
+5    5554321     54        56        9.7 C412     </code></pre>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" data-line-number="1">example <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb209-2" data-line-number="2"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(site_code))</a></code></pre></div>
+<pre><code># A tibble: 5 x 5
+  patient_id age_dx age_visit tumor_size site_code
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
+1    5554321     54        56        9.7 C412     
+2    5554321     54        55        9.5 C400     
+3    5554321     54        58       10.1 C400     
+4    5554321     54        54        9.5 C220     
+5    5554321     54        57        9.9 C220     </code></pre>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" data-line-number="1">example <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb211-2" data-line-number="2"><span class="st">  </span><span class="kw">arrange</span>(site_code, tumor_size)</a></code></pre></div>
+<pre><code># A tibble: 5 x 5
+  patient_id age_dx age_visit tumor_size site_code
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
+1    5554321     54        54        9.5 C220     
+2    5554321     54        57        9.9 C220     
+3    5554321     54        55        9.5 C400     
+4    5554321     54        58       10.1 C400     
+5    5554321     54        56        9.7 C412     </code></pre>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb213-1" data-line-number="1">example <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb213-2" data-line-number="2"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(tumor_size), site_code)</a></code></pre></div>
+<pre><code># A tibble: 5 x 5
+  patient_id age_dx age_visit tumor_size site_code
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
+1    5554321     54        58       10.1 C400     
+2    5554321     54        57        9.9 C220     
+3    5554321     54        56        9.7 C412     
+4    5554321     54        54        9.5 C220     
+5    5554321     54        55        9.5 C400     </code></pre>
+</div>
+<div id="group_by-count" class="section level4">
+<h4><code>group_by()</code> + <code>count()</code></h4>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" data-line-number="1">example <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb215-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(patient_id)</a></code></pre></div>
+<pre><code># A tibble: 5 x 5
+# Groups:   patient_id [1]
+  patient_id age_dx age_visit tumor_size site_code
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
+1    5554321     54        54        9.5 C220     
+2    5554321     54        55        9.5 C400     
+3    5554321     54        56        9.7 C412     
+4    5554321     54        57        9.9 C220     
+5    5554321     54        58       10.1 C400     </code></pre>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb217-1" data-line-number="1">example <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb217-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(patient_id, site_code)</a></code></pre></div>
+<pre><code># A tibble: 5 x 5
+# Groups:   patient_id, site_code [3]
+  patient_id age_dx age_visit tumor_size site_code
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
+1    5554321     54        54        9.5 C220     
+2    5554321     54        55        9.5 C400     
+3    5554321     54        56        9.7 C412     
+4    5554321     54        57        9.9 C220     
+5    5554321     54        58       10.1 C400     </code></pre>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" data-line-number="1">example <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb219-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(patient_id) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb219-3" data-line-number="3"><span class="st">  </span><span class="kw">count</span>()</a></code></pre></div>
+<pre><code># A tibble: 1 x 2
+# Groups:   patient_id [1]
+  patient_id     n
+       &lt;dbl&gt; &lt;int&gt;
+1    5554321     5</code></pre>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" data-line-number="1">example <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb221-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(patient_id, site_code) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb221-3" data-line-number="3"><span class="st">  </span><span class="kw">count</span>()</a></code></pre></div>
+<pre><code># A tibble: 3 x 3
+# Groups:   patient_id, site_code [3]
+  patient_id site_code     n
+       &lt;dbl&gt; &lt;chr&gt;     &lt;int&gt;
+1    5554321 C220          2
+2    5554321 C400          2
+3    5554321 C412          1</code></pre>
+</div>
+<div id="summarize" class="section level4">
+<h4><code>summarize()</code></h4>
+<p><img src="images/dplyr-summarize.png" /></p>
+<p><img src="images/dplyr-summary-function.png" /></p>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" data-line-number="1">example <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb223-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="kw">min</span>(age_dx))</a></code></pre></div>
+<pre><code># A tibble: 1 x 1
+  `min(age_dx)`
+          &lt;dbl&gt;
+1            54</code></pre>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" data-line-number="1">example <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb225-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">max_tumor_size =</span> <span class="kw">max</span>(tumor_size))</a></code></pre></div>
+<pre><code># A tibble: 1 x 1
+  max_tumor_size
+           &lt;dbl&gt;
+1           10.1</code></pre>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb227-1" data-line-number="1">example <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb227-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(</a>
+<a class="sourceLine" id="cb227-3" data-line-number="3">    <span class="dt">tumor_size_median =</span> <span class="kw">median</span>(tumor_size),</a>
+<a class="sourceLine" id="cb227-4" data-line-number="4">    <span class="dt">tumor_size_mean =</span> <span class="kw">mean</span>(tumor_size),</a>
+<a class="sourceLine" id="cb227-5" data-line-number="5">    <span class="dt">age_visit =</span> <span class="kw">max</span>(age_visit)</a>
+<a class="sourceLine" id="cb227-6" data-line-number="6">  )</a></code></pre></div>
+<pre><code># A tibble: 1 x 3
+  tumor_size_median tumor_size_mean age_visit
+              &lt;dbl&gt;           &lt;dbl&gt;     &lt;dbl&gt;
+1               9.7            9.74        58</code></pre>
+</div>
+<div id="mutate" class="section level4">
+<h4><code>mutate()</code></h4>
+<p><img src="images/dplyr-mutate.png" /></p>
+<p><img src="images/dplyr-window-function.png" /></p>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" data-line-number="1">example <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb229-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">follow_up =</span> age_visit <span class="op">-</span><span class="st"> </span>age_dx)</a></code></pre></div>
+<pre><code># A tibble: 5 x 6
+  patient_id age_dx age_visit tumor_size site_code follow_up
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;
+1    5554321     54        54        9.5 C220              0
+2    5554321     54        55        9.5 C400              1
+3    5554321     54        56        9.7 C412              2
+4    5554321     54        57        9.9 C220              3
+5    5554321     54        58       10.1 C400              4</code></pre>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" data-line-number="1">example <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb231-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tumor_size =</span> tumor_size <span class="op">*</span><span class="st"> </span><span class="dv">100</span>)</a></code></pre></div>
+<pre><code># A tibble: 5 x 5
+  patient_id age_dx age_visit tumor_size site_code
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
+1    5554321     54        54       950  C220     
+2    5554321     54        55       950  C400     
+3    5554321     54        56       970. C412     
+4    5554321     54        57       990  C220     
+5    5554321     54        58      1010  C400     </code></pre>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb233-1" data-line-number="1">example <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb233-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb233-3" data-line-number="3">    <span class="dt">tumor_size =</span> tumor_size <span class="op">*</span><span class="st"> </span><span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb233-4" data-line-number="4">    <span class="dt">tumor_size_mm =</span> tumor_size <span class="op">*</span><span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb233-5" data-line-number="5">  )</a></code></pre></div>
+<pre><code># A tibble: 5 x 6
+  patient_id age_dx age_visit tumor_size site_code tumor_size_mm
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;             &lt;dbl&gt;
+1    5554321     54        54         95 C220               9500
+2    5554321     54        55         95 C400               9500
+3    5554321     54        56         97 C412               9700
+4    5554321     54        57         99 C220               9900
+5    5554321     54        58        101 C400              10100</code></pre>
+</div>
+<div id="group_by-summarize" class="section level4">
+<h4><code>group_by()</code> + <code>summarize()</code></h4>
+<p><img src="images/dplyr-group_by.png" /></p>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb235-1" data-line-number="1">example <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb235-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(site_code) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb235-3" data-line-number="3"><span class="st">  </span><span class="kw">summarize</span>(</a>
+<a class="sourceLine" id="cb235-4" data-line-number="4">    <span class="dt">tumor_size_mean =</span> <span class="kw">mean</span>(tumor_size),</a>
+<a class="sourceLine" id="cb235-5" data-line-number="5">    <span class="dt">age_mean =</span> <span class="kw">mean</span>(age)</a>
+<a class="sourceLine" id="cb235-6" data-line-number="6">  )</a></code></pre></div>
+<pre><code>Error in summarise_impl(.data, dots): Evaluation error: object &#39;age&#39; not found.</code></pre>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb237-1" data-line-number="1">example <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb237-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(site_code, patient_id) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb237-3" data-line-number="3"><span class="st">  </span><span class="kw">summarize</span>(</a>
+<a class="sourceLine" id="cb237-4" data-line-number="4">    <span class="dt">tumor_size_mean =</span> <span class="kw">mean</span>(tumor_size),</a>
+<a class="sourceLine" id="cb237-5" data-line-number="5">    <span class="dt">age_mean =</span> <span class="kw">mean</span>(age)</a>
+<a class="sourceLine" id="cb237-6" data-line-number="6">  )</a></code></pre></div>
+<pre><code>Error in summarise_impl(.data, dots): Evaluation error: object &#39;age&#39; not found.</code></pre>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" data-line-number="1">example <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb239-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(site_code) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb239-3" data-line-number="3"><span class="st">  </span><span class="kw">summarize</span>(</a>
+<a class="sourceLine" id="cb239-4" data-line-number="4">    <span class="co">#patient_id = patient_id,</span></a>
+<a class="sourceLine" id="cb239-5" data-line-number="5">    <span class="dt">patient_id =</span> <span class="kw">first</span>(patient_id),</a>
+<a class="sourceLine" id="cb239-6" data-line-number="6">    <span class="dt">tumor_size_mean =</span> <span class="kw">mean</span>(tumor_size),</a>
+<a class="sourceLine" id="cb239-7" data-line-number="7">    <span class="dt">age_mean =</span> <span class="kw">mean</span>(age)</a>
+<a class="sourceLine" id="cb239-8" data-line-number="8">  )</a></code></pre></div>
+<pre><code>Error in summarise_impl(.data, dots): Evaluation error: object &#39;age&#39; not found.</code></pre>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

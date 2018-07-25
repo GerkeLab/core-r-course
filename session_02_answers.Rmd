@@ -17,7 +17,7 @@ editor_options:
 [cran-task-view]: https://cran.r-project.org/web/views/
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(comment = "", prompt = FALSE, results = "hide")
+knitr::opts_chunk$set(comment = "", prompt = FALSE, results = "show")
 knitr::opts_hooks$set(echo_if_show_results = function(options) {
   if (options$echo_if_show_results) {
     options$echo <- options$results == "show"
@@ -30,7 +30,7 @@ set.seed(42)
 ## Links
 
 - [Materials]
-- [This page with R output](session_02_answers.html)
+- [This page without answers](session_02.html)
 
 ```{r child="source/session_02_review.Rmd"}
 ```

@@ -1,0 +1,53 @@
+---
+title: Session 3 — Materials
+date: "August 1, 2018"
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, results = 'asis')
+make_listing <- function(filename, path_rel, base_url = "https://gerkelab.github.io/core-r-course") {
+  cat(glue::glue('\n- [{filename}]({path_rel})\n\n  ```\n  "{file.path(base_url, path_rel)}"\n  ```\n\n'))
+}
+
+needs_zip <- function(zipfile, dirpath) {
+  zipfile <- here::here(dirpath, "..", zipfile)
+  if (!file.exists(zipfile)) return(TRUE)
+  zip_modtime <- fs::file_info(zipfile)$modification_time
+  files_modtime <- fs::file_info(fs::dir_ls(dirpath)) %>% pull(modification_time) %>% max()
+  zip_modtime < files_modtime
+}
+
+SESSION <- "03"
+ZIPFILE <- glue::glue("core-r_session-{SESSION}_materials.zip")
+SESSION_DIR <- here::here("materials", SESSION)
+```
+
+Materials for [Session 3](session_03.html).
+
+## Zip File
+
+```{r}
+if (needs_zip(ZIPFILE, SESSION_DIR)) {
+  utils::zip(zipfile = file.path("materials", ZIPFILE), 
+             files = file.path("materials", SESSION),
+             extras = "-x *.DS_Store")
+}
+
+make_listing(ZIPFILE, file.path("materials", ZIPFILE))
+```
+
+## Individual Files
+
+The following files simulate a cancer registry data export for patients with breast cancer.
+
+:::{.bs-callout .bs-callout-warning}
+**Note** This data is simulated, with fictitious record numbers, patient information, and dates, and is intended for Moffitt staff training purposes only.
+:::
+
+```{r}
+fs::file_info(fs::dir_ls(SESSION_DIR)) %>% 
+  mutate(path_rel = fs::path_rel(path, here::here())) %>% 
+  select(path_rel) %>% 
+  mutate(filename = basename(path_rel)) %>% 
+  purrr::pwalk(make_listing)
+```

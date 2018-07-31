@@ -7,6 +7,7 @@ title: "Data processing with R"
 knitr::opts_chunk$set(
   echo = FALSE, comment = ""
 )
+options(max.print = 500)
 
 library(tidyverse)
 if (!requireNamespace("zip", quietly = TRUE)) install.packages("zip")
@@ -22,6 +23,7 @@ session_list <- tibble(
 )
 session_list[1, "Link"] <- "session_01.html"
 session_list[2, "Link"] <- "session_02.html"
+session_list[3, "Link"] <- "session_03.html"
 ```
 
 <!-- Emoji: https://afeld.github.io/emoji-css/ -->

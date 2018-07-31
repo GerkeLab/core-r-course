@@ -1,0 +1,261 @@
+## Functions
+
+### Functions that work with vectors
+
+So far we've primarily seen vectors that operate on single values or that take single-valued arguments.
+
+But as we've seen, R is a _vectorized language_.
+
+Try using the following functions on the variables we created in `example_single_patient.R`.
+
+```{r}
+min(tumor_size)
+max(tumor_size)
+mean(tumor_size)
+median(tumor_size)
+var(tumor_size)
+sd(tumor_size)
+IQR(tumor_size)
+```
+
+Those functions all come from base R (standard R library).
+
+The following functions are given to us from `dplyr`.
+We have dplyr loaded if we've run `library(tidyverse)`, but I'll include the `dplyr::` first as a reminder that that's where these functions come from.
+
+```{r}
+dplyr::first(site_code)
+dplyr::last(age_at_visit)
+dplyr::nth(site_code, 2)
+dplyr::n_distinct(site_code)
+```
+
+All of these functions return a single value.
+Try the following.
+What happens and why?
+
+```{r}
+tumor_size * 10
+
+age_at_visit - age_at_diagnosis
+
+paste("Site Code:", site_code)
+```
+
+Because R is vectorized, operations are applied to the whole vector.
+
+### Dot, dot, dot
+
+R has a somewhat unique addition for writing and using functions: the dot-dot-dot (`...`).
+
+The `...` is used in two ways:
+
+1. To allow you to include an unknown number of values.
+
+   ```{r results='asis', echo=FALSE}
+   cat("\n   ```", paste("paste <-", capture.output(print(paste))[1]), "```", sep = "\n   ")
+   ```
+
+   ```{r}
+   paste("a", "b", "c")
+   paste("a", "b", "c", "d")
+   ```
+
+2. To allow you to pass arguments to an underlying function.
+
+   ```{r results='asis', echo=FALSE}
+   cat("\n   ```", paste("rep <-", capture.output(print(rep))[1]), "```", sep = "\n   ")
+   ```
+
+   ```{r}
+   rep(1L, 4)
+   rep(1L, times = 4)
+   rep.int(1L, times = 4)
+   ```
+
+## Data Processing
+
+Open the file `example_single_patient.R` and add the following lines.
+
+```{r example-single-patient-file-2}
+example <- data_frame(
+  patient_id = patient_id,
+  age_dx = age_at_diagnosis,
+  age_visit = age_at_visit,
+  tumor_size = tumor_size,
+  site_code = site_code
+)
+```
+
+Clear your workspace ([quick refresher here](session_01.html#clearing_your_session)) and then source the script.
+
+View the tibble that is stored in `example`.
+
+```{r echo=FALSE}
+example
+```
+
+### The "pipe" operator `%>%`
+
+It looks like this:
+
+<div style="font-size: 5em; width: 100%; text-align: center;"><code>%>%</code></div>
+
+You can type it with
+
+::: {.img-center}
+<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd>  (Windows)
+
+<kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd>  (Mac)
+:::
+
+You say it like
+
+<div style="font-size: 3em; width: 100%; text-align: center;">...and then...</div>
+
+```{r}
+x <- 1:2
+x <- rep(x, times = 3)
+x <- mean(x)
+x
+
+y <- mean(rep(1:2, times = 3))
+y
+
+z <- 1:2 %>%
+  rep(times = 3) %>%
+  mean()
+z
+```
+
+::: {.bs-callout .alert-info}
+Requires [tidyverse]{.pkg} or [dplyr]{.pkg}!
+:::
+
+### dplyr verbs
+
+#### `filter()`
+
+![](images/dplyr-filter.png)
+
+```{r}
+example %>%
+  filter(site_code == "C400")
+
+example %>%
+  filter(tumor_size > 9.5)
+
+example %>%
+  filter(age_visit > min(age_dx))
+
+example %>%
+  pull(age_dx) %>%
+  min()
+```
+
+#### `arrange()`
+
+```{r}
+example %>%
+  arrange(site_code)
+
+example %>%
+  arrange(desc(site_code))
+
+example %>%
+  arrange(site_code, tumor_size)
+
+example %>%
+  arrange(desc(tumor_size), site_code)
+```
+
+#### `group_by()` + `count()`
+
+```{r}
+example %>% 
+  group_by(patient_id)
+
+example %>% 
+  group_by(patient_id, site_code)
+
+example %>% 
+  group_by(patient_id) %>% 
+  count()
+
+example %>% 
+  group_by(patient_id, site_code) %>% 
+  count()
+```
+
+#### `summarize()`
+
+![](images/dplyr-summarize.png)
+
+![](images/dplyr-summary-function.png)
+
+
+```{r}
+example %>%
+  summarize(min(age_dx))
+
+example %>%
+  summarize(max_tumor_size = max(tumor_size))
+
+example %>%
+  summarize(
+    tumor_size_median = median(tumor_size),
+    tumor_size_mean = mean(tumor_size),
+    age_visit = max(age_visit)
+  )
+```
+
+
+#### `mutate()`
+
+![](images/dplyr-mutate.png)
+
+![](images/dplyr-window-function.png)
+
+
+```{r}
+example %>% 
+  mutate(follow_up = age_visit - age_dx)
+
+example %>% 
+  mutate(tumor_size = tumor_size * 100)
+
+example %>% 
+  mutate(
+    tumor_size = tumor_size * 10,
+    tumor_size_mm = tumor_size * 100
+  )
+```
+
+#### `group_by()` + `summarize()`
+
+![](images/dplyr-group_by.png)
+
+```{r error=TRUE}
+example %>% 
+  group_by(site_code) %>% 
+  summarize(
+    tumor_size_mean = mean(tumor_size),
+    age_mean = mean(age)
+  )
+
+example %>% 
+  group_by(site_code, patient_id) %>% 
+  summarize(
+    tumor_size_mean = mean(tumor_size),
+    age_mean = mean(age)
+  )
+
+example %>% 
+  group_by(site_code) %>% 
+  summarize(
+    #patient_id = patient_id,
+    patient_id = first(patient_id),
+    tumor_size_mean = mean(tumor_size),
+    age_mean = mean(age)
+  )
+```

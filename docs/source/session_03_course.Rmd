@@ -248,6 +248,28 @@ mutate(example,
        tumor_size_mm = tumor_size *100)
 ```
 
+#### Recoding or conditionally changing values
+
+Often you'll want to replace certain values of a variable with another value.
+There are several helpful functions provided by [dplyr]{.pkg} that let you do this, including:
+
+1. `recode()`: Replace character values with `"old" = "new"`.
+
+    ```r
+    var = recode(var, "old" = "new", "OLD" = "new")
+    ```
+
+1. `if_else()`: Use logical statements to change the value.
+
+    ```r
+    var = if_else(CONDITION, VALUE_IF_TRUE, VALUE_IF_FALSE)
+    ```
+
+```{r}
+mutate(example, site_code = recode(site_code, "C412" = "C999"))
+mutate(example, tumor_size = if_else(site_code == "C400", tumor_size * 100, tumor_size))
+```
+
 ### `summarize()`
 
 ![](images/dplyr-summarize.png)
@@ -261,7 +283,7 @@ summarize(example, max_tumor_size = max(tumor_size))
 summarize(example, tumor_size_median = median(tumor_size),tumor_size_mean = mean(tumor_size), age_visit = max(age_visit))
 ```
 
-### `group_by()` + `summarize()`
+### `group_by()` & `summarize()`
 
 ![](images/dplyr-group_by.png)
 
@@ -278,7 +300,7 @@ summarize(example_grp,
 ```
 
 
-### `group_by()` + `count()`
+### `group_by()` & `count()`
 
 ```{r}
 count(example, site_code)
@@ -288,9 +310,45 @@ count(example, patient_id)
 count(example_grp)
 ```
 
-### The "pipe" operator `%>%`
+## Combining dplyr Verbs
 
-It looks like this:
+Let's say we want to calculate the **average age** and **tumor size** (in cm) by **site code** for each **patient**.
+
+To do this we'll take our `example` data and
+
+1. Group by `site_code` and `patient_id`
+
+1. Convert tumor size from *cm* to *mm*
+
+1. Summarize `tumor_size` and `age_dx` by their average.
+
+In [dplyr]{.pkg} speak:
+
+```{r}
+ex1 <- group_by(example, site_code, patient_id)
+ex2 <- mutate(ex1, tumor_size = tumor_size * 10)
+ex3 <- summarize(ex2, 
+  tumor_size_mean = mean(tumor_size), 
+  age_mean = mean(age_dx))
+ex3
+```
+
+Notice that the output from each step is the input to the next step.
+Also, we don't really need `ex1` or `ex2`, we just want the output which we've saved as `ex3`.
+
+To make this much cleaner we can use the pipe operator. 
+
+```{r}
+example %>% 
+  group_by(site_code, patient_id) %>% 
+  mutate(tumor_size = tumor_size * 10) %>% 
+  summarize(
+    tumor_size_mean = mean(tumor_size),
+    age_mean = mean(age_dx)
+  )
+```
+
+The pipe operator looks like this
 
 <div style="font-size: 5em; width: 100%; text-align: center;"><code>%>%</code></div>
 
@@ -306,24 +364,138 @@ You say it like
 
 <div style="font-size: 3em; width: 100%; text-align: center;">...and then...</div>
 
-::: {.bs-callout .alert-info}
-Requires [tidyverse]{.pkg} or [dplyr]{.pkg}!
+Re-read the code above:
+
+1. Take `example` **and then...**
+
+1. Group by  **and then...**
+
+1. Mutate  **and then...**
+
+1. Summarize
+
+::: {.bs-callout .bs-callout-warning}
+The pipe operator is now ubiquitous in modern R code, but it's not part of the R language.
+
+Make sure that you load [tidyverse]{.pkg} or [dplyr]{.pkg} first!
 :::
 
-```{r}
-ex <- group_by(example, site_code, patient_id)
-ex <- mutate(ex, tumor_size = tumor_size * 10)
-ex <- summarize(ex, 
-  tumor_size_mean = mean(tumor_size), 
-  age_mean = mean(age_dx))
-ex
+#### Your turn!
 
-example %>% 
-  group_by(site_code, patient_id) %>% 
-  mutate(tumor_size = tumor_size * 10) %>% 
-  summarize(
-    tumor_size_mean = mean(tumor_size),
-    age_mean = mean(age_dx)
-  )
+Use the pipe operator and [dplyr]{.pkg} verbs to complete the following task:
+
+1. Use the `example` dataset
+
+1. Filter out tumors smaller than **9.7**
+
+1. Calculate `follow_up` time as the number of years between diagnosis and the patient's visit
+
+1. Rename the `site_code` column to `code`.
+
+## Importing Data
+
+### Gather your "exported" data
+
+Download the data from the [Session 3 Materials page][s3-materials].
+
+In the [Files]{.rstudio-tab} pane of your RStudio project, click [More]{.menu-item} &rtrif; [Show Folder in New Window...]{.menu-item} to open the folder in a file browser. 
+Copy or move the data files from your downloads folder into your project folder.
+Check that you see the files in RStudio.
+
+::: {.muted}
+If you're running RStudio in your browser (e.g. on [rstudio.cloud](https://rstudio.cloud)), you can run the `download.file()` commands in the [materials page][s3-materials].
+:::
+
+### Import Using RStudio
+
+There are two main packages for reading in data: [readr]{.pkg} for CSV and [readxl]{.pkg} for Excel.
+
+If you have the option in your data source, choose to export your data as a CSV file.
+The options and control for importing into R using [readr]{.pkg} are more powerful and more easily customized.
+
+### Import Excel File
+
+![](images/rstudio-11-import-dataset-excel.png)
+
+<details><summary>Import Code</summary>
+
+```r
+library(readxl)
+cr_patients <- read_excel("CancerRegistryDataPatients.xlsx",
+                          col_types = c("numeric", "numeric", "text",
+                                        "text", "text", "text", "date", "text"))
+```
+</details>
+
+### Import CSV File
+
+![](images/rstudio-12-import-dataset-csv.png)
+
+<details><summary>Import Code</summary>
+
+```r
+library(readr)
+cr_patients <- read_csv("CancerRegistryDataPatients.csv", 
+    col_types = cols(`Date Last Patient Contact/Dead` = col_date(format = "%m/%d/%y")))
+```
+</details>
+
+### A Note About Dates
+
+Here is a small reference for date/time formats.
+See `?strftime` for more time format placeholders.
+
+```{r results='asis'}
+formats <- c("%m/%d/%y", "%m/%d/%Y", "%Y-%m-%d", "%m/%d/%y %H:%M", "%m/%d/%y %H:%M:%S", "%m/%d/%y %H:%M:%S %p")
+
+purrr::walk(formats, ~ cat("\n - `", .x, "`: ", strftime(Sys.time(), .x), "\n", sep = ""))
 ```
 
+## Explore the Data!
+
+```{r include=FALSE}
+cr_patients <- readr::read_csv(here::here("materials/03/CancerRegistryDataPatients.csv"), 
+    col_types = cols(`Date Last Patient Contact/Dead` = col_date(format = "%m/%d/%y")))
+```
+
+Use RStudio to look through the dataset.
+
+```{r, echo=FALSE, results='asis'}
+skimr::skim(cr_patients) %>% skimr::kable()
+```
+
+### Free Swim!
+
+What questions can you ask and answer using this dataset and [dplyr]{.pkg}?
+
+## Export The Data
+
+### Export Request
+
+1. Patients who
+    1. Are deceased
+    1. Older than 54 years
+1. Race recoded as "Caucasian" or "Other"
+1. Ordered by MRN
+1. With columns:
+    1. MRN
+    1. Age
+    1. Race
+    1. CoD
+
+<details><summary>Code</summary>
+
+```r
+cr_patients_export = cr_patients %>%
+  filter(`Vital Status` == "DEAD", `Age, Current` >= 55) %>%
+  arrange(`Medical Record Number`) %>%
+  select(MRN = `Medical Record Number`, Age = `Age, Current`, Race, CoD = `DC, Cause of Death`) %>%
+  mutate(Race = if_else(Race == "WHITE", "Caucasian", "Other"))
+```
+</details>
+
+### Export the data using `write_csv()`
+
+```r
+write_csv(cr_patients_export, "CancerRegistryPatients_export.csv")
+```

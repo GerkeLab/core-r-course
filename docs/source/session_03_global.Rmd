@@ -2,6 +2,7 @@
 [cran]: https://cran.rstudio.com/
 [metacran]: https://www.r-pkg.org
 [cran-task-view]: https://cran.r-project.org/web/views/
+[s3-materials]: session_03_materials.html
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(comment = "", prompt = FALSE, results = SHOW_RESULTS)

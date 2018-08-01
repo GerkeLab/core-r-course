@@ -404,7 +404,7 @@ div.tocify {
 <h2>Links</h2>
 <ul>
 <li><a href="session_03_materials.html">Materials</a></li>
-<li><a href="session_03_answers.html">This page without the code results</a></li>
+<li><a href="session_03.html">This page without the code results</a></li>
 </ul>
 </div>
 <div id="review" class="section level2">
@@ -416,7 +416,7 @@ div.tocify {
 <p><summary>Answer</summary></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;readxl&quot;</span>)</a></code></pre></div>
 </details>
-<p>How do load a package from the R prompt, like <span class="pkg">dplyr</span></p>
+<p>How do you load a package from the R prompt, like <span class="pkg">dplyr</span></p>
 <details>
 <p><summary>Answer</summary></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a></code></pre></div>
@@ -443,8 +443,8 @@ div.tocify {
 </ol>
 </details>
 </div>
-<div id="collections" class="section level3">
-<h3>Collections</h3>
+<div id="data-types" class="section level3">
+<h3>Data Types</h3>
 <p>What data type are each of the following?</p>
 <table>
 <thead>
@@ -503,320 +503,63 @@ div.tocify {
 <details>
 <summary>Answer</summary> integer, double, character, logical, vector, list, data.frame, tibble, N/A (missing), Null and factor
 </details>
-<div id="vectors" class="section level4">
-<h4>Vectors</h4>
-<p>Create the following vector and add additional names to it:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">character_name &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Luke Skywalker&quot;</span>, <span class="st">&quot;Darth Vader&quot;</span>, <span class="st">&quot;Han Solo&quot;</span>)</a></code></pre></div>
-<!-- TODO PICK UP HERE -->
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="dv">1</span><span class="op">:</span><span class="dv">3</span></a></code></pre></div>
-<pre><code>[1] 1 2 3</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</a></code></pre></div>
-<pre><code>[1] 1 2 3</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">identical</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</a></code></pre></div>
-<pre><code>[1] FALSE</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">identical</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="kw">c</span>(1L, 2L, 3L))</a></code></pre></div>
-<pre><code>[1] TRUE</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">c</span>(1L, 2L, 3L, pi)</a></code></pre></div>
-<pre><code>[1] 1.000000 2.000000 3.000000 3.141593</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">fruits &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>)</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2">fruits</a></code></pre></div>
-<pre><code>[1] &quot;apple&quot;  &quot;banana&quot;</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">fruits &lt;-<span class="st"> </span><span class="kw">c</span>(fruits, <span class="st">&quot;cherimoya&quot;</span>)</a></code></pre></div>
-<div class="figure">
-<img src="images/cherimoya.jpg" alt="A cherimoya" />
-<p class="caption"><a href="https://en.wikipedia.org/wiki/Cherimoya">A cherimoya</a></p>
-</div>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">fruits</a></code></pre></div>
-<pre><code>[1] &quot;apple&quot;     &quot;banana&quot;    &quot;cherimoya&quot;</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">month_days &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;March&quot;</span> =<span class="st"> </span><span class="dv">31</span>, <span class="st">&quot;April&quot;</span> =<span class="st"> </span><span class="dv">30</span>, <span class="dt">May =</span> <span class="dv">31</span>)</a>
-<a class="sourceLine" id="cb19-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb19-3" data-line-number="3">month_days</a></code></pre></div>
-<pre><code>March April   May 
-   31    30    31 </code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">names</span>(month_days) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;August&quot;</span>, <span class="st">&quot;September&quot;</span>, <span class="st">&quot;October&quot;</span>)</a>
-<a class="sourceLine" id="cb21-2" data-line-number="2">month_days</a></code></pre></div>
-<pre><code>   August September   October 
-       31        30        31 </code></pre>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">month_days[<span class="st">&quot;October&quot;</span>]</a></code></pre></div>
-<pre><code>October 
-     31 </code></pre>
-</div>
-<div id="lists" class="section level4">
-<h4>Lists</h4>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb25-2" data-line-number="2">  <span class="dt">fruits =</span> fruits,</a>
-<a class="sourceLine" id="cb25-3" data-line-number="3">  <span class="dt">months =</span> <span class="kw">names</span>(month_days),</a>
-<a class="sourceLine" id="cb25-4" data-line-number="4">  <span class="dt">month_days =</span> month_days</a>
-<a class="sourceLine" id="cb25-5" data-line-number="5">)</a>
-<a class="sourceLine" id="cb25-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb25-7" data-line-number="7">x</a></code></pre></div>
-<pre><code>$fruits
-[1] &quot;apple&quot;     &quot;banana&quot;    &quot;cherimoya&quot;
-
-$months
-[1] &quot;August&quot;    &quot;September&quot; &quot;October&quot;  
-
-$month_days
-   August September   October 
-       31        30        31 </code></pre>
-</div>
-<div id="data-frames-and-tibbles" class="section level4">
-<h4>Data Frames and Tibbles</h4>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">y &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
-<a class="sourceLine" id="cb27-2" data-line-number="2">  <span class="dt">fruits =</span> fruits,</a>
-<a class="sourceLine" id="cb27-3" data-line-number="3">  <span class="dt">months =</span> <span class="kw">names</span>(month_days),</a>
-<a class="sourceLine" id="cb27-4" data-line-number="4">  <span class="dt">month_days =</span> month_days</a>
-<a class="sourceLine" id="cb27-5" data-line-number="5">)</a>
-<a class="sourceLine" id="cb27-6" data-line-number="6">y</a></code></pre></div>
-<pre><code>             fruits    months month_days
-August        apple    August         31
-September    banana September         30
-October   cherimoya   October         31</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">y2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
-<a class="sourceLine" id="cb29-2" data-line-number="2">  <span class="dt">fruits =</span> fruits,</a>
-<a class="sourceLine" id="cb29-3" data-line-number="3">  <span class="dt">months =</span> <span class="kw">names</span>(month_days),</a>
-<a class="sourceLine" id="cb29-4" data-line-number="4">  <span class="dt">month_days =</span> month_days,</a>
-<a class="sourceLine" id="cb29-5" data-line-number="5">  <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb29-6" data-line-number="6">  <span class="dt">row.names =</span> <span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb29-7" data-line-number="7">)</a>
-<a class="sourceLine" id="cb29-8" data-line-number="8">y2</a></code></pre></div>
-<pre><code>     fruits    months month_days
-1     apple    August         31
-2    banana September         30
-3 cherimoya   October         31</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">z &lt;-<span class="st"> </span><span class="kw">data_frame</span>(             <span class="co">#&lt;&lt; tibble()</span></a>
-<a class="sourceLine" id="cb31-2" data-line-number="2">  <span class="dt">fruits =</span> fruits,</a>
-<a class="sourceLine" id="cb31-3" data-line-number="3">  <span class="dt">months =</span> <span class="kw">names</span>(month_days),</a>
-<a class="sourceLine" id="cb31-4" data-line-number="4">  <span class="dt">mont_days =</span> month_days</a>
-<a class="sourceLine" id="cb31-5" data-line-number="5">)</a>
-<a class="sourceLine" id="cb31-6" data-line-number="6">z</a></code></pre></div>
-<pre><code># A tibble: 3 x 3
-  fruits    months    mont_days
-  &lt;chr&gt;     &lt;chr&gt;         &lt;dbl&gt;
-1 apple     August           31
-2 banana    September        30
-3 cherimoya October          31</code></pre>
-</div>
-</div>
-<div id="data-types-continued" class="section level3">
-<h3>Data Types Continued</h3>
-<div id="review-1" class="section level4">
-<h4>Review</h4>
-<table>
-<thead>
-<tr class="header">
-<th align="center">Type</th>
-<th align="left">Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">integer</td>
-<td align="left"><code>1L</code></td>
-</tr>
-<tr class="even">
-<td align="center">double</td>
-<td align="left"><code>3.14</code>, <code>1.23e-4</code></td>
-</tr>
-<tr class="odd">
-<td align="center">character</td>
-<td align="left"><code>&quot;apple&quot;</code></td>
-</tr>
-<tr class="even">
-<td align="center">logical</td>
-<td align="left"><code>TRUE</code>, <code>FALSE</code></td>
-</tr>
-<tr class="odd">
-<td align="center">vector</td>
-<td align="left"><code>c(...)</code></td>
-</tr>
-<tr class="even">
-<td align="center">list</td>
-<td align="left"><code>list(...)</code></td>
-</tr>
-<tr class="odd">
-<td align="center">data.frame</td>
-<td align="left"><code>data.frame(...)</code></td>
-</tr>
-<tr class="even">
-<td align="center">tibble</td>
-<td align="left"><code>data_frame(...)</code></td>
-</tr>
-<tr class="odd">
-<td align="center">N/A</td>
-<td align="left"><code>NA</code></td>
-</tr>
-<tr class="even">
-<td align="center">null</td>
-<td align="left"><code>NULL</code></td>
-</tr>
-<tr class="odd">
-<td align="center">factor</td>
-<td align="left"><code>factor(letters)</code></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="special-data-types" class="section level4">
-<h4>Special Data Types</h4>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NA</span>, <span class="dv">4</span>)</a></code></pre></div>
-<pre><code>[1]  1  2 NA  4</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NULL</span>, <span class="dv">4</span>)</a></code></pre></div>
-<pre><code>[1] 1 2 4</code></pre>
-</div>
-<div id="factors" class="section level4">
-<h4>Factors</h4>
-<p>We’ll talk about this later, but it’s basically a vector with an additional <strong>label</strong> and sometimes an <strong>order</strong>.</p>
+<p>Run the following command. It will create 3 variables: <code>x</code>, <code>y</code>, and <code>z</code>. Without printing the variables, how can you tell what data type they are?</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">source</span>(<span class="st">&quot;https://git.io/fNrm9&quot;</span>)</a></code></pre></div>
 <details>
-<p><summary>Sneak Peek</summary></p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw">factor</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a></code></pre></div>
-<pre><code>[1] 1 2 3
-Levels: 1 2 3</code></pre>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="kw">factor</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb39-2" data-line-number="2">       <span class="dt">levels =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</a></code></pre></div>
-<pre><code>[1] 1 2 3
-Levels: 1 2 3</code></pre>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">factor</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb41-2" data-line-number="2">       <span class="dt">levels =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb41-3" data-line-number="3">       <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>))</a></code></pre></div>
-<pre><code>[1] a b c
-Levels: a b c</code></pre>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">factor</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb43-2" data-line-number="2">       <span class="dt">levels =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb43-3" data-line-number="3">       <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>),</a>
-<a class="sourceLine" id="cb43-4" data-line-number="4">       <span class="dt">ordered =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<pre><code>[1] a b c
-Levels: a &lt; b &lt; c</code></pre>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">factor</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb45-2" data-line-number="2">       <span class="dt">levels =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb45-3" data-line-number="3">       <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>),</a>
-<a class="sourceLine" id="cb45-4" data-line-number="4">       <span class="dt">ordered =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<pre><code>[1] c b a
-Levels: a &lt; b &lt; c</code></pre>
-</details>
-</div>
-<div id="working-with-data-types" class="section level4">
-<h4>Working with Data Types</h4>
-<div id="what-is-this-thing" class="section level5">
-<h5>What is this thing?</h5>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">x &lt;-<span class="st"> </span>1L</a>
-<a class="sourceLine" id="cb47-2" data-line-number="2">y &lt;-<span class="st"> </span>pi</a>
-<a class="sourceLine" id="cb47-3" data-line-number="3">z &lt;-<span class="st"> &quot;apple&quot;</span></a>
-<a class="sourceLine" id="cb47-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb47-5" data-line-number="5"><span class="kw">class</span>(x)</a></code></pre></div>
+<p><summary>Answer</summary></p>
+<p>Here’s the code that was run:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="kw">setNames</span>(<span class="kw">sample</span>(letters, <span class="dv">10</span>), LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">z &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">z[<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">2</span>)] &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">y</a></code></pre></div>
+<pre><code>  A   B   C   D   E   F   G   H   I   J 
+&quot;x&quot; &quot;z&quot; &quot;g&quot; &quot;t&quot; &quot;o&quot; &quot;k&quot; &quot;v&quot; &quot;c&quot; &quot;l&quot; &quot;r&quot; </code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">z</a></code></pre></div>
+<pre><code> [1] 0.4577418        NA 0.9346722 0.2554288 0.4622928 0.9400145 0.9782264
+ [8] 0.1174874 0.4749971        NA</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">class</span>(x)</a></code></pre></div>
 <pre><code>[1] &quot;integer&quot;</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">class</span>(y)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">class</span>(y)</a></code></pre></div>
+<pre><code>[1] &quot;character&quot;</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">class</span>(z)</a></code></pre></div>
 <pre><code>[1] &quot;numeric&quot;</code></pre>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="kw">class</span>(z)</a></code></pre></div>
-<pre><code>[1] &quot;character&quot;</code></pre>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw">typeof</span>(z)</a></code></pre></div>
-<pre><code>[1] &quot;character&quot;</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="kw">class</span>(mtcars)</a></code></pre></div>
-<pre><code>[1] &quot;data.frame&quot;</code></pre>
-</div>
-<div id="are-you-this-thing" class="section level5">
-<h5>Are you this thing?</h5>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="kw">is.integer</span>(1L)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">is.integer</span>(x)</a></code></pre></div>
 <pre><code>[1] TRUE</code></pre>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1"><span class="kw">is.numeric</span>(pi)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">is.character</span>(y)</a></code></pre></div>
 <pre><code>[1] TRUE</code></pre>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1"><span class="kw">is.numeric</span>(1L)</a></code></pre></div>
-<pre><code>[1] TRUE</code></pre>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="kw">is.double</span>(1L)</a></code></pre></div>
-<pre><code>[1] FALSE</code></pre>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1"><span class="kw">is.character</span>(<span class="st">&quot;one&quot;</span>)</a></code></pre></div>
-<pre><code>[1] TRUE</code></pre>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1"><span class="kw">is.logical</span>(<span class="st">&quot;TRUE&quot;</span>)</a></code></pre></div>
-<pre><code>[1] FALSE</code></pre>
-</div>
-<div id="are-you-even-there" class="section level5">
-<h5>Are you even there?</h5>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1"><span class="kw">is.na</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NA</span>, <span class="dv">4</span>))</a></code></pre></div>
-<pre><code>[1] FALSE FALSE  TRUE FALSE</code></pre>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1"><span class="kw">is.null</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NULL</span>, <span class="dv">4</span>))</a></code></pre></div>
-<pre><code>[1] FALSE</code></pre>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1">xyz &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb73-2" data-line-number="2"><span class="kw">is.null</span>(xyz)</a></code></pre></div>
-<pre><code>[1] TRUE</code></pre>
-</div>
-<div id="turn-you-into-this-thing." class="section level5">
-<h5>Turn you into this thing.</h5>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1"><span class="kw">as.character</span>(<span class="dv">1</span>)</a></code></pre></div>
-<pre><code>[1] &quot;1&quot;</code></pre>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1"><span class="kw">as.integer</span>(pi)</a></code></pre></div>
-<pre><code>[1] 3</code></pre>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="kw">as.double</span>(10L)</a></code></pre></div>
-<pre><code>[1] 10</code></pre>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1"><span class="kw">as.logical</span>(<span class="dv">2</span>)</a></code></pre></div>
-<pre><code>[1] TRUE</code></pre>
-</div>
-</div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">is.na</span>(z)</a></code></pre></div>
+<pre><code> [1] FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE</code></pre>
+</details>
 </div>
 <div id="workspaces-rstudio-projects" class="section level3">
 <h3>Workspaces &amp; RStudio Projects</h3>
-<div id="working-directory" class="section level4">
-<h4>Working Directory</h4>
-<p>The working directory is where R looks when it tries to find a file or where it writes a file.</p>
-<p>You can check where your R process is “living” – i.e. your working directory – with</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1"><span class="kw">getwd</span>()</a></code></pre></div>
-<p>and you can set it with</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1"><span class="kw">setwd</span>(<span class="st">&quot;~/myCoolProject&quot;</span>)</a></code></pre></div>
-<p>But <strong>this is not recommended</strong>!</p>
-<p>You can also use <span class="menu-item">More</span> ▸ <span class="menu-item">Set As Working Directory</span> or <span class="menu-item">Go To Working Directory</span> in the <span class="rstudio-tab">Files</span> pane to set the working directory, but this is <strong>also not recommended</strong>.</p>
-<p><span class="muted">When should you? When you get lost.</span></p>
-</div>
-<div id="using-rstudio-projects" class="section level4">
-<h4>Using RStudio Projects</h4>
-<p>Without some kind of organization scheme, you’ll very quickly end up writing all of your R scripts in a single folder. Multiple analysis will write out files, exporting data and creating plots, each of these writing into the same folder.</p>
-<div class="figure">
-<img src="images/messy-desktop.png" alt="Life without RStudio Projects" />
-<p class="caption">Life without RStudio Projects</p>
-</div>
-<p>Instead, RStudio offers an excellent method of organization called <strong>Projects</strong>. Using RStudio projects, each analysis is self-contained and organized, each in its own way, and it’s easy to switch from one project to another and know that your files will be organized, your environment will be clean, and you can pick everything back up from where you started.</p>
-<div class="figure">
-<img src="images/obsessively-organized.jpg" alt="Life with RStudio Projects, credit" />
-<p class="caption">Life <em>with</em> RStudio Projects, <a href="https://www.citi.io/2016/04/06/if-you-think-you-are-obsessively-organized-think-again-with-these/">credit</a></p>
-</div>
-</div>
-<div id="create-an-rstudio-project" class="section level4">
-<h4>Create an RStudio Project</h4>
-<p>Select <span class="menu-item">File</span> ▸ <span class="menu-item">New Project</span> or choose <span class="menu-item">New Project</span> from the drop-down menu in the upper right corner of the RStudio window.</p>
-<div class="img-center">
-<p><img src="images/rstudio-project-01-new.png" class="img-mw500" /></p>
-</div>
-<p>Select <strong>New Directory</strong> to create your project in a new directory. If you already have files in a directory that you want to use, choose <em>Existing Directory</em>.</p>
-<div class="img-center">
-<p><img src="images/rstudio-project-02-create-project.png" class="img-mw500" /></p>
-</div>
-<p>Select the type of project you want to start – this will generally be <strong>New Project</strong>.</p>
-<div class="img-center">
-<p><img src="images/rstudio-project-03-project-type.png" class="img-mw500" /></p>
-</div>
-<p>Choose the name for the folder that will be created to house your project and pick the folder where the project folder will be created.</p>
-<p>Here we give the new project folder the name <strong><code>cds-r-course</code></strong>. This will also be the name of the project itself.</p>
-<div class="img-center">
-<p><img src="images/rstudio-project-04-create-new-project.png" class="img-mw500" /></p>
-</div>
-<p>Your project will be created and you’ll be dropped into a new R/RStudio session.</p>
-<p><img src="images/rstudio-project-05-blank-project.png" /></p>
-</div>
-<div id="work-with-your-project" class="section level4">
-<h4>Work with your project</h4>
-<p>Use the <span class="rstudio-tab">Files</span> to create a folder called <code>data</code> in your project folder.</p>
-<p>Run the following command to download the <code>gapminder.csv</code> file into your <code>data</code> folder.</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="kw">download.file</span>(<span class="st">&quot;https://gerkelab.github.io/core-r-course/materials/01/gapminder.csv&quot;</span>, <span class="st">&quot;data/gapminder.csv&quot;</span>)</a></code></pre></div>
-<p>Create a new R script. Add the following code to it.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb86-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb86-3" data-line-number="3">patient_id &lt;-<span class="st"> </span><span class="dv">5554321</span></a>
-<a class="sourceLine" id="cb86-4" data-line-number="4">age_at_diagnosis &lt;-<span class="st"> </span><span class="dv">54</span></a>
-<a class="sourceLine" id="cb86-5" data-line-number="5">age_at_visit &lt;-<span class="st"> </span><span class="dv">54</span><span class="op">:</span><span class="dv">58</span></a>
-<a class="sourceLine" id="cb86-6" data-line-number="6">tumor_size &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">9.5</span>, <span class="fl">9.5</span>, <span class="fl">9.7</span>, <span class="fl">9.9</span>, <span class="fl">10.1</span>)</a>
-<a class="sourceLine" id="cb86-7" data-line-number="7">site_code &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;C220&quot;</span>, <span class="st">&quot;C400&quot;</span>, <span class="st">&quot;C412&quot;</span>, <span class="st">&quot;C220&quot;</span>, <span class="st">&quot;C400&quot;</span>)</a></code></pre></div>
-<p>Save the file as <code>example_single_patient.R</code> in your project directory.</p>
-<p>Source the file.</p>
-<p>Close the project. Take a deep breath. Re-open the project.</p>
-</div>
+<p>In <a href="session_02.html#work_with_your_project">the last session</a>, we created an RStudio project and an example R script.</p>
+<ol style="list-style-type: decimal">
+<li>Re-open the project we created (or <a href="session_02.html#create_an_rstudio_project">create a new project</a>).</li>
+<li>What is the current working directory?</li>
+<li>Use the <span class="rstudio-tab">File</span> pane to navigate to your desktop (or another folder on your computer).</li>
+<li>How can you quickly navigate back to the working directory?</li>
+</ol>
+<p>Open <code>example_single_patient.R</code> from our previous session and add the following lines.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">example &lt;-<span class="st"> </span><span class="kw">data_frame</span>(</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">  <span class="dt">patient_id =</span> patient_id,</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">  <span class="dt">age_dx =</span> age_at_diagnosis,</a>
+<a class="sourceLine" id="cb20-4" data-line-number="4">  <span class="dt">age_visit =</span> age_at_visit,</a>
+<a class="sourceLine" id="cb20-5" data-line-number="5">  <span class="dt">tumor_size =</span> tumor_size,</a>
+<a class="sourceLine" id="cb20-6" data-line-number="6">  <span class="dt">site_code =</span> site_code</a>
+<a class="sourceLine" id="cb20-7" data-line-number="7">)</a></code></pre></div>
+<p>Clear your workspace (<a href="session_01.html#clearing_your_session">quick refresher here</a>) and then source the script.</p>
+<p>View the tibble that is stored in <code>example</code>.</p>
+<pre><code># A tibble: 5 x 5
+  patient_id age_dx age_visit tumor_size site_code
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
+1    5554321     54        54        9.5 C220     
+2    5554321     54        55        9.5 C400     
+3    5554321     54        56        9.7 C412     
+4    5554321     54        57        9.9 C220     
+5    5554321     54        58       10.1 C400     </code></pre>
 </div>
 </div>
 <div id="overview" class="section level2">
@@ -834,37 +577,40 @@ Levels: a &lt; b &lt; c</code></pre>
 <h3>Functions that work with vectors</h3>
 <p>So far we’ve primarily seen vectors that operate on single values or that take single-valued arguments.</p>
 <p>But as we’ve seen, R is a <em>vectorized language</em>.</p>
-<p>Try using the following functions on the variables we created in <code>example_single_patient.R</code>.</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1"><span class="kw">min</span>(tumor_size)</a></code></pre></div>
+<p>Try using the following functions on the variables we created in <code>example_single_patient.R</code> in <a href="session_02.html#work_with_your_project">Session 2</a>.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">age_at_visit &lt;-<span class="st"> </span><span class="dv">54</span><span class="op">:</span><span class="dv">58</span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2">tumor_size &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">9.5</span>, <span class="fl">9.5</span>, <span class="fl">9.7</span>, <span class="fl">9.9</span>, <span class="fl">10.1</span>)</a>
+<a class="sourceLine" id="cb22-3" data-line-number="3">site_code &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;C220&quot;</span>, <span class="st">&quot;C400&quot;</span>, <span class="st">&quot;C412&quot;</span>, <span class="st">&quot;C220&quot;</span>, <span class="st">&quot;C400&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">min</span>(tumor_size)</a></code></pre></div>
 <pre><code>[1] 9.5</code></pre>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1"><span class="kw">max</span>(tumor_size)</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">max</span>(tumor_size)</a></code></pre></div>
 <pre><code>[1] 10.1</code></pre>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1"><span class="kw">mean</span>(tumor_size)</a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">mean</span>(tumor_size)</a></code></pre></div>
 <pre><code>[1] 9.74</code></pre>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1"><span class="kw">median</span>(tumor_size)</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">median</span>(tumor_size)</a></code></pre></div>
 <pre><code>[1] 9.7</code></pre>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1"><span class="kw">var</span>(tumor_size)</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">var</span>(tumor_size)</a></code></pre></div>
 <pre><code>[1] 0.068</code></pre>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1"><span class="kw">sd</span>(tumor_size)</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">sd</span>(tumor_size)</a></code></pre></div>
 <pre><code>[1] 0.2607681</code></pre>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" data-line-number="1"><span class="kw">IQR</span>(tumor_size)</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="kw">IQR</span>(tumor_size)</a></code></pre></div>
 <pre><code>[1] 0.4</code></pre>
 <p>Those functions all come from base R (standard R library).</p>
 <p>The following functions are given to us from <code>dplyr</code>. We have dplyr loaded if we’ve run <code>library(tidyverse)</code>, but I’ll include the <code>dplyr::</code> first as a reminder that that’s where these functions come from.</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" data-line-number="1">dplyr<span class="op">::</span><span class="kw">first</span>(site_code)</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">dplyr<span class="op">::</span><span class="kw">first</span>(site_code)</a></code></pre></div>
 <pre><code>[1] &quot;C220&quot;</code></pre>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" data-line-number="1">dplyr<span class="op">::</span><span class="kw">last</span>(age_at_visit)</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">dplyr<span class="op">::</span><span class="kw">last</span>(age_at_visit)</a></code></pre></div>
 <pre><code>[1] 58</code></pre>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1">dplyr<span class="op">::</span><span class="kw">nth</span>(site_code, <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">dplyr<span class="op">::</span><span class="kw">nth</span>(site_code, <span class="dv">2</span>)</a></code></pre></div>
 <pre><code>[1] &quot;C400&quot;</code></pre>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" data-line-number="1">dplyr<span class="op">::</span><span class="kw">n_distinct</span>(site_code)</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1">dplyr<span class="op">::</span><span class="kw">n_distinct</span>(site_code)</a></code></pre></div>
 <pre><code>[1] 3</code></pre>
 <p>All of these functions return a single value. Try the following. What happens and why?</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" data-line-number="1">tumor_size <span class="op">*</span><span class="st"> </span><span class="dv">10</span></a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">tumor_size <span class="op">*</span><span class="st"> </span><span class="dv">10</span></a></code></pre></div>
 <pre><code>[1]  95  95  97  99 101</code></pre>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" data-line-number="1">age_at_visit <span class="op">-</span><span class="st"> </span>age_at_diagnosis</a></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">age_at_visit <span class="op">-</span><span class="st"> </span>age_at_diagnosis</a></code></pre></div>
 <pre><code>[1] 0 1 2 3 4</code></pre>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" data-line-number="1"><span class="kw">paste</span>(<span class="st">&quot;Site Code:&quot;</span>, site_code)</a></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">paste</span>(<span class="st">&quot;Site Code:&quot;</span>, site_code)</a></code></pre></div>
 <pre><code>[1] &quot;Site Code: C220&quot; &quot;Site Code: C400&quot; &quot;Site Code: C412&quot; &quot;Site Code: C220&quot;
 [5] &quot;Site Code: C400&quot;</code></pre>
 <p>Because R is vectorized, operations are applied to the whole vector.</p>
@@ -876,41 +622,418 @@ Levels: a &lt; b &lt; c</code></pre>
 <ol style="list-style-type: decimal">
 <li><p>To allow you to include an unknown number of values.</p>
 <pre><code>paste &lt;- function (..., sep = &quot; &quot;, collapse = NULL) </code></pre>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb116-1" data-line-number="1"><span class="kw">paste</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="kw">paste</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>)</a></code></pre></div>
 <pre><code>[1] &quot;a b c&quot;</code></pre>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" data-line-number="1"><span class="kw">paste</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="kw">paste</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>)</a></code></pre></div>
 <pre><code>[1] &quot;a b c d&quot;</code></pre></li>
 <li><p>To allow you to pass arguments to an underlying function.</p>
 <pre><code>rep &lt;- function (x, ...)  .Primitive(&quot;rep&quot;)</code></pre>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" data-line-number="1"><span class="kw">rep</span>(1L, <span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="kw">rep</span>(1L, <span class="dv">4</span>)</a></code></pre></div>
 <pre><code>[1] 1 1 1 1</code></pre>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1"><span class="kw">rep</span>(1L, <span class="dt">times =</span> <span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1"><span class="kw">rep</span>(1L, <span class="dt">times =</span> <span class="dv">4</span>)</a></code></pre></div>
 <pre><code>[1] 1 1 1 1</code></pre>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" data-line-number="1"><span class="kw">rep.int</span>(1L, <span class="dt">times =</span> <span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1"><span class="kw">rep.int</span>(1L, <span class="dt">times =</span> <span class="dv">4</span>)</a></code></pre></div>
 <pre><code>[1] 1 1 1 1</code></pre></li>
 </ol>
 </div>
 </div>
-<div id="data-processing" class="section level2">
-<h2>Data Processing</h2>
-<p>Open the file <code>example_single_patient.R</code> and add the following lines.</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1">example &lt;-<span class="st"> </span><span class="kw">data_frame</span>(</a>
-<a class="sourceLine" id="cb127-2" data-line-number="2">  <span class="dt">patient_id =</span> patient_id,</a>
-<a class="sourceLine" id="cb127-3" data-line-number="3">  <span class="dt">age_dx =</span> age_at_diagnosis,</a>
-<a class="sourceLine" id="cb127-4" data-line-number="4">  <span class="dt">age_visit =</span> age_at_visit,</a>
-<a class="sourceLine" id="cb127-5" data-line-number="5">  <span class="dt">tumor_size =</span> tumor_size,</a>
-<a class="sourceLine" id="cb127-6" data-line-number="6">  <span class="dt">site_code =</span> site_code</a>
-<a class="sourceLine" id="cb127-7" data-line-number="7">)</a></code></pre></div>
-<p>Clear your workspace (<a href="session_01.html#clearing_your_session">quick refresher here</a>) and then source the script.</p>
-<p>View the tibble that is stored in <code>example</code>.</p>
+<div id="before-we-begin" class="section level2">
+<h2>Before We Begin</h2>
+<div id="before-we-begin-1" class="section level3">
+<h3>Before We Begin</h3>
+<blockquote>
+<p>Whenever you’re learning a new tool, for a long time you’re going to suck. It’s going to be very frustrating. But the good news is that that is typical, it’s something that happens to everyone, and it’s only temporary.</p>
+<p>Unfortunately, there is no way to go from knowing nothing about a subject to knowing something about the subject … without going through a period of great frustration and much suckiness.</p>
+<p>But remember, when you’re getting frustrated, that’s a good thing, it’s typical, it’s temporary. Keep pushing through and in time it will become second nature.</p>
+<p>Hadley Wickham, <a href="https://youtu.be/8SGif63VW6E?t=4m7s">UseR!2014</a></p>
+</blockquote>
+</div>
+</div>
+<div id="dplyr-basics" class="section level2">
+<h2>dplyr Basics</h2>
+<p><span class="pkg">dplyr</span> provides a wide range of functions for data manipulation and transformation. In this session, we’re going to cover 5 key dplyr functions:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Function</th>
+<th align="right">Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><code>filter()</code></td>
+<td align="right">Pick out observations by their values</td>
+</tr>
+<tr class="even">
+<td align="center"><code>arrange()</code></td>
+<td align="right">Reorder the rows</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>select()</code></td>
+<td align="right">Pick out variables by their names</td>
+</tr>
+<tr class="even">
+<td align="center"><code>mutate()</code></td>
+<td align="right">Create new variables using existing variables</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>summarize()</code></td>
+<td align="right">Collapse many values into a single summary</td>
+</tr>
+</tbody>
+</table>
+<p>All <span class="pkg">dplyr</span> verbs work similarly:</p>
+<ol style="list-style-type: decimal">
+<li><p>The first argument is a data frame.</p></li>
+<li><p>Subsequent arguments describe how the verb will transform the data frame, using column names without <code>&quot;column_name&quot;</code></p></li>
+<li><p>The output is a new data frame.</p></li>
+</ol>
+<div id="filter" class="section level3">
+<h3><code>filter()</code></h3>
+<p><img src="images/dplyr-filter.png" /></p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="kw">filter</span>(example, site_code <span class="op">==</span><span class="st"> &quot;C400&quot;</span>)</a></code></pre></div>
+<pre><code># A tibble: 2 x 5
+  patient_id age_dx age_visit tumor_size site_code
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
+1    5554321     54        55        9.5 C400     
+2    5554321     54        58       10.1 C400     </code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1"><span class="kw">filter</span>(example, tumor_size <span class="op">&gt;</span><span class="st"> </span><span class="fl">9.5</span>)</a></code></pre></div>
+<pre><code># A tibble: 3 x 5
+  patient_id age_dx age_visit tumor_size site_code
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
+1    5554321     54        56        9.7 C412     
+2    5554321     54        57        9.9 C220     
+3    5554321     54        58       10.1 C400     </code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1"><span class="kw">filter</span>(example, age_visit <span class="op">&lt;</span><span class="st"> </span><span class="kw">max</span>(age_dx))</a></code></pre></div>
+<pre><code># A tibble: 0 x 5
+# ... with 5 variables: patient_id &lt;dbl&gt;, age_dx &lt;dbl&gt;, age_visit &lt;int&gt;,
+#   tumor_size &lt;dbl&gt;, site_code &lt;chr&gt;</code></pre>
+<p>Multiple arguments to <code>filter()</code> are combined with <code>&amp;</code>:</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1"><span class="kw">filter</span>(example, site_code <span class="op">==</span><span class="st"> &quot;C400&quot;</span>, tumor_size <span class="op">&gt;</span><span class="st"> </span><span class="fl">9.5</span>)</a></code></pre></div>
+<pre><code># A tibble: 1 x 5
+  patient_id age_dx age_visit tumor_size site_code
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
+1    5554321     54        58       10.1 C400     </code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1"><span class="kw">filter</span>(example, site_code <span class="op">==</span><span class="st"> &quot;C400&quot;</span> <span class="op">&amp;</span><span class="st"> </span>tumor_size <span class="op">&gt;</span><span class="st"> </span><span class="fl">9.5</span>)</a></code></pre></div>
+<pre><code># A tibble: 1 x 5
+  patient_id age_dx age_visit tumor_size site_code
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
+1    5554321     54        58       10.1 C400     </code></pre>
+<p>To build more complex filter combinations, use</p>
+<div class="img-center">
+<table>
+<thead>
+<tr class="header">
+<th>Operation</th>
+<th>Symbol</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>and</strong></td>
+<td><code>&amp;</code></td>
+</tr>
+<tr class="even">
+<td><strong>or</strong></td>
+<td><code>|</code></td>
+</tr>
+<tr class="odd">
+<td><strong>not</strong></td>
+<td><code>!</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!--
+This diagram illustrates the complete set of 
+
+![Boolean Operations from [r4ds](http://r4ds.had.co.nz/transform.html#logical-operators).](images/r4ds_diagrams_transform-logical.png)
+-->
+<div id="filtering-for-an-item-in-a-group" class="section level4">
+<h4>Filtering for an item in a group</h4>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1"><span class="kw">filter</span>(example, site_code <span class="op">==</span><span class="st"> &quot;C412&quot;</span> <span class="op">|</span><span class="st"> &quot;C220&quot;</span>) <span class="co"># doesn&#39;t work</span></a></code></pre></div>
+<pre><code>Error in filter_impl(.data, quo): Evaluation error: operations are possible only for numeric, logical or complex types.</code></pre>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1"><span class="kw">filter</span>(example, site_code <span class="op">==</span><span class="st"> &quot;C412&quot;</span> <span class="op">|</span><span class="st"> </span>site_code <span class="op">==</span><span class="st"> &quot;C220&quot;</span>)</a></code></pre></div>
+<pre><code># A tibble: 3 x 5
+  patient_id age_dx age_visit tumor_size site_code
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
+1    5554321     54        54        9.5 C220     
+2    5554321     54        56        9.7 C412     
+3    5554321     54        57        9.9 C220     </code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1"><span class="kw">filter</span>(example, site_code <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;C412&quot;</span>, <span class="st">&quot;C220&quot;</span>))</a></code></pre></div>
+<pre><code># A tibble: 3 x 5
+  patient_id age_dx age_visit tumor_size site_code
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
+1    5554321     54        54        9.5 C220     
+2    5554321     54        56        9.7 C412     
+3    5554321     54        57        9.9 C220     </code></pre>
+</div>
+<div id="missing-values" class="section level4">
+<h4>Missing values</h4>
+<p>Filtering can be tricky when there are missing values – <code>NA</code>. Or sometimes, you’re <em>trying to find</em> the missing values.</p>
+<p>It’s important to keep in mind that <code>NA</code>s are “contagious” in R, meaning that the result of almost any operation involving an <code>NA</code> will be an <code>NA</code>.</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="ot">NA</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">42</span></a></code></pre></div>
+<pre><code>[1] NA</code></pre>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1"><span class="dv">1</span> <span class="op">==</span><span class="st"> </span><span class="ot">NA</span></a></code></pre></div>
+<pre><code>[1] NA</code></pre>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1"><span class="ot">NA</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span></a></code></pre></div>
+<pre><code>[1] NA</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1"><span class="ot">NA</span> <span class="op">/</span><span class="st"> </span><span class="dv">3</span></a></code></pre></div>
+<pre><code>[1] NA</code></pre>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1"><span class="ot">NA</span> <span class="op">==</span><span class="st"> </span><span class="ot">NA</span></a></code></pre></div>
+<pre><code>[1] NA</code></pre>
+<p>Here’s an example that helps to illustrate why <code>NA == NA</code> isn’t <code>TRUE</code>.</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1"><span class="co"># Let x be Mary&#39;s age. We don&#39;t know how old she is.</span></a>
+<a class="sourceLine" id="cb89-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb89-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb89-4" data-line-number="4"><span class="co"># Let y be John&#39;s age. We don&#39;t know how old he is.</span></a>
+<a class="sourceLine" id="cb89-5" data-line-number="5">y &lt;-<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb89-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb89-7" data-line-number="7"><span class="co"># Are John and Mary the same age?</span></a>
+<a class="sourceLine" id="cb89-8" data-line-number="8">x <span class="op">==</span><span class="st"> </span>y</a></code></pre></div>
+<pre><code>[1] NA</code></pre>
+<p><code>filter()</code> keeps only the rows where the condition is <code>TRUE</code> and drops the rows where it is <code>FALSE</code> or <code>NA</code>.</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="ot">NA</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb91-2" data-line-number="2"><span class="kw">filter</span>(df, x <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<pre><code># A tibble: 1 x 1
+      x
+  &lt;dbl&gt;
+1     3</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1"><span class="kw">filter</span>(df, <span class="kw">is.na</span>(x) <span class="op">|</span><span class="st"> </span>x <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<pre><code># A tibble: 2 x 1
+      x
+  &lt;dbl&gt;
+1    NA
+2     3</code></pre>
+</div>
+</div>
+<div id="arrange" class="section level3">
+<h3><code>arrange()</code></h3>
+<div class="img-center">
+<p><img src="images/dplyr-arrange.png" class="img-mw500" /></p>
+</div>
+<p>To arrange, or sort, the rows according to values in a given column, use <code>arrange()</code>.</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1"><span class="kw">arrange</span>(example, site_code)</a></code></pre></div>
 <pre><code># A tibble: 5 x 5
   patient_id age_dx age_visit tumor_size site_code
        &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
 1    5554321     54        54        9.5 C220     
+2    5554321     54        57        9.9 C220     
+3    5554321     54        55        9.5 C400     
+4    5554321     54        58       10.1 C400     
+5    5554321     54        56        9.7 C412     </code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1"><span class="kw">arrange</span>(example, <span class="kw">desc</span>(site_code))</a></code></pre></div>
+<pre><code># A tibble: 5 x 5
+  patient_id age_dx age_visit tumor_size site_code
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
+1    5554321     54        56        9.7 C412     
 2    5554321     54        55        9.5 C400     
+3    5554321     54        58       10.1 C400     
+4    5554321     54        54        9.5 C220     
+5    5554321     54        57        9.9 C220     </code></pre>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" data-line-number="1"><span class="kw">arrange</span>(example, site_code, tumor_size)</a></code></pre></div>
+<pre><code># A tibble: 5 x 5
+  patient_id age_dx age_visit tumor_size site_code
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
+1    5554321     54        54        9.5 C220     
+2    5554321     54        57        9.9 C220     
+3    5554321     54        55        9.5 C400     
+4    5554321     54        58       10.1 C400     
+5    5554321     54        56        9.7 C412     </code></pre>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" data-line-number="1"><span class="kw">arrange</span>(example, <span class="kw">desc</span>(tumor_size), site_code)</a></code></pre></div>
+<pre><code># A tibble: 5 x 5
+  patient_id age_dx age_visit tumor_size site_code
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
+1    5554321     54        58       10.1 C400     
+2    5554321     54        57        9.9 C220     
 3    5554321     54        56        9.7 C412     
-4    5554321     54        57        9.9 C220     
-5    5554321     54        58       10.1 C400     </code></pre>
+4    5554321     54        54        9.5 C220     
+5    5554321     54        55        9.5 C400     </code></pre>
+</div>
+<div id="select" class="section level3">
+<h3><code>select()</code></h3>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" data-line-number="1"><span class="kw">select</span>(example, age_dx, tumor_size)</a></code></pre></div>
+<pre><code># A tibble: 5 x 2
+  age_dx tumor_size
+   &lt;dbl&gt;      &lt;dbl&gt;
+1     54        9.5
+2     54        9.5
+3     54        9.7
+4     54        9.9
+5     54       10.1</code></pre>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1"><span class="kw">select</span>(example, age_dx<span class="op">:</span>tumor_size)</a></code></pre></div>
+<pre><code># A tibble: 5 x 3
+  age_dx age_visit tumor_size
+   &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt;
+1     54        54        9.5
+2     54        55        9.5
+3     54        56        9.7
+4     54        57        9.9
+5     54        58       10.1</code></pre>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" data-line-number="1"><span class="kw">select</span>(example, <span class="op">-</span>(patient_id<span class="op">:</span>age_visit))</a></code></pre></div>
+<pre><code># A tibble: 5 x 2
+  tumor_size site_code
+       &lt;dbl&gt; &lt;chr&gt;    
+1        9.5 C220     
+2        9.5 C400     
+3        9.7 C412     
+4        9.9 C220     
+5       10.1 C400     </code></pre>
+<div id="helper-functions-for-select" class="section level4">
+<h4>Helper functions for <code>select()</code></h4>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" data-line-number="1"><span class="kw">select</span>(example, <span class="kw">starts_with</span>(<span class="st">&quot;age&quot;</span>))</a></code></pre></div>
+<pre><code># A tibble: 5 x 2
+  age_dx age_visit
+   &lt;dbl&gt;     &lt;int&gt;
+1     54        54
+2     54        55
+3     54        56
+4     54        57
+5     54        58</code></pre>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" data-line-number="1"><span class="kw">select</span>(example, <span class="kw">ends_with</span>(<span class="st">&quot;id&quot;</span>))</a></code></pre></div>
+<pre><code># A tibble: 5 x 1
+  patient_id
+       &lt;dbl&gt;
+1    5554321
+2    5554321
+3    5554321
+4    5554321
+5    5554321</code></pre>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" data-line-number="1"><span class="kw">select</span>(example, <span class="kw">contains</span>(<span class="st">&quot;code&quot;</span>))</a></code></pre></div>
+<pre><code># A tibble: 5 x 1
+  site_code
+  &lt;chr&gt;    
+1 C220     
+2 C400     
+3 C412     
+4 C220     
+5 C400     </code></pre>
+</div>
+<div id="renaming" class="section level4">
+<h4>Renaming</h4>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" data-line-number="1"><span class="kw">select</span>(example, <span class="dt">code =</span> site_code)</a></code></pre></div>
+<pre><code># A tibble: 5 x 1
+  code 
+  &lt;chr&gt;
+1 C220 
+2 C400 
+3 C412 
+4 C220 
+5 C400 </code></pre>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" data-line-number="1"><span class="kw">rename</span>(example, <span class="dt">code =</span> site_code)</a></code></pre></div>
+<pre><code># A tibble: 5 x 5
+  patient_id age_dx age_visit tumor_size code 
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;
+1    5554321     54        54        9.5 C220 
+2    5554321     54        55        9.5 C400 
+3    5554321     54        56        9.7 C412 
+4    5554321     54        57        9.9 C220 
+5    5554321     54        58       10.1 C400 </code></pre>
+</div>
+</div>
+<div id="mutate" class="section level3">
+<h3><code>mutate()</code></h3>
+<p><img src="images/dplyr-mutate.png" /></p>
+<p><img src="images/dplyr-window-function.png" /></p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1"><span class="kw">mutate</span>(example, <span class="dt">follow_up =</span> age_visit <span class="op">-</span><span class="st"> </span>age_dx)</a></code></pre></div>
+<pre><code># A tibble: 5 x 6
+  patient_id age_dx age_visit tumor_size site_code follow_up
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;
+1    5554321     54        54        9.5 C220              0
+2    5554321     54        55        9.5 C400              1
+3    5554321     54        56        9.7 C412              2
+4    5554321     54        57        9.9 C220              3
+5    5554321     54        58       10.1 C400              4</code></pre>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" data-line-number="1"><span class="kw">mutate</span>(example, <span class="dt">elapsed =</span> age_visit <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(age_visit))</a></code></pre></div>
+<pre><code># A tibble: 5 x 6
+  patient_id age_dx age_visit tumor_size site_code elapsed
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;
+1    5554321     54        54        9.5 C220            0
+2    5554321     54        55        9.5 C400            1
+3    5554321     54        56        9.7 C412            2
+4    5554321     54        57        9.9 C220            3
+5    5554321     54        58       10.1 C400            4</code></pre>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1"><span class="kw">mutate</span>(example, </a>
+<a class="sourceLine" id="cb123-2" data-line-number="2">       <span class="dt">tumor_size =</span> tumor_size <span class="op">*</span><span class="st"> </span><span class="dv">10</span>, </a>
+<a class="sourceLine" id="cb123-3" data-line-number="3">       <span class="dt">tumor_size_mm =</span> tumor_size <span class="op">*</span><span class="dv">100</span>)</a></code></pre></div>
+<pre><code># A tibble: 5 x 6
+  patient_id age_dx age_visit tumor_size site_code tumor_size_mm
+       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;             &lt;dbl&gt;
+1    5554321     54        54         95 C220               9500
+2    5554321     54        55         95 C400               9500
+3    5554321     54        56         97 C412               9700
+4    5554321     54        57         99 C220               9900
+5    5554321     54        58        101 C400              10100</code></pre>
+</div>
+<div id="summarize" class="section level3">
+<h3><code>summarize()</code></h3>
+<p><img src="images/dplyr-summarize.png" /></p>
+<p><img src="images/dplyr-summary-function.png" /></p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb125-1" data-line-number="1"><span class="kw">summarize</span>(example, <span class="kw">min</span>(age_dx))</a></code></pre></div>
+<pre><code># A tibble: 1 x 1
+  `min(age_dx)`
+          &lt;dbl&gt;
+1            54</code></pre>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb127-1" data-line-number="1"><span class="kw">summarize</span>(example, <span class="dt">max_tumor_size =</span> <span class="kw">max</span>(tumor_size))</a></code></pre></div>
+<pre><code># A tibble: 1 x 1
+  max_tumor_size
+           &lt;dbl&gt;
+1           10.1</code></pre>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" data-line-number="1"><span class="kw">summarize</span>(example, <span class="dt">tumor_size_median =</span> <span class="kw">median</span>(tumor_size),<span class="dt">tumor_size_mean =</span> <span class="kw">mean</span>(tumor_size), <span class="dt">age_visit =</span> <span class="kw">max</span>(age_visit))</a></code></pre></div>
+<pre><code># A tibble: 1 x 3
+  tumor_size_median tumor_size_mean age_visit
+              &lt;dbl&gt;           &lt;dbl&gt;     &lt;dbl&gt;
+1               9.7            9.74        58</code></pre>
+</div>
+<div id="group_by-summarize" class="section level3">
+<h3><code>group_by()</code> + <code>summarize()</code></h3>
+<p><img src="images/dplyr-group_by.png" /></p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" data-line-number="1">example_grp &lt;-<span class="st"> </span><span class="kw">group_by</span>(example, site_code)</a>
+<a class="sourceLine" id="cb131-2" data-line-number="2"><span class="kw">summarize</span>(example_grp, </a>
+<a class="sourceLine" id="cb131-3" data-line-number="3">  <span class="dt">tumor_size_mean =</span> <span class="kw">mean</span>(tumor_size), </a>
+<a class="sourceLine" id="cb131-4" data-line-number="4">  <span class="dt">age_mean =</span> <span class="kw">mean</span>(age_dx))</a></code></pre></div>
+<pre><code># A tibble: 3 x 3
+  site_code tumor_size_mean age_mean
+  &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;
+1 C220                  9.7       54
+2 C400                  9.8       54
+3 C412                  9.7       54</code></pre>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" data-line-number="1">example_grp &lt;-<span class="st"> </span><span class="kw">group_by</span>(example, site_code, patient_id)</a>
+<a class="sourceLine" id="cb133-2" data-line-number="2"><span class="kw">summarize</span>(example_grp, </a>
+<a class="sourceLine" id="cb133-3" data-line-number="3">  <span class="dt">tumor_size_mean =</span> <span class="kw">mean</span>(tumor_size), </a>
+<a class="sourceLine" id="cb133-4" data-line-number="4">  <span class="dt">age_mean =</span> <span class="kw">mean</span>(age_dx))</a></code></pre></div>
+<pre><code># A tibble: 3 x 4
+# Groups:   site_code [?]
+  site_code patient_id tumor_size_mean age_mean
+  &lt;chr&gt;          &lt;dbl&gt;           &lt;dbl&gt;    &lt;dbl&gt;
+1 C220         5554321             9.7       54
+2 C400         5554321             9.8       54
+3 C412         5554321             9.7       54</code></pre>
+</div>
+<div id="group_by-count" class="section level3">
+<h3><code>group_by()</code> + <code>count()</code></h3>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" data-line-number="1"><span class="kw">count</span>(example, site_code)</a></code></pre></div>
+<pre><code># A tibble: 3 x 2
+  site_code     n
+  &lt;chr&gt;     &lt;int&gt;
+1 C220          2
+2 C400          2
+3 C412          1</code></pre>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" data-line-number="1"><span class="kw">count</span>(example, patient_id)</a></code></pre></div>
+<pre><code># A tibble: 1 x 2
+  patient_id     n
+       &lt;dbl&gt; &lt;int&gt;
+1    5554321     5</code></pre>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" data-line-number="1"><span class="co"># Groups: site_code, patient_id</span></a>
+<a class="sourceLine" id="cb139-2" data-line-number="2"><span class="kw">count</span>(example_grp)</a></code></pre></div>
+<pre><code># A tibble: 3 x 3
+# Groups:   site_code, patient_id [3]
+  site_code patient_id     n
+  &lt;chr&gt;          &lt;dbl&gt; &lt;int&gt;
+1 C220         5554321     2
+2 C400         5554321     2
+3 C412         5554321     1</code></pre>
+</div>
 <div id="the-pipe-operator" class="section level3">
 <h3>The “pipe” operator <code>%&gt;%</code></h3>
 <p>It looks like this:</p>
@@ -926,235 +1049,36 @@ Levels: a &lt; b &lt; c</code></pre>
 <div style="font-size: 3em; width: 100%; text-align: center;">
 …and then…
 </div>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb129-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb129-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="kw">rep</span>(x, <span class="dt">times =</span> <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb129-3" data-line-number="3">x &lt;-<span class="st"> </span><span class="kw">mean</span>(x)</a>
-<a class="sourceLine" id="cb129-4" data-line-number="4">x</a></code></pre></div>
-<pre><code>[1] 1.5</code></pre>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" data-line-number="1">y &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">times =</span> <span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb131-2" data-line-number="2">y</a></code></pre></div>
-<pre><code>[1] 1.5</code></pre>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb133-1" data-line-number="1">z &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span> <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb133-2" data-line-number="2"><span class="st">  </span><span class="kw">rep</span>(<span class="dt">times =</span> <span class="dv">3</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb133-3" data-line-number="3"><span class="st">  </span><span class="kw">mean</span>()</a>
-<a class="sourceLine" id="cb133-4" data-line-number="4">z</a></code></pre></div>
-<pre><code>[1] 1.5</code></pre>
 <div class="bs-callout alert-info">
 <p>Requires <span class="pkg">tidyverse</span> or <span class="pkg">dplyr</span>!</p>
 </div>
-</div>
-<div id="dplyr-verbs" class="section level3">
-<h3>dplyr verbs</h3>
-<div id="filter" class="section level4">
-<h4><code>filter()</code></h4>
-<p><img src="images/dplyr-filter.png" /></p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb135-1" data-line-number="1">example <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb135-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(site_code <span class="op">==</span><span class="st"> &quot;C400&quot;</span>)</a></code></pre></div>
-<pre><code># A tibble: 2 x 5
-  patient_id age_dx age_visit tumor_size site_code
-       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
-1    5554321     54        55        9.5 C400     
-2    5554321     54        58       10.1 C400     </code></pre>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" data-line-number="1">example <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb137-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(tumor_size <span class="op">&gt;</span><span class="st"> </span><span class="fl">9.5</span>)</a></code></pre></div>
-<pre><code># A tibble: 3 x 5
-  patient_id age_dx age_visit tumor_size site_code
-       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
-1    5554321     54        56        9.7 C412     
-2    5554321     54        57        9.9 C220     
-3    5554321     54        58       10.1 C400     </code></pre>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" data-line-number="1">example <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb139-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(age_visit <span class="op">&gt;</span><span class="st"> </span><span class="kw">min</span>(age_dx))</a></code></pre></div>
-<pre><code># A tibble: 4 x 5
-  patient_id age_dx age_visit tumor_size site_code
-       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
-1    5554321     54        55        9.5 C400     
-2    5554321     54        56        9.7 C412     
-3    5554321     54        57        9.9 C220     
-4    5554321     54        58       10.1 C400     </code></pre>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" data-line-number="1">example <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb141-2" data-line-number="2"><span class="st">  </span><span class="kw">pull</span>(age_dx) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb141-3" data-line-number="3"><span class="st">  </span><span class="kw">min</span>()</a></code></pre></div>
-<pre><code>[1] 54</code></pre>
-</div>
-<div id="arrange" class="section level4">
-<h4><code>arrange()</code></h4>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" data-line-number="1">example <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb143-2" data-line-number="2"><span class="st">  </span><span class="kw">arrange</span>(site_code)</a></code></pre></div>
-<pre><code># A tibble: 5 x 5
-  patient_id age_dx age_visit tumor_size site_code
-       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
-1    5554321     54        54        9.5 C220     
-2    5554321     54        57        9.9 C220     
-3    5554321     54        55        9.5 C400     
-4    5554321     54        58       10.1 C400     
-5    5554321     54        56        9.7 C412     </code></pre>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" data-line-number="1">example <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb145-2" data-line-number="2"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(site_code))</a></code></pre></div>
-<pre><code># A tibble: 5 x 5
-  patient_id age_dx age_visit tumor_size site_code
-       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
-1    5554321     54        56        9.7 C412     
-2    5554321     54        55        9.5 C400     
-3    5554321     54        58       10.1 C400     
-4    5554321     54        54        9.5 C220     
-5    5554321     54        57        9.9 C220     </code></pre>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" data-line-number="1">example <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb147-2" data-line-number="2"><span class="st">  </span><span class="kw">arrange</span>(site_code, tumor_size)</a></code></pre></div>
-<pre><code># A tibble: 5 x 5
-  patient_id age_dx age_visit tumor_size site_code
-       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
-1    5554321     54        54        9.5 C220     
-2    5554321     54        57        9.9 C220     
-3    5554321     54        55        9.5 C400     
-4    5554321     54        58       10.1 C400     
-5    5554321     54        56        9.7 C412     </code></pre>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" data-line-number="1">example <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb149-2" data-line-number="2"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(tumor_size), site_code)</a></code></pre></div>
-<pre><code># A tibble: 5 x 5
-  patient_id age_dx age_visit tumor_size site_code
-       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
-1    5554321     54        58       10.1 C400     
-2    5554321     54        57        9.9 C220     
-3    5554321     54        56        9.7 C412     
-4    5554321     54        54        9.5 C220     
-5    5554321     54        55        9.5 C400     </code></pre>
-</div>
-<div id="group_by-count" class="section level4">
-<h4><code>group_by()</code> + <code>count()</code></h4>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" data-line-number="1">example <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb151-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(patient_id)</a></code></pre></div>
-<pre><code># A tibble: 5 x 5
-# Groups:   patient_id [1]
-  patient_id age_dx age_visit tumor_size site_code
-       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
-1    5554321     54        54        9.5 C220     
-2    5554321     54        55        9.5 C400     
-3    5554321     54        56        9.7 C412     
-4    5554321     54        57        9.9 C220     
-5    5554321     54        58       10.1 C400     </code></pre>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" data-line-number="1">example <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb153-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(patient_id, site_code)</a></code></pre></div>
-<pre><code># A tibble: 5 x 5
-# Groups:   patient_id, site_code [3]
-  patient_id age_dx age_visit tumor_size site_code
-       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
-1    5554321     54        54        9.5 C220     
-2    5554321     54        55        9.5 C400     
-3    5554321     54        56        9.7 C412     
-4    5554321     54        57        9.9 C220     
-5    5554321     54        58       10.1 C400     </code></pre>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" data-line-number="1">example <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb155-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(patient_id) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb155-3" data-line-number="3"><span class="st">  </span><span class="kw">count</span>()</a></code></pre></div>
-<pre><code># A tibble: 1 x 2
-# Groups:   patient_id [1]
-  patient_id     n
-       &lt;dbl&gt; &lt;int&gt;
-1    5554321     5</code></pre>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" data-line-number="1">example <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb157-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(patient_id, site_code) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb157-3" data-line-number="3"><span class="st">  </span><span class="kw">count</span>()</a></code></pre></div>
-<pre><code># A tibble: 3 x 3
-# Groups:   patient_id, site_code [3]
-  patient_id site_code     n
-       &lt;dbl&gt; &lt;chr&gt;     &lt;int&gt;
-1    5554321 C220          2
-2    5554321 C400          2
-3    5554321 C412          1</code></pre>
-</div>
-<div id="summarize" class="section level4">
-<h4><code>summarize()</code></h4>
-<p><img src="images/dplyr-summarize.png" /></p>
-<p><img src="images/dplyr-summary-function.png" /></p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" data-line-number="1">example <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb159-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="kw">min</span>(age_dx))</a></code></pre></div>
-<pre><code># A tibble: 1 x 1
-  `min(age_dx)`
-          &lt;dbl&gt;
-1            54</code></pre>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" data-line-number="1">example <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb161-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">max_tumor_size =</span> <span class="kw">max</span>(tumor_size))</a></code></pre></div>
-<pre><code># A tibble: 1 x 1
-  max_tumor_size
-           &lt;dbl&gt;
-1           10.1</code></pre>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" data-line-number="1">example <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb163-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(</a>
-<a class="sourceLine" id="cb163-3" data-line-number="3">    <span class="dt">tumor_size_median =</span> <span class="kw">median</span>(tumor_size),</a>
-<a class="sourceLine" id="cb163-4" data-line-number="4">    <span class="dt">tumor_size_mean =</span> <span class="kw">mean</span>(tumor_size),</a>
-<a class="sourceLine" id="cb163-5" data-line-number="5">    <span class="dt">age_visit =</span> <span class="kw">max</span>(age_visit)</a>
-<a class="sourceLine" id="cb163-6" data-line-number="6">  )</a></code></pre></div>
-<pre><code># A tibble: 1 x 3
-  tumor_size_median tumor_size_mean age_visit
-              &lt;dbl&gt;           &lt;dbl&gt;     &lt;dbl&gt;
-1               9.7            9.74        58</code></pre>
-</div>
-<div id="mutate" class="section level4">
-<h4><code>mutate()</code></h4>
-<p><img src="images/dplyr-mutate.png" /></p>
-<p><img src="images/dplyr-window-function.png" /></p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" data-line-number="1">example <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb165-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">follow_up =</span> age_visit <span class="op">-</span><span class="st"> </span>age_dx)</a></code></pre></div>
-<pre><code># A tibble: 5 x 6
-  patient_id age_dx age_visit tumor_size site_code follow_up
-       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;
-1    5554321     54        54        9.5 C220              0
-2    5554321     54        55        9.5 C400              1
-3    5554321     54        56        9.7 C412              2
-4    5554321     54        57        9.9 C220              3
-5    5554321     54        58       10.1 C400              4</code></pre>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" data-line-number="1">example <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb167-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tumor_size =</span> tumor_size <span class="op">*</span><span class="st"> </span><span class="dv">100</span>)</a></code></pre></div>
-<pre><code># A tibble: 5 x 5
-  patient_id age_dx age_visit tumor_size site_code
-       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;    
-1    5554321     54        54       950  C220     
-2    5554321     54        55       950  C400     
-3    5554321     54        56       970. C412     
-4    5554321     54        57       990  C220     
-5    5554321     54        58      1010  C400     </code></pre>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" data-line-number="1">example <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb169-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb169-3" data-line-number="3">    <span class="dt">tumor_size =</span> tumor_size <span class="op">*</span><span class="st"> </span><span class="dv">10</span>,</a>
-<a class="sourceLine" id="cb169-4" data-line-number="4">    <span class="dt">tumor_size_mm =</span> tumor_size <span class="op">*</span><span class="st"> </span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb169-5" data-line-number="5">  )</a></code></pre></div>
-<pre><code># A tibble: 5 x 6
-  patient_id age_dx age_visit tumor_size site_code tumor_size_mm
-       &lt;dbl&gt;  &lt;dbl&gt;     &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt;             &lt;dbl&gt;
-1    5554321     54        54         95 C220               9500
-2    5554321     54        55         95 C400               9500
-3    5554321     54        56         97 C412               9700
-4    5554321     54        57         99 C220               9900
-5    5554321     54        58        101 C400              10100</code></pre>
-</div>
-<div id="group_by-summarize" class="section level4">
-<h4><code>group_by()</code> + <code>summarize()</code></h4>
-<p><img src="images/dplyr-group_by.png" /></p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" data-line-number="1">example <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb171-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(site_code) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb171-3" data-line-number="3"><span class="st">  </span><span class="kw">summarize</span>(</a>
-<a class="sourceLine" id="cb171-4" data-line-number="4">    <span class="dt">tumor_size_mean =</span> <span class="kw">mean</span>(tumor_size),</a>
-<a class="sourceLine" id="cb171-5" data-line-number="5">    <span class="dt">age_mean =</span> <span class="kw">mean</span>(age)</a>
-<a class="sourceLine" id="cb171-6" data-line-number="6">  )</a></code></pre></div>
-<pre><code>Error in summarise_impl(.data, dots): Evaluation error: object &#39;age&#39; not found.</code></pre>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" data-line-number="1">example <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb173-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(site_code, patient_id) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb173-3" data-line-number="3"><span class="st">  </span><span class="kw">summarize</span>(</a>
-<a class="sourceLine" id="cb173-4" data-line-number="4">    <span class="dt">tumor_size_mean =</span> <span class="kw">mean</span>(tumor_size),</a>
-<a class="sourceLine" id="cb173-5" data-line-number="5">    <span class="dt">age_mean =</span> <span class="kw">mean</span>(age)</a>
-<a class="sourceLine" id="cb173-6" data-line-number="6">  )</a></code></pre></div>
-<pre><code>Error in summarise_impl(.data, dots): Evaluation error: object &#39;age&#39; not found.</code></pre>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" data-line-number="1">example <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb175-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(site_code) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb175-3" data-line-number="3"><span class="st">  </span><span class="kw">summarize</span>(</a>
-<a class="sourceLine" id="cb175-4" data-line-number="4">    <span class="co">#patient_id = patient_id,</span></a>
-<a class="sourceLine" id="cb175-5" data-line-number="5">    <span class="dt">patient_id =</span> <span class="kw">first</span>(patient_id),</a>
-<a class="sourceLine" id="cb175-6" data-line-number="6">    <span class="dt">tumor_size_mean =</span> <span class="kw">mean</span>(tumor_size),</a>
-<a class="sourceLine" id="cb175-7" data-line-number="7">    <span class="dt">age_mean =</span> <span class="kw">mean</span>(age)</a>
-<a class="sourceLine" id="cb175-8" data-line-number="8">  )</a></code></pre></div>
-<pre><code>Error in summarise_impl(.data, dots): Evaluation error: object &#39;age&#39; not found.</code></pre>
-</div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" data-line-number="1">ex &lt;-<span class="st"> </span><span class="kw">group_by</span>(example, site_code, patient_id)</a>
+<a class="sourceLine" id="cb141-2" data-line-number="2">ex &lt;-<span class="st"> </span><span class="kw">mutate</span>(ex, <span class="dt">tumor_size =</span> tumor_size <span class="op">*</span><span class="st"> </span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb141-3" data-line-number="3">ex &lt;-<span class="st"> </span><span class="kw">summarize</span>(ex, </a>
+<a class="sourceLine" id="cb141-4" data-line-number="4">  <span class="dt">tumor_size_mean =</span> <span class="kw">mean</span>(tumor_size), </a>
+<a class="sourceLine" id="cb141-5" data-line-number="5">  <span class="dt">age_mean =</span> <span class="kw">mean</span>(age_dx))</a>
+<a class="sourceLine" id="cb141-6" data-line-number="6">ex</a></code></pre></div>
+<pre><code># A tibble: 3 x 4
+# Groups:   site_code [?]
+  site_code patient_id tumor_size_mean age_mean
+  &lt;chr&gt;          &lt;dbl&gt;           &lt;dbl&gt;    &lt;dbl&gt;
+1 C220         5554321              97       54
+2 C400         5554321              98       54
+3 C412         5554321              97       54</code></pre>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" data-line-number="1">example <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb143-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(site_code, patient_id) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb143-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tumor_size =</span> tumor_size <span class="op">*</span><span class="st"> </span><span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb143-4" data-line-number="4"><span class="st">  </span><span class="kw">summarize</span>(</a>
+<a class="sourceLine" id="cb143-5" data-line-number="5">    <span class="dt">tumor_size_mean =</span> <span class="kw">mean</span>(tumor_size),</a>
+<a class="sourceLine" id="cb143-6" data-line-number="6">    <span class="dt">age_mean =</span> <span class="kw">mean</span>(age_dx)</a>
+<a class="sourceLine" id="cb143-7" data-line-number="7">  )</a></code></pre></div>
+<pre><code># A tibble: 3 x 4
+# Groups:   site_code [?]
+  site_code patient_id tumor_size_mean age_mean
+  &lt;chr&gt;          &lt;dbl&gt;           &lt;dbl&gt;    &lt;dbl&gt;
+1 C220         5554321              97       54
+2 C400         5554321              98       54
+3 C412         5554321              97       54</code></pre>
 </div>
 </div>
 

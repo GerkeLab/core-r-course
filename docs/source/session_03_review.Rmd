@@ -11,7 +11,7 @@ install.packages("readxl")
 ```
 </details>
 
-How do load a package from the R prompt, like [dplyr]{.pkg}
+How do you load a package from the R prompt, like [dplyr]{.pkg}
 
 <details><summary>Answer</summary>
 
@@ -42,7 +42,7 @@ A package contains:
 1. *Data*
 </details>
 
-### Collections
+### Data Types
 
 What data type are each of the following?
 
@@ -64,290 +64,64 @@ What data type are each of the following?
 integer, double, character, logical, vector, list, data.frame, tibble, N/A (missing), Null and factor
 </details>
 
-#### Vectors
-
-Create the following vector and add additional names to it:
+Run the following command.
+It will create 3 variables: `x`, `y`, and `z`.
+Without printing the variables, how can you tell what data type they are?
 
 ```r
-character_name <- c("Luke Skywalker", "Darth Vader", "Han Solo")
+source("https://git.io/fNrm9")
 ```
 
-<!-- TODO PICK UP HERE -->
+<details><summary>Answer</summary>
+
+Here's the code that was run:
 
 ```{r}
-1:3
+x <- 1:10
+y <- setNames(sample(letters, 10), LETTERS[1:10])
+z <- runif(10)
+z[sample(1:10, 2)] <- NA
 
-c(1, 2, 3)
-
-identical(1:3, c(1, 2, 3))
-
-identical(1:3, c(1L, 2L, 3L))
-
-c(1L, 2L, 3L, pi)
-
-fruits <- c("apple", "banana")
-fruits
-
-fruits <- c(fruits, "cherimoya")
-```
-
-![[A cherimoya](https://en.wikipedia.org/wiki/Cherimoya)](images/cherimoya.jpg)
-
-```{r echo_if_show_results=TRUE}
-fruits
-```
-
-```{r}
-month_days <- c("March" = 31, "April" = 30, May = 31)
-
-month_days
-
-names(month_days) <- c("August", "September", "October")
-month_days
-
-month_days["October"]
-```
-
-#### Lists
-
-```{r}
-x <- list(
-  fruits = fruits,
-  months = names(month_days),
-  month_days = month_days
-)
-
-x
-```
-
-#### Data Frames and Tibbles
-
-```{r}
-y <- data.frame(
-  fruits = fruits,
-  months = names(month_days),
-  month_days = month_days
-)
 y
-
-y2 <- data.frame(
-  fruits = fruits,
-  months = names(month_days),
-  month_days = month_days,
-  stringsAsFactors = FALSE,
-  row.names = NULL
-)
-y2
-
-z <- data_frame(             #<< tibble()
-  fruits = fruits,
-  months = names(month_days),
-  mont_days = month_days
-)
 z
 ```
 
-### Data Types Continued
-
-#### Review
-
-| Type | Example |
-|:----:|:--------|
-| integer | `1L` |
-| double | `3.14`, `1.23e-4` |
-| character | `"apple"` |
-| logical | `TRUE`, `FALSE` |
-| vector | `c(...)` |
-| list | `list(...)` |
-| data.frame | `data.frame(...)` |
-| tibble | `data_frame(...)` |
-| N/A | `NA` |
-| null | `NULL` |
-| factor | `factor(letters)` |
-
-#### Special Data Types
-
 ```{r}
-c(1, 2, NA, 4)
-
-c(1, 2, NULL, 4)
-```
-
-#### Factors
-
-We'll talk about this later, but it's basically a vector with an additional **label** and sometimes an **order**.
-
-<details><summary>Sneak Peek</summary>
-
-```{r factor-sneak-peek, results="show"}
-factor(1:3)
-factor(1:3,
-       levels = 1:3)
-factor(1:3,
-       levels = 1:3,
-       labels = c("a", "b", "c"))
-factor(1:3,
-       levels = 1:3,
-       labels = c("a", "b", "c"),
-       ordered = TRUE)
-factor(1:3,
-       levels = 3:1,
-       labels = c("a", "b", "c"),
-       ordered = TRUE)
-```
-</details>
-
-
-#### Working with Data Types
-
-##### What is this thing?
-
-```{r}
-x <- 1L
-y <- pi
-z <- "apple"
-
 class(x)
 class(y)
 class(z)
-typeof(z)
 
-class(mtcars)
+is.integer(x)
+is.character(y)
+is.na(z)
 ```
-
-
-##### Are you this thing?
-
-```{r}
-is.integer(1L)
-is.numeric(pi)
-is.numeric(1L)
-is.double(1L)
-is.character("one")
-is.logical("TRUE")
-```
-
-##### Are you even there?
-
-```{r}
-is.na(c(1, 2, NA, 4))
-
-is.null(c(1, 2, NULL, 4))
-
-xyz <- NULL
-is.null(xyz)
-```
-
-##### Turn you into this thing.
-
-```{r}
-as.character(1)
-as.integer(pi)
-as.double(10L)
-as.logical(2)
-```
-
+</details>
 
 ### Workspaces & RStudio Projects
 
-#### Working Directory
+In [the last session](session_02.html#work_with_your_project), we created an RStudio project and an example R script.
 
-The working directory is where R looks when it tries to find a file or where it writes a file.
+1. Re-open the project we created (or [create a new project](session_02.html#create_an_rstudio_project)).
+1. What is the current working directory?
+1. Use the [File]{.rstudio-tab} pane to navigate to your desktop (or another folder on your computer).
+1. How can you quickly navigate back to the working directory?
 
-You can check where your R process is "living" -- i.e. your working directory -- with
+Open `example_single_patient.R` from our previous session and add the following lines.
 
-```r
-getwd()
+```{r example-single-patient-file-2}
+example <- data_frame(
+  patient_id = patient_id,
+  age_dx = age_at_diagnosis,
+  age_visit = age_at_visit,
+  tumor_size = tumor_size,
+  site_code = site_code
+)
 ```
 
-and you can set it with
+Clear your workspace ([quick refresher here](session_01.html#clearing_your_session)) and then source the script.
 
-```r
-setwd("~/myCoolProject")
+View the tibble that is stored in `example`.
+
+```{r echo=FALSE, results='show'}
+example
 ```
-
-But **this is not recommended**!
-
-You can also use [More]{.menu-item} &rtrif; [Set As Working Directory]{.menu-item} or [Go To Working Directory]{.menu-item} in the [Files]{.rstudio-tab} pane to set the working directory, but this is **also not recommended**.
-
-[When should you? When you get lost.]{.muted}
-
-#### Using RStudio Projects
-
-Without some kind of organization scheme, you'll very quickly end up writing all of your R scripts in a single folder.
-Multiple analysis will write out files, exporting data and creating plots, each of these writing into the same folder.
-
-![Life without RStudio Projects](images/messy-desktop.png)
-
-Instead, RStudio offers an excellent method of organization called **Projects**.
-Using RStudio projects, each analysis is self-contained and organized, each in its own way, and it's easy to switch from one project to another and know that your files will be organized, your environment will be clean, and you can pick everything back up from where you started.
-
-![Life _with_ RStudio Projects, [credit](https://www.citi.io/2016/04/06/if-you-think-you-are-obsessively-organized-think-again-with-these/)](images/obsessively-organized.jpg)
-
-#### Create an RStudio Project
-
-Select [File]{.menu-item} &rtrif; [New Project]{.menu-item} or choose [New Project]{.menu-item} from the drop-down menu in the upper right corner of the RStudio window.
-
-::: {.img-center}
-![](images/rstudio-project-01-new.png){.img-mw500}
-:::
-
-Select **New Directory** to create your project in a new directory.
-If you already have files in a directory that you want to use, choose _Existing Directory_.
-
-::: {.img-center}
-![](images/rstudio-project-02-create-project.png){.img-mw500}
-:::
-
-Select the type of project you want to start -- this will generally be **New Project**.
-
-::: {.img-center}
-![](images/rstudio-project-03-project-type.png){.img-mw500}
-:::
-
-Choose the name for the folder that will be created to house your project and pick the folder where the project folder will be created.
-
-Here we give the new project folder the name **`cds-r-course`**.
-This will also be the name of the project itself.
-
-::: {.img-center}
-![](images/rstudio-project-04-create-new-project.png){.img-mw500}
-:::
-
-Your project will be created and you'll be dropped into a new R/RStudio session.
-
-![](images/rstudio-project-05-blank-project.png)
-
-#### Work with your project
-
-Use the [Files]{.rstudio-tab} to create a folder called `data` in your project folder.
-
-Run the following command to download the `gapminder.csv` file into your `data` folder.
-
-```r
-> download.file("https://gerkelab.github.io/core-r-course/materials/01/gapminder.csv", "data/gapminder.csv")
-```
-
-Create a new R script.
-Add the following code to it.
-
-```{r example-single-patient-file, eval=FALSE}
-library(tidyverse)
-
-patient_id <- 5554321
-age_at_diagnosis <- 54
-age_at_visit <- 54:58
-tumor_size <- c(9.5, 9.5, 9.7, 9.9, 10.1)
-site_code <- c("C220", "C400", "C412", "C220", "C400")
-```
-
-```{r ref.label="example-single-patient-file", results="hide", echo=FALSE, eval=-1}
-```
-
-Save the file as `example_single_patient.R` in your project directory.
-
-Source the file.
-
-Close the project.
-Take a deep breath.
-Re-open the project.

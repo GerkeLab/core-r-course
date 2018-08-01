@@ -177,6 +177,11 @@ white-space:nowrap;
   margin-left: auto;
   margin-right: auto;
 }
+.img-center table {
+  width: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .img-mw500 {
   max-width: 500px;

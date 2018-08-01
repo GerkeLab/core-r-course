@@ -6,7 +6,7 @@ date: "August 1, 2018"
 ```{r include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 make_listing <- function(filename, path_rel, base_url = "https://gerkelab.github.io/core-r-course") {
-  cat(glue::glue('\n- [{filename}]({path_rel})\n\n  ```\n  "{file.path(base_url, path_rel)}"\n  ```\n\n'))
+  cat(glue::glue('\n- [{filename}]({path_rel})\n\n  ```\n  download.file("{file.path(base_url, path_rel)}", "{filename}")\n  ```\n\n'))
 }
 
 needs_zip <- function(zipfile, dirpath) {
@@ -41,7 +41,7 @@ make_listing(ZIPFILE, file.path("materials", ZIPFILE))
 The following files simulate a cancer registry data export for patients with breast cancer.
 
 :::{.bs-callout .bs-callout-warning}
-**Note** This data is simulated, with fictitious record numbers, patient information, and dates, and is intended for Moffitt staff training purposes only.
+**Note** This data is simulated with fictitious record numbers, patient information, and dates, and is intended for Moffitt staff training purposes only.
 :::
 
 ```{r}

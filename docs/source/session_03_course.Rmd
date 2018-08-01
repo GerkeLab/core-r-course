@@ -1,3 +1,8 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 ## Functions
 
 ### Functions that work with vectors
@@ -6,7 +11,13 @@ So far we've primarily seen vectors that operate on single values or that take s
 
 But as we've seen, R is a _vectorized language_.
 
-Try using the following functions on the variables we created in `example_single_patient.R`.
+Try using the following functions on the variables we created in `example_single_patient.R` in [Session 2](session_02.html#work_with_your_project).
+
+```{r}
+age_at_visit <- 54:58
+tumor_size <- c(9.5, 9.5, 9.7, 9.9, 10.1)
+site_code <- c("C220", "C400", "C412", "C220", "C400")
+```
 
 ```{r}
 min(tumor_size)
@@ -72,27 +83,209 @@ The `...` is used in two ways:
    rep(1L, times = 4)
    rep.int(1L, times = 4)
    ```
+   
 
-## Data Processing
 
-Open the file `example_single_patient.R` and add the following lines.
+## Before We Begin
 
-```{r example-single-patient-file-2}
-example <- data_frame(
-  patient_id = patient_id,
-  age_dx = age_at_diagnosis,
-  age_visit = age_at_visit,
-  tumor_size = tumor_size,
-  site_code = site_code
-)
+### Before We Begin
+
+> Whenever you're learning a new tool, for a long time you're going to suck. It's going to be very frustrating. But the good news is that that is typical, it's something that happens to everyone, and it's only temporary.
+>
+> Unfortunately, there is no way to go from knowing nothing about a subject to knowing something about the subject ... without going through a period of great frustration and much suckiness.
+>
+> But remember, when you're getting frustrated, that's a good thing, it's typical, it's temporary. Keep pushing through and in time it will become second nature.
+>
+> Hadley Wickham, [UseR!2014](https://youtu.be/8SGif63VW6E?t=4m7s)
+
+## dplyr Basics
+
+[dplyr]{.pkg} provides a wide range of functions for data manipulation and transformation.
+In this session, we're going to cover 5 key dplyr functions:
+
+| Function | Action |
+|:--------:|-------:|
+| `filter()` | Pick out observations by their values |
+| `arrange()` | Reorder the rows |
+| `select()` | Pick out variables by their names |
+| `mutate()` | Create new variables using existing variables |
+| `summarize()` | Collapse many values into a single summary |
+
+All [dplyr]{.pkg} verbs work similarly:
+
+1. The first argument is a data frame.
+
+1. Subsequent arguments describe how the verb will transform the data frame, using column names without `"column_name"`
+
+1. The output is a new data frame.
+
+### `filter()`
+
+![](images/dplyr-filter.png)
+
+```{r}
+filter(example, site_code == "C400")
+filter(example, tumor_size > 9.5)
+filter(example, age_visit < max(age_dx))
 ```
 
-Clear your workspace ([quick refresher here](session_01.html#clearing_your_session)) and then source the script.
+Multiple arguments to `filter()` are combined with `&`:
 
-View the tibble that is stored in `example`.
+```{r}
+filter(example, site_code == "C400", tumor_size > 9.5)
+filter(example, site_code == "C400" & tumor_size > 9.5)
+```
 
-```{r echo=FALSE}
-example
+To build more complex filter combinations, use
+
+::: {.img-center}
+| Operation | Symbol | 
+|---|---|
+| **and** | `&` |
+| **or** | `|` |
+| **not** | `!` |
+:::
+
+<!--
+This diagram illustrates the complete set of 
+
+![Boolean Operations from [r4ds](http://r4ds.had.co.nz/transform.html#logical-operators).](images/r4ds_diagrams_transform-logical.png)
+-->
+
+#### Filtering for an item in a group
+
+```{r error=TRUE}
+filter(example, site_code == "C412" | "C220") # doesn't work
+filter(example, site_code == "C412" | site_code == "C220")
+filter(example, site_code %in% c("C412", "C220"))
+```
+
+#### Missing values
+
+Filtering can be tricky when there are missing values -- `NA`.
+Or sometimes, you're _trying to find_ the missing values.
+
+It's important to keep in mind that `NA`s are "contagious" in R, meaning that the result of almost any operation involving an `NA` will be an `NA`.
+
+```{r error=TRUE}
+NA > 42
+1 == NA
+NA + 2
+NA / 3
+NA == NA
+```
+
+Here's an example that helps to illustrate why `NA == NA` isn't `TRUE`.
+
+```{r results="show"}
+# Let x be Mary's age. We don't know how old she is.
+x <- NA
+
+# Let y be John's age. We don't know how old he is.
+y <- NA
+
+# Are John and Mary the same age?
+x == y
+```
+
+`filter()` keeps only the rows where the condition is `TRUE` and drops the rows where it is `FALSE` or `NA`.
+
+```{r}
+df <- tibble(x = c(1, NA, 3))
+filter(df, x > 1)
+filter(df, is.na(x) | x > 1)
+```
+
+### `arrange()`
+
+::: {.img-center}
+![](images/dplyr-arrange.png){.img-mw500}
+:::
+
+To arrange, or sort, the rows according to values in a given column, use `arrange()`.
+
+```{r}
+arrange(example, site_code)
+arrange(example, desc(site_code))
+arrange(example, site_code, tumor_size)
+arrange(example, desc(tumor_size), site_code)
+```
+
+### `select()`
+
+```{r}
+select(example, age_dx, tumor_size)
+select(example, age_dx:tumor_size)
+select(example, -(patient_id:age_visit))
+```
+
+#### Helper functions for `select()`
+
+```{r}
+select(example, starts_with("age"))
+select(example, ends_with("id"))
+select(example, contains("code"))
+```
+
+#### Renaming
+
+```{r}
+select(example, code = site_code)
+rename(example, code = site_code)
+```
+
+### `mutate()`
+
+![](images/dplyr-mutate.png)
+
+![](images/dplyr-window-function.png)
+
+```{r}
+mutate(example, follow_up = age_visit - age_dx)
+mutate(example, elapsed = age_visit - min(age_visit))
+mutate(example, 
+       tumor_size = tumor_size * 10, 
+       tumor_size_mm = tumor_size *100)
+```
+
+### `summarize()`
+
+![](images/dplyr-summarize.png)
+
+![](images/dplyr-summary-function.png)
+
+
+```{r}
+summarize(example, min(age_dx))
+summarize(example, max_tumor_size = max(tumor_size))
+summarize(example, tumor_size_median = median(tumor_size),tumor_size_mean = mean(tumor_size), age_visit = max(age_visit))
+```
+
+### `group_by()` + `summarize()`
+
+![](images/dplyr-group_by.png)
+
+```{r error=TRUE}
+example_grp <- group_by(example, site_code)
+summarize(example_grp, 
+  tumor_size_mean = mean(tumor_size), 
+  age_mean = mean(age_dx))
+
+example_grp <- group_by(example, site_code, patient_id)
+summarize(example_grp, 
+  tumor_size_mean = mean(tumor_size), 
+  age_mean = mean(age_dx))
+```
+
+
+### `group_by()` + `count()`
+
+```{r}
+count(example, site_code)
+count(example, patient_id)
+
+# Groups: site_code, patient_id
+count(example_grp)
 ```
 
 ### The "pipe" operator `%>%`
@@ -113,149 +306,24 @@ You say it like
 
 <div style="font-size: 3em; width: 100%; text-align: center;">...and then...</div>
 
-```{r}
-x <- 1:2
-x <- rep(x, times = 3)
-x <- mean(x)
-x
-
-y <- mean(rep(1:2, times = 3))
-y
-
-z <- 1:2 %>%
-  rep(times = 3) %>%
-  mean()
-z
-```
-
 ::: {.bs-callout .alert-info}
 Requires [tidyverse]{.pkg} or [dplyr]{.pkg}!
 :::
 
-### dplyr verbs
-
-#### `filter()`
-
-![](images/dplyr-filter.png)
-
 ```{r}
-example %>%
-  filter(site_code == "C400")
-
-example %>%
-  filter(tumor_size > 9.5)
-
-example %>%
-  filter(age_visit > min(age_dx))
-
-example %>%
-  pull(age_dx) %>%
-  min()
-```
-
-#### `arrange()`
-
-```{r}
-example %>%
-  arrange(site_code)
-
-example %>%
-  arrange(desc(site_code))
-
-example %>%
-  arrange(site_code, tumor_size)
-
-example %>%
-  arrange(desc(tumor_size), site_code)
-```
-
-#### `group_by()` + `count()`
-
-```{r}
-example %>% 
-  group_by(patient_id)
-
-example %>% 
-  group_by(patient_id, site_code)
-
-example %>% 
-  group_by(patient_id) %>% 
-  count()
-
-example %>% 
-  group_by(patient_id, site_code) %>% 
-  count()
-```
-
-#### `summarize()`
-
-![](images/dplyr-summarize.png)
-
-![](images/dplyr-summary-function.png)
-
-
-```{r}
-example %>%
-  summarize(min(age_dx))
-
-example %>%
-  summarize(max_tumor_size = max(tumor_size))
-
-example %>%
-  summarize(
-    tumor_size_median = median(tumor_size),
-    tumor_size_mean = mean(tumor_size),
-    age_visit = max(age_visit)
-  )
-```
-
-
-#### `mutate()`
-
-![](images/dplyr-mutate.png)
-
-![](images/dplyr-window-function.png)
-
-
-```{r}
-example %>% 
-  mutate(follow_up = age_visit - age_dx)
-
-example %>% 
-  mutate(tumor_size = tumor_size * 100)
-
-example %>% 
-  mutate(
-    tumor_size = tumor_size * 10,
-    tumor_size_mm = tumor_size * 100
-  )
-```
-
-#### `group_by()` + `summarize()`
-
-![](images/dplyr-group_by.png)
-
-```{r error=TRUE}
-example %>% 
-  group_by(site_code) %>% 
-  summarize(
-    tumor_size_mean = mean(tumor_size),
-    age_mean = mean(age)
-  )
+ex <- group_by(example, site_code, patient_id)
+ex <- mutate(ex, tumor_size = tumor_size * 10)
+ex <- summarize(ex, 
+  tumor_size_mean = mean(tumor_size), 
+  age_mean = mean(age_dx))
+ex
 
 example %>% 
   group_by(site_code, patient_id) %>% 
+  mutate(tumor_size = tumor_size * 10) %>% 
   summarize(
     tumor_size_mean = mean(tumor_size),
-    age_mean = mean(age)
-  )
-
-example %>% 
-  group_by(site_code) %>% 
-  summarize(
-    #patient_id = patient_id,
-    patient_id = first(patient_id),
-    tumor_size_mean = mean(tumor_size),
-    age_mean = mean(age)
+    age_mean = mean(age_dx)
   )
 ```
+

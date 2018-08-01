@@ -14,7 +14,7 @@ SHOW_RESULTS <- "show"
 
 session_links <- list(
   "Materials" = "session_03_materials.html",
-  "This page without the code results" = "session_03_answers.html"
+  "This page without the code results" = "session_03.html"
 )
 ```
 

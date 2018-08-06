@@ -1,6 +1,6 @@
 ---
-title: Session 3 — Materials
-date: "August 1, 2018"
+title: Session 4 — Materials
+date: "August 8, 2018"
 ---
 
 ```{r include=FALSE}
@@ -17,12 +17,12 @@ needs_zip <- function(zipfile, dirpath) {
   zip_modtime < files_modtime
 }
 
-SESSION <- "03"
+SESSION <- "04"
 ZIPFILE <- glue::glue("core-r_session-{SESSION}_materials.zip")
 SESSION_DIR <- here::here("materials", SESSION)
 ```
 
-Materials for [Session 3](session_03.html).
+Materials for [Session 4](session_04.html).
 
 ## Zip File
 
@@ -37,6 +37,12 @@ make_listing(ZIPFILE, file.path("materials", ZIPFILE))
 ```
 
 ## Individual Files
+
+The following files simulate a cancer registry data export for patients with breast cancer.
+
+:::{.bs-callout .bs-callout-warning}
+**Note** This data is simulated with fictitious record numbers, patient information, and dates, and is intended for Moffitt staff training purposes only.
+:::
 
 ```{r}
 fs::file_info(fs::dir_ls(SESSION_DIR)) %>% 

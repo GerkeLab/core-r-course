@@ -1,0 +1,97 @@
+### dplyr
+
+In the last session we talked about 5 important [dplyr]{.pkg} verbs.
+What do each of these functions do?
+
+```r
+filter()
+```
+
+<details><summary>Answer</summary>
+
+- Pick out observations by their values 
+</details>
+
+```r
+arrange()
+```
+
+<details><summary>Answer</summary>
+
+- Reorder the rows
+</details>
+
+```r
+select()
+```
+
+<details><summary>Answer</summary>
+
+- Pick out variables by their names 
+</details>
+
+```r
+mutate()
+```
+
+<details><summary>Answer</summary>
+
+- Create new variables using existing variables
+</details>
+
+```r
+summarize()
+```
+
+<details><summary>Answer</summary>
+
+- Collapse many values into a single summary 
+</details>
+
+
+What are the three "rules" of [dplyr]{.pkg} verbs?
+
+<details><summary>Answer</summary>
+
+1. The first argument is a data frame.
+
+1. Subsequent arguments describe how the verb will transform the data frame, using column names without `"column_name"`
+
+1. The output is a new data frame.
+</details>
+
+### Quick Review
+
+Source the [example_single_patient.R](materials/03/example_single_patient.R) file we created in our last session so that the `example` data frame and [dplyr]{.pkg} are loaded.
+
+`example`:
+
+```{r echo=FALSE, results='asis'}
+source(here::here("materials/03/example_single_patient.R"))
+knitr::kable(example)
+```
+
+
+#### Review Task
+
+Use the pipe operator `%>%` and [dplyr]{.pkg} verbs to complete the following task:
+
+1. Use the `example` dataset
+
+1. Filter out tumors larger than **10**
+
+1. Calculate `follow_up` time as the number of years between diagnosis and the patient's visit
+
+1. Calculate the average follow up time by `site_code`
+
+<details><summary>Answer</summary>
+
+```{r}
+example %>% 
+  filter(tumor_size <= 10) %>% 
+  mutate(follow_up = age_visit - age_dx) %>% 
+  group_by(site_code) %>% 
+  summarize(avg_follow_up = mean(follow_up))
+```
+
+</details>

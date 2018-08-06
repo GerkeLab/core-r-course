@@ -13,9 +13,11 @@ navbar:
         - text: "Session 1 – July 18"
           href: session_01.html
         - text: "Session 2 – July 25"
-          href: session_02.html
+          href: session_02_answers.html
         - text: "Session 3 – August 1"
-          href: session_03.html
+          href: session_03_answers.html
+        - text: "Session 4 – August 8"
+          href: session_04.html
   right:
     - text: "Resources"
       href: resources.html

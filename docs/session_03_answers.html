@@ -367,10 +367,13 @@ div.tocify {
       <a href="session_01.html">Session 1 – July 18</a>
     </li>
     <li>
-      <a href="session_02.html">Session 2 – July 25</a>
+      <a href="session_02_answers.html">Session 2 – July 25</a>
     </li>
     <li>
-      <a href="session_03.html">Session 3 – August 1</a>
+      <a href="session_03_answers.html">Session 3 – August 1</a>
+    </li>
+    <li>
+      <a href="session_04.html">Session 4 – August 8</a>
     </li>
   </ul>
 </li>
@@ -568,7 +571,6 @@ div.tocify {
 <li><p><a href="#functions">More Functions</a></p></li>
 <li><p><a href="#import_data">Import Data</a></p></li>
 <li><p><a href="#data_processing">Data Processing with <code>dplyr</code></a></p></li>
-<li><p><a href="#export_data">Export Data</a></p></li>
 </ol>
 </div>
 <div id="functions" class="section level2">
@@ -1135,246 +1137,6 @@ This diagram illustrates the complete set of
 <li><p>Calculate <code>follow_up</code> time as the number of years between diagnosis and the patient’s visit</p></li>
 <li><p>Rename the <code>site_code</code> column to <code>code</code>.</p></li>
 </ol>
-</div>
-</div>
-<div id="importing-data" class="section level2">
-<h2>Importing Data</h2>
-<div id="gather-your-exported-data" class="section level3">
-<h3>Gather your “exported” data</h3>
-<p>Download the data from the <a href="session_03_materials.html">Session 3 Materials page</a>.</p>
-<p>In the <span class="rstudio-tab">Files</span> pane of your RStudio project, click <span class="menu-item">More</span> ▸ <span class="menu-item">Show Folder in New Window…</span> to open the folder in a file browser. Copy or move the data files from your downloads folder into your project folder. Check that you see the files in RStudio.</p>
-<div class="muted">
-<p>If you’re running RStudio in your browser (e.g. on <a href="https://rstudio.cloud">rstudio.cloud</a>), you can run the <code>download.file()</code> commands in the <a href="session_03_materials.html">materials page</a>.</p>
-</div>
-</div>
-<div id="import-using-rstudio" class="section level3">
-<h3>Import Using RStudio</h3>
-<p>There are two main packages for reading in data: <span class="pkg">readr</span> for CSV and <span class="pkg">readxl</span> for Excel.</p>
-<p>If you have the option in your data source, choose to export your data as a CSV file. The options and control for importing into R using <span class="pkg">readr</span> are more powerful and more easily customized.</p>
-</div>
-<div id="import-excel-file" class="section level3">
-<h3>Import Excel File</h3>
-<p><img src="images/rstudio-11-import-dataset-excel.png" /></p>
-<details>
-<p><summary>Import Code</summary></p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" data-line-number="1"><span class="kw">library</span>(readxl)</a>
-<a class="sourceLine" id="cb151-2" data-line-number="2">cr_patients &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;CancerRegistryDataPatients.xlsx&quot;</span>,</a>
-<a class="sourceLine" id="cb151-3" data-line-number="3">                          <span class="dt">col_types =</span> <span class="kw">c</span>(<span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;text&quot;</span>,</a>
-<a class="sourceLine" id="cb151-4" data-line-number="4">                                        <span class="st">&quot;text&quot;</span>, <span class="st">&quot;text&quot;</span>, <span class="st">&quot;text&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;text&quot;</span>))</a></code></pre></div>
-</details>
-</div>
-<div id="import-csv-file" class="section level3">
-<h3>Import CSV File</h3>
-<p><img src="images/rstudio-12-import-dataset-csv.png" /></p>
-<details>
-<p><summary>Import Code</summary></p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" data-line-number="1"><span class="kw">library</span>(readr)</a>
-<a class="sourceLine" id="cb152-2" data-line-number="2">cr_patients &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;CancerRegistryDataPatients.csv&quot;</span>, </a>
-<a class="sourceLine" id="cb152-3" data-line-number="3">    <span class="dt">col_types =</span> <span class="kw">cols</span>(<span class="st">`</span><span class="dt">Date Last Patient Contact/Dead</span><span class="st">`</span> =<span class="st"> </span><span class="kw">col_date</span>(<span class="dt">format =</span> <span class="st">&quot;%m/%d/%y&quot;</span>)))</a></code></pre></div>
-</details>
-</div>
-<div id="a-note-about-dates" class="section level3">
-<h3>A Note About Dates</h3>
-<p>Here is a small reference for date/time formats. See <code>?strftime</code> for more time format placeholders.</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" data-line-number="1">formats &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;%m/%d/%y&quot;</span>, <span class="st">&quot;%m/%d/%Y&quot;</span>, <span class="st">&quot;%Y-%m-%d&quot;</span>, <span class="st">&quot;%m/%d/%y %H:%M&quot;</span>, <span class="st">&quot;%m/%d/%y %H:%M:%S&quot;</span>, <span class="st">&quot;%m/%d/%y %H:%M:%S %p&quot;</span>)</a>
-<a class="sourceLine" id="cb153-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb153-3" data-line-number="3">purrr<span class="op">::</span><span class="kw">walk</span>(formats, <span class="op">~</span><span class="st"> </span><span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st"> - `&quot;</span>, .x, <span class="st">&quot;`: &quot;</span>, <span class="kw">strftime</span>(<span class="kw">Sys.time</span>(), .x), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>))</a></code></pre></div>
-<ul>
-<li><p><code>%m/%d/%y</code>: 08/01/18</p></li>
-<li><p><code>%m/%d/%Y</code>: 08/01/2018</p></li>
-<li><p><code>%Y-%m-%d</code>: 2018-08-01</p></li>
-<li><p><code>%m/%d/%y %H:%M</code>: 08/01/18 09:06</p></li>
-<li><p><code>%m/%d/%y %H:%M:%S</code>: 08/01/18 09:06:11</p></li>
-<li><p><code>%m/%d/%y %H:%M:%S %p</code>: 08/01/18 09:06:11 AM</p></li>
-</ul>
-</div>
-</div>
-<div id="explore-the-data" class="section level2">
-<h2>Explore the Data!</h2>
-<p>Use RStudio to look through the dataset.</p>
-<p>Skim summary statistics<br />
-n obs: 150<br />
-n variables: 8</p>
-<p>Variable type: character</p>
-<table>
-<thead>
-<tr class="header">
-<th align="center">variable</th>
-<th align="center">missing</th>
-<th align="center">complete</th>
-<th align="center">n</th>
-<th align="center">min</th>
-<th align="center">max</th>
-<th align="center">empty</th>
-<th align="center">n_unique</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">DC, Cause of Death</td>
-<td align="center">16</td>
-<td align="center">134</td>
-<td align="center">150</td>
-<td align="center">1</td>
-<td align="center">4</td>
-<td align="center">0</td>
-<td align="center">3</td>
-</tr>
-<tr class="even">
-<td align="center">Race</td>
-<td align="center">0</td>
-<td align="center">150</td>
-<td align="center">150</td>
-<td align="center">5</td>
-<td align="center">5</td>
-<td align="center">0</td>
-<td align="center">3</td>
-</tr>
-<tr class="odd">
-<td align="center">Sex</td>
-<td align="center">0</td>
-<td align="center">150</td>
-<td align="center">150</td>
-<td align="center">6</td>
-<td align="center">6</td>
-<td align="center">0</td>
-<td align="center">1</td>
-</tr>
-<tr class="even">
-<td align="center">Spanish/Hispanic Origin</td>
-<td align="center">0</td>
-<td align="center">150</td>
-<td align="center">150</td>
-<td align="center">10</td>
-<td align="center">21</td>
-<td align="center">0</td>
-<td align="center">6</td>
-</tr>
-<tr class="odd">
-<td align="center">Vital Status</td>
-<td align="center">0</td>
-<td align="center">150</td>
-<td align="center">150</td>
-<td align="center">4</td>
-<td align="center">5</td>
-<td align="center">0</td>
-<td align="center">3</td>
-</tr>
-</tbody>
-</table>
-<p>Variable type: Date</p>
-<table>
-<thead>
-<tr class="header">
-<th align="center">variable</th>
-<th align="center">missing</th>
-<th align="center">complete</th>
-<th align="center">n</th>
-<th align="center">min</th>
-<th align="center">max</th>
-<th align="center">median</th>
-<th align="center">n_unique</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">Date Last Patient Contact/Dead</td>
-<td align="center">0</td>
-<td align="center">150</td>
-<td align="center">150</td>
-<td align="center">2011-10-03</td>
-<td align="center">2019-03-28</td>
-<td align="center">2016-03-25</td>
-<td align="center">148</td>
-</tr>
-</tbody>
-</table>
-<p>Variable type: integer</p>
-<table>
-<thead>
-<tr class="header">
-<th align="center">variable</th>
-<th align="center">missing</th>
-<th align="center">complete</th>
-<th align="center">n</th>
-<th align="center">mean</th>
-<th align="center">sd</th>
-<th align="center">p0</th>
-<th align="center">p25</th>
-<th align="center">p50</th>
-<th align="center">p75</th>
-<th align="center">p100</th>
-<th align="center">hist</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center">Age, Current</td>
-<td align="center">0</td>
-<td align="center">150</td>
-<td align="center">150</td>
-<td align="center">64.89</td>
-<td align="center">12.97</td>
-<td align="center">24</td>
-<td align="center">57</td>
-<td align="center">66</td>
-<td align="center">73</td>
-<td align="center">90</td>
-<td align="center">▁▁▂▅▆▇▅▃</td>
-</tr>
-<tr class="even">
-<td align="center">Medical Record Number</td>
-<td align="center">0</td>
-<td align="center">150</td>
-<td align="center">150</td>
-<td align="center">511945.66</td>
-<td align="center">249271.49</td>
-<td align="center">1e+05</td>
-<td align="center">317958</td>
-<td align="center">489985</td>
-<td align="center">717547.25</td>
-<td align="center">988307</td>
-<td align="center">▇▅▇▆▆▅▅▅</td>
-</tr>
-</tbody>
-</table>
-<div id="free-swim" class="section level3">
-<h3>Free Swim!</h3>
-<p>What questions can you ask and answer using this dataset and <span class="pkg">dplyr</span>?</p>
-</div>
-</div>
-<div id="export-the-data" class="section level2">
-<h2>Export The Data</h2>
-<div id="export-request" class="section level3">
-<h3>Export Request</h3>
-<ol style="list-style-type: decimal">
-<li>Patients who
-<ol style="list-style-type: decimal">
-<li>Are deceased</li>
-<li>Older than 54 years</li>
-</ol></li>
-<li>Race recoded as “Caucasian” or “Other”</li>
-<li>Ordered by MRN</li>
-<li>With columns:
-<ol style="list-style-type: decimal">
-<li>MRN</li>
-<li>Age</li>
-<li>Race</li>
-<li>CoD</li>
-</ol></li>
-</ol>
-<details>
-<p><summary>Code</summary></p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" data-line-number="1">cr_patients_export =<span class="st"> </span>cr_patients <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb154-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(<span class="st">`</span><span class="dt">Vital Status</span><span class="st">`</span> <span class="op">==</span><span class="st"> &quot;DEAD&quot;</span>, <span class="st">`</span><span class="dt">Age, Current</span><span class="st">`</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">55</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb154-3" data-line-number="3"><span class="st">  </span><span class="kw">arrange</span>(<span class="st">`</span><span class="dt">Medical Record Number</span><span class="st">`</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb154-4" data-line-number="4"><span class="st">  </span><span class="kw">select</span>(<span class="dt">MRN =</span> <span class="st">`</span><span class="dt">Medical Record Number</span><span class="st">`</span>, <span class="dt">Age =</span> <span class="st">`</span><span class="dt">Age, Current</span><span class="st">`</span>, Race, <span class="dt">CoD =</span> <span class="st">`</span><span class="dt">DC, Cause of Death</span><span class="st">`</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb154-5" data-line-number="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Race =</span> <span class="kw">if_else</span>(Race <span class="op">==</span><span class="st"> &quot;WHITE&quot;</span>, <span class="st">&quot;Caucasian&quot;</span>, <span class="st">&quot;Other&quot;</span>))</a></code></pre></div>
-</details>
-</div>
-<div id="export-the-data-using-write_csv" class="section level3">
-<h3>Export the data using <code>write_csv()</code></h3>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" data-line-number="1"><span class="kw">write_csv</span>(cr_patients_export, <span class="st">&quot;CancerRegistryPatients_export.csv&quot;</span>)</a></code></pre></div>
 </div>
 </div>
 

@@ -14,7 +14,7 @@ In the [Files]{.rstudio-tab} pane of your RStudio project, click [More]{.menu-it
 Copy or move the data files from your downloads folder into your project folder.
 Check that you see the files in RStudio.
 
-::: {.muted}
+::: {.bs-callout .bs-callout-info}
 If you're running RStudio in your browser (e.g. on [rstudio.cloud](https://rstudio.cloud)), you can run the `download.file()` commands in the [materials page][s4-materials].
 :::
 
@@ -57,10 +57,11 @@ cr_patients <- read_csv("CancerRegistryDataPatients.csv",
 Here is a small reference for date/time formats.
 See `?strftime` for more time format placeholders.
 
-```{r results='asis'}
-formats <- c("%m/%d/%y", "%m/%d/%Y", "%Y-%m-%d", "%m/%d/%y %H:%M", "%m/%d/%y %H:%M:%S", "%m/%d/%y %h:%M:%S %p")
+```{r results='asis', echo=FALSE}
+formats <- c("%m/%d/%y", "%m/%d/%Y", "%Y-%m-%d", "%m/%d/%y %H:%M", "%m/%d/%y %H:%M:%S", "%m/%d/%y %I:%M:%S %p")
 
-purrr::walk(formats, ~ cat("\n - `", .x, "`: ", strftime(Sys.time(), .x), "\n", sep = ""))
+test_time <- lubridate::ymd_hms("2006-01-02 15:04:05", tz = "America/New_York")
+purrr::walk(formats, ~ cat("\n - `", .x, "`: ", strftime(test_time, .x), "\n", sep = ""))
 ```
 
 ## Explore the Data!
@@ -78,38 +79,46 @@ View(cr_patients)
 glimpse(cr_patients)
 ```
 
-### Free Swim!
+### Brainstorming...
 
 What questions can you ask and answer using this dataset and [dplyr]{.pkg}?
 
 ## Export The Data
 
-### Export Request
-
-1. Patients who
-    1. Are deceased
-    1. Older than 54 years
-1. Race recoded as "Caucasian" or "Other"
-1. Ordered by MRN
-1. With columns:
-    1. MRN
-    1. Age
-    1. Race
-    1. CoD
-
-<details><summary>Code</summary>
-
-```r
-cr_patients_export = cr_patients %>%
-  filter(`Vital Status` == "DEAD", `Age, Current` >= 55) %>%
-  arrange(`Medical Record Number`) %>%
-  select(MRN = `Medical Record Number`, Age = `Age, Current`, Race, CoD = `DC, Cause of Death`) %>%
-  mutate(Race = if_else(Race == "WHITE", "Caucasian", "Other"))
-```
-</details>
-
 ### Export the data using `write_csv()`
+
+To export the data, use the function `write_csv()` from [readr]{.pkg}.
+This function takes the data frame as the first object, and a `path` (or filename) where the file should be written.
 
 ```r
 write_csv(cr_patients_export, "CancerRegistryPatients_export.csv")
 ```
+
+It's a good idea to save your output files in a separate directory, like `output_04` for outputs from this session.
+If you get an error like this
+
+```{r, echo=FALSE, error=TRUE}
+write_csv(iris, "output_04/CancerRegistryPatients_export.csv")
+```
+
+it is most likely because the directory `output_04` doesn't exist in your current working directory.
+You can use the [Files]{.rstudio-tab} pane in RStudio to create one, or you can run
+
+```r
+dir.create("output_04")
+```
+
+## Exercises
+
+The [Session 04 materials page][s4-materials] includes a file called [cancer_registry_dplyr.R](materials/04/cancer_registry_dplyr.R).
+Download this file and move it into your project folder.
+
+<details><summary>Or download it in R</summary>
+
+```r
+download.file("https://gerkelab.github.io/core-r-course/materials/04/cancer_registry_dplyr.R", "cancer_registry_dplyr.R")
+```
+</details>
+
+I've added code to get you started, but there are pieces missing.
+Fill in the places where you see `________`.

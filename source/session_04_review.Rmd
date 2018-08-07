@@ -1,3 +1,5 @@
+## Review
+
 ### dplyr
 
 In the last session we talked about 5 important [dplyr]{.pkg} verbs.
@@ -53,12 +55,60 @@ What are the three "rules" of [dplyr]{.pkg} verbs?
 
 <details><summary>Answer</summary>
 
+[dplyr]{.pkg} functions are written as verbs with the following rules:
+
 1. The first argument is a data frame.
 
-1. Subsequent arguments describe how the verb will transform the data frame, using column names without `"column_name"`
+1. Inside the function, you can use column names as if they were variables.
 
 1. The output is a new data frame.
 </details>
+
+### The Pipe Operator {.tabset .tabset-pills}
+
+The `%>%` operator lets you chain together processing steps.
+
+#### Story
+
+> Little bunny Foo Foo  
+Went hopping through the forest  
+Scooping up the field mice  
+And bopping them on the head  
+
+#### Iterative
+
+![](images/pipe-operator/pipe-operator.001_cropped.png)
+
+#### Repetitive
+
+![](images/pipe-operator/pipe-operator.002_cropped.png)
+
+#### Chained
+
+![](images/pipe-operator/pipe-operator.003_cropped.png)
+
+#### Piped!
+
+![](images/pipe-operator/pipe-operator.004_cropped.png)
+
+#### Try it
+
+Rewrite the following using pipes.
+
+```r
+ex1 <- group_by(example, site_code)
+ex2 <- mutate(ex1, tumor_size = tumor_size * 10)
+ex3 <- summarize(ex2, avg_tumor = mean(tumor_size))
+```
+
+
+::: {.bs-callout .bs-callout-info}
+Want to learn more about the pipe operator? 
+The [Pipes in R Tutorial](https://www.datacamp.com/community/tutorials/pipe-r-tutorial) from DataCamp is a great place to start!
+
+Or read the chapter on [Pipes in R4DS](http://r4ds.had.co.nz/pipes.html).
+(The source of this example.)
+:::
 
 ### Quick Review
 

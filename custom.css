@@ -120,6 +120,12 @@ a:hover, a:focus {
   padding-left: 20px;
   padding-right: 10px;
 }
+.nav-pills > li > a {
+  border-radius: 30px;
+}
+.nav-pills > li > a:focus {
+  outline: none;
+}
 
 kbd {
 padding:0.1em 0.6em;

@@ -18,6 +18,14 @@ navbar:
           href: session_03_answers.html
         - text: "Session 4 – August 8"
           href: session_04.html
+    - text: "Materials"
+      menu:
+        - text: "Session 1"
+          href: "session_01_materials.html"
+        - text: "Session 3"
+          href: "session_03_materials.html"
+        - text: "Session 4"
+          href: "session_04_materials.html"
   right:
     - text: "Resources"
       href: resources.html

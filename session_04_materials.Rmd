@@ -28,9 +28,11 @@ Materials for [Session 4](session_04.html).
 
 ```{r}
 if (needs_zip(ZIPFILE, SESSION_DIR)) {
-  utils::zip(zipfile = file.path("materials", ZIPFILE), 
-             files = file.path("materials", SESSION),
-             extras = "-x *.DS_Store")
+  xfun::in_dir(file.path("materials", SESSION), {
+    utils::zip(zipfile = file.path("../../materials", ZIPFILE), 
+               files = dir(pattern = "\\.(R|csv|xlsx)"),
+               extras = "-x *.DS_Store")
+  })
 }
 
 make_listing(ZIPFILE, file.path("materials", ZIPFILE))
@@ -45,7 +47,7 @@ The following files simulate a cancer registry data export for patients with bre
 :::
 
 ```{r}
-fs::file_info(fs::dir_ls(SESSION_DIR)) %>% 
+fs::file_info(fs::dir_ls(SESSION_DIR, regexp = "\\.(R|csv|xlsx)")) %>%
   mutate(path_rel = fs::path_rel(path, here::here())) %>% 
   select(path_rel) %>% 
   mutate(filename = basename(path_rel)) %>% 

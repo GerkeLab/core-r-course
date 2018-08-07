@@ -377,6 +377,24 @@ div.tocify {
     </li>
   </ul>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Materials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="session_01_materials.html">Session 1</a>
+    </li>
+    <li>
+      <a href="session_03_materials.html">Session 3</a>
+    </li>
+    <li>
+      <a href="session_04_materials.html">Session 4</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -409,6 +427,9 @@ div.tocify {
 <li><a href="session_04_materials.html">Materials</a></li>
 <li><a href="session_04_answers.html">This page with the code results</a></li>
 </ul>
+</div>
+<div id="review" class="section level2">
+<h2>Review</h2>
 <div id="dplyr" class="section level3">
 <h3>dplyr</h3>
 <p>In the last session we talked about 5 important <span class="pkg">dplyr</span> verbs. What do each of these functions do?</p>
@@ -450,12 +471,53 @@ div.tocify {
 <p>What are the three “rules” of <span class="pkg">dplyr</span> verbs?</p>
 <details>
 <p><summary>Answer</summary></p>
+<p><span class="pkg">dplyr</span> functions are written as verbs with the following rules:</p>
 <ol style="list-style-type: decimal">
 <li><p>The first argument is a data frame.</p></li>
-<li><p>Subsequent arguments describe how the verb will transform the data frame, using column names without <code>&quot;column_name&quot;</code></p></li>
+<li><p>Inside the function, you can use column names as if they were variables.</p></li>
 <li>The output is a new data frame.</li>
 </ol>
 </details>
+</div>
+<div id="the-pipe-operator" class="section level3 tabset tabset-pills">
+<h3>The Pipe Operator</h3>
+<p>The <code>%&gt;%</code> operator lets you chain together processing steps.</p>
+<div id="story" class="section level4">
+<h4>Story</h4>
+<blockquote>
+<p>Little bunny Foo Foo<br />
+Went hopping through the forest<br />
+Scooping up the field mice<br />
+And bopping them on the head</p>
+</blockquote>
+</div>
+<div id="iterative" class="section level4">
+<h4>Iterative</h4>
+<p><img src="images/pipe-operator/pipe-operator.001_cropped.png" /></p>
+</div>
+<div id="repetitive" class="section level4">
+<h4>Repetitive</h4>
+<p><img src="images/pipe-operator/pipe-operator.002_cropped.png" /></p>
+</div>
+<div id="chained" class="section level4">
+<h4>Chained</h4>
+<p><img src="images/pipe-operator/pipe-operator.003_cropped.png" /></p>
+</div>
+<div id="piped" class="section level4">
+<h4>Piped!</h4>
+<p><img src="images/pipe-operator/pipe-operator.004_cropped.png" /></p>
+</div>
+<div id="try-it" class="section level4">
+<h4>Try it</h4>
+<p>Rewrite the following using pipes.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">ex1 &lt;-<span class="st"> </span><span class="kw">group_by</span>(example, site_code)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">ex2 &lt;-<span class="st"> </span><span class="kw">mutate</span>(ex1, <span class="dt">tumor_size =</span> tumor_size <span class="op">*</span><span class="st"> </span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">ex3 &lt;-<span class="st"> </span><span class="kw">summarize</span>(ex2, <span class="dt">avg_tumor =</span> <span class="kw">mean</span>(tumor_size))</a></code></pre></div>
+<div class="bs-callout bs-callout-info">
+<p>Want to learn more about the pipe operator? The <a href="https://www.datacamp.com/community/tutorials/pipe-r-tutorial">Pipes in R Tutorial</a> from DataCamp is a great place to start!</p>
+<p>Or read the chapter on <a href="http://r4ds.had.co.nz/pipes.html">Pipes in R4DS</a>. (The source of this example.)</p>
+</div>
+</div>
 </div>
 <div id="quick-review" class="section level3">
 <h3>Quick Review</h3>
@@ -520,11 +582,11 @@ div.tocify {
 </ol>
 <details>
 <p><summary>Answer</summary></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">example <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(tumor_size <span class="op">&lt;=</span><span class="st"> </span><span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">follow_up =</span> age_visit <span class="op">-</span><span class="st"> </span>age_dx) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="st">  </span><span class="kw">group_by</span>(site_code) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">avg_follow_up =</span> <span class="kw">mean</span>(follow_up))</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">example <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(tumor_size <span class="op">&lt;=</span><span class="st"> </span><span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">follow_up =</span> age_visit <span class="op">-</span><span class="st"> </span>age_dx) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="st">  </span><span class="kw">group_by</span>(site_code) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">avg_follow_up =</span> <span class="kw">mean</span>(follow_up))</a></code></pre></div>
 </details>
 </div>
 </div>
@@ -543,7 +605,7 @@ div.tocify {
 <h3>Gather your “exported” data</h3>
 <p>Download the <strong>CancerRegistryDataPatients.xlsx</strong> and <strong>CancerRegistryDataPatients.csv</strong> data files from the <a href="session_04_materials.html">Session 4 Materials page</a>.</p>
 <p>In the <span class="rstudio-tab">Files</span> pane of your RStudio project, click <span class="menu-item">More</span> ▸ <span class="menu-item">Show Folder in New Window…</span> to open the folder in a file browser. Copy or move the data files from your downloads folder into your project folder. Check that you see the files in RStudio.</p>
-<div class="muted">
+<div class="bs-callout bs-callout-info">
 <p>If you’re running RStudio in your browser (e.g. on <a href="https://rstudio.cloud">rstudio.cloud</a>), you can run the <code>download.file()</code> commands in the <a href="session_04_materials.html">materials page</a>.</p>
 </div>
 </div>
@@ -557,10 +619,10 @@ div.tocify {
 <p><img src="images/rstudio-11-import-dataset-excel.png" /></p>
 <details>
 <p><summary>Import Code</summary></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">library</span>(readxl)</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">cr_patients &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;CancerRegistryDataPatients.xlsx&quot;</span>,</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">                          <span class="dt">col_types =</span> <span class="kw">c</span>(<span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;text&quot;</span>,</a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">                                        <span class="st">&quot;text&quot;</span>, <span class="st">&quot;text&quot;</span>, <span class="st">&quot;text&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;text&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">library</span>(readxl)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">cr_patients &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;CancerRegistryDataPatients.xlsx&quot;</span>,</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">                          <span class="dt">col_types =</span> <span class="kw">c</span>(<span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;numeric&quot;</span>, <span class="st">&quot;text&quot;</span>,</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">                                        <span class="st">&quot;text&quot;</span>, <span class="st">&quot;text&quot;</span>, <span class="st">&quot;text&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;text&quot;</span>))</a></code></pre></div>
 </details>
 </div>
 <div id="import-csv-file" class="section level3">
@@ -568,24 +630,21 @@ div.tocify {
 <p><img src="images/rstudio-12-import-dataset-csv.png" /></p>
 <details>
 <p><summary>Import Code</summary></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">library</span>(readr)</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">cr_patients &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;CancerRegistryDataPatients.csv&quot;</span>, </a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">    <span class="dt">col_types =</span> <span class="kw">cols</span>(<span class="st">`</span><span class="dt">Date Last Patient Contact/Dead</span><span class="st">`</span> =<span class="st"> </span><span class="kw">col_date</span>(<span class="dt">format =</span> <span class="st">&quot;%m/%d/%y&quot;</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">library</span>(readr)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">cr_patients &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;CancerRegistryDataPatients.csv&quot;</span>, </a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">    <span class="dt">col_types =</span> <span class="kw">cols</span>(<span class="st">`</span><span class="dt">Date Last Patient Contact/Dead</span><span class="st">`</span> =<span class="st"> </span><span class="kw">col_date</span>(<span class="dt">format =</span> <span class="st">&quot;%m/%d/%y&quot;</span>)))</a></code></pre></div>
 </details>
 </div>
 <div id="a-note-about-dates" class="section level3">
 <h3>A Note About Dates</h3>
 <p>Here is a small reference for date/time formats. See <code>?strftime</code> for more time format placeholders.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">formats &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;%m/%d/%y&quot;</span>, <span class="st">&quot;%m/%d/%Y&quot;</span>, <span class="st">&quot;%Y-%m-%d&quot;</span>, <span class="st">&quot;%m/%d/%y %H:%M&quot;</span>, <span class="st">&quot;%m/%d/%y %H:%M:%S&quot;</span>, <span class="st">&quot;%m/%d/%y %h:%M:%S %p&quot;</span>)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3">purrr<span class="op">::</span><span class="kw">walk</span>(formats, <span class="op">~</span><span class="st"> </span><span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st"> - `&quot;</span>, .x, <span class="st">&quot;`: &quot;</span>, <span class="kw">strftime</span>(<span class="kw">Sys.time</span>(), .x), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>))</a></code></pre></div>
 <ul>
-<li><p><code>%m/%d/%y</code>: 08/06/18</p></li>
-<li><p><code>%m/%d/%Y</code>: 08/06/2018</p></li>
-<li><p><code>%Y-%m-%d</code>: 2018-08-06</p></li>
-<li><p><code>%m/%d/%y %H:%M</code>: 08/06/18 16:24</p></li>
-<li><p><code>%m/%d/%y %H:%M:%S</code>: 08/06/18 16:24:33</p></li>
-<li><p><code>%m/%d/%y %h:%M:%S %p</code>: 08/06/18 Aug:24:33 PM</p></li>
+<li><p><code>%m/%d/%y</code>: 01/02/06</p></li>
+<li><p><code>%m/%d/%Y</code>: 01/02/2006</p></li>
+<li><p><code>%Y-%m-%d</code>: 2006-01-02</p></li>
+<li><p><code>%m/%d/%y %H:%M</code>: 01/02/06 15:04</p></li>
+<li><p><code>%m/%d/%y %H:%M:%S</code>: 01/02/06 15:04:05</p></li>
+<li><p><code>%m/%d/%y %I:%M:%S %p</code>: 01/02/06 03:04:05 PM</p></li>
 </ul>
 </div>
 </div>
@@ -594,44 +653,33 @@ div.tocify {
 <p>Use RStudio to look through the dataset using the RStudio viewer. Try the functions <code>View()</code> and <code>glimpse()</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">## View(cr_patients)</a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw">glimpse</span>(cr_patients)</a></code></pre></div>
-<div id="free-swim" class="section level3">
-<h3>Free Swim!</h3>
+<div id="brainstorming" class="section level3">
+<h3>Brainstorming…</h3>
 <p>What questions can you ask and answer using this dataset and <span class="pkg">dplyr</span>?</p>
 </div>
 </div>
 <div id="export-the-data" class="section level2">
 <h2>Export The Data</h2>
-<div id="export-request" class="section level3">
-<h3>Export Request</h3>
-<ol style="list-style-type: decimal">
-<li>Patients who
-<ol style="list-style-type: decimal">
-<li>Are deceased</li>
-<li>Older than 54 years</li>
-</ol></li>
-<li>Race recoded as “Caucasian” or “Other”</li>
-<li>Ordered by MRN</li>
-<li>With columns:
-<ol style="list-style-type: decimal">
-<li>MRN</li>
-<li>Age</li>
-<li>Race</li>
-<li>CoD</li>
-</ol></li>
-</ol>
-<details>
-<p><summary>Code</summary></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">cr_patients_export =<span class="st"> </span>cr_patients <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(<span class="st">`</span><span class="dt">Vital Status</span><span class="st">`</span> <span class="op">==</span><span class="st"> &quot;DEAD&quot;</span>, <span class="st">`</span><span class="dt">Age, Current</span><span class="st">`</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">55</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="st">  </span><span class="kw">arrange</span>(<span class="st">`</span><span class="dt">Medical Record Number</span><span class="st">`</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="st">  </span><span class="kw">select</span>(<span class="dt">MRN =</span> <span class="st">`</span><span class="dt">Medical Record Number</span><span class="st">`</span>, <span class="dt">Age =</span> <span class="st">`</span><span class="dt">Age, Current</span><span class="st">`</span>, Race, <span class="dt">CoD =</span> <span class="st">`</span><span class="dt">DC, Cause of Death</span><span class="st">`</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Race =</span> <span class="kw">if_else</span>(Race <span class="op">==</span><span class="st"> &quot;WHITE&quot;</span>, <span class="st">&quot;Caucasian&quot;</span>, <span class="st">&quot;Other&quot;</span>))</a></code></pre></div>
-</details>
-</div>
 <div id="export-the-data-using-write_csv" class="section level3">
 <h3>Export the data using <code>write_csv()</code></h3>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">write_csv</span>(cr_patients_export, <span class="st">&quot;CancerRegistryPatients_export.csv&quot;</span>)</a></code></pre></div>
+<p>To export the data, use the function <code>write_csv()</code> from <span class="pkg">readr</span>. This function takes the data frame as the first object, and a <code>path</code> (or filename) where the file should be written.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">write_csv</span>(cr_patients_export, <span class="st">&quot;CancerRegistryPatients_export.csv&quot;</span>)</a></code></pre></div>
+<p>It’s a good idea to save your output files in a separate directory, like <code>output_04</code> for outputs from this session. If you get an error like this</p>
+<pre><code>Warning in open.connection(path, &quot;wb&quot;): cannot open file &#39;output_04/
+CancerRegistryPatients_export.csv&#39;: No such file or directory</code></pre>
+<pre><code>Error in open.connection(path, &quot;wb&quot;): cannot open the connection</code></pre>
+<p>it is most likely because the directory <code>output_04</code> doesn’t exist in your current working directory. You can use the <span class="rstudio-tab">Files</span> pane in RStudio to create one, or you can run</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">dir.create</span>(<span class="st">&quot;output_04&quot;</span>)</a></code></pre></div>
 </div>
+</div>
+<div id="exercises" class="section level2">
+<h2>Exercises</h2>
+<p>The <a href="session_04_materials.html">Session 04 materials page</a> includes a file called <a href="materials/04/cancer_registry_dplyr.R">cancer_registry_dplyr.R</a>. Download this file and move it into your project folder.</p>
+<details>
+<p><summary>Or download it in R</summary></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">download.file</span>(<span class="st">&quot;https://gerkelab.github.io/core-r-course/materials/04/cancer_registry_dplyr.R&quot;</span>, <span class="st">&quot;cancer_registry_dplyr.R&quot;</span>)</a></code></pre></div>
+</details>
+<p>I’ve added code to get you started, but there are pieces missing. Fill in the places where you see <code>________</code>.</p>
 </div>
 
 

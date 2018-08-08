@@ -16,7 +16,15 @@ if (!requireNamespace("xaringan", quietly = TRUE)) install.packages("xaringan")
 
 ```{r}
 session_list <- tibble(
+  n = 1:8,
   Date = seq(lubridate::ymd("2018-07-18"), lubridate::ymd("2018-07-18") + lubridate::weeks(7), by = "7 day"),
+  Topic = c(
+    "Meet R and RStudio", #1
+    "Data Types, Packages, Data Collections, Workspaces and RStudio Projects", #2,
+    "Functions, dplyr, Single-table dplyr verbs", #3
+    "Importing/Exporting Data, Working with dplyr", #4
+    rep("", 4)
+  ),
   Location = c("MKE-1308", rep("MKE-1022", 7)),
   `Start Time` = "09:15",
   Link = ""
@@ -24,12 +32,19 @@ session_list <- tibble(
 session_list[1, "Link"] <- "session_01.html"
 session_list[2, "Link"] <- "session_02_answers.html"
 session_list[3, "Link"] <- "session_03_answers.html"
-session_list[4, "Link"] <- "session_04.html"
+session_list[4, "Link"] <- "session_04_answers.html"
 ```
 
 <!-- Emoji: https://afeld.github.io/emoji-css/ -->
 
 ## Announcements
+
+**Assignment for Wednesday, August 15**:
+
+> Fill in the missing code and complete the tasks in the 
+[cancer_registry_dplyr.R](materials/04/cancer_registry_dplyr.R) script.
+The data and original script can be downloaded from the [Session 04 materials page](session_04_materials.html).
+You can refer to the [dplyr]{.pkg} [cheat sheet](resources.html#cheat_sheets) or the section on [dplyr from Session 3](session_03_answers.html#dplyr_basics).
 
 <details><summary>Travis Gerke, Thursday, June 28, 2018</summary>
 
@@ -49,8 +64,9 @@ next_session <- session_list %>%
   slice(1) %>%
   mutate(
     Date = strftime(Date, "%A, %B %d, %Y"),
-    Link = ifelse(Link != "", glue::glue('<a href="{Link}">Session Page</a>'), "")
-  )
+    Link = ifelse(Link != "", glue::glue('<a href="{Link}">Session {n}</a>'), "")
+  ) %>% 
+  select(-Topic, -n)
 
 knitr::kable(next_session, escape = FALSE)
 ```
@@ -62,9 +78,10 @@ prev_sessions <- session_list %>%
   filter(Date <= Sys.Date()) %>%
   arrange(desc(Date)) %>%
   mutate(
-    Date = strftime(Date, "%A, %B %d, %Y"),
-    Link = ifelse(Link != "", glue::glue('<a href="{Link}">Session Page</a>'), "")
-  )
+    Date = strftime(Date, "%B %d"),
+    Link = ifelse(Link != "", glue::glue('<a href="{Link}">Session {n}</a>'), "")
+  ) %>% 
+  select(Date, Topic, Link)
 
 knitr::kable(prev_sessions, escape = FALSE)
 ```

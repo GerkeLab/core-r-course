@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<meta name="date" content="2018-08-15" />
+
+<title>Session 5</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span. { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+<link rel="stylesheet" href="https://afeld.github.io/emoji-css/emoji.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Core R Course</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    About
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="proposal.html">About this course</a>
+    </li>
+    <li>
+      <a href="system-requirements.html">System Requirements</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Sessions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="session_01.html">Session 1 – July 18</a>
+    </li>
+    <li>
+      <a href="session_02_answers.html">Session 2 – July 25</a>
+    </li>
+    <li>
+      <a href="session_03_answers.html">Session 3 – August 1</a>
+    </li>
+    <li>
+      <a href="session_04.html">Session 4 – August 8</a>
+    </li>
+    <li>
+      <a href="session_05.html">Session 5 – August 15</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Materials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="session_01_materials.html">Session 1</a>
+    </li>
+    <li>
+      <a href="session_03_materials.html">Session 3</a>
+    </li>
+    <li>
+      <a href="session_04_materials.html">Session 4</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="resources.html">Resources</a>
+</li>
+<li>
+  <a href="https://github.com/gerkelab/core-r-course">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Session 5</h1>
+<h4 class="date"><em>August 15, 2018</em></h4>
+
+</div>
+
+
+<div id="links" class="section level2">
+<h2>Links</h2>
+<ul>
+<li><a href="session_04_materials.html">Materials</a></li>
+<li><a href="session_05_answers.html">This page with the code results</a></li>
+</ul>
+</div>
+<div id="review" class="section level2">
+<h2>Review</h2>
+<div id="dplyr-homework" class="section level3">
+<h3>dplyr Homework</h3>
+<p>Review the homework from <a href="session_04.html#exercises">Session 4</a>.</p>
+<p>You can check out the approach I took <a href="materials/04/cancer_registry_dplyr.html">in this page</a>. There is more than one way to accomplish each task, so it’s okay if your code looks different!</p>
+<ul>
+<li>What parts of these tasks were difficult?</li>
+<li>Which parts did you find easy?</li>
+<li>What questions did you have as you worked?</li>
+<li>Were you able to find the answers to any of these questions?</li>
+</ul>
+</div>
+</div>
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<ol style="list-style-type: decimal">
+<li><p>Review</p></li>
+<li><p>Tidy Data</p></li>
+<li><p>Two-table <span class="pkg">dplyr</span> verbs</p></li>
+</ol>
+</div>
+<div id="tidy-data" class="section level2">
+<h2>Tidy Data</h2>
+<div id="examples" class="section level3 tabset tabset-pills">
+<h3>Examples</h3>
+<div id="example-1" class="section level4">
+<h4>Example 1</h4>
+<p>There are three variables in this data. What are they?</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">Pregnant</th>
+<th align="right">Not Pregnant</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Male</td>
+<td align="right">0</td>
+<td align="right">5</td>
+</tr>
+<tr class="even">
+<td>Female</td>
+<td align="right">1</td>
+<td align="right">4</td>
+</tr>
+</tbody>
+</table>
+<details>
+<p><summary>Tidy…</summary></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">sex</th>
+<th align="left">pregnant</th>
+<th align="right">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Male</td>
+<td align="left">TRUE</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Female</td>
+<td align="left">TRUE</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">Male</td>
+<td align="left">FALSE</td>
+<td align="right">5</td>
+</tr>
+<tr class="even">
+<td align="left">Female</td>
+<td align="left">FALSE</td>
+<td align="right">4</td>
+</tr>
+</tbody>
+</table>
+</details>
+</div>
+<div id="example-2" class="section level4">
+<h4>Example 2</h4>
+<p>What are the variables in this data set?</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Patient</th>
+<th align="left">2000</th>
+<th align="left">2002</th>
+<th align="left">2004</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">John</td>
+<td align="left"></td>
+<td align="left">10 (Prostate)</td>
+<td align="left">11 (Prostate)</td>
+</tr>
+<tr class="even">
+<td align="left">Mary</td>
+<td align="left">9.6 (Breast)</td>
+<td align="left">10.3 (Breast)</td>
+<td align="left">10.5 (Breast)</td>
+</tr>
+</tbody>
+</table>
+<details>
+<p><summary>Tidy…</summary></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Patient</th>
+<th align="left">Year</th>
+<th align="left">tumor_size</th>
+<th align="left">cancer_type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">John</td>
+<td align="left">2000</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">Mary</td>
+<td align="left">2000</td>
+<td align="left">9.6</td>
+<td align="left">Breast</td>
+</tr>
+<tr class="odd">
+<td align="left">John</td>
+<td align="left">2002</td>
+<td align="left">10</td>
+<td align="left">Prostate</td>
+</tr>
+<tr class="even">
+<td align="left">Mary</td>
+<td align="left">2002</td>
+<td align="left">10.3</td>
+<td align="left">Breast</td>
+</tr>
+<tr class="odd">
+<td align="left">John</td>
+<td align="left">2004</td>
+<td align="left">11</td>
+<td align="left">Prostate</td>
+</tr>
+<tr class="even">
+<td align="left">Mary</td>
+<td align="left">2004</td>
+<td align="left">10.5</td>
+<td align="left">Breast</td>
+</tr>
+</tbody>
+</table>
+</details>
+</div>
+</div>
+<div id="the-three-rules-of-tidy-data" class="section level3">
+<h3>The three rules of tidy data</h3>
+<ol style="list-style-type: decimal">
+<li><p>Columns represent separate variables</p></li>
+<li><p>Rows represent individual observations</p></li>
+<li><p>Observational units form tables</p></li>
+</ol>
+</div>
+<div id="another-messy-example" class="section level3">
+<h3>Another messy example</h3>
+<p>What are the variables in this table and how would you transform it into tidy format?</p>
+<p><a href="session_05_table.html">Pew Forum on Religious and Public Life</a></p>
+</div>
+</div>
+<div id="two-table-dplyr-verbs" class="section level2">
+<h2>Two-Table <span class="pkg">dplyr</span> verbs</h2>
+<ul>
+<li><a href="http://r4ds.had.co.nz/relation-data.html">Relational Data</a></li>
+</ul>
+<div id="example-tables" class="section level3 tabset tabset-pills">
+<h3>Example Tables</h3>
+<p>We have three tables that you can load with</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">source</span>(<span class="st">&quot;https://git.io/fNN7R&quot;</span>)</a></code></pre></div>
+<div id="patients" class="section level4">
+<h4><code>patients</code></h4>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">patients</a></code></pre></div>
+<pre><code># A tibble: 5 x 3
+     id name       age
+  &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;
+1     1 Emmet       63
+2     2 Sheilah     61
+3     3 Camron      76
+4     4 Marisela    58
+5     5 Charity     64</code></pre>
+</div>
+<div id="encounters" class="section level4">
+<h4><code>encounters</code></h4>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">encounters</a></code></pre></div>
+<pre><code># A tibble: 10 x 4
+   encounter_id patient_id blood_test paid 
+          &lt;int&gt;      &lt;int&gt; &lt;lgl&gt;      &lt;lgl&gt;
+ 1            1          2 TRUE       FALSE
+ 2            2          3 TRUE       TRUE 
+ 3            3          5 TRUE       FALSE
+ 4            4          3 TRUE       FALSE
+ 5            5          5 TRUE       TRUE 
+ 6            6          1 FALSE      TRUE 
+ 7            7          3 FALSE      FALSE
+ 8            8          5 FALSE      TRUE 
+ 9            9          1 FALSE      FALSE
+10           10          1 TRUE       FALSE</code></pre>
+</div>
+<div id="insurance" class="section level4">
+<h4><code>insurance</code></h4>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">insurance</a></code></pre></div>
+<pre><code># A tibble: 4 x 2
+  patient_id insurance
+       &lt;int&gt; &lt;chr&gt;    
+1          5 Other    
+2          4 Other    
+3          1 Aetna    
+4          2 BCBS     </code></pre>
+</div>
+</div>
+<div id="keys" class="section level3">
+<h3>Keys</h3>
+<p>Primary keys, foreign key, draw from <a href="http://r4ds.had.co.nz/relation-data.html#keys" class="uri">http://r4ds.had.co.nz/relation-data.html#keys</a></p>
+</div>
+<div id="mutating-joins" class="section level3">
+<h3>Mutating Joins</h3>
+</div>
+<div id="filtering-joins" class="section level3">
+<h3>Filtering Joins</h3>
+</div>
+</div>
+<div id="exercises" class="section level2">
+<h2>Exercises</h2>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

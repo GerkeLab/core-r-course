@@ -9,3 +9,17 @@ https://rafalab.github.io/dsbook/distributions.html
 https://speakerdeck.com/jennybc/workflow-you-should-have-one
 
 https://speakerdeck.com/jennybc/code-smells-and-feels
+
+
+## Plan
+
+- Session 5
+    - Tidy Data
+    - Dplyr two-table verbs
+- Session 6
+    - dates
+    - tidyr
+- Session 7
+    - ggplot2
+- Session 8
+    - rmarkdown?

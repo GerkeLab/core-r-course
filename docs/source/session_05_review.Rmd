@@ -1,0 +1,13 @@
+## Review
+
+### dplyr Homework
+
+Review the homework from [Session 4](session_04.html#exercises).
+
+You can check out the approach I took [in this page](materials/04/cancer_registry_dplyr.html).
+There is more than one way to accomplish each task, so it's okay if your code looks different!
+
+- What parts of these tasks were difficult?
+- Which parts did you find easy?
+- What questions did you have as you worked?
+- Were you able to find the answers to any of these questions?

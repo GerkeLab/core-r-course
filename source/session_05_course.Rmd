@@ -1,0 +1,120 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+## Tidy Data
+
+### Examples {.tabset .tabset-pills}
+
+#### Example 1
+
+There are three variables in this data.
+What are they?
+
+```{r, echo=FALSE, results="asis"}
+untidy1 <- data.frame(Pregnant = 0:1, `Not Pregnant` = 5:4)
+row.names(untidy1) <- c("Male", "Female")
+
+knitr::kable(untidy1, col.names = c("Pregnant", "Not Pregnant"))
+```
+
+<details><summary>Tidy...</summary>
+
+```{r, echo=FALSE, results="asis"}
+untidy1 %>%
+  tibble::rownames_to_column("sex") %>%
+  tidyr::gather("pregnant", "n", -sex) %>%
+  mutate(pregnant = pregnant == "Pregnant") %>% 
+  knitr::kable()
+```
+
+</details>
+
+#### Example 2
+
+What are the variables in this data set?
+
+```{r, echo=FALSE, results="asis"}
+untidy2 <- data_frame(
+  Patient = c("John", "Mary"),
+  `2000` = c("", "9.6 (Breast)"),
+  `2002` = c("10 (Prostate)", "10.3 (Breast)"),
+  `2004` = c("11 (Prostate)", "10.5 (Breast)")
+)
+
+knitr::kable(untidy2)
+```
+
+<details><summary>Tidy...</summary>
+
+```{r, echo=FALSE, results="asis"}
+untidy2 %>% 
+  tidyr::gather("Year", "value", -Patient) %>% 
+  tidyr::extract(value, c("tumor_size", "cancer_type"), "(.+) \\((.+)\\)") %>% 
+  knitr::kable()
+```
+
+</details>
+
+### The three rules of tidy data
+
+1. Columns represent separate variables
+
+2. Rows represent individual observations
+
+3. Observational units form tables
+
+
+### Another messy example
+
+What are the variables in this table and how would you transform it into tidy format? 
+
+[Pew Forum on Religious and Public Life](session_05_table.html)
+
+
+## Two-Table [dplyr]{.pkg} verbs
+
+- [Relational Data](http://r4ds.had.co.nz/relation-data.html)
+
+### Example Tables {.tabset .tabset-pills}
+
+We have three tables that you can load with
+
+```r
+source("https://git.io/fNN7R")
+```
+
+```{r, include=FALSE}
+source(here::here("_data/patients_join_example.R"))
+```
+
+#### `patients`
+
+```{r, results="show"}
+patients
+```
+
+#### `encounters`
+
+```{r, results="show"}
+encounters
+```
+
+#### `insurance`
+
+```{r, results="show"}
+insurance
+```
+
+
+### Keys
+
+Primary keys, foreign key, draw from <http://r4ds.had.co.nz/relation-data.html#keys>
+
+### Mutating Joins
+
+### Filtering Joins
+
+## Exercises

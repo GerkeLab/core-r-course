@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<meta name="date" content="2018-08-15" />
+
+<title>Session 5 - Pew Research</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+<link rel="stylesheet" href="https://afeld.github.io/emoji-css/emoji.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Core R Course</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    About
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="proposal.html">About this course</a>
+    </li>
+    <li>
+      <a href="system-requirements.html">System Requirements</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Sessions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="session_01.html">Session 1 – July 18</a>
+    </li>
+    <li>
+      <a href="session_02_answers.html">Session 2 – July 25</a>
+    </li>
+    <li>
+      <a href="session_03_answers.html">Session 3 – August 1</a>
+    </li>
+    <li>
+      <a href="session_04.html">Session 4 – August 8</a>
+    </li>
+    <li>
+      <a href="session_05.html">Session 5 – August 15</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Materials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="session_01_materials.html">Session 1</a>
+    </li>
+    <li>
+      <a href="session_03_materials.html">Session 3</a>
+    </li>
+    <li>
+      <a href="session_04_materials.html">Session 4</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="resources.html">Resources</a>
+</li>
+<li>
+  <a href="https://github.com/gerkelab/core-r-course">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Session 5 - Pew Research</h1>
+<h4 class="date"><em>August 15, 2018</em></h4>
+
+</div>
+
+
+<table>
+<thead>
+<tr class="header">
+<th align="left">religion</th>
+<th align="right">&lt;$10k</th>
+<th align="right">$10-20k</th>
+<th align="right">$20-30k</th>
+<th align="right">$30-40k</th>
+<th align="right">$40-50k</th>
+<th align="right">$50-75k</th>
+<th align="right">$75-100k</th>
+<th align="right">$100-150k</th>
+<th align="right">&gt;150k</th>
+<th align="right">Don’t know/refused</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Agnostic</td>
+<td align="right">27</td>
+<td align="right">34</td>
+<td align="right">60</td>
+<td align="right">81</td>
+<td align="right">76</td>
+<td align="right">137</td>
+<td align="right">122</td>
+<td align="right">109</td>
+<td align="right">84</td>
+<td align="right">96</td>
+</tr>
+<tr class="even">
+<td align="left">Atheist</td>
+<td align="right">12</td>
+<td align="right">27</td>
+<td align="right">37</td>
+<td align="right">52</td>
+<td align="right">35</td>
+<td align="right">70</td>
+<td align="right">73</td>
+<td align="right">59</td>
+<td align="right">74</td>
+<td align="right">76</td>
+</tr>
+<tr class="odd">
+<td align="left">Buddhist</td>
+<td align="right">27</td>
+<td align="right">21</td>
+<td align="right">30</td>
+<td align="right">34</td>
+<td align="right">33</td>
+<td align="right">58</td>
+<td align="right">62</td>
+<td align="right">39</td>
+<td align="right">53</td>
+<td align="right">54</td>
+</tr>
+<tr class="even">
+<td align="left">Catholic</td>
+<td align="right">418</td>
+<td align="right">617</td>
+<td align="right">732</td>
+<td align="right">670</td>
+<td align="right">638</td>
+<td align="right">1116</td>
+<td align="right">949</td>
+<td align="right">792</td>
+<td align="right">633</td>
+<td align="right">1489</td>
+</tr>
+<tr class="odd">
+<td align="left">Don’t know/refused</td>
+<td align="right">15</td>
+<td align="right">14</td>
+<td align="right">15</td>
+<td align="right">11</td>
+<td align="right">10</td>
+<td align="right">35</td>
+<td align="right">21</td>
+<td align="right">17</td>
+<td align="right">18</td>
+<td align="right">116</td>
+</tr>
+<tr class="even">
+<td align="left">Evangelical Prot</td>
+<td align="right">575</td>
+<td align="right">869</td>
+<td align="right">1064</td>
+<td align="right">982</td>
+<td align="right">881</td>
+<td align="right">1486</td>
+<td align="right">949</td>
+<td align="right">723</td>
+<td align="right">414</td>
+<td align="right">1529</td>
+</tr>
+<tr class="odd">
+<td align="left">Hindu</td>
+<td align="right">1</td>
+<td align="right">9</td>
+<td align="right">7</td>
+<td align="right">9</td>
+<td align="right">11</td>
+<td align="right">34</td>
+<td align="right">47</td>
+<td align="right">48</td>
+<td align="right">54</td>
+<td align="right">37</td>
+</tr>
+<tr class="even">
+<td align="left">Historically Black Prot</td>
+<td align="right">228</td>
+<td align="right">244</td>
+<td align="right">236</td>
+<td align="right">238</td>
+<td align="right">197</td>
+<td align="right">223</td>
+<td align="right">131</td>
+<td align="right">81</td>
+<td align="right">78</td>
+<td align="right">339</td>
+</tr>
+<tr class="odd">
+<td align="left">Jehovah’s Witness</td>
+<td align="right">20</td>
+<td align="right">27</td>
+<td align="right">24</td>
+<td align="right">24</td>
+<td align="right">21</td>
+<td align="right">30</td>
+<td align="right">15</td>
+<td align="right">11</td>
+<td align="right">6</td>
+<td align="right">37</td>
+</tr>
+<tr class="even">
+<td align="left">Jewish</td>
+<td align="right">19</td>
+<td align="right">19</td>
+<td align="right">25</td>
+<td align="right">25</td>
+<td align="right">30</td>
+<td align="right">95</td>
+<td align="right">69</td>
+<td align="right">87</td>
+<td align="right">151</td>
+<td align="right">162</td>
+</tr>
+<tr class="odd">
+<td align="left">Mainline Prot</td>
+<td align="right">289</td>
+<td align="right">495</td>
+<td align="right">619</td>
+<td align="right">655</td>
+<td align="right">651</td>
+<td align="right">1107</td>
+<td align="right">939</td>
+<td align="right">753</td>
+<td align="right">634</td>
+<td align="right">1328</td>
+</tr>
+<tr class="even">
+<td align="left">Mormon</td>
+<td align="right">29</td>
+<td align="right">40</td>
+<td align="right">48</td>
+<td align="right">51</td>
+<td align="right">56</td>
+<td align="right">112</td>
+<td align="right">85</td>
+<td align="right">49</td>
+<td align="right">42</td>
+<td align="right">69</td>
+</tr>
+<tr class="odd">
+<td align="left">Muslim</td>
+<td align="right">6</td>
+<td align="right">7</td>
+<td align="right">9</td>
+<td align="right">10</td>
+<td align="right">9</td>
+<td align="right">23</td>
+<td align="right">16</td>
+<td align="right">8</td>
+<td align="right">6</td>
+<td align="right">22</td>
+</tr>
+<tr class="even">
+<td align="left">Orthodox</td>
+<td align="right">13</td>
+<td align="right">17</td>
+<td align="right">23</td>
+<td align="right">32</td>
+<td align="right">32</td>
+<td align="right">47</td>
+<td align="right">38</td>
+<td align="right">42</td>
+<td align="right">46</td>
+<td align="right">73</td>
+</tr>
+<tr class="odd">
+<td align="left">Other Christian</td>
+<td align="right">9</td>
+<td align="right">7</td>
+<td align="right">11</td>
+<td align="right">13</td>
+<td align="right">13</td>
+<td align="right">14</td>
+<td align="right">18</td>
+<td align="right">14</td>
+<td align="right">12</td>
+<td align="right">18</td>
+</tr>
+<tr class="even">
+<td align="left">Other Faiths</td>
+<td align="right">20</td>
+<td align="right">33</td>
+<td align="right">40</td>
+<td align="right">46</td>
+<td align="right">49</td>
+<td align="right">63</td>
+<td align="right">46</td>
+<td align="right">40</td>
+<td align="right">41</td>
+<td align="right">71</td>
+</tr>
+<tr class="odd">
+<td align="left">Other World Religions</td>
+<td align="right">5</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">7</td>
+<td align="right">3</td>
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="right">8</td>
+</tr>
+<tr class="even">
+<td align="left">Unaffiliated</td>
+<td align="right">217</td>
+<td align="right">299</td>
+<td align="right">374</td>
+<td align="right">365</td>
+<td align="right">341</td>
+<td align="right">528</td>
+<td align="right">407</td>
+<td align="right">321</td>
+<td align="right">258</td>
+<td align="right">597</td>
+</tr>
+</tbody>
+</table>
+<p>Survey data from the <a href="http://pewforum.org/Income-Distribution-Within-US-Religious-Groups.aspx">Pew Forum on Religious and Public Life</a>.</p>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

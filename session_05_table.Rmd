@@ -1,0 +1,12 @@
+---
+title: Session 5 - Pew Research
+date: "August 15, 2018"
+output: html_document
+---
+
+```{r echo=FALSE, message=FALSE, results="asis"}
+read_tsv("https://raw.githubusercontent.com/justmarkham/tidy-data/b3933b919d2f46188492d006347eb486f59fcd5a/data/pew.txt") %>% 
+  knitr::kable()
+```
+
+Survey data from the [Pew Forum on Religious and Public Life](http://pewforum.org/Income-Distribution-Within-US-Religious-Groups.aspx).

@@ -24,7 +24,8 @@ session_list <- tibble(
     "Data Types, Packages, Data Collections, Workspaces and RStudio Projects", #2,
     "Functions, dplyr, Single-table dplyr verbs", #3
     "Importing/Exporting Data, Working with dplyr", #4
-    rep("", 4)
+    "Tidy Data, Two-table dplyr verbs", #5
+    rep("", 3)
   ),
   Location = c("MKE-1308", rep("MKE-1022", 7)),
   `Start Time` = "09:15",

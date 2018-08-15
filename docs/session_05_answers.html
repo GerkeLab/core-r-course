@@ -33,7 +33,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -46,11 +46,13 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -394,6 +396,9 @@ div.tocify {
     <li>
       <a href="session_04_materials.html">Session 4</a>
     </li>
+    <li>
+      <a href="session_05_materials.html">Session 5</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -614,7 +619,7 @@ div.tocify {
 <div id="example-tables" class="section level3 tabset tabset-pills">
 <h3>Example Tables</h3>
 <p>We have three tables that you can load with</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">source</span>(<span class="st">&quot;https://git.io/fNN7R&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">source</span>(<span class="st">&quot;https://git.io/fNxIF&quot;</span>)</a></code></pre></div>
 <div id="patients" class="section level4">
 <h4><code>patients</code></h4>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">patients</a></code></pre></div>
@@ -713,7 +718,9 @@ div.tocify {
 <blockquote>
 <p>A mutating join allows you to combine variables from two tables. It first matches observations by their keys, then copies across variables from one table to the other. <a href="http://r4ds.had.co.nz/relation-data.html#mutating-joins" class="uri">http://r4ds.had.co.nz/relation-data.html#mutating-joins</a></p>
 </blockquote>
-<p><img src="session_05_answers_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<div class="img-center">
+<p><img src="images/animation-original.png" class="img-mw500" /></p>
+</div>
 <div id="inner-join" class="section level4">
 <h4>Inner Join</h4>
 <div class="img-center">
@@ -846,9 +853,6 @@ div.tocify {
 1     4 Marisela    58</code></pre>
 </div>
 </div>
-</div>
-<div id="exercises" class="section level2">
-<h2>Exercises</h2>
 </div>
 
 

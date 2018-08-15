@@ -84,7 +84,7 @@ Much of this material is drawn from [Relational Data](http://r4ds.had.co.nz/rela
 We have three tables that you can load with
 
 ```r
-source("https://git.io/fNN7R")
+source("https://git.io/fNxIF")
 ```
 
 ```{r, include=FALSE}
@@ -187,7 +187,7 @@ babynames::babynames %>%
 > A mutating join allows you to combine variables from two tables. It first matches observations by their keys, then copies across variables from one table to the other.
 > <http://r4ds.had.co.nz/relation-data.html#mutating-joins>
 
-```{r echo=FALSE}
+```{r include=FALSE}
 x <- data_frame(
   id = 1:3,
   x = paste0("x", 1:3)
@@ -202,8 +202,22 @@ initial_dfs <- proc_data(x, "x") %>%
   bind_rows(mutate(proc_data(y, "y"), .x = .x + 3)) %>%
   mutate(frame = 1)
 
-plot_data(initial_dfs)
+df_names <- data_frame(
+  .x = c(1.5, 4.5), .y = 0.25,
+  value = c("x", "y"),
+  size = 12,
+  color = "black"
+)
+
+g <- plot_data(initial_dfs) +
+  geom_text(data = df_names, family = "Fira Mono", size = 24)
+
+ggsave(g, file = here::here("images/animation-original.png"))
 ```
+
+::: {.img-center}
+![](images/animation-original.png){.img-mw500}
+:::
 
 #### Inner Join
 
@@ -297,5 +311,3 @@ semi_join(patients, encounters, by = c("id" = "patient_id"))
 ```{r results="show"}
 anti_join(patients, encounters, by = c("id" = "patient_id"))
 ```
-
-## Exercises

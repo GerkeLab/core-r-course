@@ -42,11 +42,11 @@ session_list[5, "Link"] <- "session_05.html"
 
 ## Announcements
 
-**Assignment for Wednesday, August 15**:
+**Assignment for Wednesday, August 22**:
 
 > Fill in the missing code and complete the tasks in the 
-[cancer_registry_dplyr.R](materials/04/cancer_registry_dplyr.R) script.
-The data and original script can be downloaded from the [Session 04 materials page](session_04_materials.html).
+[cancer_registry_dplyr.R](materials/05/cancer_registry_dplyr_partial.R) script.
+The data and original script can be downloaded from the [Session 4 materials page](session_04_materials.html), and the partially complete script is in the [Session 5 materials page](session_05_materials.html).
 You can refer to the [dplyr]{.pkg} [cheat sheet](resources.html#cheat_sheets) or the section on [dplyr from Session 3](session_03_answers.html#dplyr_basics).
 
 <details><summary>Travis Gerke, Thursday, June 28, 2018</summary>

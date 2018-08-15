@@ -33,7 +33,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -46,13 +46,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -612,9 +610,7 @@ div.tocify {
 </div>
 <div id="two-table-dplyr-verbs" class="section level2">
 <h2>Two-Table <span class="pkg">dplyr</span> verbs</h2>
-<ul>
-<li><a href="http://r4ds.had.co.nz/relation-data.html">Relational Data</a></li>
-</ul>
+<p>Much of this material is drawn from <a href="http://r4ds.had.co.nz/relation-data.html">Relational Data</a> in the R4DS book.</p>
 <div id="example-tables" class="section level3 tabset tabset-pills">
 <h3>Example Tables</h3>
 <p>We have three tables that you can load with</p>
@@ -635,18 +631,18 @@ div.tocify {
 <h4><code>encounters</code></h4>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">encounters</a></code></pre></div>
 <pre><code># A tibble: 10 x 4
-   encounter_id patient_id blood_test paid 
-          &lt;int&gt;      &lt;int&gt; &lt;lgl&gt;      &lt;lgl&gt;
- 1            1          2 TRUE       FALSE
- 2            2          3 TRUE       TRUE 
- 3            3          5 TRUE       FALSE
- 4            4          3 TRUE       FALSE
- 5            5          5 TRUE       TRUE 
- 6            6          1 FALSE      TRUE 
- 7            7          3 FALSE      FALSE
- 8            8          5 FALSE      TRUE 
- 9            9          1 FALSE      FALSE
-10           10          1 TRUE       FALSE</code></pre>
+   date       patient_id blood_test paid 
+   &lt;chr&gt;           &lt;int&gt; &lt;lgl&gt;      &lt;lgl&gt;
+ 1 2018-08-08          1 TRUE       FALSE
+ 2 2018-08-08          3 TRUE       TRUE 
+ 3 2018-08-09          1 FALSE      FALSE
+ 4 2018-08-10          5 TRUE       TRUE 
+ 5 2018-08-11          3 TRUE       FALSE
+ 6 2018-08-13          1 FALSE      TRUE 
+ 7 2018-08-13          2 TRUE       FALSE
+ 8 2018-08-13          5 TRUE       FALSE
+ 9 2018-08-13          3 FALSE      FALSE
+10 2018-08-13          5 FALSE      TRUE </code></pre>
 </div>
 <div id="insurance" class="section level4">
 <h4><code>insurance</code></h4>
@@ -662,13 +658,180 @@ div.tocify {
 </div>
 <div id="keys" class="section level3">
 <h3>Keys</h3>
-<p>Primary keys, foreign key, draw from <a href="http://r4ds.had.co.nz/relation-data.html#keys" class="uri">http://r4ds.had.co.nz/relation-data.html#keys</a></p>
+<p>There are two types of keys:</p>
+<ul>
+<li><p>A <strong>primary key</strong> uniquely identifies an observation in its own table. For example, <code>patients$id</code> is a primary key because it uniquely identifies each patient in the <code>patients</code> table.</p></li>
+<li><p>A foreign key uniquely identifies an observation in another table. For example, the <code>encounters$patient_id</code> is a foreign key because it appears in the <code>patients</code> table where it matches each encounter to a unique <code>patient</code>.</p></li>
+</ul>
+<p>What is the primary key of <code>encounters</code>? You can check that a key is primary by counting unique combinations of the variables you expect to be the key.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">patients <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(id) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="st">  </span><span class="kw">count</span>(<span class="dt">sort =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code># A tibble: 5 x 2
+# Groups:   id [5]
+     id     n
+  &lt;dbl&gt; &lt;int&gt;
+1     1     1
+2     2     1
+3     3     1
+4     4     1
+5     5     1</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">encounters <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(date) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="st">  </span><span class="kw">count</span>(<span class="dt">sort =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code># A tibble: 5 x 2
+# Groups:   date [5]
+  date           n
+  &lt;chr&gt;      &lt;int&gt;
+1 2018-08-13     5
+2 2018-08-08     2
+3 2018-08-09     1
+4 2018-08-10     1
+5 2018-08-11     1</code></pre>
+<div id="exercise" class="section level4">
+<h4>Exercise</h4>
+<p>What is/are the primary key(s) in the <code>babynames</code> data set?</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">babynames<span class="op">::</span>babynames <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">10</span>)</a></code></pre></div>
 </div>
-<div id="mutating-joins" class="section level3">
+</div>
+<div id="mutating-joins" class="section level3 tabset tabset-pills">
 <h3>Mutating Joins</h3>
+<blockquote>
+<p>A mutating join allows you to combine variables from two tables. It first matches observations by their keys, then copies across variables from one table to the other. <a href="http://r4ds.had.co.nz/relation-data.html#mutating-joins" class="uri">http://r4ds.had.co.nz/relation-data.html#mutating-joins</a></p>
+</blockquote>
+<p><img src="session_05_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<div id="inner-join" class="section level4">
+<h4>Inner Join</h4>
+<div class="img-center">
+<p><img src="images/animation-inner-join.gif" class="img-mw500" /></p>
 </div>
-<div id="filtering-joins" class="section level3">
+<blockquote>
+<p>Keeps all observations that appear in <code>x</code> and <code>y</code>.</p>
+</blockquote>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">inner_join</span>(patients, insurance, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;id&quot;</span> =<span class="st"> &quot;patient_id&quot;</span>))</a></code></pre></div>
+<pre><code># A tibble: 4 x 4
+     id name       age insurance
+  &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;    
+1     1 Emmet       63 Aetna    
+2     2 Sheilah     61 BCBS     
+3     4 Marisela    58 Other    
+4     5 Charity     64 Other    </code></pre>
+</div>
+<div id="left-join" class="section level4">
+<h4>Left Join</h4>
+<div class="img-center">
+<p><img src="images/animation-left-join.gif" class="img-mw500" /></p>
+</div>
+<blockquote>
+<p>Keeps all observations that appear in <code>x</code> with columns in <code>x</code> and <code>y</code>.</p>
+</blockquote>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">left_join</span>(patients, insurance, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;id&quot;</span> =<span class="st"> &quot;patient_id&quot;</span>))</a></code></pre></div>
+<pre><code># A tibble: 5 x 4
+     id name       age insurance
+  &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;    
+1     1 Emmet       63 Aetna    
+2     2 Sheilah     61 BCBS     
+3     3 Camron      76 &lt;NA&gt;     
+4     4 Marisela    58 Other    
+5     5 Charity     64 Other    </code></pre>
+</div>
+<div id="left-join-2" class="section level4">
+<h4>Left Join 2</h4>
+<div class="img-center">
+<p><img src="images/animation-left-join2.gif" class="img-mw500" /></p>
+</div>
+<blockquote>
+<p>If keys from <code>x</code> appear multiple times, they appear once for each row in <code>y</code>!</p>
+</blockquote>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">left_join</span>(patients, encounters, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;id&quot;</span> =<span class="st"> &quot;patient_id&quot;</span>))</a></code></pre></div>
+<pre><code># A tibble: 11 x 6
+      id name       age date       blood_test paid 
+   &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;      &lt;lgl&gt;      &lt;lgl&gt;
+ 1     1 Emmet       63 2018-08-08 TRUE       FALSE
+ 2     1 Emmet       63 2018-08-09 FALSE      FALSE
+ 3     1 Emmet       63 2018-08-13 FALSE      TRUE 
+ 4     2 Sheilah     61 2018-08-13 TRUE       FALSE
+ 5     3 Camron      76 2018-08-08 TRUE       TRUE 
+ 6     3 Camron      76 2018-08-11 TRUE       FALSE
+ 7     3 Camron      76 2018-08-13 FALSE      FALSE
+ 8     4 Marisela    58 &lt;NA&gt;       NA         NA   
+ 9     5 Charity     64 2018-08-10 TRUE       TRUE 
+10     5 Charity     64 2018-08-13 TRUE       FALSE
+11     5 Charity     64 2018-08-13 FALSE      TRUE </code></pre>
+</div>
+<div id="right-join" class="section level4">
+<h4>Right Join</h4>
+<div class="img-center">
+<p><img src="images/animation-right-join.gif" class="img-mw500" /></p>
+</div>
+<blockquote>
+<p>Keeps all observations that appear in <code>y</code> with columns in <code>x</code> and <code>y</code>.</p>
+</blockquote>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">right_join</span>(patients, insurance, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;id&quot;</span> =<span class="st"> &quot;patient_id&quot;</span>))</a></code></pre></div>
+<pre><code># A tibble: 4 x 4
+     id name       age insurance
+  &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;    
+1     5 Charity     64 Other    
+2     4 Marisela    58 Other    
+3     1 Emmet       63 Aetna    
+4     2 Sheilah     61 BCBS     </code></pre>
+</div>
+<div id="full-join" class="section level4">
+<h4>Full Join</h4>
+<div class="img-center">
+<p><img src="images/animation-full-join.gif" class="img-mw500" /></p>
+</div>
+<blockquote>
+<p>Keeps all observations that appear in <code>x</code> or <code>y</code> with columns in <code>x</code> and <code>y</code>.</p>
+</blockquote>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">full_join</span>(patients, insurance, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;id&quot;</span> =<span class="st"> &quot;patient_id&quot;</span>))</a></code></pre></div>
+<pre><code># A tibble: 5 x 4
+     id name       age insurance
+  &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;    
+1     1 Emmet       63 Aetna    
+2     2 Sheilah     61 BCBS     
+3     3 Camron      76 &lt;NA&gt;     
+4     4 Marisela    58 Other    
+5     5 Charity     64 Other    </code></pre>
+</div>
+</div>
+<div id="filtering-joins" class="section level3 tabset tabset-pills">
 <h3>Filtering Joins</h3>
+<blockquote>
+<p>Filtering joins match observations in the same way as mutating joins, but affect the observations, not the variables.</p>
+</blockquote>
+<div id="semi-join" class="section level4">
+<h4>Semi Join</h4>
+<div class="img-center">
+<p><img src="images/animation-semi-join.gif" class="img-mw500" /></p>
+</div>
+<blockquote>
+<p><code>semi_join(x, y)</code> keeps all observations in x that have a match in y.</p>
+</blockquote>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">semi_join</span>(patients, encounters, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;id&quot;</span> =<span class="st"> &quot;patient_id&quot;</span>))</a></code></pre></div>
+<pre><code># A tibble: 4 x 3
+     id name      age
+  &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;
+1     1 Emmet      63
+2     2 Sheilah    61
+3     3 Camron     76
+4     5 Charity    64</code></pre>
+</div>
+<div id="anti-join" class="section level4">
+<h4>Anti Join</h4>
+<div class="img-center">
+<p><img src="images/animation-anti-join.gif" class="img-mw500" /></p>
+</div>
+<blockquote>
+<p><code>anti_join(x, y)</code> drops all observations in x that have a match in y.</p>
+</blockquote>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">anti_join</span>(patients, encounters, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;id&quot;</span> =<span class="st"> &quot;patient_id&quot;</span>))</a></code></pre></div>
+<pre><code># A tibble: 1 x 3
+     id name       age
+  &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;
+1     4 Marisela    58</code></pre>
+</div>
 </div>
 </div>
 <div id="exercises" class="section level2">

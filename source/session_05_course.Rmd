@@ -52,6 +52,7 @@ knitr::kable(untidy2)
 ```{r, echo=FALSE, results="asis"}
 untidy2 %>% 
   tidyr::gather("Year", "value", -Patient) %>% 
+  filter(!is.na(value)) %>% 
   tidyr::extract(value, c("tumor_size", "cancer_type"), "(.+) \\((.+)\\)") %>% 
   knitr::kable()
 ```
@@ -76,7 +77,7 @@ What are the variables in this table and how would you transform it into tidy fo
 
 ## Two-Table [dplyr]{.pkg} verbs
 
-- [Relational Data](http://r4ds.had.co.nz/relation-data.html)
+Much of this material is drawn from [Relational Data](http://r4ds.had.co.nz/relation-data.html) in the R4DS book.
 
 ### Example Tables {.tabset .tabset-pills}
 
@@ -87,7 +88,49 @@ source("https://git.io/fNN7R")
 ```
 
 ```{r, include=FALSE}
-source(here::here("_data/patients_join_example.R"))
+source(here::here("source/patients_join_example.R"))
+
+proc_data <- function(x, .id = "x") {
+  colors <- scales::brewer_pal(type = "qual", "Set1")(max(x$id))
+  x %>%
+    mutate(.y = -row_number()) %>%
+    tidyr::gather("label", "value", -.y) %>%
+    mutate(value = as.character(value)) %>%
+    group_by(.y) %>%
+    mutate(
+      .x = 1:n(),
+      .id = .id,
+      color = ifelse(label == "id", value, max(x$id) + 1),
+      color = colors[as.integer(color)],
+      color = ifelse(is.na(color), "#d0d0d0", color),
+      color = ifelse(is.na(value), "#ffffff", color)
+    )
+}
+
+plot_data <- function(x, title = "", with_colnames = FALSE) {
+  if (!"size" %in% names(x)) x$size <- 12
+  g <- ggplot(x) +
+    aes(.x, .y, fill = color, label = value) +
+    geom_tile(color = "white", size = 3) +
+    geom_text(aes(x = .x, size = size), hjust = 0.5, family = "Fira Sans", color = "white") +
+    scale_fill_identity() +
+    scale_size_identity() +
+    coord_equal() +
+    ggtitle(title) +
+    theme_void() +
+    theme(plot.title = element_text(family = "Fira Mono", hjust = 0.5, size = 24)) +
+    guides(fill = FALSE)
+  
+  if (with_colnames) {
+    cols <- filter(x, .y == -1) %>% 
+      ungroup() %>% 
+      mutate(value = label,
+             .y = .y + 0.75)
+    g + 
+      geom_text(data = cols, hjust = 0.5, family = "Fira Mono", size = 8)
+  } else g
+  
+}
 ```
 
 #### `patients`
@@ -111,10 +154,148 @@ insurance
 
 ### Keys
 
-Primary keys, foreign key, draw from <http://r4ds.had.co.nz/relation-data.html#keys>
+There are two types of keys:
 
-### Mutating Joins
+- A **primary key** uniquely identifies an observation in its own table. For example, `patients$id` is a primary key because it uniquely identifies each patient in the `patients` table.
 
-### Filtering Joins
+- A foreign key uniquely identifies an observation in another table. For example, the `encounters$patient_id` is a foreign key because it appears in the `patients` table where it matches each encounter to a unique `patient`.
+
+What is the primary key of `encounters`?
+You can check that a key is primary by counting unique combinations of the variables you expect to be the key.
+
+```{r, results="show"}
+patients %>% 
+  group_by(id) %>% 
+  count(sort = TRUE)
+
+encounters %>% 
+  group_by(date) %>% 
+  count(sort = TRUE)
+```
+
+#### Exercise
+
+What is/are the primary key(s) in the `babynames` data set?
+
+```{r}
+babynames::babynames %>% 
+  sample_n(10)
+```
+
+### Mutating Joins {.tabset .tabset-pills}
+
+> A mutating join allows you to combine variables from two tables. It first matches observations by their keys, then copies across variables from one table to the other.
+> <http://r4ds.had.co.nz/relation-data.html#mutating-joins>
+
+```{r echo=FALSE}
+x <- data_frame(
+  id = 1:3,
+  x = paste0("x", 1:3)
+)
+
+y <- data_frame(
+  id = (1:4)[-3],
+  y = paste0("y", (1:4)[-3])
+)
+
+initial_dfs <- proc_data(x, "x") %>%
+  bind_rows(mutate(proc_data(y, "y"), .x = .x + 3)) %>%
+  mutate(frame = 1)
+
+plot_data(initial_dfs)
+```
+
+#### Inner Join
+
+::: {.img-center}
+![](images/animation-inner-join.gif){.img-mw500}
+:::
+
+> Keeps all observations that appear in `x` and `y`.
+
+```{r results="show"}
+inner_join(patients, insurance, by = c("id" = "patient_id"))
+```
+
+#### Left Join
+
+::: {.img-center}
+![](images/animation-left-join.gif){.img-mw500}
+:::
+
+> Keeps all observations that appear in `x` with columns in `x` and `y`.
+
+```{r results="show"}
+left_join(patients, insurance, by = c("id" = "patient_id"))
+```
+
+#### Left Join 2
+
+::: {.img-center}
+![](images/animation-left-join2.gif){.img-mw500}
+:::
+
+> If keys from `x` appear multiple times, they appear once for each row in `y`!
+
+```{r results="show"}
+left_join(patients, encounters, by = c("id" = "patient_id"))
+```
+
+
+#### Right Join
+
+::: {.img-center}
+![](images/animation-right-join.gif){.img-mw500}
+:::
+
+
+> Keeps all observations that appear in `y` with columns in `x` and `y`.
+
+```{r results="show"}
+right_join(patients, insurance, by = c("id" = "patient_id"))
+```
+
+#### Full Join
+
+::: {.img-center}
+![](images/animation-full-join.gif){.img-mw500}
+:::
+
+
+> Keeps all observations that appear in `x` or `y` with columns in `x` and `y`.
+
+```{r results="show"}
+full_join(patients, insurance, by = c("id" = "patient_id"))
+```
+
+### Filtering Joins {.tabset .tabset-pills}
+
+> Filtering joins match observations in the same way as mutating joins, but affect the observations, not the variables.
+
+#### Semi Join
+
+::: {.img-center}
+![](images/animation-semi-join.gif){.img-mw500}
+:::
+
+
+> `semi_join(x, y)` keeps all observations in x that have a match in y.
+
+```{r results="show"}
+semi_join(patients, encounters, by = c("id" = "patient_id"))
+```
+
+#### Anti Join
+
+::: {.img-center}
+![](images/animation-anti-join.gif){.img-mw500}
+:::
+
+
+> `anti_join(x, y)` drops all observations in x that have a match in y.
+
+```{r results="show"}
+anti_join(patients, encounters, by = c("id" = "patient_id"))
+```
 
 ## Exercises

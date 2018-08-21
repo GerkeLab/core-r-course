@@ -1,0 +1,31 @@
+---
+title: Session 6
+date: "August 22, 2018"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r session-04-init, include=FALSE}
+SHOW_RESULTS <- "show"
+
+session_links <- list(
+  "Materials" = "session_05_materials.html",
+  "This page with the code results" = "session_06_answers.html"
+)
+```
+
+```{r child="source/session_06_global.Rmd"}
+```
+
+```{r child="source/session_06_review.Rmd"}
+```
+
+```{r child="source/session_06_outline.Rmd"}
+```
+
+```{r child="source/session_06_course.Rmd"}
+```

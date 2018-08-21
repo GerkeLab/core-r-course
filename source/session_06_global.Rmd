@@ -1,0 +1,22 @@
+[gapminder]: http://www.gapminder.org/data/
+[cran]: https://cran.rstudio.com/
+[metacran]: https://www.r-pkg.org
+[cran-task-view]: https://cran.r-project.org/web/views/
+[s4-materials]: session_04_materials.html
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(comment = "", prompt = FALSE, results = SHOW_RESULTS)
+knitr::opts_hooks$set(echo_if_show_results = function(options) {
+  if (options$echo_if_show_results) {
+    options$echo <- options$results == "show"
+  }
+  options
+})
+set.seed(42)
+```
+
+## Links
+
+```{r links, echo=FALSE, results='asis'}
+purrr::iwalk(session_links, ~ cat("\n- [", .y, "](", .x, ")", sep = ""))
+```

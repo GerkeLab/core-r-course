@@ -25,7 +25,8 @@ session_list <- tibble(
     "Functions, dplyr, Single-table dplyr verbs", #3
     "Importing/Exporting Data, Working with dplyr", #4
     "Tidy Data, Two-table dplyr verbs", #5
-    rep("", 3)
+    "Tidying data with tidyr, Dates with lubridate", #6
+    rep("", 2)
   ),
   Location = c("MKE-1308", rep("MKE-1022", 7)),
   `Start Time` = "09:15",
@@ -35,7 +36,8 @@ session_list[1, "Link"] <- "session_01.html"
 session_list[2, "Link"] <- "session_02_answers.html"
 session_list[3, "Link"] <- "session_03_answers.html"
 session_list[4, "Link"] <- "session_04_answers.html"
-session_list[5, "Link"] <- "session_05.html"
+session_list[5, "Link"] <- "session_05_answers.html"
+session_list[6, "Link"] <- "session_06.html"
 ```
 
 <!-- Emoji: https://afeld.github.io/emoji-css/ -->

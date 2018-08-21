@@ -19,7 +19,7 @@ needs_zip <- function(zipfile, dirpath) {
 
 SESSION <- "05"
 ZIPFILE <- glue::glue("core-r_session-{SESSION}_materials.zip")
-SESSION_DIR <- here::here("materials", SESSION)
+SESSION_DIR <- file.path("materials", SESSION)
 ```
 
 Materials for [Session 5](session_05.html).

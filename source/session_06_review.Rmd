@@ -1,0 +1,74 @@
+## Review
+
+### dplyr Homework
+
+Review the homework from [Session 5](session_05_materials.html).
+
+You can check out the approach I took [in this page](materials/04/cancer_registry_dplyr.html).
+There is more than one way to accomplish each task, so it's okay if your code looks different!
+
+- What parts of these tasks were difficult?
+- Which parts did you find easy?
+- What questions did you have as you worked?
+- Were you able to find the answers to any of these questions?
+
+
+### Tidy Data
+
+#### The three rules of tidy data
+
+1. Columns represent separate variables
+
+2. Rows represent individual observations
+
+3. Observational units form tables
+
+
+### Review: Two-Table [dplyr]{.pkg} verbs
+
+#### Keys
+
+What are the two types of keys?
+
+<details><summary>Answer</summary>
+
+- A **primary key** uniquely identifies an observation in its own table. For example, `patients$id` is a primary key because it uniquely identifies each patient in the `patients` table.
+
+- A foreign key uniquely identifies an observation in another table. For example, the `encounters$patient_id` is a foreign key because it appears in the `patients` table where it matches each encounter to a unique `patient`.
+</details>
+
+#### Exercise
+
+What is/are the primary key(s) in the `babynames` data set?
+
+```{r s6-babynames, eval=FALSE}
+babynames::babynames %>% 
+  sample_n(10)
+```
+
+<details><summary>Output</summary>
+
+```{r ref.label="s6-babynames", echo=FALSE, eval=TRUE, results="show"}
+```
+
+</details>
+
+#### Joins
+
+I highly encourage you to read the chapter on [Relational Data](http://r4ds.had.co.nz/relational-data.html) in the R4DS book.
+
+You can also review all of the join animations by visiting my page on [tidy animated verbs](https://github.com/gadenbuie/tidy-animated-verbs/#readme).
+
+![](images/animation-original.png)
+
+Mutating Joins
+
+- `inner_join()`
+- `left_join()`
+- `right_join()`
+- `full_join()`
+
+Filtering Joins
+
+- `semi_join()`
+- `anti_join()`

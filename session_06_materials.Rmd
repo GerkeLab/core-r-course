@@ -1,6 +1,6 @@
 ---
-title: Session 4 — Materials
-date: "August 8, 2018"
+title: Session 6 — Materials
+date: "August 22, 2018"
 ---
 
 ```{r include=FALSE}
@@ -17,36 +17,14 @@ needs_zip <- function(zipfile, dirpath) {
   zip_modtime < files_modtime
 }
 
-SESSION <- "04"
+SESSION <- "05"
 ZIPFILE <- glue::glue("core-r_session-{SESSION}_materials.zip")
-SESSION_DIR <- file.path("materials", SESSION)
+SESSION_DIR <- here::here("materials", SESSION)
 ```
 
-Materials for [Session 4](session_04.html).
+Materials for [Session 6](session_05.html).
 
-## Zip File
-
-```{r}
-if (needs_zip(ZIPFILE, SESSION_DIR)) {
-  xfun::in_dir(file.path("materials", SESSION), {
-    utils::zip(zipfile = file.path("../../materials", ZIPFILE), 
-               files = dir(pattern = "\\.(R|csv|xlsx)"),
-               extras = "-x *.DS_Store")
-  })
-}
-
-make_listing(ZIPFILE, file.path("materials", ZIPFILE))
-```
-
-## Individual Files
-
-The following files simulate a cancer registry data export for patients with breast cancer.
-
-:::{.bs-callout .bs-callout-warning}
-**Note** This data is simulated with fictitious record numbers, patient information, and dates, and is intended for Moffitt staff training purposes only.
-:::
-
-```{r}
+```{r eval=FALSE}
 fs::file_info(fs::dir_ls(SESSION_DIR, regexp = "\\.(R|csv|xlsx)")) %>%
   mutate(path_rel = fs::path_rel(path, here::here())) %>% 
   select(path_rel) %>% 

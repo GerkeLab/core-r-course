@@ -1,0 +1,18 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+## Tidying Data (tidyr)
+
+### Gather
+
+### Spread
+
+
+### Another messy example
+
+What are the variables in this table and how would you transform it into tidy format? 
+
+[Pew Forum on Religious and Public Life](session_05_table.html)

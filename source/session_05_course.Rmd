@@ -84,7 +84,7 @@ Much of this material is drawn from [Relational Data](http://r4ds.had.co.nz/rela
 We have three tables that you can load with
 
 ```r
-source(`r grkmisc::shorten_github_url("https://gist.githubusercontent.com/gadenbuie/7353077965b1f78a3a7489abc587acb0/raw/74c82cc9fe219baa8ad321accc1e9b3a5a16fc02/core-r-course_patients_join_example.R")`)
+source("https://git.io/fATl8")
 ```
 
 ```{r, include=FALSE}

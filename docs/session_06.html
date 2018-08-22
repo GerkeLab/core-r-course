@@ -342,7 +342,7 @@ div.tocify {
         <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     About
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
@@ -357,7 +357,7 @@ div.tocify {
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Sessions
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
@@ -384,7 +384,7 @@ div.tocify {
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Materials
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
@@ -413,7 +413,7 @@ div.tocify {
 <li>
   <a href="https://github.com/gerkelab/core-r-course">
     <span class="fa fa-github"></span>
-     
+
   </a>
 </li>
       </ul>
@@ -483,27 +483,27 @@ div.tocify {
 <h4>Example 1</h4>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">table_6b</a></code></pre></div>
 <pre><code># A tibble: 20 x 4
-      mrn sequence type       value 
-    &lt;int&gt;    &lt;int&gt; &lt;chr&gt;      &lt;chr&gt; 
- 1 289034        1 age        47    
+      mrn sequence type       value
+    &lt;int&gt;    &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;
+ 1 289034        1 age        47
  2 289034        1 tumor_size 0.9 cm
- 3 289034        2 age        47    
+ 3 289034        2 age        47
  4 289034        2 tumor_size 999 mm
- 5 290660        1 age        49    
- 6 290660        1 tumor_size 30 mm 
- 7 290660        2 age        49    
+ 5 290660        1 age        49
+ 6 290660        1 tumor_size 30 mm
+ 7 290660        2 age        49
  8 290660        2 tumor_size 999 mm
- 9 341050        1 age        61    
+ 9 341050        1 age        61
 10 341050        1 tumor_size 999 mm
-11 341050        2 age        70    
+11 341050        2 age        70
 12 341050        2 tumor_size 2.1 cm
-13 385615        1 age        71    
-14 385615        1 tumor_size 12 mm 
-15 385615        2 age        71    
-16 385615        2 tumor_size 2 cm  
-17 550955        1 age        43    
+13 385615        1 age        71
+14 385615        1 tumor_size 12 mm
+15 385615        2 age        71
+16 385615        2 tumor_size 2 cm
+17 550955        1 age        43
 18 550955        1 tumor_size 2.5 cm
-19 550955        2 age        43    
+19 550955        2 age        43
 20 550955        2 tumor_size 998 mm</code></pre>
 </div>
 <div id="example-2" class="section level4">
@@ -511,16 +511,16 @@ div.tocify {
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">table_6c</a></code></pre></div>
 <pre><code># A tibble: 10 x 4
       mrn age    tumor_size tumor_unit
-    &lt;int&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;     
- 1 289034 47 (1)        0.9 cm        
- 2 289034 47 (2)      999   mm        
- 3 290660 49 (1)       30   mm        
- 4 290660 49 (2)      999   mm        
- 5 341050 61 (1)      999   mm        
- 6 341050 70 (2)        2.1 cm        
- 7 385615 71 (1)       12   mm        
- 8 385615 71 (2)        2   cm        
- 9 550955 43 (1)        2.5 cm        
+    &lt;int&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;
+ 1 289034 47 (1)        0.9 cm
+ 2 289034 47 (2)      999   mm
+ 3 290660 49 (1)       30   mm
+ 4 290660 49 (2)      999   mm
+ 5 341050 61 (1)      999   mm
+ 6 341050 70 (2)        2.1 cm
+ 7 385615 71 (1)       12   mm
+ 8 385615 71 (2)        2   cm
+ 9 550955 43 (1)        2.5 cm
 10 550955 43 (2)      998   mm        </code></pre>
 </div>
 <div id="example-3" class="section level4">
@@ -536,12 +536,12 @@ div.tocify {
 5 550955    43    43</code></pre>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">table_6d2 <span class="co"># tumor_size</span></a></code></pre></div>
 <pre><code># A tibble: 5 x 3
-     mrn `1`    `2`   
-   &lt;int&gt; &lt;chr&gt;  &lt;chr&gt; 
+     mrn `1`    `2`
+   &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;
 1 289034 0.9 cm 999 mm
 2 290660 30 mm  999 mm
 3 341050 999 mm 2.1 cm
-4 385615 12 mm  2 cm  
+4 385615 12 mm  2 cm
 5 550955 2.5 cm 998 mm</code></pre>
 </div>
 <div id="example-4" class="section level4">
@@ -549,11 +549,11 @@ div.tocify {
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">table_6e</a></code></pre></div>
 <pre><code># A tibble: 4 x 11
   var       `289034` `289034` `290660` `290660` `341050` `341050` `385615`
-  &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;   
-1 sequence  1        2        1        2        1        2        1       
-2 age       47       47       49       49       61       70       71      
-3 tumor_si… 0.9      999.0    30.0     999.0    999.0    2.1      12.0    
-4 tumor_un… cm       mm       mm       mm       mm       cm       mm      
+  &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;
+1 sequence  1        2        1        2        1        2        1
+2 age       47       47       49       49       61       70       71
+3 tumor_si… 0.9      999.0    30.0     999.0    999.0    2.1      12.0
+4 tumor_un… cm       mm       mm       mm       mm       cm       mm
 # ... with 3 more variables: `385615` &lt;chr&gt;, `550955` &lt;chr&gt;,
 #   `550955` &lt;chr&gt;</code></pre>
 </div>
@@ -672,6 +672,10 @@ div.tocify {
 <div id="task-4" class="section level4">
 <h4>Task 4</h4>
 <p>Find all patients who have had more than one cancer diagnosis and create a data frame with only their patient information.</p>
+</div>
+<div id="task-5" class="section level4">
+<h4>Task 5</h4>
+<p>Find patients who were last contacted in 2017 and merge their patient information with the diagnosis records. Transform all dates to be the number of days since first patient contact.</p>
 </div>
 </div>
 </div>
@@ -799,10 +803,10 @@ div.tocify {
 <a class="sourceLine" id="cb31-5" data-line-number="5"><span class="kw">force_tz</span>(x, <span class="dt">tzone =</span> <span class="st">&quot;US/Eastern&quot;</span>)</a></code></pre></div>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">timezones &lt;-<span class="st"> </span><span class="kw">OlsonNames</span>()</a>
 <a class="sourceLine" id="cb32-2" data-line-number="2">timezones[<span class="kw">grepl</span>(<span class="st">&quot;US&quot;</span>, timezones)]</a></code></pre></div>
-<pre><code> [1] &quot;US/Alaska&quot;         &quot;US/Aleutian&quot;       &quot;US/Arizona&quot;       
- [4] &quot;US/Central&quot;        &quot;US/East-Indiana&quot;   &quot;US/Eastern&quot;       
- [7] &quot;US/Hawaii&quot;         &quot;US/Indiana-Starke&quot; &quot;US/Michigan&quot;      
-[10] &quot;US/Mountain&quot;       &quot;US/Pacific&quot;        &quot;US/Pacific-New&quot;   
+<pre><code> [1] &quot;US/Alaska&quot;         &quot;US/Aleutian&quot;       &quot;US/Arizona&quot;
+ [4] &quot;US/Central&quot;        &quot;US/East-Indiana&quot;   &quot;US/Eastern&quot;
+ [7] &quot;US/Hawaii&quot;         &quot;US/Indiana-Starke&quot; &quot;US/Michigan&quot;
+[10] &quot;US/Mountain&quot;       &quot;US/Pacific&quot;        &quot;US/Pacific-New&quot;
 [13] &quot;US/Samoa&quot;         </code></pre>
 </div>
 </div>

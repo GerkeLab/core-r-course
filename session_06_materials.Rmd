@@ -17,14 +17,14 @@ needs_zip <- function(zipfile, dirpath) {
   zip_modtime < files_modtime
 }
 
-SESSION <- "05"
+SESSION <- "06"
 ZIPFILE <- glue::glue("core-r_session-{SESSION}_materials.zip")
 SESSION_DIR <- here::here("materials", SESSION)
 ```
 
 Materials for [Session 6](session_05.html).
 
-```{r eval=FALSE}
+```{r eval=TRUE}
 fs::file_info(fs::dir_ls(SESSION_DIR, regexp = "\\.(R|csv|xlsx)")) %>%
   mutate(path_rel = fs::path_rel(path, here::here())) %>% 
   select(path_rel) %>% 

@@ -32,6 +32,8 @@ navbar:
           href: "session_04_materials.html"
         - text: "Session 5"
           href: "session_05_materials.html"
+        - text: "Session 6"
+          href: "session_06_materials.html"
   right:
     - text: "Resources"
       href: resources.html

@@ -1,7 +1,10 @@
 ## Overview
 
 1. Tidying Data
+    - Group discussion: messy data sets
 
-1. Group work: Joins and Tidying
+1. Joins
+    - Review Joins
+    - Group work joining data
 
 1. Working with dates and times

@@ -4,15 +4,418 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Tidying Data (tidyr)
+## Tidying Data
 
-### Gather
+### The three rules of tidy data
 
-### Spread
+1. Columns represent separate variables
+
+2. Rows represent individual observations
+
+3. Observational units form tables
+
+### Why tidy data? {.tabset .tabset-pills}
+
+```r
+source("https://git.io/fATEK")
+```
+
+Each of the following tables contains the same five variables: `mrn`, `sequence`, `age`, `tumor_size`, `tumor_unit`.
+
+How easy would it be to calculate **average tumor size** for each patient?
+What problems would you face if your data were formatted like the examples below?
+
+```{r echo=FALSE, results="hide"}
+table_6a <- tibble::tribble(
+  ~mrn, ~sequence, ~age, ~tumor_size, ~tumor_unit,
+  289034L,        1L,  47L,         0.9,        "cm",
+  289034L,        2L,  47L,         999,        "mm",
+  290660L,        1L,  49L,          30,        "mm",
+  290660L,        2L,  49L,         999,        "mm",
+  341050L,        1L,  61L,         999,        "mm",
+  341050L,        2L,  70L,         2.1,        "cm",
+  385615L,        1L,  71L,          12,        "mm",
+  385615L,        2L,  71L,           2,        "cm",
+  550955L,        1L,  43L,         2.5,        "cm",
+  550955L,        2L,  43L,         998,        "mm"
+)
+
+table_6b <-
+  table_6a %>% 
+    mutate(tumor_size = paste(tumor_size, tumor_unit)) %>% 
+    select(-tumor_unit) %>% 
+    gather(type, value, age:tumor_size) %>% 
+    arrange(mrn, sequence)
+
+table_6c <-
+  table_6a %>% 
+    mutate(age = paste0(age, " (", sequence, ")")) %>% 
+    select(-sequence)
+
+table_6d1 <- 
+  table_6a %>% 
+  select(mrn, sequence, age) %>% 
+  spread(sequence, age)
+
+table_6d2 <-
+  table_6a %>% 
+  mutate(tumor_size = paste(tumor_size, tumor_unit)) %>% 
+  select(mrn, sequence, tumor_size) %>% 
+  spread(sequence, tumor_size)
+
+table_6e <- 
+  t(table_6a) %>%
+  as.data.frame(stringsAsFactors = FALSE) %>%
+  rownames_to_column("var") %>%
+  as_tibble() %>%
+  mutate_all(str_trim) %>% 
+  {
+    colnames(.) <- paste(c("var", .[1, -1]))
+    .[-1, ]
+  }
+```
+
+#### Example 1
+
+```{r results="show"}
+table_6b
+```
+
+#### Example 2
+
+```{r results="show"}
+table_6c
+```
+
+#### Example 3
+
+```{r results="show"}
+table_6d1 # age
+table_6d2 # tumor_size
+```
+
+#### Example 4
+
+```{r results="show"}
+table_6e
+```
 
 
-### Another messy example
+### Tidying Data {.tabset .tabset-pills}
 
-What are the variables in this table and how would you transform it into tidy format? 
+Most data isn't tidy: often data is organized for something other than *analysis*.
+For example, the data may be structured in a way that's easiest for data entry or so that all of the data fits on a single page.
+
+First, ask yourself (or the person who created the data):
+
+1. What are the variables?
+
+1. What are the observations?
+
+Sometimes, a _variable_ is spread across multiple columns.
+Othertimes, an _observation_ is scattered across multiple rows.
+
+The [tidyr]{.pkg} packages is part of the [tidyverse]{.pkg} and loaded with `library(tidyverse)`.
+
+#### `gather()`
+
+```r
+gather(data, key, value, ...)
+```
+
+Use `gather()` to _gather_ the values of a variable that are spread across columns.
+
+The `key` is the name of the variable that will hold the values that are currently used as column names.
+The `value` is the name of the variables that holds the values in those columns.
+
+```{r}
+table_6d1
+gather(table_6d1, sequence, age, `1`, `2`)
+```
+
+#### `spread()`
+
+```r
+spread(data, key, value)
+```
+
+`spread()` is the inverse of `gather()`.
+The values of the variable given as `key` will be the new column names that will contain the values in `value`.
+
+```{r}
+table_6b
+spread(table_6b, type, value)
+```
+
+#### Animated
+
+![](https://raw.githubusercontent.com/gadenbuie/tidy-animated-verbs/master/images/tidyr-spread-gather.gif)
+
+### Quick Review
+
+Which function would you use to transform this data into tidy format?
 
 [Pew Forum on Religious and Public Life](session_05_table.html)
+
+
+
+## Two-Table [dplyr]{.pkg} verbs
+
+### Keys
+
+What are the two types of keys?
+
+<details><summary>Answer</summary>
+
+- A **primary key** uniquely identifies an observation in its own table.
+
+- A foreign key uniquely identifies an observation in another table.
+</details>
+
+### Joins
+
+I highly encourage you to read the chapter on [Relational Data](http://r4ds.had.co.nz/relational-data.html) in the R4DS book.
+
+You can also review all of the join animations by visiting my page on [tidy animated verbs](https://github.com/gadenbuie/tidy-animated-verbs/#readme).
+
+::: {.img-center}
+![](images/animation-original.png){width="480px"}
+:::
+
+Mutating Joins
+
+- `inner_join()`
+- `left_join()`
+- `right_join()`
+- `full_join()`
+
+Filtering Joins
+
+- `semi_join()`
+- `anti_join()`
+
+### Group Work {.tabset}
+
+We'll use the [Breast Cancer Registry Data](session_04_materials.html) from Session 4.
+I've written the import script to get you started, which you can download from the [Session 6 materials page](session_06_materials.html), or copy from below.
+
+<details><summary>Import Data</summary>
+
+```r
+library(tidyverse)
+cr_patients <- read_csv(
+  "CancerRegistryDataPatients.csv",
+  col_names = c("mrn", "age_current", "sex", "hispanic_origin", "race", "vital_status", "date_last_contact", "cause_of_death"),
+  col_types = cols(date_last_contact = col_date(format = "%m/%d/%y")),
+  skip = 1
+)
+
+cr <- read_csv(
+  "CancerRegistryData.csv",
+  col_names = c("mrn", "sequence", "site_primary_icd_o_3",
+                "histology_behavior_icd_o_3", "date_diagnosis", "age_diagnosis",
+                "age_current", "sex", "hispanic_origin", "race", "vital_status",
+                "date_last_contact", "survival_time", "cause_of_death",
+                "tumor_size", "size_unit", "tobacco_use",
+                "summary_rx", "payer_source_dx", "patient_history_alcohol",
+                "marital_status_dx"),
+  col_types = cols(
+    date_last_contact = col_date(format = "%m/%d/%y"),
+    date_diagnosis = col_date(format = "%m/%d/%y")
+  ),
+  skip = 1
+)
+```
+</details>
+
+#### Task 1
+
+Merge the two data sets to add the patient information to their diagnosis records.
+
+#### Task 2
+
+Find deceased patients at least 75 years or older.
+Create a data frame containing their patient information and all of their diagnosis records.
+
+#### Task 3
+
+Find the diagnosis records of the African American patients.
+
+**Bonus:** Find the diagnosis records of _married_ African American patients.
+
+#### Task 4
+
+Find all patients who have had more than one cancer diagnosis and create a data frame with only their patient information.
+
+
+## Working with Dates
+
+To work with dates, we need another packges from the [tidyverse]{.pkg} called [lubridate]{.pkg}.
+This package isn't loaded by default, so you'll need to run
+
+```{r}
+library(lubridate)
+```
+
+### About dates, times and date-times
+
+```
+2006-01-02 03:04:05
+```
+
+A **date-time** is a point in time, stored as the number of seconds since `1970-01-01 00:00:00 UTC`.
+Note that a date-time also understands time zones.
+
+```{r}
+as_datetime(1136171045)
+```
+
+A **date** is a _day_ and is stored as the number of days since `1970-01-01`.
+
+```{r}
+as_date(13150)
+```
+
+An [hms]{.pkg} **time** is stored as the number of seconds since `00:00:00`.
+
+```{r}
+hms::as.hms(3 * 60^2 + 4 * 60 + 5)
+```
+
+### Converting strings to date-times
+
+[lubridate]{.pkg} has a number of functions that convert strings to date-times.
+The functions are named so that they match the order of the date components in the string.
+The the string doesn't include _time_, a _date_ is returned rather than a _date-time_.
+
+```{r echo=FALSE, results='asis'}
+data_frame(
+  element = c("year", "month", "day", "hour", "minute", "second"),
+  letter = paste0("**", c("y", "m", "d", "h", "m", "s"), "**")
+)
+```
+
+```{r}
+ymd_hms("2006-01-02 03:04:05")
+ymd_hm("2006-01-02 03:04")
+ymd("2006-01-02")
+
+mdy_hm("1/2/06 3:04")
+mdy_hm("January 2, 2006 3:04")
+mdy("1/2/2006")
+
+dmy_hm("2 Jan 2006 3:04")
+dmy("2 Jan 2006")
+```
+
+### Getting and Setting Date Components
+
+You can get or set a date component with the singular noun describing the date element.
+
+```{r}
+x <- ymd_hms("2006-01-02 03:04:05")
+
+date(x)
+
+year(x)
+week(x)
+
+epiyear(x)
+epiweek(x)
+
+month(x)
+
+day(x)
+wday(x)
+wday(x, label = TRUE)
+wday(x, label = TRUE, abbr = FALSE)
+
+hour(x)
+minute(x)
+second(x)
+```
+
+For all of the above you can also use this syntax to change the value.
+
+```{r, results='show'}
+y <- ymd_hms("2006-01-02 03:04:05")
+day(y) <- 7
+y
+```
+
+### Moving the date-time
+
+If you want to adjust a date-time on the timeline, you can add or subtract time periods, like 2 years.
+These functions are all named after the plural nouns.
+
+```{r}
+x <- ymd_hms("2006-01-02 03:04:05")
+
+x + years(4)
+x + months(4)
+x - days(4)
+x - hours(1)
+x + minutes(20)
+```
+
+### Durations and Comparing date-times
+
+```{r error=TRUE}
+x <- ymd_hms("2006-01-02 03:04:05")
+y <- ymd_hms("2007-02-03 04:05:06")
+
+x > y
+x < y
+
+y - x
+x + y #<< Error in `+.POSIXt`(x, y) `+` not defined...
+
+# Comparing date-time
+z <- y - x
+z
+as.integer(z)
+
+# Compareing dates
+z <- as_date(y) - as_date(x)
+z
+as.integer(z)
+```
+
+### Rounding Dates
+
+```{r}
+x <- ymd_hms("2006-01-02 03:04:05")
+y <- ymd_hms("2007-02-03 04:05:06")
+
+# Round to nearest unit
+round_date(x, unit = "minute")
+round_date(y, unit = "month")
+
+# Round down to nearest unit
+floor_date(x, unit = "hour")
+floor_date(x, unit = "day")
+
+# Round up to nearest unit
+ceiling_date(y, unit = "hour")
+ceiling_date(y, unit = "day")
+
+# Rollback to last day of previous month
+rollback(x)
+rollback(x, roll_to_first = TRUE)
+rollback(x, roll_to_first = TRUE, preserve_hms = FALSE)
+```
+
+### Time Zones
+
+```{r}
+x <- ymd_hms("2006-01-02 03:04:05")
+
+with_tz(x, tzone = "US/Eastern")
+
+force_tz(x, tzone = "US/Eastern")
+```
+
+```{r results="show"}
+timezones <- OlsonNames()
+timezones[grepl("US", timezones)]
+```

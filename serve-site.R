@@ -9,7 +9,7 @@ render <- function(x) {
     purrr::walk(x[grepl("slides\\.Rmd$", x)], rmarkdown::render)
     rmarkdown::render_site(quiet = TRUE)
   } else rmarkdown::render_site(quiet = TRUE)
-  cli::cat_bullet(capture.output(toc()), col = "green", bullet_col = "green")
+  cli::cat_bullet(capture.output(toc()), col = "green", bullet_col = "green", bullet = "tick")
 }
 
 render("index.Rmd")

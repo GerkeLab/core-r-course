@@ -55,20 +55,25 @@ task3_patients <- cr_patients %>%
 _____join(cr, ________, by = "Medical Record Number")
 
 
-# BONUS: Find the diagnosis records of married African American patients.
+# BONUS: Find the diagnosis records of married African American patients using two joins.
 
 
 
 
 # Task 4 ------------------------------------------------------------------
 
-# Find all patients who have had more than one cancer diagnosis and create a
-# data frame with only their patient information, using `anti_join()`.
+# First, verify that all patients in the diagnosis records data set `cr` appear
+# in the patient information data set using `anti_join`
+#
+# Then, find all patients who have had more than one cancer diagnosis and create
+# a data frame with only their patient information, using `semi_join()`.
+
+anti_join(_________, ________, by = "Medical Record Number")
 
 _________ <- cr %>%
   _________
 
-anti_join(_________, _________, by = "Medical Record Number")
+semi_join(_________, _________, by = "Medical Record Number")
 
 
 
@@ -91,12 +96,17 @@ task5_first_dx <- cr %>%
   summarize(first_diagnosis = min(________))
 
 # Merge task5_selected and task5_first_dx so that selected patients also have
-# a `first_diagnosis` column
-task5_patients <- _____join(task5_selected, task5_first_dx, by = "Medical Record Number")
+# a `first_diagnosis` column. Note that `cr_patients` already has a column
+# called `Date Last Patient Contact/Dead` and that we don't trust this to be
+# the same as the column in `cr`, so we need to remove it now.
+task5_patients <- _____join(task5_selected, task5_first_dx, by = "Medical Record Number") %>%
+  select(-`Date Last Patient Contact/Dead`)
 
 # Then join patient information and diagnosis records and transform dates.
 _________(task5_patients, _________, by = "Medical Record") %>%
   mutate(
-    `Date Last Patient Contact/Dead` = ________,
-    `Date of Diagnosis` = ________
+    `Date Last Patient Contact/Dead` = ________ - ________,
+    `Date Last Patient Contact/Dead` = as.integer(________),
+    `Date of Diagnosis` = ________ - ________,
+    `Date of Diagnosis` = __.________(________)
   )

@@ -414,11 +414,13 @@ Create a data frame containing their patient information and all of their diagno
 
 Find the diagnosis records of the African American patients.
 
-**Bonus:** Find the diagnosis records of _married_ African American patients.
+**Bonus:** Find the diagnosis records of _married_ African American patients using two joins.
 
 #### Task 4
 
-Find all patients who have had more than one cancer diagnosis and create a data frame with only their patient information.
+First, verify that all patients in the diagnosis records data set `cr` appearin the patient information data set using `anti_join`
+
+Then, find all patients who have had more than one cancer diagnosis and create a data frame with only their patient information, using `semi_join()`.
 
 #### Task 5
 

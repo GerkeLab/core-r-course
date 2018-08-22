@@ -157,102 +157,6 @@ Which function would you use to transform this data into tidy format?
 
 [Pew Forum on Religious and Public Life](session_05_table.html)
 
-
-
-## Two-Table [dplyr]{.pkg} verbs
-
-### Keys
-
-What are the two types of keys?
-
-<details><summary>Answer</summary>
-
-- A **primary key** uniquely identifies an observation in its own table.
-
-- A foreign key uniquely identifies an observation in another table.
-</details>
-
-### Joins
-
-I highly encourage you to read the chapter on [Relational Data](http://r4ds.had.co.nz/relational-data.html) in the R4DS book.
-
-You can also review all of the join animations by visiting my page on [tidy animated verbs](https://github.com/gadenbuie/tidy-animated-verbs/#readme).
-
-::: {.img-center}
-![](images/animation-original.png){width="480px"}
-:::
-
-Mutating Joins
-
-- `inner_join()`
-- `left_join()`
-- `right_join()`
-- `full_join()`
-
-Filtering Joins
-
-- `semi_join()`
-- `anti_join()`
-
-### Group Work {.tabset}
-
-We'll use the [Breast Cancer Registry Data](session_04_materials.html) from Session 4.
-I've written the import script to get you started, which you can download from the [Session 6 materials page](session_06_materials.html), or copy from below.
-
-<details><summary>Import Data</summary>
-
-```r
-library(tidyverse)
-cr_patients <- read_csv(
-  "CancerRegistryDataPatients.csv",
-  col_names = c("mrn", "age_current", "sex", "hispanic_origin", "race", "vital_status", "date_last_contact", "cause_of_death"),
-  col_types = cols(date_last_contact = col_date(format = "%m/%d/%y")),
-  skip = 1
-)
-
-cr <- read_csv(
-  "CancerRegistryData.csv",
-  col_names = c("mrn", "sequence", "site_primary_icd_o_3",
-                "histology_behavior_icd_o_3", "date_diagnosis", "age_diagnosis",
-                "age_current", "sex", "hispanic_origin", "race", "vital_status",
-                "date_last_contact", "survival_time", "cause_of_death",
-                "tumor_size", "size_unit", "tobacco_use",
-                "summary_rx", "payer_source_dx", "patient_history_alcohol",
-                "marital_status_dx"),
-  col_types = cols(
-    date_last_contact = col_date(format = "%m/%d/%y"),
-    date_diagnosis = col_date(format = "%m/%d/%y")
-  ),
-  skip = 1
-)
-```
-</details>
-
-#### Task 1
-
-Merge the two data sets to add the patient information to their diagnosis records.
-
-#### Task 2
-
-Find deceased patients at least 75 years or older.
-Create a data frame containing their patient information and all of their diagnosis records.
-
-#### Task 3
-
-Find the diagnosis records of the African American patients.
-
-**Bonus:** Find the diagnosis records of _married_ African American patients.
-
-#### Task 4
-
-Find all patients who have had more than one cancer diagnosis and create a data frame with only their patient information.
-
-#### Task 5
-
-Find patients who were last contacted in 2017 and merge their patient information with their diagnosis records.
-Transform all dates to be the number of days since first patient contact.
-
-
 ## Working with Dates
 
 To work with dates, we need another packges from the [tidyverse]{.pkg} called [lubridate]{.pkg}.
@@ -425,3 +329,98 @@ force_tz(x, tzone = "US/Eastern")
 timezones <- OlsonNames()
 timezones[grepl("US", timezones)]
 ```
+
+
+## Assignment
+
+### Review: Two-Table [dplyr]{.pkg} verbs
+
+#### Keys
+
+What are the two types of keys?
+
+<details><summary>Answer</summary>
+
+- A **primary key** uniquely identifies an observation in its own table.
+
+- A foreign key uniquely identifies an observation in another table.
+</details>
+
+#### Joins
+
+I highly encourage you to read the chapter on [Relational Data](http://r4ds.had.co.nz/relational-data.html) in the R4DS book.
+
+You can also review all of the join animations by visiting my page on [tidy animated verbs](https://github.com/gadenbuie/tidy-animated-verbs/#readme).
+
+<details><summary>Joins Review</summary>
+
+::: {.img-center}
+![](images/animation-original.png){width="480px"}
+:::
+
+Mutating Joins
+
+- [`inner_join()`](https://github.com/gadenbuie/tidy-animated-verbs/#inner-join)
+- [`left_join()`](https://github.com/gadenbuie/tidy-animated-verbs/#left-join)
+- [`right_join()`](https://github.com/gadenbuie/tidy-animated-verbs/#right-join)
+- [`full_join()`](https://github.com/gadenbuie/tidy-animated-verbs/#full-join)
+
+Filtering Joins
+
+- [`semi_join()`](https://github.com/gadenbuie/tidy-animated-verbs/#semi-join)
+- [`anti_join()`](https://github.com/gadenbuie/tidy-animated-verbs/#anti-join)
+</details>
+
+### Homework {.tabset}
+
+We'll use the [Breast Cancer Registry Data](session_04_materials.html) from Session 4.
+I've started writing the script with some tips and hints, which you can download from the [Session 6 materials page](session_06_materials.html).
+Or, if you'd like to start blind, you can use the code in Import Data below to get started.
+
+<details><summary>Import Data</summary>
+
+```r
+library(tidyverse)
+# If you don't have the data in your working directory, you can download it by
+# uncommenting and running the two lines below.
+# download.file("https://git.io/fATNV", "CancerRegistryData.csv")
+# download.file("https://git.io/fATNo", "CancerRegistryDataPatients.csv")
+
+cr_patients <- read_csv(
+  "CancerRegistryDataPatients.csv",
+  col_types = cols(`Date Last Patient Contact/Dead` = col_date(format = "%m/%d/%y"))
+)
+
+cr <- read_csv(
+  "CancerRegistryData.csv",
+  col_types = cols(
+    `Date Last Patient Contact/Dead` = col_date(format = "%m/%d/%y"),
+    `Date of Diagnosis` = col_date(format = "%m/%d/%y")
+  )
+)
+```
+</details>
+
+#### Task 1
+
+Merge the two data sets to add the patient information to their diagnosis records.
+
+#### Task 2
+
+Find deceased patients at least 75 years or older.
+Create a data frame containing their patient information and all of their diagnosis records.
+
+#### Task 3
+
+Find the diagnosis records of the African American patients.
+
+**Bonus:** Find the diagnosis records of _married_ African American patients.
+
+#### Task 4
+
+Find all patients who have had more than one cancer diagnosis and create a data frame with only their patient information.
+
+#### Task 5
+
+Find patients who were last contacted in 2017 and merge their patient information with their diagnosis records. Transform all dates to be the number of days since their earliest diagnosis.
+

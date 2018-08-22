@@ -44,12 +44,21 @@ session_list[6, "Link"] <- "session_06.html"
 
 ## Announcements
 
-**Assignment for Wednesday, August 22**:
+**Assignment for Wednesday, August 29**
+
+> Review [dplyr]{.pkg} joins and the [homework assignment from Session 6](session_06.html#assignment).
+Fill in the missing code and complete the tasks in the [cancer_registry_joins.R](materials/06/cancer_registry_join.R) script.
+The scripts use the breast cancer registry data, which you can download from the [Session 4 materials page](session_04_materials.html).
+You can refer to the section on [Two-Table dplyr Verbs](session_05_answers.html#two-table_dplyr_verbs) or to the page of [animated joins](https://github.com/gadenbuie/tidy-animated-verbs#readme).
+
+<details><summary>Assignment for Wednesday, August 22</summary>
 
 > Fill in the missing code and complete the tasks in the 
 [cancer_registry_dplyr.R](materials/05/cancer_registry_dplyr_partial.R) script.
 The data and original script can be downloaded from the [Session 4 materials page](session_04_materials.html), and the partially complete script is in the [Session 5 materials page](session_05_materials.html).
 You can refer to the [dplyr]{.pkg} [cheat sheet](resources.html#cheat_sheets) or the section on [dplyr from Session 3](session_03_answers.html#dplyr_basics).
+
+</details>
 
 <details><summary>Travis Gerke, Thursday, June 28, 2018</summary>
 

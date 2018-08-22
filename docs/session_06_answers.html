@@ -653,106 +653,21 @@ div.tocify {
 <p><a href="session_05_table.html">Pew Forum on Religious and Public Life</a></p>
 </div>
 </div>
-<div id="two-table-dplyr-verbs" class="section level2">
-<h2>Two-Table <span class="pkg">dplyr</span> verbs</h2>
-<div id="keys" class="section level3">
-<h3>Keys</h3>
-<p>What are the two types of keys?</p>
-<details>
-<p><summary>Answer</summary></p>
-<ul>
-<li><p>A <strong>primary key</strong> uniquely identifies an observation in its own table.</p></li>
-<li>A foreign key uniquely identifies an observation in another table.</li>
-</ul>
-</details>
-</div>
-<div id="joins" class="section level3">
-<h3>Joins</h3>
-<p>I highly encourage you to read the chapter on <a href="http://r4ds.had.co.nz/relational-data.html">Relational Data</a> in the R4DS book.</p>
-<p>You can also review all of the join animations by visiting my page on <a href="https://github.com/gadenbuie/tidy-animated-verbs/#readme">tidy animated verbs</a>.</p>
-<div class="img-center">
-<p><img src="images/animation-original.png" width="480" /></p>
-</div>
-<p>Mutating Joins</p>
-<ul>
-<li><code>inner_join()</code></li>
-<li><code>left_join()</code></li>
-<li><code>right_join()</code></li>
-<li><code>full_join()</code></li>
-</ul>
-<p>Filtering Joins</p>
-<ul>
-<li><code>semi_join()</code></li>
-<li><code>anti_join()</code></li>
-</ul>
-</div>
-<div id="group-work" class="section level3 tabset">
-<h3>Group Work</h3>
-<p>We’ll use the <a href="session_04_materials.html">Breast Cancer Registry Data</a> from Session 4. I’ve written the import script to get you started, which you can download from the <a href="session_06_materials.html">Session 6 materials page</a>, or copy from below.</p>
-<details>
-<p><summary>Import Data</summary></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb22-2" data-line-number="2">cr_patients &lt;-<span class="st"> </span><span class="kw">read_csv</span>(</a>
-<a class="sourceLine" id="cb22-3" data-line-number="3">  <span class="st">&quot;CancerRegistryDataPatients.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb22-4" data-line-number="4">  <span class="dt">col_names =</span> <span class="kw">c</span>(<span class="st">&quot;mrn&quot;</span>, <span class="st">&quot;age_current&quot;</span>, <span class="st">&quot;sex&quot;</span>, <span class="st">&quot;hispanic_origin&quot;</span>, <span class="st">&quot;race&quot;</span>, <span class="st">&quot;vital_status&quot;</span>, <span class="st">&quot;date_last_contact&quot;</span>, <span class="st">&quot;cause_of_death&quot;</span>),</a>
-<a class="sourceLine" id="cb22-5" data-line-number="5">  <span class="dt">col_types =</span> <span class="kw">cols</span>(<span class="dt">date_last_contact =</span> <span class="kw">col_date</span>(<span class="dt">format =</span> <span class="st">&quot;%m/%d/%y&quot;</span>)),</a>
-<a class="sourceLine" id="cb22-6" data-line-number="6">  <span class="dt">skip =</span> <span class="dv">1</span></a>
-<a class="sourceLine" id="cb22-7" data-line-number="7">)</a>
-<a class="sourceLine" id="cb22-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb22-9" data-line-number="9">cr &lt;-<span class="st"> </span><span class="kw">read_csv</span>(</a>
-<a class="sourceLine" id="cb22-10" data-line-number="10">  <span class="st">&quot;CancerRegistryData.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb22-11" data-line-number="11">  <span class="dt">col_names =</span> <span class="kw">c</span>(<span class="st">&quot;mrn&quot;</span>, <span class="st">&quot;sequence&quot;</span>, <span class="st">&quot;site_primary_icd_o_3&quot;</span>,</a>
-<a class="sourceLine" id="cb22-12" data-line-number="12">                <span class="st">&quot;histology_behavior_icd_o_3&quot;</span>, <span class="st">&quot;date_diagnosis&quot;</span>, <span class="st">&quot;age_diagnosis&quot;</span>,</a>
-<a class="sourceLine" id="cb22-13" data-line-number="13">                <span class="st">&quot;age_current&quot;</span>, <span class="st">&quot;sex&quot;</span>, <span class="st">&quot;hispanic_origin&quot;</span>, <span class="st">&quot;race&quot;</span>, <span class="st">&quot;vital_status&quot;</span>,</a>
-<a class="sourceLine" id="cb22-14" data-line-number="14">                <span class="st">&quot;date_last_contact&quot;</span>, <span class="st">&quot;survival_time&quot;</span>, <span class="st">&quot;cause_of_death&quot;</span>,</a>
-<a class="sourceLine" id="cb22-15" data-line-number="15">                <span class="st">&quot;tumor_size&quot;</span>, <span class="st">&quot;size_unit&quot;</span>, <span class="st">&quot;tobacco_use&quot;</span>,</a>
-<a class="sourceLine" id="cb22-16" data-line-number="16">                <span class="st">&quot;summary_rx&quot;</span>, <span class="st">&quot;payer_source_dx&quot;</span>, <span class="st">&quot;patient_history_alcohol&quot;</span>,</a>
-<a class="sourceLine" id="cb22-17" data-line-number="17">                <span class="st">&quot;marital_status_dx&quot;</span>),</a>
-<a class="sourceLine" id="cb22-18" data-line-number="18">  <span class="dt">col_types =</span> <span class="kw">cols</span>(</a>
-<a class="sourceLine" id="cb22-19" data-line-number="19">    <span class="dt">date_last_contact =</span> <span class="kw">col_date</span>(<span class="dt">format =</span> <span class="st">&quot;%m/%d/%y&quot;</span>),</a>
-<a class="sourceLine" id="cb22-20" data-line-number="20">    <span class="dt">date_diagnosis =</span> <span class="kw">col_date</span>(<span class="dt">format =</span> <span class="st">&quot;%m/%d/%y&quot;</span>)</a>
-<a class="sourceLine" id="cb22-21" data-line-number="21">  ),</a>
-<a class="sourceLine" id="cb22-22" data-line-number="22">  <span class="dt">skip =</span> <span class="dv">1</span></a>
-<a class="sourceLine" id="cb22-23" data-line-number="23">)</a></code></pre></div>
-</details>
-<div id="task-1" class="section level4">
-<h4>Task 1</h4>
-<p>Merge the two data sets to add the patient information to their diagnosis records.</p>
-</div>
-<div id="task-2" class="section level4">
-<h4>Task 2</h4>
-<p>Find deceased patients at least 75 years or older. Create a data frame containing their patient information and all of their diagnosis records.</p>
-</div>
-<div id="task-3" class="section level4">
-<h4>Task 3</h4>
-<p>Find the diagnosis records of the African American patients.</p>
-<p><strong>Bonus:</strong> Find the diagnosis records of <em>married</em> African American patients.</p>
-</div>
-<div id="task-4" class="section level4">
-<h4>Task 4</h4>
-<p>Find all patients who have had more than one cancer diagnosis and create a data frame with only their patient information.</p>
-</div>
-<div id="task-5" class="section level4">
-<h4>Task 5</h4>
-<p>Find patients who were last contacted in 2017 and merge their patient information with their diagnosis records. Transform all dates to be the number of days since first patient contact.</p>
-</div>
-</div>
-</div>
 <div id="working-with-dates" class="section level2">
 <h2>Working with Dates</h2>
 <p>To work with dates, we need another packges from the <span class="pkg">tidyverse</span> called <span class="pkg">lubridate</span>. This package isn’t loaded by default, so you’ll need to run</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">library</span>(lubridate)</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">library</span>(lubridate)</a></code></pre></div>
 <div id="about-dates-times-and-date-times" class="section level3">
 <h3>About dates, times and date-times</h3>
 <pre><code>2006-01-02 03:04:05</code></pre>
 <p>A <strong>date-time</strong> is a point in time, stored as the number of seconds since <code>1970-01-01 00:00:00 UTC</code>. Note that a date-time also understands time zones.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">as_datetime</span>(<span class="dv">1136171045</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">as_datetime</span>(<span class="dv">1136171045</span>)</a></code></pre></div>
 <pre><code>[1] &quot;2006-01-02 03:04:05 UTC&quot;</code></pre>
 <p>A <strong>date</strong> is a <em>day</em> and is stored as the number of days since <code>1970-01-01</code>.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">as_date</span>(<span class="dv">13150</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">as_date</span>(<span class="dv">13150</span>)</a></code></pre></div>
 <pre><code>[1] &quot;2006-01-02&quot;</code></pre>
 <p>An <span class="pkg">hms</span> <strong>time</strong> is stored as the number of seconds since <code>00:00:00</code>.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">hms<span class="op">::</span><span class="kw">as.hms</span>(<span class="dv">3</span> <span class="op">*</span><span class="st"> </span><span class="dv">60</span><span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span><span class="dv">60</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">hms<span class="op">::</span><span class="kw">as.hms</span>(<span class="dv">3</span> <span class="op">*</span><span class="st"> </span><span class="dv">60</span><span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">4</span> <span class="op">*</span><span class="st"> </span><span class="dv">60</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span>)</a></code></pre></div>
 <pre><code>03:04:05</code></pre>
 </div>
 <div id="converting-strings-to-date-times" class="section level3">
@@ -792,147 +707,233 @@ div.tocify {
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">ymd_hms</span>(<span class="st">&quot;2006-01-02 03:04:05&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">ymd_hms</span>(<span class="st">&quot;2006-01-02 03:04:05&quot;</span>)</a></code></pre></div>
 <pre><code>[1] &quot;2006-01-02 03:04:05 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">ymd_hm</span>(<span class="st">&quot;2006-01-02 03:04&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw">ymd_hm</span>(<span class="st">&quot;2006-01-02 03:04&quot;</span>)</a></code></pre></div>
 <pre><code>[1] &quot;2006-01-02 03:04:00 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="kw">ymd</span>(<span class="st">&quot;2006-01-02&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">ymd</span>(<span class="st">&quot;2006-01-02&quot;</span>)</a></code></pre></div>
 <pre><code>[1] &quot;2006-01-02&quot;</code></pre>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw">mdy_hm</span>(<span class="st">&quot;1/2/06 3:04&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw">mdy_hm</span>(<span class="st">&quot;1/2/06 3:04&quot;</span>)</a></code></pre></div>
 <pre><code>[1] &quot;2006-01-02 03:04:00 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="kw">mdy_hm</span>(<span class="st">&quot;January 2, 2006 3:04&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">mdy_hm</span>(<span class="st">&quot;January 2, 2006 3:04&quot;</span>)</a></code></pre></div>
 <pre><code>[1] &quot;2006-01-02 03:04:00 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">mdy</span>(<span class="st">&quot;1/2/2006&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">mdy</span>(<span class="st">&quot;1/2/2006&quot;</span>)</a></code></pre></div>
 <pre><code>[1] &quot;2006-01-02&quot;</code></pre>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">dmy_hm</span>(<span class="st">&quot;2 Jan 2006 3:04&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">dmy_hm</span>(<span class="st">&quot;2 Jan 2006 3:04&quot;</span>)</a></code></pre></div>
 <pre><code>[1] &quot;2006-01-02 03:04:00 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">dmy</span>(<span class="st">&quot;2 Jan 2006&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="kw">dmy</span>(<span class="st">&quot;2 Jan 2006&quot;</span>)</a></code></pre></div>
 <pre><code>[1] &quot;2006-01-02&quot;</code></pre>
 </div>
 <div id="getting-and-setting-date-components" class="section level3">
 <h3>Getting and Setting Date Components</h3>
 <p>You can get or set a date component with the singular noun describing the date element.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2006-01-02 03:04:05&quot;</span>)</a>
-<a class="sourceLine" id="cb47-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb47-3" data-line-number="3"><span class="kw">date</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2006-01-02 03:04:05&quot;</span>)</a>
+<a class="sourceLine" id="cb46-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb46-3" data-line-number="3"><span class="kw">date</span>(x)</a></code></pre></div>
 <pre><code>[1] &quot;2006-01-02&quot;</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">year</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="kw">year</span>(x)</a></code></pre></div>
 <pre><code>[1] 2006</code></pre>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="kw">week</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="kw">week</span>(x)</a></code></pre></div>
 <pre><code>[1] 1</code></pre>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw">epiyear</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="kw">epiyear</span>(x)</a></code></pre></div>
 <pre><code>[1] 2006</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="kw">epiweek</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="kw">epiweek</span>(x)</a></code></pre></div>
 <pre><code>[1] 1</code></pre>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="kw">month</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="kw">month</span>(x)</a></code></pre></div>
 <pre><code>[1] 1</code></pre>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1"><span class="kw">day</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1"><span class="kw">day</span>(x)</a></code></pre></div>
 <pre><code>[1] 2</code></pre>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1"><span class="kw">wday</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">wday</span>(x)</a></code></pre></div>
 <pre><code>[1] 2</code></pre>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="kw">wday</span>(x, <span class="dt">label =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="kw">wday</span>(x, <span class="dt">label =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>[1] Mon
 Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; Thu &lt; Fri &lt; Sat</code></pre>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1"><span class="kw">wday</span>(x, <span class="dt">label =</span> <span class="ot">TRUE</span>, <span class="dt">abbr =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="kw">wday</span>(x, <span class="dt">label =</span> <span class="ot">TRUE</span>, <span class="dt">abbr =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <pre><code>[1] Monday
 7 Levels: Sunday &lt; Monday &lt; Tuesday &lt; Wednesday &lt; Thursday &lt; ... &lt; Saturday</code></pre>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1"><span class="kw">hour</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="kw">hour</span>(x)</a></code></pre></div>
 <pre><code>[1] 3</code></pre>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1"><span class="kw">minute</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1"><span class="kw">minute</span>(x)</a></code></pre></div>
 <pre><code>[1] 4</code></pre>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1"><span class="kw">second</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="kw">second</span>(x)</a></code></pre></div>
 <pre><code>[1] 5</code></pre>
 <p>For all of the above you can also use this syntax to change the value.</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1">y &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2006-01-02 03:04:05&quot;</span>)</a>
-<a class="sourceLine" id="cb73-2" data-line-number="2"><span class="kw">day</span>(y) &lt;-<span class="st"> </span><span class="dv">7</span></a>
-<a class="sourceLine" id="cb73-3" data-line-number="3">y</a></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1">y &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2006-01-02 03:04:05&quot;</span>)</a>
+<a class="sourceLine" id="cb72-2" data-line-number="2"><span class="kw">day</span>(y) &lt;-<span class="st"> </span><span class="dv">7</span></a>
+<a class="sourceLine" id="cb72-3" data-line-number="3">y</a></code></pre></div>
 <pre><code>[1] &quot;2006-01-07 03:04:05 UTC&quot;</code></pre>
 </div>
 <div id="moving-the-date-time" class="section level3">
 <h3>Moving the date-time</h3>
 <p>If you want to adjust a date-time on the timeline, you can add or subtract time periods, like 2 years. These functions are all named after the plural nouns.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2006-01-02 03:04:05&quot;</span>)</a>
-<a class="sourceLine" id="cb75-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb75-3" data-line-number="3">x <span class="op">+</span><span class="st"> </span><span class="kw">years</span>(<span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2006-01-02 03:04:05&quot;</span>)</a>
+<a class="sourceLine" id="cb74-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb74-3" data-line-number="3">x <span class="op">+</span><span class="st"> </span><span class="kw">years</span>(<span class="dv">4</span>)</a></code></pre></div>
 <pre><code>[1] &quot;2010-01-02 03:04:05 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1">x <span class="op">+</span><span class="st"> </span><span class="kw">months</span>(<span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1">x <span class="op">+</span><span class="st"> </span><span class="kw">months</span>(<span class="dv">4</span>)</a></code></pre></div>
 <pre><code>[1] &quot;2006-05-02 03:04:05 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1">x <span class="op">-</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1">x <span class="op">-</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">4</span>)</a></code></pre></div>
 <pre><code>[1] &quot;2005-12-29 03:04:05 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1">x <span class="op">-</span><span class="st"> </span><span class="kw">hours</span>(<span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1">x <span class="op">-</span><span class="st"> </span><span class="kw">hours</span>(<span class="dv">1</span>)</a></code></pre></div>
 <pre><code>[1] &quot;2006-01-02 02:04:05 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1">x <span class="op">+</span><span class="st"> </span><span class="kw">minutes</span>(<span class="dv">20</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1">x <span class="op">+</span><span class="st"> </span><span class="kw">minutes</span>(<span class="dv">20</span>)</a></code></pre></div>
 <pre><code>[1] &quot;2006-01-02 03:24:05 UTC&quot;</code></pre>
 </div>
 <div id="durations-and-comparing-date-times" class="section level3">
 <h3>Durations and Comparing date-times</h3>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2006-01-02 03:04:05&quot;</span>)</a>
-<a class="sourceLine" id="cb85-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2007-02-03 04:05:06&quot;</span>)</a>
-<a class="sourceLine" id="cb85-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb85-4" data-line-number="4">x <span class="op">&gt;</span><span class="st"> </span>y</a></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2006-01-02 03:04:05&quot;</span>)</a>
+<a class="sourceLine" id="cb84-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2007-02-03 04:05:06&quot;</span>)</a>
+<a class="sourceLine" id="cb84-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb84-4" data-line-number="4">x <span class="op">&gt;</span><span class="st"> </span>y</a></code></pre></div>
 <pre><code>[1] FALSE</code></pre>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1">x <span class="op">&lt;</span><span class="st"> </span>y</a></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1">x <span class="op">&lt;</span><span class="st"> </span>y</a></code></pre></div>
 <pre><code>[1] TRUE</code></pre>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1">y <span class="op">-</span><span class="st"> </span>x</a></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1">y <span class="op">-</span><span class="st"> </span>x</a></code></pre></div>
 <pre><code>Time difference of 397.0424 days</code></pre>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1">x <span class="op">+</span><span class="st"> </span>y <span class="co">#&lt;&lt; Error in `+.POSIXt`(x, y) `+` not defined...</span></a></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1">x <span class="op">+</span><span class="st"> </span>y <span class="co">#&lt;&lt; Error in `+.POSIXt`(x, y) `+` not defined...</span></a></code></pre></div>
 <pre><code>Error in `+.POSIXt`(x, y): binary &#39;+&#39; is not defined for &quot;POSIXt&quot; objects</code></pre>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1"><span class="co"># Comparing date-time</span></a>
-<a class="sourceLine" id="cb93-2" data-line-number="2">z &lt;-<span class="st"> </span>y <span class="op">-</span><span class="st"> </span>x</a>
-<a class="sourceLine" id="cb93-3" data-line-number="3">z</a></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1"><span class="co"># Comparing date-time</span></a>
+<a class="sourceLine" id="cb92-2" data-line-number="2">z &lt;-<span class="st"> </span>y <span class="op">-</span><span class="st"> </span>x</a>
+<a class="sourceLine" id="cb92-3" data-line-number="3">z</a></code></pre></div>
 <pre><code>Time difference of 397.0424 days</code></pre>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1"><span class="kw">as.integer</span>(z)</a></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1"><span class="kw">as.integer</span>(z)</a></code></pre></div>
 <pre><code>[1] 397</code></pre>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1"><span class="co"># Compareing dates</span></a>
-<a class="sourceLine" id="cb97-2" data-line-number="2">z &lt;-<span class="st"> </span><span class="kw">as_date</span>(y) <span class="op">-</span><span class="st"> </span><span class="kw">as_date</span>(x)</a>
-<a class="sourceLine" id="cb97-3" data-line-number="3">z</a></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1"><span class="co"># Compareing dates</span></a>
+<a class="sourceLine" id="cb96-2" data-line-number="2">z &lt;-<span class="st"> </span><span class="kw">as_date</span>(y) <span class="op">-</span><span class="st"> </span><span class="kw">as_date</span>(x)</a>
+<a class="sourceLine" id="cb96-3" data-line-number="3">z</a></code></pre></div>
 <pre><code>Time difference of 397 days</code></pre>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" data-line-number="1"><span class="kw">as.integer</span>(z)</a></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" data-line-number="1"><span class="kw">as.integer</span>(z)</a></code></pre></div>
 <pre><code>[1] 397</code></pre>
 </div>
 <div id="rounding-dates" class="section level3">
 <h3>Rounding Dates</h3>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2006-01-02 03:04:05&quot;</span>)</a>
-<a class="sourceLine" id="cb101-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2007-02-03 04:05:06&quot;</span>)</a>
-<a class="sourceLine" id="cb101-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb101-4" data-line-number="4"><span class="co"># Round to nearest unit</span></a>
-<a class="sourceLine" id="cb101-5" data-line-number="5"><span class="kw">round_date</span>(x, <span class="dt">unit =</span> <span class="st">&quot;minute&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2006-01-02 03:04:05&quot;</span>)</a>
+<a class="sourceLine" id="cb100-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2007-02-03 04:05:06&quot;</span>)</a>
+<a class="sourceLine" id="cb100-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb100-4" data-line-number="4"><span class="co"># Round to nearest unit</span></a>
+<a class="sourceLine" id="cb100-5" data-line-number="5"><span class="kw">round_date</span>(x, <span class="dt">unit =</span> <span class="st">&quot;minute&quot;</span>)</a></code></pre></div>
 <pre><code>[1] &quot;2006-01-02 03:04:00 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" data-line-number="1"><span class="kw">round_date</span>(y, <span class="dt">unit =</span> <span class="st">&quot;month&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1"><span class="kw">round_date</span>(y, <span class="dt">unit =</span> <span class="st">&quot;month&quot;</span>)</a></code></pre></div>
 <pre><code>[1] &quot;2007-02-01 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1"><span class="co"># Round down to nearest unit</span></a>
-<a class="sourceLine" id="cb105-2" data-line-number="2"><span class="kw">floor_date</span>(x, <span class="dt">unit =</span> <span class="st">&quot;hour&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" data-line-number="1"><span class="co"># Round down to nearest unit</span></a>
+<a class="sourceLine" id="cb104-2" data-line-number="2"><span class="kw">floor_date</span>(x, <span class="dt">unit =</span> <span class="st">&quot;hour&quot;</span>)</a></code></pre></div>
 <pre><code>[1] &quot;2006-01-02 03:00:00 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" data-line-number="1"><span class="kw">floor_date</span>(x, <span class="dt">unit =</span> <span class="st">&quot;day&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" data-line-number="1"><span class="kw">floor_date</span>(x, <span class="dt">unit =</span> <span class="st">&quot;day&quot;</span>)</a></code></pre></div>
 <pre><code>[1] &quot;2006-01-02 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" data-line-number="1"><span class="co"># Round up to nearest unit</span></a>
-<a class="sourceLine" id="cb109-2" data-line-number="2"><span class="kw">ceiling_date</span>(y, <span class="dt">unit =</span> <span class="st">&quot;hour&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" data-line-number="1"><span class="co"># Round up to nearest unit</span></a>
+<a class="sourceLine" id="cb108-2" data-line-number="2"><span class="kw">ceiling_date</span>(y, <span class="dt">unit =</span> <span class="st">&quot;hour&quot;</span>)</a></code></pre></div>
 <pre><code>[1] &quot;2007-02-03 05:00:00 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" data-line-number="1"><span class="kw">ceiling_date</span>(y, <span class="dt">unit =</span> <span class="st">&quot;day&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" data-line-number="1"><span class="kw">ceiling_date</span>(y, <span class="dt">unit =</span> <span class="st">&quot;day&quot;</span>)</a></code></pre></div>
 <pre><code>[1] &quot;2007-02-04 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" data-line-number="1"><span class="co"># Rollback to last day of previous month</span></a>
-<a class="sourceLine" id="cb113-2" data-line-number="2"><span class="kw">rollback</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" data-line-number="1"><span class="co"># Rollback to last day of previous month</span></a>
+<a class="sourceLine" id="cb112-2" data-line-number="2"><span class="kw">rollback</span>(x)</a></code></pre></div>
 <pre><code>[1] &quot;2005-12-31 03:04:05 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" data-line-number="1"><span class="kw">rollback</span>(x, <span class="dt">roll_to_first =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" data-line-number="1"><span class="kw">rollback</span>(x, <span class="dt">roll_to_first =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>[1] &quot;2006-01-01 03:04:05 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb117-1" data-line-number="1"><span class="kw">rollback</span>(x, <span class="dt">roll_to_first =</span> <span class="ot">TRUE</span>, <span class="dt">preserve_hms =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb116-1" data-line-number="1"><span class="kw">rollback</span>(x, <span class="dt">roll_to_first =</span> <span class="ot">TRUE</span>, <span class="dt">preserve_hms =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <pre><code>[1] &quot;2006-01-01 UTC&quot;</code></pre>
 </div>
 <div id="time-zones" class="section level3">
 <h3>Time Zones</h3>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2006-01-02 03:04:05&quot;</span>)</a>
-<a class="sourceLine" id="cb119-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb119-3" data-line-number="3"><span class="kw">with_tz</span>(x, <span class="dt">tzone =</span> <span class="st">&quot;US/Eastern&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="st">&quot;2006-01-02 03:04:05&quot;</span>)</a>
+<a class="sourceLine" id="cb118-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb118-3" data-line-number="3"><span class="kw">with_tz</span>(x, <span class="dt">tzone =</span> <span class="st">&quot;US/Eastern&quot;</span>)</a></code></pre></div>
 <pre><code>[1] &quot;2006-01-01 22:04:05 EST&quot;</code></pre>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb121-1" data-line-number="1"><span class="kw">force_tz</span>(x, <span class="dt">tzone =</span> <span class="st">&quot;US/Eastern&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb120-1" data-line-number="1"><span class="kw">force_tz</span>(x, <span class="dt">tzone =</span> <span class="st">&quot;US/Eastern&quot;</span>)</a></code></pre></div>
 <pre><code>[1] &quot;2006-01-02 03:04:05 EST&quot;</code></pre>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb123-1" data-line-number="1">timezones &lt;-<span class="st"> </span><span class="kw">OlsonNames</span>()</a>
-<a class="sourceLine" id="cb123-2" data-line-number="2">timezones[<span class="kw">grepl</span>(<span class="st">&quot;US&quot;</span>, timezones)]</a></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb122-1" data-line-number="1">timezones &lt;-<span class="st"> </span><span class="kw">OlsonNames</span>()</a>
+<a class="sourceLine" id="cb122-2" data-line-number="2">timezones[<span class="kw">grepl</span>(<span class="st">&quot;US&quot;</span>, timezones)]</a></code></pre></div>
 <pre><code> [1] &quot;US/Alaska&quot;         &quot;US/Aleutian&quot;       &quot;US/Arizona&quot;       
  [4] &quot;US/Central&quot;        &quot;US/East-Indiana&quot;   &quot;US/Eastern&quot;       
  [7] &quot;US/Hawaii&quot;         &quot;US/Indiana-Starke&quot; &quot;US/Michigan&quot;      
 [10] &quot;US/Mountain&quot;       &quot;US/Pacific&quot;        &quot;US/Pacific-New&quot;   
 [13] &quot;US/Samoa&quot;         </code></pre>
+</div>
+</div>
+<div id="assignment" class="section level2">
+<h2>Assignment</h2>
+<div id="review-two-table-dplyr-verbs" class="section level3">
+<h3>Review: Two-Table <span class="pkg">dplyr</span> verbs</h3>
+<div id="keys" class="section level4">
+<h4>Keys</h4>
+<p>What are the two types of keys?</p>
+<details>
+<p><summary>Answer</summary></p>
+<ul>
+<li><p>A <strong>primary key</strong> uniquely identifies an observation in its own table.</p></li>
+<li>A foreign key uniquely identifies an observation in another table.</li>
+</ul>
+</details>
+</div>
+<div id="joins" class="section level4">
+<h4>Joins</h4>
+<p>I highly encourage you to read the chapter on <a href="http://r4ds.had.co.nz/relational-data.html">Relational Data</a> in the R4DS book.</p>
+<p>You can also review all of the join animations by visiting my page on <a href="https://github.com/gadenbuie/tidy-animated-verbs/#readme">tidy animated verbs</a>.</p>
+<details>
+<p><summary>Joins Review</summary></p>
+<div class="img-center">
+<p><img src="images/animation-original.png" width="480" /></p>
+</div>
+<p>Mutating Joins</p>
+<ul>
+<li><a href="https://github.com/gadenbuie/tidy-animated-verbs/#inner-join"><code>inner_join()</code></a></li>
+<li><a href="https://github.com/gadenbuie/tidy-animated-verbs/#left-join"><code>left_join()</code></a></li>
+<li><a href="https://github.com/gadenbuie/tidy-animated-verbs/#right-join"><code>right_join()</code></a></li>
+<li><a href="https://github.com/gadenbuie/tidy-animated-verbs/#full-join"><code>full_join()</code></a></li>
+</ul>
+<p>Filtering Joins</p>
+<ul>
+<li><a href="https://github.com/gadenbuie/tidy-animated-verbs/#semi-join"><code>semi_join()</code></a></li>
+<li><a href="https://github.com/gadenbuie/tidy-animated-verbs/#anti-join"><code>anti_join()</code></a></li>
+</ul>
+</details>
+</div>
+</div>
+<div id="homework" class="section level3 tabset">
+<h3>Homework</h3>
+<p>We’ll use the <a href="session_04_materials.html">Breast Cancer Registry Data</a> from Session 4. I’ve started writing the script with some tips and hints, which you can download from the <a href="session_06_materials.html">Session 6 materials page</a>. Or, if you’d like to start blind, you can use the code in Import Data below to get started.</p>
+<details>
+<p><summary>Import Data</summary></p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb124-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb124-2" data-line-number="2"><span class="co"># If you don&#39;t have the data in your working directory, you can download it by</span></a>
+<a class="sourceLine" id="cb124-3" data-line-number="3"><span class="co"># uncommenting and running the two lines below.</span></a>
+<a class="sourceLine" id="cb124-4" data-line-number="4"><span class="co"># download.file(&quot;https://git.io/fATNV&quot;, &quot;CancerRegistryData.csv&quot;)</span></a>
+<a class="sourceLine" id="cb124-5" data-line-number="5"><span class="co"># download.file(&quot;https://git.io/fATNo&quot;, &quot;CancerRegistryDataPatients.csv&quot;)</span></a>
+<a class="sourceLine" id="cb124-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb124-7" data-line-number="7">cr_patients &lt;-<span class="st"> </span><span class="kw">read_csv</span>(</a>
+<a class="sourceLine" id="cb124-8" data-line-number="8">  <span class="st">&quot;CancerRegistryDataPatients.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb124-9" data-line-number="9">  <span class="dt">col_types =</span> <span class="kw">cols</span>(<span class="st">`</span><span class="dt">Date Last Patient Contact/Dead</span><span class="st">`</span> =<span class="st"> </span><span class="kw">col_date</span>(<span class="dt">format =</span> <span class="st">&quot;%m/%d/%y&quot;</span>))</a>
+<a class="sourceLine" id="cb124-10" data-line-number="10">)</a>
+<a class="sourceLine" id="cb124-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb124-12" data-line-number="12">cr &lt;-<span class="st"> </span><span class="kw">read_csv</span>(</a>
+<a class="sourceLine" id="cb124-13" data-line-number="13">  <span class="st">&quot;CancerRegistryData.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb124-14" data-line-number="14">  <span class="dt">col_types =</span> <span class="kw">cols</span>(</a>
+<a class="sourceLine" id="cb124-15" data-line-number="15">    <span class="st">`</span><span class="dt">Date Last Patient Contact/Dead</span><span class="st">`</span> =<span class="st"> </span><span class="kw">col_date</span>(<span class="dt">format =</span> <span class="st">&quot;%m/%d/%y&quot;</span>),</a>
+<a class="sourceLine" id="cb124-16" data-line-number="16">    <span class="st">`</span><span class="dt">Date of Diagnosis</span><span class="st">`</span> =<span class="st"> </span><span class="kw">col_date</span>(<span class="dt">format =</span> <span class="st">&quot;%m/%d/%y&quot;</span>)</a>
+<a class="sourceLine" id="cb124-17" data-line-number="17">  )</a>
+<a class="sourceLine" id="cb124-18" data-line-number="18">)</a></code></pre></div>
+</details>
+<div id="task-1" class="section level4">
+<h4>Task 1</h4>
+<p>Merge the two data sets to add the patient information to their diagnosis records.</p>
+</div>
+<div id="task-2" class="section level4">
+<h4>Task 2</h4>
+<p>Find deceased patients at least 75 years or older. Create a data frame containing their patient information and all of their diagnosis records.</p>
+</div>
+<div id="task-3" class="section level4">
+<h4>Task 3</h4>
+<p>Find the diagnosis records of the African American patients.</p>
+<p><strong>Bonus:</strong> Find the diagnosis records of <em>married</em> African American patients.</p>
+</div>
+<div id="task-4" class="section level4">
+<h4>Task 4</h4>
+<p>Find all patients who have had more than one cancer diagnosis and create a data frame with only their patient information.</p>
+</div>
+<div id="task-5" class="section level4">
+<h4>Task 5</h4>
+<p>Find patients who were last contacted in 2017 and merge their patient information with their diagnosis records. Transform all dates to be the number of days since their earliest diagnosis.</p>
+</div>
 </div>
 </div>
 

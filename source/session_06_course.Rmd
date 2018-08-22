@@ -247,6 +247,11 @@ Find the diagnosis records of the African American patients.
 
 Find all patients who have had more than one cancer diagnosis and create a data frame with only their patient information.
 
+#### Task 5
+
+Find patients who were last contacted in 2017 and merge their patient information with their diagnosis records.
+Transform all dates to be the number of days since first patient contact.
+
 
 ## Working with Dates
 
@@ -292,7 +297,8 @@ The the string doesn't include _time_, a _date_ is returned rather than a _date-
 data_frame(
   element = c("year", "month", "day", "hour", "minute", "second"),
   letter = paste0("**", c("y", "m", "d", "h", "m", "s"), "**")
-)
+) %>% 
+  knitr::kable()
 ```
 
 ```{r}

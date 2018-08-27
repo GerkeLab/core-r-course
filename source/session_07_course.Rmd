@@ -1,0 +1,243 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+## Package Spotlight: [janitor]{.pkg}
+
+[![](https://raw.githubusercontent.com/sfirke/janitor/master/man/figures/logo_small.png){.img-right}][janitor]
+
+> **janitor** has simple functions for examining and cleaning dirty data. It was built with beginning and intermediate R users in mind and is optimized for user-friendliness.
+
+To install [janitor]{.pkg}:
+
+```r
+install.packages("janitor")
+```
+
+### Clean names, remove empties, find duplicates
+
+Three functions are useful on a daily basis:
+
+1. `clean_names()`: Makes nice, easy to use names
+
+2. `remove_empty()`: Removes rows or columns where _everything_ is missing
+
+3. `get_dupes(df, col1, col2)`: Get rows in `df` that have duplicate values in `col1` and `col2`.
+
+```r
+library(janitor)
+library(readr)
+library(lubridate)
+
+cr <- read_csv("CancerRegistryData.csv") %>% 
+  clean_names() %>% 
+  remove_empty() %>% 
+  mutate(
+    date_of_diagnosis = mdy(date_of_diagnosis),
+    date_last_patient_contact_dead = mdy(date_last_patient_contact_dead)
+  )
+```
+
+```{r results="show", echo=FALSE}
+cr <- readr::read_csv(
+  here::here("materials/04/CancerRegistryData.csv")
+) %>% 
+  janitor::clean_names() %>% 
+  janitor::remove_empty(c("rows", "cols")) %>% 
+  mutate(
+    date_of_diagnosis = lubridate::mdy(date_of_diagnosis),
+    date_last_patient_contact_dead = lubridate::mdy(date_last_patient_contact_dead)
+  )
+```
+
+```{r results='show'}
+names(cr)
+```
+
+Learn more at the [janitor package website][janitor].
+
+
+## Doing things with strings
+
+[![](https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png){.img-right width=300}][stringr]
+
+```r
+library(tidyverse)
+# library(stringr)
+```
+
+### Quick String Review
+
+Which of the following are valid R strings:
+
+- `"Something interesting"`
+
+- `"I'm not sure what to say here"`
+
+- `'There\'s nothing like going "home"'`
+
+- `"\"It's snowing outside,\" he said"`
+
+```r
+source("https://git.io/fAOVu")
+```
+
+```{r include=FALSE}
+source(here::here("source/07_import_data.R"))
+```
+
+### Work Directly with Strings
+
+All of the [stringr]{.pkg} functions start with **`str_`**, like `str_c()`.
+This function takes parts of a string and concatenates them, just like `c()` takes parts of a vector and puts them together.
+
+```{r}
+str_c("Something", "interesting")
+str_c("Something", "interesting", sep = " ")
+
+str_c("Something", c("funny", "odd"), sep = " ")
+str_c("Something", c("funny", "odd"), sep = " ", collapse = " or ")
+```
+
+#### Detect if a string contains another string
+
+```{r}
+str_detect("apple", "ap")
+str_detect(c("apple", "grape", "banana"), "ap")
+```
+
+<details><summary>Visualize</summary>
+
+```{r echo=FALSE, results="show"}
+regexplain::view_regex(c("apple", "grape", "banana"), "ap")
+```
+</details>
+
+```{r}
+cr %>% 
+  filter(str_detect(histology_behavior_icd_o_3, "CARCINOMA"))
+
+cr %>% filter(
+  str_detect(histology_behavior_icd_o_3, "CARCINOMA"),
+  !str_detect(histology_behavior_icd_o_3, "INFILTRATING")
+)
+```
+
+#### Count the number of times a string is found in other string(s)
+
+```{r}
+str_count("apple", "p")
+str_count(c("apple", "grape", "banana"), "p")
+```
+
+#### Extract part of a string
+
+```{r}
+str_extract(c("apple", "grape", "banana"), "p")
+```
+
+#### Remove or replace part of a string
+
+```{r}
+str_remove(c("apple fruit", "grapefruit", "fruit banana"), "fruit")
+
+str_replace(c("apple fruit", "grapefruit", "fruit banana"), "fruit", "FRUIT")
+
+str_remove("apple fruit and banana fruit", "fruit")
+str_remove_all("apple fruit and banana fruit", "fruit")
+
+str_replace_all("apple fruit and banana fruit", "fruit", "FRUIT")
+```
+
+#### Convert string to lower, upper or title case
+
+```{r}
+str_to_lower("STOP SHOUTING")
+
+str_to_upper("talk loudly")
+
+str_to_title("be a little more professional")
+```
+
+### Exercises 7.1 {.tabset}
+
+#### Task 1
+
+Find all `BREAST` cancer diagnosis records with a payer source that includes `HMO`s.
+
+<details><summary>Answer</summary>
+
+```{r results="show"}
+cr %>% 
+  filter(
+    str_detect(site_primary_icd_o_3, "BREAST"),
+    str_detect(payer_source_1_at_dx, "HMO")
+  ) %>% 
+  select(medical_record_number, 
+         site_primary_icd_o_3, 
+         payer_source_1_at_dx)
+```
+</details>
+
+#### Task 2
+
+Count the total number of times surgery appears in the prescribed first course for each diagnosis record.
+
+```r
+cr %>% 
+  mutate(
+    ________ = str_=====(summary_of_rx_1st_course, "SURGERY")
+  ) %>% 
+  group_by(medical_record_number) %>% 
+  summarize(n_surgery = sum(________))
+```
+
+<details><summary>Answer</summary>
+
+```{r results="show"}
+cr %>% 
+  mutate(
+    surgery_count = str_count(summary_of_rx_1st_course, "SURGERY")
+  ) %>% 
+  group_by(medical_record_number) %>% 
+  summarize(n_surgery = sum(surgery_count))
+```
+</details>
+
+#### Task 3
+
+I took another look at the data and improved the previous code.
+What improvement did I make to get this result?
+
+```{r session-07-task-3, echo=FALSE, results="show"}
+cr %>% 
+  mutate(
+    surgery_count = str_count(summary_of_rx_1st_course, "SURG")
+  ) %>% 
+  group_by(medical_record_number) %>% 
+  summarize(n_surgery = sum(surgery_count))
+```
+
+<details><summary>Answer</summary>
+
+```{r ref.label="session-07-task-3", echo=TRUE, eval=FALSE}
+```
+</details>
+
+#### Task 4
+
+The `cr_patients` dataset also includes an `email` field, but some of the records weren't filled out correctly.
+An email _definitely_ has to have an `@`.
+
+How many patients are missing a valid email address with this criteria?
+
+<details><summary>Answer</summary>
+
+```{r results='asis'}
+cr_patients %>% 
+  filter(!str_detect(email, "@")) %>% 
+  select(email)
+```
+</details>

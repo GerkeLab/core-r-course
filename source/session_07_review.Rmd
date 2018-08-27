@@ -1,0 +1,72 @@
+## Homework Review
+
+Review the homework from [Session 6](session_06.html#assignment).
+
+You can check out the approach I took [in this page](materials/06/cancer_registry_joins.html).
+There is more than one way to accomplish each task, so it's okay if your code looks different!
+
+- What parts of these tasks were difficult?
+- Which parts did you find easy?
+- What questions did you have as you worked?
+- Were you able to find the answers to any of these questions?
+
+### Tidy Data
+
+**Question:** What are the [three rules of tidy data](session_06_answers.html#the_three_rules_of_tidy_data)?
+
+**Question:** Which function from [tidyr]{.pkg} takes data from _wide_ to _long_ format?
+
+1. `gather()`
+2. `spread()`
+
+### Working with Dates
+
+**Question:** Which of the following functions is used to: 
+
+1. extract the month from a date; 
+2. add a number of months to a date; 
+3. find the first day of the month to which a date belongs?
+
+a. `months()`
+b. `floor_date()`
+c. `month()`
+
+<details><summary>Answer</summary>
+
+- `month(x)` extracts the month of the date `x`
+- `x + months(2)` adds two months to `x`
+- `floor_date(x, unit = "month")` rounds down to the nearest month
+</details>
+
+**Question:** Given the following dates
+
+```{r echo=FALSE, results='asis'}
+s7_review_formats <- c(
+  "%a %b %e %Y %H:%M:%S",
+  "%F",
+  "%m/%d/%y %I:%M",
+  "%e %B %Y %I%P"
+)[sample(1:4, 4)]
+for (i in 1:4) {
+  s7_time <- Sys.time() - lubridate::days(round(runif(1, 1, 365*1), 0))
+  cat(strftime(s7_time, paste0("\n- `\"", s7_review_formats[i], "\"`")))
+}
+```
+
+which functions can be used to convert the dates from strings to dates or date-times?
+
+a. `mdy_hm()`
+b. `dmy_h()`
+c. `ymd()`
+d. `mdy_hms()`
+
+<details><summary>Answer</summary>
+
+- `dmy_h(" 4 January 2018 01pm")`: `r lubridate::dmy_h(" 4 January 2018 01pm")`
+
+- `mdy_hm("02/18/18 01:54")`: `r lubridate::mdy_hm("02/18/18 01:54")`
+
+- `mdy_hms("Fri Dec  1 2017 13:54:01")`: `r lubridate::mdy_hms("Fri Dec  1 2017 13:54:01")`
+
+- `ymd("2018-07-08")`: `r lubridate::ymd("2018-07-08")`
+</details>

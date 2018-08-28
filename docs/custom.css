@@ -196,7 +196,9 @@ white-space:nowrap;
   margin-left: auto;
   margin-right: auto;
 }
-
+.img-right {
+  float: right;
+}
 .img-mw500 {
   max-width: 500px;
 }

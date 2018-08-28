@@ -1,0 +1,22 @@
+## Overview
+
+1. Review Homework
+
+1. Working with strings (regex-free)
+    - `paste()`
+    - `str_trim()`
+    - `str_detect()`
+    - `str_count()`
+    - `str_extact()`
+    - `str_remove()`
+    - `str_replace()` and `str_replace_all()`
+    - `str_to_lower()`, `str_to_title()`, `str_to_upper()`
+    
+1. Regular Expressions
+    - regexplain
+    - or `|`
+    - groups `(apple) (banana)`
+    - anything `.`
+    - modifiers `+`, `*`, `?`
+    - anchors `^`, `$`
+    - backslashes

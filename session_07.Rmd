@@ -1,0 +1,30 @@
+---
+title: Session 7
+date: "August 29, 2018"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r session-07-init, include=FALSE}
+SHOW_RESULTS <- "hide"
+
+session_links <- list(
+  "This page with the code results" = "session_07_answers.html"
+)
+```
+
+```{r child="source/session_07_global.Rmd"}
+```
+
+```{r child="source/session_07_review.Rmd"}
+```
+
+```{r child="source/session_07_outline.Rmd"}
+```
+
+```{r child="source/session_07_course.Rmd"}
+```

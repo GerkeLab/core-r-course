@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<meta name="date" content="2018-08-29" />
+
+<title>Session 7</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/regexplain-groups-0.2.2/groups.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span. { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+<link rel="stylesheet" href="https://afeld.github.io/emoji-css/emoji.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Core R Course</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    About
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="proposal.html">About this course</a>
+    </li>
+    <li>
+      <a href="system-requirements.html">System Requirements</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Sessions
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="session_01.html">Session 1 – July 18</a>
+    </li>
+    <li>
+      <a href="session_02_answers.html">Session 2 – July 25</a>
+    </li>
+    <li>
+      <a href="session_03_answers.html">Session 3 – August 1</a>
+    </li>
+    <li>
+      <a href="session_04.html">Session 4 – August 8</a>
+    </li>
+    <li>
+      <a href="session_05_answers.html">Session 5 – August 15</a>
+    </li>
+    <li>
+      <a href="session_06_answers.html">Session 6 – August 22</a>
+    </li>
+    <li>
+      <a href="session_07.html">Session 7 – August 29</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Materials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="session_01_materials.html">Session 1</a>
+    </li>
+    <li>
+      <a href="session_03_materials.html">Session 3</a>
+    </li>
+    <li>
+      <a href="session_04_materials.html">Session 4</a>
+    </li>
+    <li>
+      <a href="session_05_materials.html">Session 5</a>
+    </li>
+    <li>
+      <a href="session_06_materials.html">Session 6</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="resources.html">Resources</a>
+</li>
+<li>
+  <a href="https://github.com/gerkelab/core-r-course">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Session 7</h1>
+<h4 class="date"><em>August 29, 2018</em></h4>
+
+</div>
+
+
+<div id="links" class="section level2">
+<h2>Links</h2>
+<ul>
+<li><a href="session_07_answers.html">This page with the code results</a></li>
+</ul>
+</div>
+<div id="homework-review" class="section level2">
+<h2>Homework Review</h2>
+<p>Review the homework from <a href="session_06.html#assignment">Session 6</a>.</p>
+<p>You can check out the approach I took <a href="materials/06/cancer_registry_joins.html">in this page</a>. There is more than one way to accomplish each task, so it’s okay if your code looks different!</p>
+<ul>
+<li>What parts of these tasks were difficult?</li>
+<li>Which parts did you find easy?</li>
+<li>What questions did you have as you worked?</li>
+<li>Were you able to find the answers to any of these questions?</li>
+</ul>
+<div id="tidy-data" class="section level3">
+<h3>Tidy Data</h3>
+<p><strong>Question:</strong> What are the <a href="session_06_answers.html#the_three_rules_of_tidy_data">three rules of tidy data</a>?</p>
+<p><strong>Question:</strong> Which function from <span class="pkg">tidyr</span> takes data from <em>wide</em> to <em>long</em> format?</p>
+<ol style="list-style-type: decimal">
+<li><code>gather()</code></li>
+<li><code>spread()</code></li>
+</ol>
+</div>
+<div id="working-with-dates" class="section level3">
+<h3>Working with Dates</h3>
+<p><strong>Question:</strong> Which of the following functions is used to:</p>
+<ol style="list-style-type: decimal">
+<li>extract the month from a date;</li>
+<li>add a number of months to a date;</li>
+<li>find the first day of the month to which a date belongs?</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li><code>months()</code></li>
+<li><code>floor_date()</code></li>
+<li><code>month()</code></li>
+</ol>
+<details>
+<p><summary>Answer</summary></p>
+<ul>
+<li><code>month(x)</code> extracts the month of the date <code>x</code></li>
+<li><code>x + months(2)</code> adds two months to <code>x</code></li>
+<li><code>floor_date(x, unit = &quot;month&quot;)</code> rounds down to the nearest month</li>
+</ul>
+</details>
+<p><strong>Question:</strong> Given the following dates</p>
+<ul>
+<li><code>&quot; 5 January 2018 06pm&quot;</code></li>
+<li><code>&quot;02/19/18 06:04&quot;</code></li>
+<li><code>&quot;Sat Dec  2 2017 18:04:32&quot;</code></li>
+<li><code>&quot;2018-07-09&quot;</code></li>
+</ul>
+<p>which functions can be used to convert the dates from strings to dates or date-times?</p>
+<ol style="list-style-type: lower-alpha">
+<li><code>mdy_hm()</code></li>
+<li><code>dmy_h()</code></li>
+<li><code>ymd()</code></li>
+<li><code>mdy_hms()</code></li>
+</ol>
+<details>
+<p><summary>Answer</summary></p>
+<ul>
+<li><p><code>dmy_h(&quot; 4 January 2018 01pm&quot;)</code>: 2018-01-04 13:00:00</p></li>
+<li><p><code>mdy_hm(&quot;02/18/18 01:54&quot;)</code>: 2018-02-18 01:54:00</p></li>
+<li><p><code>mdy_hms(&quot;Fri Dec  1 2017 13:54:01&quot;)</code>: 2017-12-01 13:54:01</p></li>
+<li><code>ymd(&quot;2018-07-08&quot;)</code>: 2018-07-08</li>
+</ul>
+</details>
+</div>
+</div>
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<ol style="list-style-type: decimal">
+<li><p>Review Homework</p></li>
+<li>Working with strings (regex-free)
+<ul>
+<li><code>paste()</code></li>
+<li><code>str_trim()</code></li>
+<li><code>str_detect()</code></li>
+<li><code>str_count()</code></li>
+<li><code>str_extact()</code></li>
+<li><code>str_remove()</code></li>
+<li><code>str_replace()</code> and <code>str_replace_all()</code></li>
+<li><code>str_to_lower()</code>, <code>str_to_title()</code>, <code>str_to_upper()</code></li>
+</ul></li>
+<li>Regular Expressions
+<ul>
+<li>regexplain</li>
+<li>or <code>|</code></li>
+<li>groups <code>(apple) (banana)</code></li>
+<li>anything <code>.</code></li>
+<li>modifiers <code>+</code>, <code>*</code>, <code>?</code></li>
+<li>anchors <code>^</code>, <code>$</code></li>
+<li>backslashes</li>
+</ul></li>
+</ol>
+</div>
+<div id="package-spotlight-janitor" class="section level2">
+<h2>Package Spotlight: <span class="pkg">janitor</span></h2>
+<p><a href="https://github.com/sfirke/janitor#readme"><img src="https://raw.githubusercontent.com/sfirke/janitor/master/man/figures/logo_small.png" class="img-right" /></a></p>
+<blockquote>
+<p><strong>janitor</strong> has simple functions for examining and cleaning dirty data. It was built with beginning and intermediate R users in mind and is optimized for user-friendliness.</p>
+</blockquote>
+<p>To install <span class="pkg">janitor</span>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&quot;janitor&quot;</span>)</a></code></pre></div>
+<div id="clean-names-remove-empties-find-duplicates" class="section level3">
+<h3>Clean names, remove empties, find duplicates</h3>
+<p>Three functions are useful on a daily basis:</p>
+<ol style="list-style-type: decimal">
+<li><p><code>clean_names()</code>: Makes nice, easy to use names</p></li>
+<li><p><code>remove_empty()</code>: Removes rows or columns where <em>everything</em> is missing</p></li>
+<li><p><code>get_dupes(df, col1, col2)</code>: Get rows in <code>df</code> that have duplicate values in <code>col1</code> and <code>col2</code>.</p></li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(janitor)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">library</span>(readr)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">library</span>(lubridate)</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">cr &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;CancerRegistryData.csv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="st">  </span><span class="kw">clean_names</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="st">  </span><span class="kw">remove_empty</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="st">  </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">    <span class="dt">date_of_diagnosis =</span> <span class="kw">mdy</span>(date_of_diagnosis),</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">    <span class="dt">date_last_patient_contact_dead =</span> <span class="kw">mdy</span>(date_last_patient_contact_dead)</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">  )</a></code></pre></div>
+<pre><code>Parsed with column specification:
+cols(
+  .default = col_character(),
+  `Medical Record Number` = col_integer(),
+  `Sequence Number` = col_integer(),
+  `Age at Diagnosis` = col_integer(),
+  `Age, Current` = col_integer(),
+  `Survival Time (months)` = col_integer(),
+  `Clinical Tumor Size` = col_double()
+)</code></pre>
+<pre><code>See spec(...) for full column specifications.</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">names</span>(cr)</a></code></pre></div>
+<pre><code> [1] &quot;medical_record_number&quot;          &quot;sequence_number&quot;               
+ [3] &quot;site_primary_icd_o_3&quot;           &quot;histology_behavior_icd_o_3&quot;    
+ [5] &quot;date_of_diagnosis&quot;              &quot;age_at_diagnosis&quot;              
+ [7] &quot;age_current&quot;                    &quot;sex&quot;                           
+ [9] &quot;spanish_hispanic_origin&quot;        &quot;race&quot;                          
+[11] &quot;vital_status&quot;                   &quot;date_last_patient_contact_dead&quot;
+[13] &quot;survival_time_months&quot;           &quot;dc_cause_of_death&quot;             
+[15] &quot;clinical_tumor_size&quot;            &quot;clinical_size_unit&quot;            
+[17] &quot;tobacco_use_fcds&quot;               &quot;summary_of_rx_1st_course&quot;      
+[19] &quot;payer_source_1_at_dx&quot;           &quot;patient_history_alcohol&quot;       
+[21] &quot;marital_status_at_dx&quot;          </code></pre>
+<p>Learn more at the <a href="https://github.com/sfirke/janitor#readme">janitor package website</a>.</p>
+</div>
+</div>
+<div id="doing-things-with-strings" class="section level2">
+<h2>Doing things with strings</h2>
+<p><a href="http://stringr.tidyverse.org/"><img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png" class="img-right" width="300" /></a></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co"># library(stringr)</span></a></code></pre></div>
+<div id="quick-string-review" class="section level3">
+<h3>Quick String Review</h3>
+<p>Which of the following are valid R strings:</p>
+<ul>
+<li><p><code>&quot;Something interesting&quot;</code></p></li>
+<li><p><code>&quot;I'm not sure what to say here&quot;</code></p></li>
+<li><p><code>'There\'s nothing like going &quot;home&quot;'</code></p></li>
+<li><p><code>&quot;\&quot;It's snowing outside,\&quot; he said&quot;</code></p></li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">source</span>(<span class="st">&quot;https://git.io/fAOVu&quot;</span>)</a></code></pre></div>
+</div>
+<div id="work-directly-with-strings" class="section level3">
+<h3>Work Directly with Strings</h3>
+<p>All of the <span class="pkg">stringr</span> functions start with <strong><code>str_</code></strong>, like <code>str_c()</code>. This function takes parts of a string and concatenates them, just like <code>c()</code> takes parts of a vector and puts them together.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">str_c</span>(<span class="st">&quot;Something&quot;</span>, <span class="st">&quot;interesting&quot;</span>)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw">str_c</span>(<span class="st">&quot;Something&quot;</span>, <span class="st">&quot;interesting&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>)</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="kw">str_c</span>(<span class="st">&quot;Something&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;funny&quot;</span>, <span class="st">&quot;odd&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>)</a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="kw">str_c</span>(<span class="st">&quot;Something&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;funny&quot;</span>, <span class="st">&quot;odd&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>, <span class="dt">collapse =</span> <span class="st">&quot; or &quot;</span>)</a></code></pre></div>
+<div id="detect-if-a-string-contains-another-string" class="section level4">
+<h4>Detect if a string contains another string</h4>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">str_detect</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;ap&quot;</span>)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw">str_detect</span>(<span class="kw">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;grape&quot;</span>, <span class="st">&quot;banana&quot;</span>), <span class="st">&quot;ap&quot;</span>)</a></code></pre></div>
+<details>
+<p><summary>Visualize</summary></p>
+<p class='results  '> <span class="group g00">ap</span>ple </p><p class='results  '> gr<span class="group g00">ap</span>e </p><p class='results  '> banana </p>
+</details>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">cr <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">str_detect</span>(histology_behavior_icd_o_<span class="dv">3</span>, <span class="st">&quot;CARCINOMA&quot;</span>))</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">cr <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(</a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">  <span class="kw">str_detect</span>(histology_behavior_icd_o_<span class="dv">3</span>, <span class="st">&quot;CARCINOMA&quot;</span>),</a>
+<a class="sourceLine" id="cb11-6" data-line-number="6">  <span class="op">!</span><span class="kw">str_detect</span>(histology_behavior_icd_o_<span class="dv">3</span>, <span class="st">&quot;INFILTRATING&quot;</span>)</a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">)</a></code></pre></div>
+</div>
+<div id="count-the-number-of-times-a-string-is-found-in-other-strings" class="section level4">
+<h4>Count the number of times a string is found in other string(s)</h4>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">str_count</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;p&quot;</span>)</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="kw">str_count</span>(<span class="kw">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;grape&quot;</span>, <span class="st">&quot;banana&quot;</span>), <span class="st">&quot;p&quot;</span>)</a></code></pre></div>
+</div>
+<div id="extract-part-of-a-string" class="section level4">
+<h4>Extract part of a string</h4>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">str_extract</span>(<span class="kw">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;grape&quot;</span>, <span class="st">&quot;banana&quot;</span>), <span class="st">&quot;p&quot;</span>)</a></code></pre></div>
+</div>
+<div id="remove-or-replace-part-of-a-string" class="section level4">
+<h4>Remove or replace part of a string</h4>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">str_remove</span>(<span class="kw">c</span>(<span class="st">&quot;apple fruit&quot;</span>, <span class="st">&quot;grapefruit&quot;</span>, <span class="st">&quot;fruit banana&quot;</span>), <span class="st">&quot;fruit&quot;</span>)</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="kw">str_replace</span>(<span class="kw">c</span>(<span class="st">&quot;apple fruit&quot;</span>, <span class="st">&quot;grapefruit&quot;</span>, <span class="st">&quot;fruit banana&quot;</span>), <span class="st">&quot;fruit&quot;</span>, <span class="st">&quot;FRUIT&quot;</span>)</a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="kw">str_remove</span>(<span class="st">&quot;apple fruit and banana fruit&quot;</span>, <span class="st">&quot;fruit&quot;</span>)</a>
+<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="kw">str_remove_all</span>(<span class="st">&quot;apple fruit and banana fruit&quot;</span>, <span class="st">&quot;fruit&quot;</span>)</a>
+<a class="sourceLine" id="cb14-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="kw">str_replace_all</span>(<span class="st">&quot;apple fruit and banana fruit&quot;</span>, <span class="st">&quot;fruit&quot;</span>, <span class="st">&quot;FRUIT&quot;</span>)</a></code></pre></div>
+</div>
+<div id="convert-string-to-lower-upper-or-title-case" class="section level4">
+<h4>Convert string to lower, upper or title case</h4>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">str_to_lower</span>(<span class="st">&quot;STOP SHOUTING&quot;</span>)</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="kw">str_to_upper</span>(<span class="st">&quot;talk loudly&quot;</span>)</a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="kw">str_to_title</span>(<span class="st">&quot;be a little more professional&quot;</span>)</a></code></pre></div>
+</div>
+</div>
+<div id="exercises-7.1" class="section level3 tabset">
+<h3>Exercises 7.1</h3>
+<div id="task-1" class="section level4">
+<h4>Task 1</h4>
+<p>Find all <code>BREAST</code> cancer diagnosis records with a payer source that includes <code>HMO</code>s.</p>
+<details>
+<p><summary>Answer</summary></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">cr <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">    <span class="kw">str_detect</span>(site_primary_icd_o_<span class="dv">3</span>, <span class="st">&quot;BREAST&quot;</span>),</a>
+<a class="sourceLine" id="cb16-4" data-line-number="4">    <span class="kw">str_detect</span>(payer_source_<span class="dv">1</span>_at_dx, <span class="st">&quot;HMO&quot;</span>)</a>
+<a class="sourceLine" id="cb16-5" data-line-number="5">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="st">  </span><span class="kw">select</span>(medical_record_number, </a>
+<a class="sourceLine" id="cb16-7" data-line-number="7">         site_primary_icd_o_<span class="dv">3</span>, </a>
+<a class="sourceLine" id="cb16-8" data-line-number="8">         payer_source_<span class="dv">1</span>_at_dx)</a></code></pre></div>
+<pre><code># A tibble: 69 x 3
+   medical_record_number site_primary_icd_o_3 payer_source_1_at_dx   
+                   &lt;int&gt; &lt;chr&gt;                &lt;chr&gt;                  
+ 1                197932 C504 (BREAST UOQ)    MANAGED CARE (HMO, PPO)
+ 2                446531 C504 (BREAST UOQ)    MANAGED CARE (HMO, PPO)
+ 3                766840 C504 (BREAST UOQ)    MANAGED CARE (HMO, PPO)
+ 4                591913 C504 (BREAST UOQ)    MANAGED CARE (HMO, PPO)
+ 5                182841 C504 (BREAST UOQ)    MANAGED CARE (HMO, PPO)
+ 6                896356 C509 (BREAST NOS)    MANAGED CARE (HMO, PPO)
+ 7                218883 C502 (BREAST UIQ)    MANAGED CARE (HMO, PPO)
+ 8                348966 C504 (BREAST UOQ)    MANAGED CARE (HMO, PPO)
+ 9                718924 C504 (BREAST UOQ)    MANAGED CARE (HMO, PPO)
+10                458035 C504 (BREAST UOQ)    MANAGED CARE (HMO, PPO)
+# ... with 59 more rows</code></pre>
+</details>
+</div>
+<div id="task-2" class="section level4">
+<h4>Task 2</h4>
+<p>Count the total number of times surgery appears in the prescribed first course for each diagnosis record.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">cr <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb18-3" data-line-number="3">    <span class="dt">________ =</span> str_<span class="op">==</span><span class="er">===</span>(summary_of_rx_1st_course, <span class="st">&quot;SURGERY&quot;</span>)</a>
+<a class="sourceLine" id="cb18-4" data-line-number="4">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="st">  </span><span class="kw">group_by</span>(medical_record_number) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-6" data-line-number="6"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n_surgery =</span> <span class="kw">sum</span>(________))</a></code></pre></div>
+<details>
+<p><summary>Answer</summary></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">cr <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3">    <span class="dt">surgery_count =</span> <span class="kw">str_count</span>(summary_of_rx_1st_course, <span class="st">&quot;SURGERY&quot;</span>)</a>
+<a class="sourceLine" id="cb19-4" data-line-number="4">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb19-5" data-line-number="5"><span class="st">  </span><span class="kw">group_by</span>(medical_record_number) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb19-6" data-line-number="6"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n_surgery =</span> <span class="kw">sum</span>(surgery_count))</a></code></pre></div>
+<pre><code># A tibble: 150 x 2
+   medical_record_number n_surgery
+                   &lt;int&gt;     &lt;int&gt;
+ 1                101145         0
+ 2                101380         0
+ 3                112743         0
+ 4                124227         0
+ 5                140848         0
+ 6                145185         0
+ 7                148456         0
+ 8                149065         0
+ 9                151416         0
+10                158774         1
+# ... with 140 more rows</code></pre>
+</details>
+</div>
+<div id="task-3" class="section level4">
+<h4>Task 3</h4>
+<p>I took another look at the data and improved the previous code. What improvement did I make to get this result?</p>
+<pre><code># A tibble: 150 x 2
+   medical_record_number n_surgery
+                   &lt;int&gt;     &lt;int&gt;
+ 1                101145         1
+ 2                101380         1
+ 3                112743         1
+ 4                124227         1
+ 5                140848         1
+ 6                145185         1
+ 7                148456         1
+ 8                149065         1
+ 9                151416         1
+10                158774         1
+# ... with 140 more rows</code></pre>
+<details>
+<p><summary>Answer</summary></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">cr <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb22-3" data-line-number="3">    <span class="dt">surgery_count =</span> <span class="kw">str_count</span>(summary_of_rx_1st_course, <span class="st">&quot;SURG&quot;</span>)</a>
+<a class="sourceLine" id="cb22-4" data-line-number="4">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb22-5" data-line-number="5"><span class="st">  </span><span class="kw">group_by</span>(medical_record_number) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb22-6" data-line-number="6"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n_surgery =</span> <span class="kw">sum</span>(surgery_count))</a></code></pre></div>
+</details>
+</div>
+<div id="task-4" class="section level4">
+<h4>Task 4</h4>
+<p>The <code>cr_patients</code> dataset also includes an <code>email</code> field, but some of the records weren’t filled out correctly. An email <em>definitely</em> has to have an <code>@</code>.</p>
+<p>How many patients are missing a valid email address with this criteria?</p>
+<details>
+<p><summary>Answer</summary></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">cr_patients <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">str_detect</span>(email, <span class="st">&quot;@&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb23-3" data-line-number="3"><span class="st">  </span><span class="kw">select</span>(email) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb23-4" data-line-number="4"><span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>()</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">email</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">550.245.1108x906</td>
+</tr>
+<tr class="even">
+<td align="left">Okuneva, Okuneva and Okuneva</td>
+</tr>
+<tr class="odd">
+<td align="left">+92(5)4722895694</td>
+</tr>
+<tr class="even">
+<td align="left">814.891.0875x7342</td>
+</tr>
+<tr class="odd">
+<td align="left">(610)647-6685x068</td>
+</tr>
+<tr class="even">
+<td align="left">013-030-7545</td>
+</tr>
+<tr class="odd">
+<td align="left">Batz, Batz and Batz</td>
+</tr>
+<tr class="even">
+<td align="left">Hammes, Hammes and Hammes</td>
+</tr>
+<tr class="odd">
+<td align="left">Mayer Ltd</td>
+</tr>
+<tr class="even">
+<td align="left">268.986.9090x238</td>
+</tr>
+<tr class="odd">
+<td align="left">(947)787-6881x8309</td>
+</tr>
+<tr class="even">
+<td align="left">Ratke-Ratke</td>
+</tr>
+<tr class="odd">
+<td align="left">O’Reilly, O’Reilly and O’Reilly</td>
+</tr>
+<tr class="even">
+<td align="left">Brakus-Brakus</td>
+</tr>
+<tr class="odd">
+<td align="left">Spencer, Spencer and Spencer</td>
+</tr>
+<tr class="even">
+<td align="left">397.981.2233x56350</td>
+</tr>
+<tr class="odd">
+<td align="left">790.197.5667x87625</td>
+</tr>
+<tr class="even">
+<td align="left">Jerde, Jerde and Jerde</td>
+</tr>
+<tr class="odd">
+<td align="left">(847)437-7174</td>
+</tr>
+<tr class="even">
+<td align="left">Durgan, Durgan and Durgan</td>
+</tr>
+</tbody>
+</table>
+</details>
+</div>
+</div>
+</div>
+<div id="regular-expressions" class="section level2">
+<h2>Regular Expressions</h2>
+<p>Our diagnosis records include an ICD code for the location of the cancer, but these values include additional text:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">select</span>(cr, site_primary_icd_o_<span class="dv">3</span>)</a></code></pre></div>
+<pre><code># A tibble: 167 x 1
+   site_primary_icd_o_3
+   &lt;chr&gt;               
+ 1 C509 (BREAST NOS)   
+ 2 C509 (BREAST NOS)   
+ 3 C503 (BREAST LIQ)   
+ 4 C503 (BREAST LIQ)   
+ 5 C509 (BREAST NOS)   
+ 6 C504 (BREAST UOQ)   
+ 7 C504 (BREAST UOQ)   
+ 8 C504 (BREAST UOQ)   
+ 9 C509 (BREAST NOS)   
+10 C509 (BREAST NOS)   
+# ... with 157 more rows</code></pre>
+<p>How would you describe in words the structure of a breast cancer related IDC code?</p>
+<p>Here are the ICD codes found in this example.</p>
+<pre><code> [1] &quot;C182&quot; &quot;C383&quot; &quot;C421&quot; &quot;C449&quot; &quot;C501&quot; &quot;C502&quot; &quot;C503&quot; &quot;C504&quot; &quot;C505&quot; &quot;C506&quot;
+[11] &quot;C508&quot; &quot;C509&quot; &quot;C529&quot; &quot;C541&quot; &quot;C569&quot; &quot;C649&quot; &quot;C700&quot; &quot;C739&quot; &quot;C778&quot; &quot;C809&quot;</code></pre>
+<div id="what-is-a-regular-expression" class="section level3">
+<h3>What is a regular expression?</h3>
+<p><strong>Regular expressions</strong> are a language for describing patterns in strings.</p>
+</div>
+<div id="an-rstudio-addin-to-help-you" class="section level3">
+<h3>An RStudio Addin to help you</h3>
+<p><a href="https://www.garrickadenbuie.com/project/regexplain/">RStudio Addin - RegExplain</a>.</p>
+</div>
+<div id="basic-regular-expressions" class="section level3">
+<h3>Basic Regular Expressions</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="center">RegExp</th>
+<th align="left">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><code>\w</code></td>
+<td align="left">Word Character (a letter)</td>
+</tr>
+<tr class="even">
+<td align="center"><code>\d</code></td>
+<td align="left">Digit (a number)</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>.</code></td>
+<td align="left">Anything</td>
+</tr>
+<tr class="even">
+<td align="center"><code>+</code></td>
+<td align="left">One or more</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>*</code></td>
+<td align="left">Zero or more</td>
+</tr>
+<tr class="even">
+<td align="center"><code>?</code></td>
+<td align="left">Maybe?</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>|</code></td>
+<td align="left">Or</td>
+</tr>
+<tr class="even">
+<td align="center"><code>^</code></td>
+<td align="left">Start</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>$</code></td>
+<td align="left">End</td>
+</tr>
+<tr class="even">
+<td align="center"><code>()</code></td>
+<td align="left">Group</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="backslashes" class="section level3">
+<h3>Backslashes!</h3>
+<p>Escape, escape, escape! The backslash is evil!</p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

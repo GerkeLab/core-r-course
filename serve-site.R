@@ -2,13 +2,14 @@
 setwd(here::here())
 library(tictoc)
 
-render <- function(x) {
+render <- function(x, quiet = TRUE) {
+  if (grepl("site_libs", x)) return()
   tic("Update complete")
   cli::cat_bullet("Update started:  ", x, col = "yellow", bullet_col = "yellow")
   if (any(grepl("slides\\.Rmd$", x))) {
     purrr::walk(x[grepl("slides\\.Rmd$", x)], rmarkdown::render)
-    rmarkdown::render_site(quiet = TRUE)
-  } else rmarkdown::render_site(quiet = TRUE)
+    rmarkdown::render_site(quiet = quiet)
+  } else rmarkdown::render_site(quiet = quiet)
   cli::cat_bullet(capture.output(toc()), col = "green", bullet_col = "green", bullet = "tick")
 }
 

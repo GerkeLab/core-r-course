@@ -38,7 +38,8 @@ session_list[2, "Link"] <- "session_02_answers.html"
 session_list[3, "Link"] <- "session_03_answers.html"
 session_list[4, "Link"] <- "session_04_answers.html"
 session_list[5, "Link"] <- "session_05_answers.html"
-session_list[6, "Link"] <- "session_06.html"
+session_list[6, "Link"] <- "session_06_answers.html"
+session_list[7, "Link"] <- "session_07.html"
 ```
 
 <!-- Emoji: https://afeld.github.io/emoji-css/ -->

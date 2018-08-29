@@ -9,13 +9,13 @@ editor_options:
   chunk_output_type: console
 ---
 
-```{r session-07-init, include=FALSE}
-SHOW_RESULTS <- "hide"
+```{r session-04-init, include=FALSE}
+SHOW_RESULTS <- "show"
 
 session_links <- list(
   "R for Data Science: Strings" = "http://r4ds.had.co.nz/strings.html",
   "STAT545: Character Data" = "http://stat545.com/block028_character-data.html",
-  "This page with the code results" = "session_07_answers.html"
+  "This page without the code results" = "session_07.html"
 )
 ```
 

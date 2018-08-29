@@ -64,28 +64,34 @@ Learn more at the [janitor package website][janitor].
 [![](https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/stringr.png){.img-right width=300}][stringr]
 
 ```r
+library(stringr) 
+
+# part of the tidyverse and loaded with
 library(tidyverse)
-# library(stringr)
 ```
 
 ### Quick String Review
 
 Which of the following are valid R strings:
 
-- `"Something interesting"`
+1. `"I am OZ, the Great and Terrible"`
 
-- `"I'm not sure what to say here"`
+1. `"You're a humbug!"`
 
-- `'There\'s nothing like going "home"'`
+1. `"There's no place like 'home'"`
 
-- `"\"It's snowing outside,\" he said"`
+1. `"\"Can't you give me brains?,\" asked Scarecrow"`
+
+### Load Packages and Data
+
+[This script](source/session-07_import_data.R) loads the [tidyverse]{.pkg}, [lubridate]{.pkg}, and [janitor]{.pkg} and then loads the example [Cancer Registry Data](session_04_materials.html#individual-files).
 
 ```r
 source("https://git.io/fAOVu")
 ```
 
 ```{r include=FALSE}
-source(here::here("source/07_import_data.R"), local = TRUE)
+source(here::here("source/session-07_import_data.R"), local = TRUE)
 ```
 
 ### Work Directly with Strings
@@ -246,13 +252,22 @@ cr_patients %>%
 
 ## Regular Expressions
 
+### What is a regular expression?
+
 Our diagnosis records include an ICD code for the location of the cancer, but these values include additional text:
 
 ```{r results="show"}
 select(cr, site_primary_icd_o_3)
 ```
 
+```{r echo=FALSE, results="hide"}
+icd_example <- cr %>% sample_n(1) %>% pull(site_primary_icd_o_3)
+```
+
 How would you describe in words the structure of a breast cancer related IDC code?
+
+Pretend you're writing instructions for a robot that can only look at one letter of input at a time.
+How would you instruct the robot to extract just the IDC code `"`r str_extract(icd_example, '\\w\\d+\\b')`"` from the full string `"`r icd_example`"`?
 
 Here are the ICD codes found in this example.
 
@@ -264,8 +279,6 @@ cr %>%
   sort()
 ```
 
-### What is a regular expression?
-
 **Regular expressions** are a language for describing patterns in strings.
 
 ### An RStudio Addin to help you
@@ -274,19 +287,23 @@ cr %>%
 
 ### Basic Regular Expressions
 
+```
+"abc123"
+```
+
 ```{r, echo=FALSE, results="asis"}
 tibble::tribble(
-  ~ RegExp, ~ Meaning 
-  , "`\\w`", "Word Character (a letter)"
-  , "`\\d`", "Digit (a number)"
-  , "`.`", "Anything"
-  , "`+`", "One or more"
-  , "`*`", "Zero or more"
-  , "`?`", "Maybe?"
-  , "`|`", "Or"
-  , "`^`", "Start" 
-  , "`$`", "End"
-  , "`()`", "Group"
+  ~ RegExp, ~ Meaning, ~ Example, ~ Result
+  , "`\\w`", "Word Character (a letter)", "`\\w`", "**a**bc123"
+  , "`\\d`", "Digit (a number)", "`\\d\\d`", "abc**12**3"
+  , "`.`", "Anything", "`c.`", "ab**c1**123"
+  , "`+`", "One or more", "`c.+`", "ab**c123**"
+  , "`*`", "Zero or more", "`abc\\d*`", "**abc123**"
+  , "`?`", "Maybe?", "`abcd?1`", "**abc1**23"
+  , "`|`", "Or", "`abcd|1`", "abc**1**23"
+  , "`^`", "Start", "`^a`", "**a**bc123"
+  , "`$`", "End", "`3$`", "abc12**3**"
+  , "`()`", "Group", "`abc(d|1)`", "**abc1**23"
 ) %>% 
   knitr::kable(align = "cl")
 ```
@@ -294,4 +311,117 @@ tibble::tribble(
 
 ### Backslashes!
 
-Escape, escape, escape! The backslash is evil!
+As we saw with the examples above, there are characters that have special meaning in strings in R.
+For example, a string starts and ends with `"` or `'`.
+
+```{r, results="show"}
+writeLines("There is no place like home")
+```
+
+If we used `"` to open or close the string but we want to have another `"` _inside the string_, we need to **escape** the quote.
+
+```{r results="show"}
+writeLines("There is no place like \"home\"")
+```
+
+This is called **escaping** because adding the backslash lets you _escape_ the special semantics of the character.
+It indicates that you don't want a _special_ `"`, you want a regular _literal_ `"`.
+
+**What if you want to add a backslash?**
+The backslash is also special (it does the escaping), so to write a literal backslash you have to escape the backslash, too.
+
+```{r results="show"}
+writeLines("\\")
+```
+
+Some of the [regular expressions above](#basic_regular_expressions) include backslashes.
+To write this in a string in R, you need to escape the backslash.
+
+```{r results="show", error=TRUE}
+str_extract("abc123", "\w")
+```
+
+```{r results="show"}
+str_extract("abc123", "\\w")
+str_extract("abc123", "\\w\\w\\d")
+writeLines("\\w\\w\\d")
+```
+
+**Escaping for R or for the regular expression**
+When writing regular expressions, you're operating at two levels.
+First, you are writing a code into R to store the strings.
+Second, when R is done processing that code we want the output to be a regular expression.
+
+So above, we write `"\\w"` into R so that we get a regular expression like `"\w"`.
+
+But regular expressions also have special characters, like `.` and `+`.
+If we want to write _literal_ versions of these in our regular expressions -- for example to match the dot in `10.123` -- we need to escape the dot _at the regular expression level_.
+
+Adding **one backslash** escapes at the R level:
+
+```{r results="show", error=TRUE}
+str_extract("10.123", "0\.1")
+```
+
+But this doesn't pass down to the regular expression level.
+
+```{r results="show", error=TRUE}
+writeLines("0\.1")
+```
+
+To get _there_ we need _yet another_ backslash.
+
+```{r result="show"}
+str_extract("10.123", "0\\.1")
+writeLines("0\\.1")
+```
+
+**How can you write an actual backslash at the regular expression level?**
+
+<details><summary>Answer</summary>
+
+```{r}
+writeLines("\\\\")
+```
+</details>
+
+## Regular expressions in data
+
+Back to our example from before.
+How can we extract the ICD code from the diagnosis records?
+
+```{r results="show"}
+cr %>% 
+  select(site_primary_icd_o_3)
+```
+
+```r
+cr %>% 
+  select(site_primary_icd_o_3) %>% 
+  mutate(icd = str______(site_primary_icd_o_3, "_____"))
+```
+
+<details><summary>Answer</summary>
+
+```{r results="show"}
+cr %>% 
+  select(site_primary_icd_o_3) %>% 
+  mutate(icd = str_extract(site_primary_icd_o_3, "C5\\d\\d"))
+```
+</details>
+
+How can we extract the ICD meaning?
+Note: it's inside `(` and `)`, but these are special characters in regular expressions.
+
+<details><summary>Answer</summary>
+
+```{r results="show"}
+cr %>% 
+  select(site_primary_icd_o_3) %>% 
+  mutate(
+    icd = str_extract(site_primary_icd_o_3, "C5\\d\\d"),
+    icd_info = str_extract(site_primary_icd_o_3, "\\(.+\\)"),
+    icd_info = str_remove_all(icd_info, "\\(|\\)")
+  )
+```
+</details>

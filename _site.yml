@@ -24,6 +24,8 @@ navbar:
           href: session_06_answers.html
         - text: "Session 7 – August 29"
           href: session_07.html
+        - text: "Session 8 – September 5"
+          href: session_08.html
     - text: "Materials"
       menu:
         - text: "Session 1"

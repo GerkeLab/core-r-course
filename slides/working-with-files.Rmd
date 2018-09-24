@@ -1,0 +1,510 @@
+---
+title: "Working with Files Using <code style='color: white;'>fs</code>"
+#subtitle: "Session 1"
+author: "Garrick Aden-Buie"
+date: 'September 24, 2018'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: 
+      - moffitt-theme.css
+      - extra.css
+    nature:
+      titleSlideClass: ["bottom", "left"]
+      slideNumberFormat: "%current%"
+      highlightStyle: atom-one-light
+      highlightLines: true
+      ratio: "16:9"
+      countIncrementalSlides: true
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(fs)
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(prompt=TRUE, comment='')
+Sys.setenv(R_FS_HOME = "/Users/garrick")
+if (fs::dir_exists(fs::path(fs::path_temp(), "data"))) 
+  fs::dir_delete(fs::path(fs::path_temp(), "data"))
+```
+
+class: center middle inverse
+
+# fs
+
+## File System Operations
+
+--
+
+### (Work with *paths*, *files*, and *directories* within R)
+
+--
+
+### <pre><code>install.packages("fs")</code></pre>
+
+---
+
+## Overview of Functions in `fs`
+
+<div style="font-size: 1.75em">
+```{r results='asis', echo = FALSE}
+tibble::tribble(
+  ~ Prefix, ~ Functionality
+  , "<code>file_</code>" , "Create, delete, copy, move, show, check files"
+  , "<code>dir_</code>" , "Create, delete, list, check directories"
+  , "<code>path_</code>" , "Create, find, expand, work with paths"
+) %>% 
+  knitr::kable(format = "html", escape = FALSE, table.attr = "class='plain'")
+```
+</div>
+
+---
+layout: true
+## What is a _file path_?
+---
+
+.left-column[
+![](../images/fs_file-path-pin-icon.png)
+]
+
+.right-column[
+`C:\Libraries\Documents\Documents\images\my-photo.jpg`
+]
+--
+.right-column[
+`/User/username/Documents/images/my-photo.jpg`
+]
+--
+.right-column[
+`https://username.com/images/my-photo.jpg`
+]
+--
+.right-column[
+`\\net.edu\Users\username\Documents\images\my-photo.jpg`
+]
+
+???
+
+A selection of file paths pointing to the same file on several different systems:
+
+- Windows
+- Mac
+- Web
+- Network
+
+---
+
+.left-column[
+![](../images/fs_file-path-pin-icon.png)
+]
+
+.right-column[
+`.\images\my-photo.jpg`
+]
+.right-column[
+`../../images/my-photo.jpg`
+]
+.right-column[
+`images/my-photo.jpg`
+]
+.right-column[
+`~\Documents\papers\..\images\my-photo.jpg`
+]
+
+???
+
+Demonstrates the difference between **absolute** and **relative** file paths.
+
+---
+layout: false
+
+### Getting Common Directory Paths
+
+```{r eval=FALSE}
+library(fs)
+path_wd()
+```
+```
+/Users/garrick/work/core-r-course/slides
+```
+--
+```{r}
+path_home()
+```
+--
+```{r eval=FALSE}
+path_home_r()
+```
+```
+/Users/garrick/
+```
+--
+```{r}
+path_temp()
+```
+
+---
+
+### Create a path
+
+```{r}
+path("data.csv")
+```
+--
+```{r}
+path(path_home(), "data.csv")
+```
+--
+```{r}
+path_rel(path(path_home(), "data.csv"), path_wd())
+```
+--
+```{r}
+path(path_temp(), "data.csv")
+```
+
+---
+
+### Work with directories
+
+```{r}
+data_dir <- path(path_temp(), "data")
+dir_exists(data_dir)
+```
+--
+```{r}
+dir_create(data_dir)
+```
+--
+```{r}
+dir_ls(data_dir)
+```
+
+---
+
+### Download a file to the temp directory
+
+```{r}
+external_file <- "https://git.io/grk-hospital-referrals"
+data_zip_file <- path(data_dir, "data.zip")
+data_zip_file
+```
+--
+```{r}
+download.file(external_file, destfile = data_zip_file)
+```
+
+```
+trying URL 'https://git.io/grk-hospital-referrals'
+Content type 'application/zip' length 79760 bytes (77 KB)
+==================================================
+downloaded 77 KB
+```
+--
+```{r}
+dir_ls(data_dir)
+```
+---
+layout: true
+### Extract the zip file
+
+**Option 1:** Use `file_show()` to open the directory and extract "manually".
+
+```r
+file_show(data_dir)
+```
+
+**Option 2:** Use the `unzip()` function from .pkg[utils].
+---
+
+```r
+?unzip
+
+unzip(data_zip_file) # Unzips data into current working directory
+```
+
+```{r, echo = FALSE}
+paste0("<wd>/", unzip(data_zip_file, list = TRUE)$Name)
+```
+
+---
+
+```{r}
+unzip(data_zip_file, exdir = data_dir)
+```
+
+```{r, echo = FALSE}
+paste0("<data_dir>/", unzip(data_zip_file, list = TRUE)$Name)
+```
+
+---
+layout: true
+
+### List Files in A Directory with `dir_ls()`
+
+```{r}
+data_dir <- path(data_dir, "ie-general-referrals-by-hospital")
+```
+---
+
+#### List the files inside a directory
+
+```{r}
+dir_ls(data_dir)
+```
+
+---
+
+#### Or using `path_rel()` to list the files relative to `data_dir`
+
+```{r}
+path_rel(dir_ls(data_dir), data_dir)
+```
+
+---
+layout: true
+
+### Get Info about Files in a Directory with `dir_info()`
+---
+
+```{r}
+dir_info(data_dir)
+```
+
+---
+
+```{r include=FALSE}
+old_opts <- options(width = 250)
+```
+
+```{r}
+dir_info(data_dir) %>% 
+  mutate(path = path_rel(path, data_dir))
+```
+
+---
+
+```{r}
+dir_info(data_dir, regexp = "csv$") %>% 
+  mutate(path = path_rel(path, data_dir))
+```
+
+```{r include=FALSE}
+options(width = 80)
+```
+
+---
+layout: false
+
+### Work with Files with `file_*()`
+
+```{r error=TRUE}
+csv_file <- dir_ls(data_dir, regexp = "csv$")[1]
+file_exists(csv_file) %>% unname()                         # File Exists?
+```
+--
+```{r}
+file_access(csv_file) %>% unname()                         # File Accesible?
+```
+--
+```{r}
+file_copy(csv_file, path(path_wd(), "data_copy.csv"))      # Copy File
+dir_ls(regexp = "csv$") # Shows CSV files in working directory
+```
+--
+```{r}
+file_delete(path("data_copy.csv"))                         # Delete File
+```
+
+---
+
+### Work with _File Paths_ with `path_*()`
+
+```{r}
+path_file(csv_file)                                        # File Name
+```
+--
+```{r}
+path_dir(csv_file)                                         # File Directory
+```
+--
+```{r}
+path_ext(csv_file)                                         # File Extension
+```
+--
+```{r}
+path_file(csv_file) %>% path_ext_remove()                  # Bare File Name
+```
+
+---
+layout: true
+### Creating New Paths
+---
+```{r}
+new_path <- path(
+  path_home(),
+  "Desktop",
+  path_ext_remove(path_file(csv_file)),
+  "data",
+  ext = path_ext(csv_file)
+)
+new_path
+```
+---
+```{r}
+new_path
+```
+
+--
+
+#### Copy the `csv_file` to this new location:
+
+```r
+file_copy(csv_file, new_path)
+```
+--
+
+#### But then change your mind and delete the directory
+
+```r
+dir_delete(csv_file, path_dir(new_path))
+```
+
+---
+layout: false
+class: center middle inverse
+
+# Why is this cool?
+
+--
+
+## Example:<br>Import All CSV Files From A Directory
+
+---
+
+## List our data files again
+
+```{r}
+data_dir <- path(path_temp(), "data", "ie-general-referrals-by-hospital")
+csv_files <- dir_ls(data_dir, regexp = "csv$")
+csv_files
+```
+--
+```{r}
+path_rel(csv_files, data_dir)
+```
+
+---
+layout: true
+## Read Using `readr`
+---
+
+```{r prompt=FALSE, comment="##"}
+library(readr)
+data <- list()
+
+for (csv_file in csv_files) {
+  data[[csv_file]] <- read_csv(csv_file)
+}
+```
+
+---
+
+```{r}
+names(data)
+```
+
+---
+
+```{r prompt=FALSE, comment="##", message = FALSE}
+library(readr)
+data <- list()
+
+for (csv_file in csv_files) {
+  data[[path_file(csv_file)]] <- read_csv(csv_file)
+}
+```
+
+```{r}
+names(data)
+```
+
+---
+
+```{r}
+str(data, give.attr = FALSE)
+```
+
+---
+layout: true
+
+## Row-Bind Data Together
+---
+
+Uses `bind_rows()` from .pkg[dplyr]:
+
+```{r}
+bind_rows(data)
+```
+
+---
+
+```{r echo=FALSE, results="asis"}
+set.seed(158)
+sampled_rows <- sort(sample(1:nrow(bind_rows(data)), 5))
+bind_rows(data) %>% 
+  slice(sampled_rows) %>% 
+  knitr::kable(format = "html")
+```
+
+---
+
+```r
+library(readr)
+*library(lubridate)
+data <- list()
+
+for (csv_file in csv_files) {
+  data[[path_file(csv_file)]] <- read_csv(csv_file)
+}
+
+data <- bind_rows(data) %>% 
+```
+
+---
+
+```{r prompt=FALSE, comment="##", message = FALSE}
+library(readr)
+library(lubridate)
+data <- list()
+
+for (csv_file in csv_files) {
+  data[[path_file(csv_file)]] <- read_csv(csv_file)
+}
+
+data <- bind_rows(data) %>%
+  mutate(Month_Year = lubridate::myd(Month_Year, truncated = 1))
+```
+
+--
+
+Adding `truncated = 1` to `myd()` function lets it match on **Month** and **Year**.
+
+---
+
+```{r echo=FALSE, results="asis"}
+data %>% 
+  slice(sampled_rows) %>% 
+  knitr::kable(format = "html")
+```
+
+
+---
+layout: false
+class: center top
+
+<img src="https://camo.githubusercontent.com/b7a8b1687a46868377f54dfc6288acd0bbd340e8/68747470733a2f2f692e696d6775722e636f6d2f4e4175783158632e706e67" width="50%">
+
+## Learn More at&nbsp; [`fs.r-lib.org`](https://fs.r-lib.org)
+
+Also [gerkelab.com/blog](https://www.gerkelab.com/blog/2018/09/import-directory-csv-purrr-readr/)

@@ -26,6 +26,8 @@ navbar:
           href: session_07.html
         - text: "Session 8 – September 5"
           href: session_08.html
+        - text: "Extra - Working with Files"
+          href: slides/working-with-files.html
     - text: "Materials"
       menu:
         - text: "Session 1"

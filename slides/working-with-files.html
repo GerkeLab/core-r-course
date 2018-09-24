@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Working with Files Using fs</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Garrick Aden-Buie" />
+    <meta name="date" content="2018-09-24" />
+    <link rel="stylesheet" href="moffitt-theme.css" type="text/css" />
+    <link rel="stylesheet" href="extra.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: bottom, left, title-slide
+
+# Working with Files Using <code style='color: white;'>fs</code>
+### Garrick Aden-Buie
+### September 24, 2018
+
+---
+
+
+
+
+class: center middle inverse
+
+# fs
+
+## File System Operations
+
+--
+
+### (Work with *paths*, *files*, and *directories* within R)
+
+--
+
+### &lt;pre&gt;&lt;code&gt;install.packages("fs")&lt;/code&gt;&lt;/pre&gt;
+
+---
+
+## Overview of Functions in `fs`
+
+&lt;div style="font-size: 1.75em"&gt;
+&lt;table class='plain'&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Prefix &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Functionality &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; &lt;code&gt;file_&lt;/code&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Create, delete, copy, move, show, check files &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; &lt;code&gt;dir_&lt;/code&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Create, delete, list, check directories &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; &lt;code&gt;path_&lt;/code&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Create, find, expand, work with paths &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+---
+layout: true
+## What is a _file path_?
+---
+
+.left-column[
+![](../images/fs_file-path-pin-icon.png)
+]
+
+.right-column[
+`C:\Libraries\Documents\Documents\images\my-photo.jpg`
+]
+--
+.right-column[
+`/User/username/Documents/images/my-photo.jpg`
+]
+--
+.right-column[
+`https://username.com/images/my-photo.jpg`
+]
+--
+.right-column[
+`\\net.edu\Users\username\Documents\images\my-photo.jpg`
+]
+
+???
+
+A selection of file paths pointing to the same file on several different systems:
+
+- Windows
+- Mac
+- Web
+- Network
+
+---
+
+.left-column[
+![](../images/fs_file-path-pin-icon.png)
+]
+
+.right-column[
+`.\images\my-photo.jpg`
+]
+.right-column[
+`../../images/my-photo.jpg`
+]
+.right-column[
+`images/my-photo.jpg`
+]
+.right-column[
+`~\Documents\papers\..\images\my-photo.jpg`
+]
+
+???
+
+Demonstrates the difference between **absolute** and **relative** file paths.
+
+---
+layout: false
+
+### Getting Common Directory Paths
+
+
+```r
+&gt; library(fs)
+&gt; path_wd()
+```
+```
+/Users/garrick/work/core-r-course/slides
+```
+--
+
+```r
+&gt; path_home()
+```
+
+```
+/Users/garrick
+```
+--
+
+```r
+&gt; path_home_r()
+```
+```
+/Users/garrick/
+```
+--
+
+```r
+&gt; path_temp()
+```
+
+```
+/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8
+```
+
+---
+
+### Create a path
+
+
+```r
+&gt; path("data.csv")
+```
+
+```
+data.csv
+```
+--
+
+```r
+&gt; path(path_home(), "data.csv")
+```
+
+```
+/Users/garrick/data.csv
+```
+--
+
+```r
+&gt; path_rel(path(path_home(), "data.csv"), path_wd())
+```
+
+```
+../../../../garrick/data.csv
+```
+--
+
+```r
+&gt; path(path_temp(), "data.csv")
+```
+
+```
+/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data.csv
+```
+
+---
+
+### Work with directories
+
+
+```r
+&gt; data_dir &lt;- path(path_temp(), "data")
+&gt; dir_exists(data_dir)
+```
+
+```
+/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data 
+                                                           FALSE 
+```
+--
+
+```r
+&gt; dir_create(data_dir)
+```
+--
+
+```r
+&gt; dir_ls(data_dir)
+```
+
+```
+character(0)
+```
+
+---
+
+### Download a file to the temp directory
+
+
+```r
+&gt; external_file &lt;- "https://git.io/grk-hospital-referrals"
+&gt; data_zip_file &lt;- path(data_dir, "data.zip")
+&gt; data_zip_file
+```
+
+```
+/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/data.zip
+```
+--
+
+```r
+&gt; download.file(external_file, destfile = data_zip_file)
+```
+
+```
+trying URL 'https://git.io/grk-hospital-referrals'
+Content type 'application/zip' length 79760 bytes (77 KB)
+==================================================
+downloaded 77 KB
+```
+--
+
+```r
+&gt; dir_ls(data_dir)
+```
+
+```
+/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/data.zip
+```
+---
+layout: true
+### Extract the zip file
+
+**Option 1:** Use `file_show()` to open the directory and extract "manually".
+
+```r
+file_show(data_dir)
+```
+
+**Option 2:** Use the `unzip()` function from .pkg[utils].
+---
+
+```r
+?unzip
+
+unzip(data_zip_file) # Unzips data into current working directory
+```
+
+
+```
+[1] "&lt;wd&gt;/ie-general-referrals-by-hospital/"                                                 
+[2] "&lt;wd&gt;/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2015.csv"
+[3] "&lt;wd&gt;/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2016.csv"
+[4] "&lt;wd&gt;/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2017.csv"
+[5] "&lt;wd&gt;/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2018.csv"
+[6] "&lt;wd&gt;/ie-general-referrals-by-hospital/README.txt"                                       
+```
+
+---
+
+
+```r
+&gt; unzip(data_zip_file, exdir = data_dir)
+```
+
+
+```
+[1] "&lt;data_dir&gt;/ie-general-referrals-by-hospital/"                                                 
+[2] "&lt;data_dir&gt;/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2015.csv"
+[3] "&lt;data_dir&gt;/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2016.csv"
+[4] "&lt;data_dir&gt;/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2017.csv"
+[5] "&lt;data_dir&gt;/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2018.csv"
+[6] "&lt;data_dir&gt;/ie-general-referrals-by-hospital/README.txt"                                       
+```
+
+---
+layout: true
+
+### List Files in A Directory with `dir_ls()`
+
+
+```r
+&gt; data_dir &lt;- path(data_dir, "ie-general-referrals-by-hospital")
+```
+---
+
+#### List the files inside a directory
+
+
+```r
+&gt; dir_ls(data_dir)
+```
+
+```
+/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital/README.txt
+/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2015.csv
+/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2016.csv
+/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2017.csv
+/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2018.csv
+```
+
+---
+
+#### Or using `path_rel()` to list the files relative to `data_dir`
+
+
+```r
+&gt; path_rel(dir_ls(data_dir), data_dir)
+```
+
+```
+README.txt
+general-referrals-by-hospital-department-2015.csv
+general-referrals-by-hospital-department-2016.csv
+general-referrals-by-hospital-department-2017.csv
+general-referrals-by-hospital-department-2018.csv
+```
+
+---
+layout: true
+
+### Get Info about Files in a Directory with `dir_info()`
+---
+
+
+```r
+&gt; dir_info(data_dir)
+```
+
+```
+# A tibble: 5 x 18
+# ... with 18 more variables: path &lt;fs::path&gt;, type &lt;fct&gt;,
+#   size &lt;fs::bytes&gt;, permissions &lt;fs::perms&gt;, modification_time &lt;dttm&gt;,
+#   user &lt;chr&gt;, group &lt;chr&gt;, device_id &lt;dbl&gt;, hard_links &lt;dbl&gt;,
+#   special_device_id &lt;dbl&gt;, inode &lt;dbl&gt;, block_size &lt;dbl&gt;, blocks &lt;dbl&gt;,
+#   flags &lt;int&gt;, generation &lt;dbl&gt;, access_time &lt;dttm&gt;, change_time &lt;dttm&gt;,
+#   birth_time &lt;dttm&gt;
+```
+
+---
+
+
+
+
+```r
+&gt; dir_info(data_dir) %&gt;% 
++   mutate(path = path_rel(path, data_dir))
+```
+
+```
+# A tibble: 5 x 18
+  path                                              type     size permissions modification_time   user  group device_id hard_links special_device_…  inode block_size blocks flags generation access_time         change_time         birth_time         
+  &lt;fs::path&gt;                                        &lt;fct&gt; &lt;fs::b&gt; &lt;fs::perms&gt; &lt;dttm&gt;              &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;      &lt;dbl&gt; &lt;dttm&gt;              &lt;dttm&gt;              &lt;dttm&gt;             
+1 README.txt                                        file      184 rw-r--r--   2018-09-24 12:41:09 4468… "HLM…  16777224          1                0 9.73e6       4096      8     0          0 2018-09-24 12:41:09 2018-09-24 12:41:09 2018-09-24 12:41:09
+2 general-referrals-by-hospital-department-2015.csv file    57.4K rw-r--r--   2018-09-24 12:41:09 4468… "HLM…  16777224          1                0 9.73e6       4096    120     0          0 2018-09-24 12:41:09 2018-09-24 12:41:09 2018-09-24 12:41:09
+3 general-referrals-by-hospital-department-2016.csv file   340.9K rw-r--r--   2018-09-24 12:41:09 4468… "HLM…  16777224          1                0 9.73e6       4096    688     0          0 2018-09-24 12:41:09 2018-09-24 12:41:09 2018-09-24 12:41:09
+4 general-referrals-by-hospital-department-2017.csv file   241.4K rw-r--r--   2018-09-24 12:41:09 4468… "HLM…  16777224          1                0 9.73e6       4096    488     0          0 2018-09-24 12:41:09 2018-09-24 12:41:09 2018-09-24 12:41:09
+5 general-referrals-by-hospital-department-2018.csv file   290.7K rw-r--r--   2018-09-24 12:41:09 4468… "HLM…  16777224          1                0 9.73e6       4096    584     0          0 2018-09-24 12:41:09 2018-09-24 12:41:09 2018-09-24 12:41:09
+```
+
+---
+
+
+```r
+&gt; dir_info(data_dir, regexp = "csv$") %&gt;% 
++   mutate(path = path_rel(path, data_dir))
+```
+
+```
+# A tibble: 4 x 18
+  path                                              type     size permissions modification_time   user  group device_id hard_links special_device_…  inode block_size blocks flags generation access_time         change_time         birth_time         
+  &lt;fs::path&gt;                                        &lt;fct&gt; &lt;fs::b&gt; &lt;fs::perms&gt; &lt;dttm&gt;              &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;      &lt;dbl&gt; &lt;dttm&gt;              &lt;dttm&gt;              &lt;dttm&gt;             
+1 general-referrals-by-hospital-department-2015.csv file    57.4K rw-r--r--   2018-09-24 12:41:09 4468… "HLM…  16777224          1                0 9.73e6       4096    120     0          0 2018-09-24 12:41:09 2018-09-24 12:41:09 2018-09-24 12:41:09
+2 general-referrals-by-hospital-department-2016.csv file   340.9K rw-r--r--   2018-09-24 12:41:09 4468… "HLM…  16777224          1                0 9.73e6       4096    688     0          0 2018-09-24 12:41:09 2018-09-24 12:41:09 2018-09-24 12:41:09
+3 general-referrals-by-hospital-department-2017.csv file   241.4K rw-r--r--   2018-09-24 12:41:09 4468… "HLM…  16777224          1                0 9.73e6       4096    488     0          0 2018-09-24 12:41:09 2018-09-24 12:41:09 2018-09-24 12:41:09
+4 general-referrals-by-hospital-department-2018.csv file   290.7K rw-r--r--   2018-09-24 12:41:09 4468… "HLM…  16777224          1                0 9.73e6       4096    584     0          0 2018-09-24 12:41:09 2018-09-24 12:41:09 2018-09-24 12:41:09
+```
+
+
+
+---
+layout: false
+
+### Work with Files with `file_*()`
+
+
+```r
+&gt; csv_file &lt;- dir_ls(data_dir, regexp = "csv$")[1]
+&gt; file_exists(csv_file) %&gt;% unname()                         # File Exists?
+```
+
+```
+[1] TRUE
+```
+--
+
+```r
+&gt; file_access(csv_file) %&gt;% unname()                         # File Accesible?
+```
+
+```
+[1] TRUE
+```
+--
+
+```r
+&gt; file_copy(csv_file, path(path_wd(), "data_copy.csv"))      # Copy File
+&gt; dir_ls(regexp = "csv$") # Shows CSV files in working directory
+```
+
+```
+data_copy.csv
+```
+--
+
+```r
+&gt; file_delete(path("data_copy.csv"))                         # Delete File
+```
+
+---
+
+### Work with _File Paths_ with `path_*()`
+
+
+```r
+&gt; path_file(csv_file)                                        # File Name
+```
+
+```
+general-referrals-by-hospital-department-2015.csv
+```
+--
+
+```r
+&gt; path_dir(csv_file)                                         # File Directory
+```
+
+```
+/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital
+```
+--
+
+```r
+&gt; path_ext(csv_file)                                         # File Extension
+```
+
+```
+[1] "csv"
+```
+--
+
+```r
+&gt; path_file(csv_file) %&gt;% path_ext_remove()                  # Bare File Name
+```
+
+```
+general-referrals-by-hospital-department-2015
+```
+
+---
+layout: true
+### Creating New Paths
+---
+
+```r
+&gt; new_path &lt;- path(
++   path_home(),
++   "Desktop",
++   path_ext_remove(path_file(csv_file)),
++   "data",
++   ext = path_ext(csv_file)
++ )
+&gt; new_path
+```
+
+```
+/Users/garrick/Desktop/general-referrals-by-hospital-department-2015/data.csv
+```
+---
+
+```r
+&gt; new_path
+```
+
+```
+/Users/garrick/Desktop/general-referrals-by-hospital-department-2015/data.csv
+```
+
+--
+
+#### Copy the `csv_file` to this new location:
+
+```r
+file_copy(csv_file, new_path)
+```
+--
+
+#### But then change your mind and delete the directory
+
+```r
+dir_delete(csv_file, path_dir(new_path))
+```
+
+---
+layout: false
+class: center middle inverse
+
+# Why is this cool?
+
+--
+
+## Example:&lt;br&gt;Import All CSV Files From A Directory
+
+---
+
+## List our data files again
+
+
+```r
+&gt; data_dir &lt;- path(path_temp(), "data", "ie-general-referrals-by-hospital")
+&gt; csv_files &lt;- dir_ls(data_dir, regexp = "csv$")
+&gt; csv_files
+```
+
+```
+/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2015.csv
+/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2016.csv
+/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2017.csv
+/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2018.csv
+```
+--
+
+```r
+&gt; path_rel(csv_files, data_dir)
+```
+
+```
+general-referrals-by-hospital-department-2015.csv
+general-referrals-by-hospital-department-2016.csv
+general-referrals-by-hospital-department-2017.csv
+general-referrals-by-hospital-department-2018.csv
+```
+
+---
+layout: true
+## Read Using `readr`
+---
+
+
+```r
+library(readr)
+data &lt;- list()
+
+for (csv_file in csv_files) {
+  data[[csv_file]] &lt;- read_csv(csv_file)
+}
+```
+
+```
+## Parsed with column specification:
+## cols(
+##   Month_Year = col_character(),
+##   Hospital_Name = col_character(),
+##   Hospital_ID = col_integer(),
+##   Hospital_Department = col_character(),
+##   ReferralType = col_character(),
+##   TotalReferrals = col_integer()
+## )
+## Parsed with column specification:
+## cols(
+##   Month_Year = col_character(),
+##   Hospital_Name = col_character(),
+##   Hospital_ID = col_integer(),
+##   Hospital_Department = col_character(),
+##   ReferralType = col_character(),
+##   TotalReferrals = col_integer()
+## )
+## Parsed with column specification:
+## cols(
+##   Month_Year = col_character(),
+##   Hospital_Name = col_character(),
+##   Hospital_ID = col_integer(),
+##   Hospital_Department = col_character(),
+##   ReferralType = col_character(),
+##   TotalReferrals = col_integer()
+## )
+## Parsed with column specification:
+## cols(
+##   Month_Year = col_character(),
+##   Hospital_Name = col_character(),
+##   Hospital_ID = col_integer(),
+##   Hospital_Department = col_character(),
+##   ReferralType = col_character(),
+##   TotalReferrals = col_integer()
+## )
+```
+
+---
+
+
+```r
+&gt; names(data)
+```
+
+```
+[1] "/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2015.csv"
+[2] "/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2016.csv"
+[3] "/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2017.csv"
+[4] "/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2018.csv"
+```
+
+---
+
+
+```r
+library(readr)
+data &lt;- list()
+
+for (csv_file in csv_files) {
+  data[[path_file(csv_file)]] &lt;- read_csv(csv_file)
+}
+```
+
+
+```r
+&gt; names(data)
+```
+
+```
+[1] "general-referrals-by-hospital-department-2015.csv"
+[2] "general-referrals-by-hospital-department-2016.csv"
+[3] "general-referrals-by-hospital-department-2017.csv"
+[4] "general-referrals-by-hospital-department-2018.csv"
+```
+
+---
+
+
+```r
+&gt; str(data, give.attr = FALSE)
+```
+
+```
+List of 4
+ $ general-referrals-by-hospital-department-2015.csv:Classes 'tbl_df', 'tbl' and 'data.frame':	837 obs. of  6 variables:
+  ..$ Month_Year         : chr [1:837] "Aug-15" "Aug-15" "Aug-15" "Aug-15" ...
+  ..$ Hospital_Name      : chr [1:837] "AMNCH" "AMNCH" "AMNCH" "Bantry General Hospital" ...
+  ..$ Hospital_ID        : int [1:837] 1049 1049 1049 704 704 704 704 704 704 704 ...
+  ..$ Hospital_Department: chr [1:837] "Paediatric ENT" "Paediatric Gastroenterology" "Paediatric General Surgery" "Gastroenterology" ...
+  ..$ ReferralType       : chr [1:837] "General Referral" "General Referral" "General Referral" "General Referral" ...
+  ..$ TotalReferrals     : int [1:837] 2 4 4 12 18 43 8 9 5 5 ...
+ $ general-referrals-by-hospital-department-2016.csv:Classes 'tbl_df', 'tbl' and 'data.frame':	4972 obs. of  6 variables:
+  ..$ Month_Year         : chr [1:4972] "Jan-16" "Jan-16" "Jan-16" "Jan-16" ...
+  ..$ Hospital_Name      : chr [1:4972] "AMNCH" "AMNCH" "AMNCH" "AMNCH" ...
+  ..$ Hospital_ID        : int [1:4972] 1049 1049 1049 1049 1049 1049 704 704 704 704 ...
+  ..$ Hospital_Department: chr [1:4972] "Paediatric Cardiology" "Paediatric Dermatology" "Paediatric ENT" "Paediatric General Surgery" ...
+  ..$ ReferralType       : chr [1:4972] "General Referral" "General Referral" "General Referral" "General Referral" ...
+  ..$ TotalReferrals     : int [1:4972] 1 2 3 10 2 4 28 36 40 1 ...
+ $ general-referrals-by-hospital-department-2017.csv:Classes 'tbl_df', 'tbl' and 'data.frame':	2977 obs. of  6 variables:
+  ..$ Month_Year         : chr [1:2977] "Jan-2017" "Jan-2017" "Jan-2017" "Jan-2017" ...
+  ..$ Hospital_Name      : chr [1:2977] "Cappagh National Orthopaedic Hospital" "Cavan Monaghan Hospital" "Cavan Monaghan Hospital" "Cavan Monaghan Hospital" ...
+  ..$ Hospital_ID        : int [1:2977] 955 402 402 402 402 402 402 402 402 402 ...
+  ..$ Hospital_Department: chr [1:2977] "Orthopaedics" "Ante-Natal" "Dermatology" "ENT" ...
+  ..$ ReferralType       : chr [1:2977] "General Referral" "General Referral" "General Referral" "General Referral" ...
+  ..$ TotalReferrals     : int [1:2977] 19 9 27 39 34 2 4 33 32 125 ...
+ $ general-referrals-by-hospital-department-2018.csv:Classes 'tbl_df', 'tbl' and 'data.frame':	3492 obs. of  6 variables:
+  ..$ Month_Year         : chr [1:3492] "Jan-2018" "Jan-2018" "Jan-2018" "Jan-2018" ...
+  ..$ Hospital_Name      : chr [1:3492] "Alliance Mater Private Cork Radiology" "Alliance Mater Private Cork Radiology" "Alliance Mater Private Cork Radiology" "Alliance Mater Private Cork Radiology" ...
+  ..$ Hospital_ID        : int [1:3492] 9116 9116 9116 9116 9116 9104 9104 9104 9104 9104 ...
+  ..$ Hospital_Department: chr [1:3492] "Cardiac Calcium Scoring" "CT" "MRI" "Ultrasound" ...
+  ..$ ReferralType       : chr [1:3492] "General Referral" "General Referral" "General Referral" "General Referral" ...
+  ..$ TotalReferrals     : int [1:3492] 5 13 97 56 12 7 13 36 22 27 ...
+```
+
+---
+layout: true
+
+## Row-Bind Data Together
+---
+
+Uses `bind_rows()` from .pkg[dplyr]:
+
+
+```r
+&gt; bind_rows(data)
+```
+
+```
+# A tibble: 12,278 x 6
+   Month_Year Hospital_Name Hospital_ID Hospital_Depart… ReferralType
+   &lt;chr&gt;      &lt;chr&gt;               &lt;int&gt; &lt;chr&gt;            &lt;chr&gt;       
+ 1 Aug-15     AMNCH                1049 Paediatric ENT   General Ref…
+ 2 Aug-15     AMNCH                1049 Paediatric Gast… General Ref…
+ 3 Aug-15     AMNCH                1049 Paediatric Gene… General Ref…
+ 4 Aug-15     Bantry Gener…         704 Gastroenterology General Ref…
+ 5 Aug-15     Bantry Gener…         704 General Medicine General Ref…
+ 6 Aug-15     Bantry Gener…         704 General Surgery  General Ref…
+ 7 Aug-15     Bantry Gener…         704 Medicine for th… General Ref…
+ 8 Aug-15     Bantry Gener…         704 Outreach Dermat… General Ref…
+ 9 Aug-15     Bantry Gener…         704 Outreach Orthop… General Ref…
+10 Aug-15     Bantry Gener…         704 Outreach Surgic… General Ref…
+# ... with 12,268 more rows, and 1 more variable: TotalReferrals &lt;int&gt;
+```
+
+---
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Month_Year &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Hospital_Name &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Hospital_ID &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Hospital_Department &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; ReferralType &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; TotalReferrals &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Oct-16 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMNCH &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1049 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Paediatric Developmental &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; General Referral &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Dec-16 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; UL Hospitals Group &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9100 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Nephrology &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; General Referral &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Oct-2017 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Cork University Hospital &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 724 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Neurology &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; General Referral &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Feb-2018 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Midland Regional Hospital Portlaoise &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 201 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Obstetrics &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; General Referral &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; May-2018 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; St. Michael's Hospital &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 912 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Ophthalmology &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Ophthalmology Referral &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+```r
+library(readr)
+*library(lubridate)
+data &lt;- list()
+
+for (csv_file in csv_files) {
+  data[[path_file(csv_file)]] &lt;- read_csv(csv_file)
+}
+
+data &lt;- bind_rows(data) %&gt;% 
+```
+
+---
+
+
+```r
+library(readr)
+library(lubridate)
+data &lt;- list()
+
+for (csv_file in csv_files) {
+  data[[path_file(csv_file)]] &lt;- read_csv(csv_file)
+}
+
+data &lt;- bind_rows(data) %&gt;%
+  mutate(Month_Year = lubridate::myd(Month_Year, truncated = 1))
+```
+
+--
+
+Adding `truncated = 1` to `myd()` function lets it match on **Month** and **Year**.
+
+---
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Month_Year &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Hospital_Name &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Hospital_ID &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Hospital_Department &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; ReferralType &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; TotalReferrals &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 2016-10-01 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMNCH &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1049 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Paediatric Developmental &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; General Referral &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 2016-12-01 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; UL Hospitals Group &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9100 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Nephrology &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; General Referral &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 2017-10-01 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Cork University Hospital &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 724 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Neurology &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; General Referral &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 2018-02-01 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Midland Regional Hospital Portlaoise &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 201 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Obstetrics &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; General Referral &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 2018-05-01 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; St. Michael's Hospital &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 912 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Ophthalmology &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Ophthalmology Referral &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+---
+layout: false
+class: center top
+
+&lt;img src="https://camo.githubusercontent.com/b7a8b1687a46868377f54dfc6288acd0bbd340e8/68747470733a2f2f692e696d6775722e636f6d2f4e4175783158632e706e67" width="50%"&gt;
+
+## Learn More at&amp;nbsp; [`fs.r-lib.org`](https://fs.r-lib.org)
+
+Also [gerkelab.com/blog](https://www.gerkelab.com/blog/2018/09/import-directory-csv-purrr-readr/)
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%",
+"highlightStyle": "atom-one-light",
+"highlightLines": true,
+"ratio": "16:9",
+"countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

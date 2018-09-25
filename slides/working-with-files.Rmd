@@ -24,8 +24,15 @@ library(fs)
 options(htmltools.dir.version = FALSE)
 knitr::opts_chunk$set(prompt=TRUE, comment='')
 Sys.setenv(R_FS_HOME = "/Users/garrick")
-if (fs::dir_exists(fs::path(fs::path_temp(), "data"))) 
-  fs::dir_delete(fs::path(fs::path_temp(), "data"))
+if (.Platform$OS.type == "unix") {
+  # Set tempdir to something reasonable
+  TEMP_DIR <- "/tmp/rsession-tempdir"
+  if (!fs::dir_exists(TEMP_DIR)) fs::dir_create(TEMP_DIR)
+  path_temp <- (function(TEMPDIR, ...) function(...) fs::path(TEMP_DIR, ...))(TEMP_DIR)
+}
+if (fs::dir_exists(fs::path(path_temp(), "data")))
+  fs::dir_delete(fs::path(path_temp(), "data"))
+
 ```
 
 class: center middle inverse
@@ -46,42 +53,116 @@ class: center middle inverse
 
 ## Overview of Functions in `fs`
 
+```{css echo=FALSE}
+.map-image {
+  text-align: center;
+  width: 100%;
+}
+div.map-image p img {
+  max-height: 475px;
+}
+```
+
 <div style="font-size: 1.75em">
 ```{r results='asis', echo = FALSE}
 tibble::tribble(
   ~ Prefix, ~ Functionality
+  , "<code>path_</code>" , "Create, find, expand, work with paths"
   , "<code>file_</code>" , "Create, delete, copy, move, show, check files"
   , "<code>dir_</code>" , "Create, delete, list, check directories"
-  , "<code>path_</code>" , "Create, find, expand, work with paths"
 ) %>% 
   knitr::kable(format = "html", escape = FALSE, table.attr = "class='plain'")
 ```
 </div>
 
 ---
-layout: true
-## What is a _file path_?
+class: center middle inverse
+
+## What are _paths_, _files_ and _directories_?
+
+--
+
+### Maps as a metaphor for the file system
+
 ---
+layout: true
+## Directories
+---
+
+United States
+
+.map-image[
+![](../images/fs_dir_01.png)
+]
+
+---
+
+United States > Florida
+
+.map-image[
+![](../images/fs_dir_02.png)
+]
+
+---
+
+United States > Florida > 33704
+
+.map-image[
+![](../images/fs_dir_03.png)
+]
+
+
+---
+layout: false
+
+## Path
+
+720 35th Ave N., St. Petersburg, FL, 33704
+
+.map-image[
+![](../images/fs_path.png)
+]
+
+---
+layout: true
+
+## File
+---
+
+The actual thing that is at the path...
+
+.map-image[
+![](../images/fs_file-exists.jpg)
+]
+
+---
+
+...that may or may not actually be there
+
+.map-image[
+![](../images/fs_file-not-found.jpg)
+]
+
+---
+layout: false
+## File Paths are Platform Dependent
+
+These all point to the same file, in different places. (Windows, Mac, Web, Network)
 
 .left-column[
 ![](../images/fs_file-path-pin-icon.png)
 ]
 
 .right-column[
-`C:\Libraries\Documents\Documents\images\my-photo.jpg`
+.line-height-1-5[`C:\Libraries\Documents\Documents\images\my-photo.jpg`]
+
+.line-height-1-5[`/User/username/Documents/images/my-photo.jpg`]
+
+.line-height-1-5[`https://username.com/images/my-photo.jpg`]
+
+.line-height-1-5[`\\net.edu\Users\username\Documents\images\my-photo.jpg`]
 ]
---
-.right-column[
-`/User/username/Documents/images/my-photo.jpg`
-]
---
-.right-column[
-`https://username.com/images/my-photo.jpg`
-]
---
-.right-column[
-`\\net.edu\Users\username\Documents\images\my-photo.jpg`
-]
+
 
 ???
 
@@ -94,21 +175,28 @@ A selection of file paths pointing to the same file on several different systems
 
 ---
 
+## Relative Paths
+
+Compared with **absolute** paths, **relative** paths assume the starting point.
+
 .left-column[
 ![](../images/fs_file-path-pin-icon.png)
 ]
 
 .right-column[
-`.\images\my-photo.jpg`
+.line-height-1-5[`.\images\my-photo.jpg`]
+
+.line-height-1-5[`../../images/my-photo.jpg`]
+
+.line-height-1-5[`images/my-photo.jpg`]
+
+.line-height-1-5[`~\Documents\papers\\..\images\my-photo.jpg`]
 ]
+--
 .right-column[
-`../../images/my-photo.jpg`
-]
-.right-column[
-`images/my-photo.jpg`
-]
-.right-column[
-`~\Documents\papers\..\images\my-photo.jpg`
+.line-height-1-5[<code>&nbsp;.</code> .muted[— Current directory]]
+
+.line-height-1-5[`..` .muted[— One level up from current directory]]
 ]
 
 ???
@@ -116,7 +204,11 @@ A selection of file paths pointing to the same file on several different systems
 Demonstrates the difference between **absolute** and **relative** file paths.
 
 ---
-layout: false
+class: inverse center middle
+
+## A Tour of <code>fs</code>
+
+---
 
 ### Getting Common Directory Paths
 
@@ -382,7 +474,7 @@ class: center middle inverse
 
 ---
 
-## List our data files again
+### List our data files again
 
 ```{r}
 data_dir <- path(path_temp(), "data", "ie-general-referrals-by-hospital")
@@ -396,7 +488,7 @@ path_rel(csv_files, data_dir)
 
 ---
 layout: true
-## Read Using `readr`
+### Read Using `readr`
 ---
 
 ```{r prompt=FALSE, comment="##"}
@@ -421,7 +513,7 @@ library(readr)
 data <- list()
 
 for (csv_file in csv_files) {
-  data[[path_file(csv_file)]] <- read_csv(csv_file)
+  data[[path_file(csv_file)]] <- read_csv(csv_file) #<<
 }
 ```
 
@@ -438,7 +530,7 @@ str(data, give.attr = FALSE)
 ---
 layout: true
 
-## Row-Bind Data Together
+### Row-Bind Data Together
 ---
 
 Uses `bind_rows()` from .pkg[dplyr]:
@@ -483,7 +575,7 @@ for (csv_file in csv_files) {
 }
 
 data <- bind_rows(data) %>%
-  mutate(Month_Year = lubridate::myd(Month_Year, truncated = 1))
+  mutate(Month_Year = lubridate::myd(Month_Year, truncated = 1)) #<<
 ```
 
 --

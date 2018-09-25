@@ -39,6 +39,16 @@ class: center middle inverse
 
 ## Overview of Functions in `fs`
 
+&lt;style type="text/css"&gt;
+.map-image {
+  text-align: center;
+  width: 100%;
+}
+div.map-image p img {
+  max-height: 475px;
+}
+&lt;/style&gt;
+
 &lt;div style="font-size: 1.75em"&gt;
 &lt;table class='plain'&gt;
  &lt;thead&gt;
@@ -49,6 +59,10 @@ class: center middle inverse
  &lt;/thead&gt;
 &lt;tbody&gt;
   &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; &lt;code&gt;path_&lt;/code&gt; &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Create, find, expand, work with paths &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; &lt;code&gt;file_&lt;/code&gt; &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; Create, delete, copy, move, show, check files &lt;/td&gt;
   &lt;/tr&gt;
@@ -56,38 +70,98 @@ class: center middle inverse
    &lt;td style="text-align:left;"&gt; &lt;code&gt;dir_&lt;/code&gt; &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; Create, delete, list, check directories &lt;/td&gt;
   &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; &lt;code&gt;path_&lt;/code&gt; &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Create, find, expand, work with paths &lt;/td&gt;
-  &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
 
 ---
-layout: true
-## What is a _file path_?
+class: center middle inverse
+
+## What are _paths_, _files_ and _directories_?
+
+--
+
+### Maps as a metaphor for the file system
+
 ---
+layout: true
+## Directories
+---
+
+United States
+
+.map-image[
+![](../images/fs_dir_01.png)
+]
+
+---
+
+United States &gt; Florida
+
+.map-image[
+![](../images/fs_dir_02.png)
+]
+
+---
+
+United States &gt; Florida &gt; 33704
+
+.map-image[
+![](../images/fs_dir_03.png)
+]
+
+
+---
+layout: false
+
+## Path
+
+720 35th Ave N., St. Petersburg, FL, 33704
+
+.map-image[
+![](../images/fs_path.png)
+]
+
+---
+layout: true
+
+## File
+---
+
+The actual thing that is at the path...
+
+.map-image[
+![](../images/fs_file-exists.jpg)
+]
+
+---
+
+...that may or may not actually be there
+
+.map-image[
+![](../images/fs_file-not-found.jpg)
+]
+
+---
+layout: false
+## File Paths are Platform Dependent
+
+These all point to the same file, in different places. (Windows, Mac, Web, Network)
 
 .left-column[
 ![](../images/fs_file-path-pin-icon.png)
 ]
 
 .right-column[
-`C:\Libraries\Documents\Documents\images\my-photo.jpg`
+.line-height-1-5[`C:\Libraries\Documents\Documents\images\my-photo.jpg`]
+
+.line-height-1-5[`/User/username/Documents/images/my-photo.jpg`]
+
+.line-height-1-5[`https://username.com/images/my-photo.jpg`]
+
+.line-height-1-5[`\\net.edu\Users\username\Documents\images\my-photo.jpg`]
 ]
---
-.right-column[
-`/User/username/Documents/images/my-photo.jpg`
-]
---
-.right-column[
-`https://username.com/images/my-photo.jpg`
-]
---
-.right-column[
-`\\net.edu\Users\username\Documents\images\my-photo.jpg`
-]
+
 
 ???
 
@@ -100,21 +174,28 @@ A selection of file paths pointing to the same file on several different systems
 
 ---
 
+## Relative Paths
+
+Compared with **absolute** paths, **relative** paths assume the starting point.
+
 .left-column[
 ![](../images/fs_file-path-pin-icon.png)
 ]
 
 .right-column[
-`.\images\my-photo.jpg`
+.line-height-1-5[`.\images\my-photo.jpg`]
+
+.line-height-1-5[`../../images/my-photo.jpg`]
+
+.line-height-1-5[`images/my-photo.jpg`]
+
+.line-height-1-5[`~\Documents\papers\\..\images\my-photo.jpg`]
 ]
+--
 .right-column[
-`../../images/my-photo.jpg`
-]
-.right-column[
-`images/my-photo.jpg`
-]
-.right-column[
-`~\Documents\papers\..\images\my-photo.jpg`
+.line-height-1-5[&lt;code&gt;&amp;nbsp;.&lt;/code&gt; .muted[— Current directory]]
+
+.line-height-1-5[`..` .muted[— One level up from current directory]]
 ]
 
 ???
@@ -122,7 +203,11 @@ A selection of file paths pointing to the same file on several different systems
 Demonstrates the difference between **absolute** and **relative** file paths.
 
 ---
-layout: false
+class: inverse center middle
+
+## A Tour of &lt;code&gt;fs&lt;/code&gt;
+
+---
 
 ### Getting Common Directory Paths
 
@@ -158,7 +243,7 @@ layout: false
 ```
 
 ```
-/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8
+/tmp/rsession-tempdir
 ```
 
 ---
@@ -198,7 +283,7 @@ data.csv
 ```
 
 ```
-/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data.csv
+/tmp/rsession-tempdir/data.csv
 ```
 
 ---
@@ -212,8 +297,8 @@ data.csv
 ```
 
 ```
-/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data 
-                                                           FALSE 
+/tmp/rsession-tempdir/data 
+                     FALSE 
 ```
 --
 
@@ -242,7 +327,7 @@ character(0)
 ```
 
 ```
-/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/data.zip
+/tmp/rsession-tempdir/data/data.zip
 ```
 --
 
@@ -263,7 +348,7 @@ downloaded 77 KB
 ```
 
 ```
-/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/data.zip
+/tmp/rsession-tempdir/data/data.zip
 ```
 ---
 layout: true
@@ -330,11 +415,11 @@ layout: true
 ```
 
 ```
-/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital/README.txt
-/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2015.csv
-/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2016.csv
-/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2017.csv
-/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2018.csv
+/tmp/rsession-tempdir/data/ie-general-referrals-by-hospital/README.txt
+/tmp/rsession-tempdir/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2015.csv
+/tmp/rsession-tempdir/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2016.csv
+/tmp/rsession-tempdir/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2017.csv
+/tmp/rsession-tempdir/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2018.csv
 ```
 
 ---
@@ -389,11 +474,11 @@ layout: true
 # A tibble: 5 x 18
   path                                              type     size permissions modification_time   user  group device_id hard_links special_device_…  inode block_size blocks flags generation access_time         change_time         birth_time         
   &lt;fs::path&gt;                                        &lt;fct&gt; &lt;fs::b&gt; &lt;fs::perms&gt; &lt;dttm&gt;              &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;      &lt;dbl&gt; &lt;dttm&gt;              &lt;dttm&gt;              &lt;dttm&gt;             
-1 README.txt                                        file      184 rw-r--r--   2018-09-24 12:41:09 4468… "HLM…  16777224          1                0 9.73e6       4096      8     0          0 2018-09-24 12:41:09 2018-09-24 12:41:09 2018-09-24 12:41:09
-2 general-referrals-by-hospital-department-2015.csv file    57.4K rw-r--r--   2018-09-24 12:41:09 4468… "HLM…  16777224          1                0 9.73e6       4096    120     0          0 2018-09-24 12:41:09 2018-09-24 12:41:09 2018-09-24 12:41:09
-3 general-referrals-by-hospital-department-2016.csv file   340.9K rw-r--r--   2018-09-24 12:41:09 4468… "HLM…  16777224          1                0 9.73e6       4096    688     0          0 2018-09-24 12:41:09 2018-09-24 12:41:09 2018-09-24 12:41:09
-4 general-referrals-by-hospital-department-2017.csv file   241.4K rw-r--r--   2018-09-24 12:41:09 4468… "HLM…  16777224          1                0 9.73e6       4096    488     0          0 2018-09-24 12:41:09 2018-09-24 12:41:09 2018-09-24 12:41:09
-5 general-referrals-by-hospital-department-2018.csv file   290.7K rw-r--r--   2018-09-24 12:41:09 4468… "HLM…  16777224          1                0 9.73e6       4096    584     0          0 2018-09-24 12:41:09 2018-09-24 12:41:09 2018-09-24 12:41:09
+1 README.txt                                        file      184 rw-r--r--   2018-09-25 09:58:04 4468… wheel  16777224          1                0 9.80e6       4096      8     0          0 2018-09-25 09:58:04 2018-09-25 09:58:04 2018-09-25 09:58:04
+2 general-referrals-by-hospital-department-2015.csv file    57.4K rw-r--r--   2018-09-25 09:58:04 4468… wheel  16777224          1                0 9.80e6       4096    120     0          0 2018-09-25 09:58:04 2018-09-25 09:58:04 2018-09-25 09:58:04
+3 general-referrals-by-hospital-department-2016.csv file   340.9K rw-r--r--   2018-09-25 09:58:04 4468… wheel  16777224          1                0 9.80e6       4096    688     0          0 2018-09-25 09:58:04 2018-09-25 09:58:04 2018-09-25 09:58:04
+4 general-referrals-by-hospital-department-2017.csv file   241.4K rw-r--r--   2018-09-25 09:58:04 4468… wheel  16777224          1                0 9.80e6       4096    488     0          0 2018-09-25 09:58:04 2018-09-25 09:58:04 2018-09-25 09:58:04
+5 general-referrals-by-hospital-department-2018.csv file   290.7K rw-r--r--   2018-09-25 09:58:04 4468… wheel  16777224          1                0 9.80e6       4096    584     0          0 2018-09-25 09:58:04 2018-09-25 09:58:04 2018-09-25 09:58:04
 ```
 
 ---
@@ -408,10 +493,10 @@ layout: true
 # A tibble: 4 x 18
   path                                              type     size permissions modification_time   user  group device_id hard_links special_device_…  inode block_size blocks flags generation access_time         change_time         birth_time         
   &lt;fs::path&gt;                                        &lt;fct&gt; &lt;fs::b&gt; &lt;fs::perms&gt; &lt;dttm&gt;              &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;      &lt;dbl&gt; &lt;dttm&gt;              &lt;dttm&gt;              &lt;dttm&gt;             
-1 general-referrals-by-hospital-department-2015.csv file    57.4K rw-r--r--   2018-09-24 12:41:09 4468… "HLM…  16777224          1                0 9.73e6       4096    120     0          0 2018-09-24 12:41:09 2018-09-24 12:41:09 2018-09-24 12:41:09
-2 general-referrals-by-hospital-department-2016.csv file   340.9K rw-r--r--   2018-09-24 12:41:09 4468… "HLM…  16777224          1                0 9.73e6       4096    688     0          0 2018-09-24 12:41:09 2018-09-24 12:41:09 2018-09-24 12:41:09
-3 general-referrals-by-hospital-department-2017.csv file   241.4K rw-r--r--   2018-09-24 12:41:09 4468… "HLM…  16777224          1                0 9.73e6       4096    488     0          0 2018-09-24 12:41:09 2018-09-24 12:41:09 2018-09-24 12:41:09
-4 general-referrals-by-hospital-department-2018.csv file   290.7K rw-r--r--   2018-09-24 12:41:09 4468… "HLM…  16777224          1                0 9.73e6       4096    584     0          0 2018-09-24 12:41:09 2018-09-24 12:41:09 2018-09-24 12:41:09
+1 general-referrals-by-hospital-department-2015.csv file    57.4K rw-r--r--   2018-09-25 09:58:04 4468… wheel  16777224          1                0 9.80e6       4096    120     0          0 2018-09-25 09:58:04 2018-09-25 09:58:04 2018-09-25 09:58:04
+2 general-referrals-by-hospital-department-2016.csv file   340.9K rw-r--r--   2018-09-25 09:58:04 4468… wheel  16777224          1                0 9.80e6       4096    688     0          0 2018-09-25 09:58:04 2018-09-25 09:58:04 2018-09-25 09:58:04
+3 general-referrals-by-hospital-department-2017.csv file   241.4K rw-r--r--   2018-09-25 09:58:04 4468… wheel  16777224          1                0 9.80e6       4096    488     0          0 2018-09-25 09:58:04 2018-09-25 09:58:04 2018-09-25 09:58:04
+4 general-referrals-by-hospital-department-2018.csv file   290.7K rw-r--r--   2018-09-25 09:58:04 4468… wheel  16777224          1                0 9.80e6       4096    584     0          0 2018-09-25 09:58:04 2018-09-25 09:58:04 2018-09-25 09:58:04
 ```
 
 
@@ -474,7 +559,7 @@ general-referrals-by-hospital-department-2015.csv
 ```
 
 ```
-/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital
+/tmp/rsession-tempdir/data/ie-general-referrals-by-hospital
 ```
 --
 
@@ -551,7 +636,7 @@ class: center middle inverse
 
 ---
 
-## List our data files again
+### List our data files again
 
 
 ```r
@@ -561,10 +646,10 @@ class: center middle inverse
 ```
 
 ```
-/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2015.csv
-/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2016.csv
-/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2017.csv
-/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2018.csv
+/tmp/rsession-tempdir/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2015.csv
+/tmp/rsession-tempdir/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2016.csv
+/tmp/rsession-tempdir/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2017.csv
+/tmp/rsession-tempdir/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2018.csv
 ```
 --
 
@@ -581,7 +666,7 @@ general-referrals-by-hospital-department-2018.csv
 
 ---
 layout: true
-## Read Using `readr`
+### Read Using `readr`
 ---
 
 
@@ -641,10 +726,10 @@ for (csv_file in csv_files) {
 ```
 
 ```
-[1] "/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2015.csv"
-[2] "/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2016.csv"
-[3] "/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2017.csv"
-[4] "/var/folders/0n/sldqyy0s2713kh94byt0gttc001jc5/T/RtmpGec3H8/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2018.csv"
+[1] "/tmp/rsession-tempdir/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2015.csv"
+[2] "/tmp/rsession-tempdir/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2016.csv"
+[3] "/tmp/rsession-tempdir/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2017.csv"
+[4] "/tmp/rsession-tempdir/data/ie-general-referrals-by-hospital/general-referrals-by-hospital-department-2018.csv"
 ```
 
 ---
@@ -655,7 +740,7 @@ library(readr)
 data &lt;- list()
 
 for (csv_file in csv_files) {
-  data[[path_file(csv_file)]] &lt;- read_csv(csv_file)
+* data[[path_file(csv_file)]] &lt;- read_csv(csv_file)
 }
 ```
 
@@ -713,7 +798,7 @@ List of 4
 ---
 layout: true
 
-## Row-Bind Data Together
+### Row-Bind Data Together
 ---
 
 Uses `bind_rows()` from .pkg[dplyr]:
@@ -824,7 +909,7 @@ for (csv_file in csv_files) {
 }
 
 data &lt;- bind_rows(data) %&gt;%
-  mutate(Month_Year = lubridate::myd(Month_Year, truncated = 1))
+* mutate(Month_Year = lubridate::myd(Month_Year, truncated = 1))
 ```
 
 --

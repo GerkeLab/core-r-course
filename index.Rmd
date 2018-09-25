@@ -17,8 +17,11 @@ if (!requireNamespace("xaringan", quietly = TRUE)) install.packages("xaringan")
 
 ```{r}
 session_list <- tibble(
-  n = 1:8,
-  Date = seq(lubridate::ymd("2018-07-18"), lubridate::ymd("2018-07-18") + lubridate::weeks(7), by = "7 day"),
+  n = 1:12,
+  Date = c(
+    seq(lubridate::ymd("2018-07-18"), lubridate::ymd("2018-07-18") + lubridate::weeks(7), by = "7 day"),
+    seq(lubridate::ymd("2018-09-24"), lubridate::ymd("2018-11-10"), by = "14 day")
+  ),
   Topic = c(
     "Meet R and RStudio", #1
     "Data Types, Packages, Data Collections, Workspaces and RStudio Projects", #2,
@@ -27,10 +30,12 @@ session_list <- tibble(
     "Tidy Data, Two-table dplyr verbs", #5
     "Tidying data with tidyr, Dates with lubridate", #6
     "Working with strings", #7
-    "R in Real Life" #8
+    "R in Real Life", #8
+    "Working With Files", #9
+    rep("", 3)
   ),
-  Location = c("MKE-1308", rep("MKE-1022", 7)),
-  `Start Time` = "09:15",
+  Location = c("MKE-1308", rep("MKE-1022", 11)),
+  `Start Time` = c(rep("09:15", 8), rep("1pm", 4)),
   Link = ""
 )
 session_list[1, "Link"] <- "session_01.html"
@@ -41,17 +46,20 @@ session_list[5, "Link"] <- "session_05_answers.html"
 session_list[6, "Link"] <- "session_06_answers.html"
 session_list[7, "Link"] <- "session_07.html"
 session_list[8, "Link"] <- "session_08.html"
+session_list[9, "Link"] <- "slides/working-with-files.html"
 ```
 
 <!-- Emoji: https://afeld.github.io/emoji-css/ -->
 
 ## Announcements
 
-**Assignment for Wednesday, September 5**
+<details><summary>Assignment for Wednesday, September 5</summary>
 
 > **Use R for a task in your daily work.** 
 For sharing with the group, you can use your laptop or the conference system to present your use case, or if it’s easier you can [send me your files](mailto:Garrick.Aden-Buie@moffitt.org) and I’ll present them from my laptop. 
 If you’re attending remotely and would like to share with the group, please let me know.
+
+</details>
 
 <details><summary>Assignment for Wednesday, August 29</summary>
 

@@ -1,0 +1,705 @@
+---
+title: "Writing Dynamic Reports with <code style='color: white;'>rmarkdown</code>"
+#subtitle: "Session 1"
+author: "Garrick Aden-Buie"
+date: 'October 8, 2018'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: 
+      - moffitt-theme.css
+      - extra.css
+    nature:
+      titleSlideClass: ["bottom", "left"]
+      slideNumberFormat: "%current%"
+      highlightStyle: atom-one-light
+      highlightLines: false
+      ratio: "16:9"
+      countIncrementalSlides: true
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+class: middle left inverse
+
+## Step 1: Markdown
+
+--
+
+## Step 2: **R** Markdown
+
+--
+
+## Step 3: ...
+
+--
+
+## Step 4: Profit!
+
+<img src="https://media.giphy.com/media/g8S1ntWFumtmE/giphy.gif" style="float: right; position: absolute; top: 20%; right: 10%;">
+
+---
+class: big
+
+## Why Use R Markdown?
+
+1. Blend code and text.
+
+--
+
+2. Updating the code also updates the text.
+
+--
+
+3. Change the output format with _just one click_.<sup>*</sup>
+    - Word Documents, PDF, HTML, Slides, Powerpoint, ...
+
+.footnote.muted[Standard disclaimers apply.]
+
+---
+background-image: url(../images/kelly-sikkema-580858-unsplash_cropped.jpeg)
+background-size: cover
+class: center middle
+
+## Markdown
+
+### Plain Text<br>Formatting
+
+---
+
+## Markdown
+
+.pull-left[
+#### Source
+
+<!----------------------------------->
+```markdown
+With **markdown**, you write your text
+in *plain text*, in a standard text
+editor. To format your text, you use
+standard characters that make sense
+when you're reading the plain version.
+
+You can use tools, like RStudio, to
+render the plain text into a more
+visually appealing format, like an
+HTML page or Microsoft Word document.
+```
+]
+--
+.pull-right[
+#### Output
+
+With **markdown**, you write your text
+in *plain text*, in a standard text
+editor. To format your text, you use
+standard characters that make sense
+when you're reading the plain version.
+
+You can use tools, like RStudio, to
+render the plain text into a more
+visually appealing format, like an
+HTML page or Microsoft Word document.
+]
+
+---
+
+## Markdown
+
+.pull-left[
+#### Source
+
+```markdown
+The `mutate()` function from the 
+[dplyr](https://dplyr.tidyverse.org) 
+package can be used 
+to *mutate* your data frame.
+
+Like all **dplyr** functions, it
+
+1. Takes a data frame
+2. Returns a data frame
+```
+]
+--
+.pull-right[
+#### Output
+
+The `mutate()` function from the [dplyr](https://dplyr.tidyverse.org) package can be used to *mutate* your data frame.
+
+Like all **dplyr** functions, it
+
+1. Takes a data frame
+2. Returns a data frame
+]
+
+---
+
+## Formatting
+
+.pull-left[
+```markdown
+ *italics*
+
+ **bold**
+
+> quoted text
+
+~~strikethrough~~
+
+equation: $e = mc^2$
+```
+]
+
+.pull-right[
+*italics*
+
+**bold**
+
+> quoted text
+
+~~strikethrough~~
+
+equation: $e = mc^2$
+
+]
+
+---
+layout: true
+## Code
+---
+
+.pull-left[
+````markdown
+Inline code: `x %>% group_by()`.
+
+
+A code block:
+
+```
+View(x)
+```
+
+
+Another code block:
+
+    glimpse(x)
+````
+]
+
+.pull-right[
+Inline code: `x %>% group_by()`.
+
+
+A code block:
+
+```
+View(x)
+```
+
+
+Another code block:
+
+    glimpse(x)
+]
+
+---
+
+.pull-left[
+````markdown
+A code block with syntax highlighting
+
+```r
+x <- sample(letters, 10)
+x <- paste(x, collapse = ", ")
+print(x)
+```
+
+Many supported styles
+
+```javascript
+var i;
+for (i=0; i<5; i++) {
+  console.log(i);
+}
+```
+````
+]
+
+.pull-right[
+A code block with syntax highlighting
+
+```r
+x <- sample(letters, 10)
+x <- paste(x, collapse = ", ")
+print(x)
+```
+
+<br>Many supported styles
+
+```javascript
+var i;
+for (i=0; i<5; i++) {
+  console.log(i);
+}
+```
+]
+
+---
+layout: false
+## Headers
+
+.pull-left[
+```markdown
+# Section 1
+
+## Section 2
+
+### Section 3
+
+#### Section 4
+
+##### Section 5
+
+ ***
+```
+]
+--
+.pull-right[
+# Section 1
+
+## Section 2
+
+### Section 3
+
+#### Section 4
+
+##### Section 5
+
+* * *
+]
+
+---
+
+## Links
+
+.pull-left[
+```markdown
+[RStudio](https://rstudio.com)
+
+
+[gerkelab]: https://gerkelab.com
+
+I develop software in R 
+for [Dr. Gerke's Lab][gerkelab].
+
+
+![Caption](https://bit.ly/2RwSDjL)
+
+
+Jump to a [Section](#header-name).
+
+
+Text with a note[^1].
+
+[^1]: Footnote defined anywhere.
+```
+]
+
+.pull-right[
+[RStudio](https://rstudio.com)
+
+
+[gerkelab]: https://gerkelab.com
+
+<br><br>I develop software in R 
+for [Dr. Gerke's Lab][gerkelab].
+
+![me](https://bit.ly/2RwSDjL)
+
+Jump to a [Section](#16).
+
+A footnote<sup>1</sup>.
+
+.footnote.muted[<sup>1</sup>Footnote defined anywhere.]
+]
+
+---
+layout: true
+## Lists
+---
+
+.pull-left[
+```markdown
+* Fruit
+* Apple
+* Orange
+* Banana
+* Dairy
+* Milk
+* Cheese
+```
+]
+
+.pull-right[
+* Fruit
+* Apple
+* Orange
+* Banana
+* Dairy
+* Milk
+* Cheese
+]
+
+---
+
+.pull-left[
+```markdown
+* Fruit
+    * Apple
+    * Orange
+    * Banana
+* Dairy
+    * Milk
+    * Cheese
+```
+]
+
+.pull-right[
+* Fruit
+    * Apple
+    * Orange
+    * Banana
+* Dairy
+    * Milk
+    * Cheese
+]
+
+
+---
+
+.pull-left[
+```markdown
+* Fruit
+    - Apple
+    - Orange
+    - Banana
+* Dairy
+    + Milk
+    + Cheese
+```
+
+]
+
+.pull-right[
+* Fruit
+    - Apple
+    - Orange
+    - Banana
+* Dairy
+    + Milk
+    + Cheese
+]
+
+You can use `*`, `-`, or `+` for bullet points
+
+---
+
+.pull-left[
+```markdown
+* Fruit
+    1. Apple
+    2. Orange
+    3. Banana
+* Dairy
+    1. Milk
+    1. Cheese
+```
+]
+
+.pull-right[
+* Fruit
+    1. Apple
+    2. Orange
+    3. Banana
+* Dairy
+    1. Milk
+    1. Cheese
+]
+
+Use numbers like `1.` for ordered lists.  
+
+---
+
+.pull-left[
+```markdown
+* Fruit
+    1. Apple
+    2. Orange
+    3. Banana
+    
+* Dairy
+    1. Milk
+    1. Cheese
+```
+]
+
+.pull-right[
+* Fruit
+    1. Apple
+    2. Orange
+    3. Banana
+    
+* Dairy
+    1. Milk
+    1. Cheese
+]
+
+Add empty lines between elements  
+to increase line spacing
+
+---
+
+.pull-left[
+```markdown
+1. A short item
+    * Has it's own things
+    
+1. A longer item with a few paragraphs.
+
+    Indent continuation by four spaces.
+    
+    * Still can have sub-items.
+```
+]
+
+.pull-right[
+1. A short item
+    * Has it's own things
+    
+1. A longer item with a few paragraphs.
+
+    Indent continuation by four spaces.
+    
+    * Still can have sub-items.
+]
+
+---
+layout: false
+
+## Tables
+
+.center[
+<pre>
+| height| mass|hair_color |skin_color  |species |
+|------:|----:|:----------|:-----------|:-------|
+|    172|   77|blond      |fair        |Human   |
+|    167|   75|           |gold        |Droid   |
+|     96|   32|           |white, blue |Droid   |
+|    202|  136|none       |white       |Human   |
+|    150|   49|brown      |light       |Human   |
+</pre>
+]
+
+--
+
+| height| mass|hair_color |skin_color  |species |
+|------:|----:|:----------|:-----------|:-------|
+|    172|   77|blond      |fair        |Human   |
+|    167|   75|           |gold        |Droid   |
+|     96|   32|           |white, blue |Droid   |
+|    202|  136|none       |white       |Human   |
+|    150|   49|brown      |light       |Human   |
+
+---
+background-image: url(../images/ben-white-197668-unsplash.jpg)
+background-size: cover
+class: middle inverse big
+
+.pull-right[
+## Learn More
+
+<a href="https://commonmark.org/help/" style="color: white;">commonmark.org/help/</a>
+]
+
+---
+background-image: url(../images/scott-webb-199470-unsplash.jpg)
+background-size: cover
+class: center top
+
+<img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/rmarkdown.png" width="300px" style="padding-top: 75px">
+
+---
+layout: true
+## Write Code _Inside_ Your Markdown
+---
+
+.pull-left[
+````markdown
+Use a code block but use `{r}` 
+where we previously used `r`.
+
+```{r}`r ''`
+summary(cars)
+```
+````
+]
+--
+.pull-right[
+Use a code block but use `{r}` 
+where we previously used `r`.
+
+```{r}
+summary(cars)
+```
+]
+
+---
+
+.pull-left[
+````markdown
+The average speed of the cars
+was ``r ''`r mean(cars$speed)` mph
+and the average distance
+travelled was ``r ''`r mean(cars$dist)`
+meters (or another unit of distance).
+````
+]
+--
+.pull-right[
+The average speed of the cars
+was `r mean(cars$speed)` mph
+and the average distance
+travelled was `r mean(cars$dist)`
+meters (or another unit of distance).
+]
+
+---
+layout: true
+## Code Chunk Options
+---
+
+.pull-left[
+````markdown
+```{r cars}`r ''`
+head(cars)
+```
+````
+
+]
+.pull-right[
+```{r}
+head(cars)
+```
+]
+
+---
+
+.pull-left[
+````markdown
+```{r cars, echo=FALSE}`r ''`
+head(cars)
+```
+````
+
+Set `echo = FALSE` to hide the code.
+]
+.pull-right[
+```{r, echo=FALSE}
+head(cars)
+```
+]
+
+
+---
+
+.pull-left[
+````markdown
+```{r cars, include=FALSE}`r ''`
+head(cars)
+```
+````
+
+Set `include = FALSE` to hide the code and the output, but still run the code.
+]
+.pull-right[
+```{r, include=FALSE}
+head(cars)
+```
+]
+
+
+---
+
+.pull-left[
+````markdown
+```{r cars, results='hide'}`r ''`
+head(cars)
+```
+````
+
+
+Set `results = 'hide'` to hide the output.
+]
+.pull-right[
+```{r, results='hide'}
+head(cars)
+```
+]
+
+
+---
+
+.pull-left[
+````markdown
+```{r cars, results='asis'}`r ''`
+head(cars)
+```
+````
+
+Set `results = 'asis'` to print the output exactly.
+]
+.pull-right[
+```{r, results='asis'}
+head(cars)
+```
+]
+
+
+
+---
+
+.pull-left[
+````markdown
+```{r cars, results='asis'}`r ''`
+knitr::kable(head(cars))
+```
+````
+
+Set `results = 'asis'` and use `kable()` from .pkg[knitr]  to print pretty tables.
+]
+.pull-right[
+```r
+knitr::kable(head(cars))
+```
+
+| speed| dist|
+|-----:|----:|
+|     4|    2|
+|     4|   10|
+|     7|    4|
+|     7|   22|
+|     8|   16|
+|     9|   10|
+]
+
+---
+background-image: url(../images/aaron-burden-60068-unsplash.jpg)
+backgroun-size: cover
+layout: false
+class: inverse right middle
+
+# Let's Try!
+## rmarkdown.rstudio.com

@@ -28,6 +28,8 @@ navbar:
           href: session_08.html
         - text: "Extra - Working with Files"
           href: slides/working-with-files.html
+        - text: "Extra - R Markdown"
+          href: slides/rmarkdown.html
     - text: "Materials"
       menu:
         - text: "Session 1"

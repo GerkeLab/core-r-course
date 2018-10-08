@@ -32,7 +32,8 @@ session_list <- tibble(
     "Working with strings", #7
     "R in Real Life", #8
     "Working With Files", #9
-    rep("", 3)
+    "R Markdown", #10
+    rep("", 2)
   ),
   Location = c("MKE-1308", rep("MKE-1022", 11)),
   `Start Time` = c(rep("09:15", 8), rep("1pm", 4)),
@@ -47,6 +48,7 @@ session_list[6, "Link"] <- "session_06_answers.html"
 session_list[7, "Link"] <- "session_07.html"
 session_list[8, "Link"] <- "session_08.html"
 session_list[9, "Link"] <- "slides/working-with-files.html"
+session_list[10, "Link"] <- "slides/rmarkdown.html"
 ```
 
 <!-- Emoji: https://afeld.github.io/emoji-css/ -->

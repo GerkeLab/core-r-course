@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Writing Dynamic Reports with rmarkdown</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Garrick Aden-Buie" />
+    <meta name="date" content="2018-10-08" />
+    <link rel="stylesheet" href="moffitt-theme.css" type="text/css" />
+    <link rel="stylesheet" href="extra.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: bottom, left, title-slide
+
+# Writing Dynamic Reports with <code style='color: white;'>rmarkdown</code>
+### Garrick Aden-Buie
+### October 8, 2018
+
+---
+
+
+
+
+class: middle left inverse
+
+## Step 1: Markdown
+
+--
+
+## Step 2: **R** Markdown
+
+--
+
+## Step 3: ...
+
+--
+
+## Step 4: Profit!
+
+&lt;img src="https://media.giphy.com/media/g8S1ntWFumtmE/giphy.gif" style="float: right; position: absolute; top: 20%; right: 10%;"&gt;
+
+---
+class: big
+
+## Why Use R Markdown?
+
+1. Blend code and text.
+
+--
+
+2. Updating the code also updates the text.
+
+--
+
+3. Change the output format with _just one click_.&lt;sup&gt;*&lt;/sup&gt;
+    - Word Documents, PDF, HTML, Slides, Powerpoint, ...
+
+.footnote.muted[Standard disclaimers apply.]
+
+---
+background-image: url(../images/kelly-sikkema-580858-unsplash_cropped.jpeg)
+background-size: cover
+class: center middle
+
+## Markdown
+
+### Plain Text&lt;br&gt;Formatting
+
+---
+
+## Markdown
+
+.pull-left[
+#### Source
+
+&lt;!-----------------------------------&gt;
+```markdown
+With **markdown**, you write your text
+in *plain text*, in a standard text
+editor. To format your text, you use
+standard characters that make sense
+when you're reading the plain version.
+
+You can use tools, like RStudio, to
+render the plain text into a more
+visually appealing format, like an
+HTML page or Microsoft Word document.
+```
+]
+--
+.pull-right[
+#### Output
+
+With **markdown**, you write your text
+in *plain text*, in a standard text
+editor. To format your text, you use
+standard characters that make sense
+when you're reading the plain version.
+
+You can use tools, like RStudio, to
+render the plain text into a more
+visually appealing format, like an
+HTML page or Microsoft Word document.
+]
+
+---
+
+## Markdown
+
+.pull-left[
+#### Source
+
+```markdown
+The `mutate()` function from the 
+[dplyr](https://dplyr.tidyverse.org) 
+package can be used 
+to *mutate* your data frame.
+
+Like all **dplyr** functions, it
+
+1. Takes a data frame
+2. Returns a data frame
+```
+]
+--
+.pull-right[
+#### Output
+
+The `mutate()` function from the [dplyr](https://dplyr.tidyverse.org) package can be used to *mutate* your data frame.
+
+Like all **dplyr** functions, it
+
+1. Takes a data frame
+2. Returns a data frame
+]
+
+---
+
+## Formatting
+
+.pull-left[
+```markdown
+ *italics*
+
+ **bold**
+
+&gt; quoted text
+
+~~strikethrough~~
+
+equation: $e = mc^2$
+```
+]
+
+.pull-right[
+*italics*
+
+**bold**
+
+&gt; quoted text
+
+~~strikethrough~~
+
+equation: `\(e = mc^2\)`
+
+]
+
+---
+layout: true
+## Code
+---
+
+.pull-left[
+````markdown
+Inline code: `x %&gt;% group_by()`.
+
+
+A code block:
+
+```
+View(x)
+```
+
+
+Another code block:
+
+    glimpse(x)
+````
+]
+
+.pull-right[
+Inline code: `x %&gt;% group_by()`.
+
+
+A code block:
+
+```
+View(x)
+```
+
+
+Another code block:
+
+    glimpse(x)
+]
+
+---
+
+.pull-left[
+````markdown
+A code block with syntax highlighting
+
+```r
+x &lt;- sample(letters, 10)
+x &lt;- paste(x, collapse = ", ")
+print(x)
+```
+
+Many supported styles
+
+```javascript
+var i;
+for (i=0; i&lt;5; i++) {
+  console.log(i);
+}
+```
+````
+]
+
+.pull-right[
+A code block with syntax highlighting
+
+```r
+x &lt;- sample(letters, 10)
+x &lt;- paste(x, collapse = ", ")
+print(x)
+```
+
+&lt;br&gt;Many supported styles
+
+```javascript
+var i;
+for (i=0; i&lt;5; i++) {
+  console.log(i);
+}
+```
+]
+
+---
+layout: false
+## Headers
+
+.pull-left[
+```markdown
+# Section 1
+
+## Section 2
+
+### Section 3
+
+#### Section 4
+
+##### Section 5
+
+ ***
+```
+]
+--
+.pull-right[
+# Section 1
+
+## Section 2
+
+### Section 3
+
+#### Section 4
+
+##### Section 5
+
+* * *
+]
+
+---
+
+## Links
+
+.pull-left[
+```markdown
+[RStudio](https://rstudio.com)
+
+
+[gerkelab]: https://gerkelab.com
+
+I develop software in R 
+for [Dr. Gerke's Lab][gerkelab].
+
+
+![Caption](https://bit.ly/2RwSDjL)
+
+
+Jump to a [Section](#header-name).
+
+
+Text with a note[^1].
+
+[^1]: Footnote defined anywhere.
+```
+]
+
+.pull-right[
+[RStudio](https://rstudio.com)
+
+
+[gerkelab]: https://gerkelab.com
+
+&lt;br&gt;&lt;br&gt;I develop software in R 
+for [Dr. Gerke's Lab][gerkelab].
+
+![me](https://bit.ly/2RwSDjL)
+
+Jump to a [Section](#16).
+
+A footnote&lt;sup&gt;1&lt;/sup&gt;.
+
+.footnote.muted[&lt;sup&gt;1&lt;/sup&gt;Footnote defined anywhere.]
+]
+
+---
+layout: true
+## Lists
+---
+
+.pull-left[
+```markdown
+* Fruit
+* Apple
+* Orange
+* Banana
+* Dairy
+* Milk
+* Cheese
+```
+]
+
+.pull-right[
+* Fruit
+* Apple
+* Orange
+* Banana
+* Dairy
+* Milk
+* Cheese
+]
+
+---
+
+.pull-left[
+```markdown
+* Fruit
+    * Apple
+    * Orange
+    * Banana
+* Dairy
+    * Milk
+    * Cheese
+```
+]
+
+.pull-right[
+* Fruit
+    * Apple
+    * Orange
+    * Banana
+* Dairy
+    * Milk
+    * Cheese
+]
+
+
+---
+
+.pull-left[
+```markdown
+* Fruit
+    - Apple
+    - Orange
+    - Banana
+* Dairy
+    + Milk
+    + Cheese
+```
+
+]
+
+.pull-right[
+* Fruit
+    - Apple
+    - Orange
+    - Banana
+* Dairy
+    + Milk
+    + Cheese
+]
+
+You can use `*`, `-`, or `+` for bullet points
+
+---
+
+.pull-left[
+```markdown
+* Fruit
+    1. Apple
+    2. Orange
+    3. Banana
+* Dairy
+    1. Milk
+    1. Cheese
+```
+]
+
+.pull-right[
+* Fruit
+    1. Apple
+    2. Orange
+    3. Banana
+* Dairy
+    1. Milk
+    1. Cheese
+]
+
+Use numbers like `1.` for ordered lists.  
+
+---
+
+.pull-left[
+```markdown
+* Fruit
+    1. Apple
+    2. Orange
+    3. Banana
+    
+* Dairy
+    1. Milk
+    1. Cheese
+```
+]
+
+.pull-right[
+* Fruit
+    1. Apple
+    2. Orange
+    3. Banana
+    
+* Dairy
+    1. Milk
+    1. Cheese
+]
+
+Add empty lines between elements  
+to increase line spacing
+
+---
+
+.pull-left[
+```markdown
+1. A short item
+    * Has it's own things
+    
+1. A longer item with a few paragraphs.
+
+    Indent continuation by four spaces.
+    
+    * Still can have sub-items.
+```
+]
+
+.pull-right[
+1. A short item
+    * Has it's own things
+    
+1. A longer item with a few paragraphs.
+
+    Indent continuation by four spaces.
+    
+    * Still can have sub-items.
+]
+
+---
+layout: false
+
+## Tables
+
+.center[
+&lt;pre&gt;
+| height| mass|hair_color |skin_color  |species |
+|------:|----:|:----------|:-----------|:-------|
+|    172|   77|blond      |fair        |Human   |
+|    167|   75|           |gold        |Droid   |
+|     96|   32|           |white, blue |Droid   |
+|    202|  136|none       |white       |Human   |
+|    150|   49|brown      |light       |Human   |
+&lt;/pre&gt;
+]
+
+--
+
+| height| mass|hair_color |skin_color  |species |
+|------:|----:|:----------|:-----------|:-------|
+|    172|   77|blond      |fair        |Human   |
+|    167|   75|           |gold        |Droid   |
+|     96|   32|           |white, blue |Droid   |
+|    202|  136|none       |white       |Human   |
+|    150|   49|brown      |light       |Human   |
+
+---
+background-image: url(../images/ben-white-197668-unsplash.jpg)
+background-size: cover
+class: middle inverse big
+
+.pull-right[
+## Learn More
+
+&lt;a href="https://commonmark.org/help/" style="color: white;"&gt;commonmark.org/help/&lt;/a&gt;
+]
+
+---
+background-image: url(../images/scott-webb-199470-unsplash.jpg)
+background-size: cover
+class: center top
+
+&lt;img src="https://raw.githubusercontent.com/rstudio/hex-stickers/master/PNG/rmarkdown.png" width="300px" style="padding-top: 75px"&gt;
+
+---
+layout: true
+## Write Code _Inside_ Your Markdown
+---
+
+.pull-left[
+````markdown
+Use a code block but use `{r}` 
+where we previously used `r`.
+
+```{r}
+summary(cars)
+```
+````
+]
+--
+.pull-right[
+Use a code block but use `{r}` 
+where we previously used `r`.
+
+
+```r
+summary(cars)
+```
+
+```
+##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00
+```
+]
+
+---
+
+.pull-left[
+````markdown
+The average speed of the cars
+was `r mean(cars$speed)` mph
+and the average distance
+travelled was `r mean(cars$dist)`
+meters (or another unit of distance).
+````
+]
+--
+.pull-right[
+The average speed of the cars
+was 15.4 mph
+and the average distance
+travelled was 42.98
+meters (or another unit of distance).
+]
+
+---
+layout: true
+## Code Chunk Options
+---
+
+.pull-left[
+````markdown
+```{r cars}
+head(cars)
+```
+````
+
+]
+.pull-right[
+
+```r
+head(cars)
+```
+
+```
+##   speed dist
+## 1     4    2
+## 2     4   10
+## 3     7    4
+## 4     7   22
+## 5     8   16
+## 6     9   10
+```
+]
+
+---
+
+.pull-left[
+````markdown
+```{r cars, echo=FALSE}
+head(cars)
+```
+````
+
+Set `echo = FALSE` to hide the code.
+]
+.pull-right[
+
+```
+##   speed dist
+## 1     4    2
+## 2     4   10
+## 3     7    4
+## 4     7   22
+## 5     8   16
+## 6     9   10
+```
+]
+
+
+---
+
+.pull-left[
+````markdown
+```{r cars, include=FALSE}
+head(cars)
+```
+````
+
+Set `include = FALSE` to hide the code and the output, but still run the code.
+]
+.pull-right[
+
+]
+
+
+---
+
+.pull-left[
+````markdown
+```{r cars, results='hide'}
+head(cars)
+```
+````
+
+
+Set `results = 'hide'` to hide the output.
+]
+.pull-right[
+
+```r
+head(cars)
+```
+]
+
+
+---
+
+.pull-left[
+````markdown
+```{r cars, results='asis'}
+head(cars)
+```
+````
+
+Set `results = 'asis'` to print the output exactly.
+]
+.pull-right[
+
+```r
+head(cars)
+```
+
+  speed dist
+1     4    2
+2     4   10
+3     7    4
+4     7   22
+5     8   16
+6     9   10
+]
+
+
+
+---
+
+.pull-left[
+````markdown
+```{r cars, results='asis'}
+knitr::kable(head(cars))
+```
+````
+
+Set `results = 'asis'` and use `kable()` from .pkg[knitr]  to print pretty tables.
+]
+.pull-right[
+```r
+knitr::kable(head(cars))
+```
+
+| speed| dist|
+|-----:|----:|
+|     4|    2|
+|     4|   10|
+|     7|    4|
+|     7|   22|
+|     8|   16|
+|     9|   10|
+]
+
+---
+background-image: url(../images/aaron-burden-60068-unsplash.jpg)
+backgroun-size: cover
+layout: false
+class: inverse right middle
+
+# Let's Try!
+## rmarkdown.rstudio.com
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%",
+"highlightStyle": "atom-one-light",
+"highlightLines": false,
+"ratio": "16:9",
+"countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

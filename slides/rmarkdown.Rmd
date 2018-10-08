@@ -697,9 +697,10 @@ knitr::kable(head(cars))
 
 ---
 background-image: url(../images/aaron-burden-60068-unsplash.jpg)
-backgroun-size: cover
+background-size: cover
 layout: false
-class: inverse right middle
+class: inverse right bottom
 
-# Let's Try!
+
+# Let's Try
 ## rmarkdown.rstudio.com

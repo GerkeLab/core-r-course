@@ -291,8 +291,8 @@ therapies %>%
 ```r
 diagnoses <- readxl::read_xlsx(
   paste0("https://gerkelab.github.io/core-r-course/",
-         "materials/session-extra-03/", "
-         data-export-example.xlsx"), 
+         "materials/session-extra-03/", 
+         "data-export-example.xlsx"), 
   sheet = "Diagnoses"
 )
 

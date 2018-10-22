@@ -30,6 +30,8 @@ navbar:
           href: slides/working-with-files.html
         - text: "Extra - R Markdown"
           href: slides/rmarkdown.html
+        - text: "Extra - Replace Excel"
+          href: session_extra_03.html
     - text: "Materials"
       menu:
         - text: "Session 1"

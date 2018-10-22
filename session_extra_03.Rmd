@@ -1,0 +1,345 @@
+---
+title: Extra - Replace Excel
+date: "October 22, 2018"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(comment = "", prompt = TRUE)
+set.seed(42)
+```
+
+## Common Excel Functions in R
+
+The following table is from [How to Use R With Excel](https://rpubs.com/acolumbus/how-to-use-r-with-excel) by Alyssa Columbus, a start-to-finish guide on replacing Excel with R.
+You can also [download a printable version](materials/session-extra-03/common-excel-functions.pdf).
+
+```{r, echo=FALSE}
+common_excel_functions <- 
+  tibble::tribble(
+             ~`Excel Formula`,                                           ~`R Function`,        ~Type,
+                      "ABS",                                               "`abs`", "Arithmetic",
+                  "ADDRESS",                                            "`assign`", "Essentials",
+                      "AND",                                      "`&`,`&&`,`all`",    "Boolean",
+  "AVERAGE, AVG, AVERAGEIF",                                              "`mean`", "Arithmetic",
+                 "BETADIST",                                             "`pbeta`", "Statistics",
+                  "BETAINV",                                             "`qbeta`", "Statistics",
+                "BINOMDIST",          "`pbinom` when cumulative,`dbinom` when not", "Statistics",
+                  "CEILING",                                           "`ceiling`", "Arithmetic",
+                     "CELL",                             "`str` has the same idea", "Essentials",
+       "CHIDIST, CHISQDIST",                                            "`pchisq`", "Statistics",
+         "CHIINV, CHISQINV",                                            "`qchisq`", "Statistics",
+                  "CHITEST",                                        "`chisq.test`", "Statistics",
+                   "CHOOSE",                                            "`switch`", "Essentials",
+                    "CLEAN",                                              "`gsub`",       "Text",
+            "COLS, COLUMNS",                                              "`ncol`", "Essentials",
+                   "COLUMN",                                     "`col`,`:`,`seq`", "Essentials",
+                   "COMBIN",                                            "`choose`",  "Essentals",
+              "CONCATENATE",                                             "`paste`",       "Text",
+               "CONFIDENCE",                       "`-qnorm(alpha/2)*std/sqrt(n)`", "Statistics",
+                   "CORREL",                                               "`cor`", "Statistics",
+           "COUNT, COUNTIF",                                            "`length`", "Arithmetic",
+                    "COVAR",                                               "`cov`", "Statistics",
+                "CRITBINOM",                                            "`qbinom`", "Statistics",
+                    "DELTA",                                         "`identical`",    "Boolean",
+                    "EXACT",                                                "`==`",    "Boolean",
+                      "EXP",                                               "`exp`", "Arithmetic",
+                "EXPONDIST",              "`pexp` when cumulative,`dexp` when not", "Statistics",
+                     "FACT",                                         "`factorial`", "Arithmetic",
+               "FACTDOUBLE",              "`dfactorial` in the `phangorn` package", "Arithmetic",
+                    "FDIST",                                                "`pf`", "Statistics",
+                     "FIND",                            "`regexpr`,`grepl`,`grep`",       "Text",
+                     "FINV",                                                "`qf`", "Statistics",
+                   "FISHER",                                             "`atanh`", "Arithmetic",
+                "FISHERINV",                                              "`tanh`", "Arithmetic",
+                    "FIXED",                        "`format`,`sprintf`,`formatC`", "Essentials",
+                    "FLOOR",                                             "`floor`", "Arithmetic",
+                 "FORECAST",                         "`predict` on an `lm` object", "Statistics",
+                "FREQUENCY",                                       "`cut`,`table`", "Arithmetic",
+                    "FTEST",                                          "`var.test`", "Statistics",
+                "GAMMADIST", "`pgamma` if last argument T,`dgamma` if last arg. F", "Statistics",
+                 "GAMMAINV",                                            "`qgamma`", "Statistics",
+                  "GAMMALN",                                            "`lgamma`", "Statistics",
+                    "GAUSS",                                    "`pnorm(x) - 0.5`", "Statistics",
+                      "GCD",                                               "`gcd`", "Arithmetic",
+                  "GEOMEAN",                                 "`exp(mean(log(x)))`", "Arithmetic",
+                   "GESTEP",                                                "`>=`",    "Boolean",
+                  "HARMEAN",              "`harmonic.mean` in the `psych` package", "Arithmetic",
+                  "HLOOKUP",                                     "`match`,`merge`", "Essentials",
+              "HYPGEOMDIST",                                            "`dhyper`", "Statistics",
+                       "IF",                                       "`if`,`ifelse`", "Essentials",
+                  "IFERROR",                                    "`try`,`tryCatch`", "Essentials",
+                    "INDEX",                                            "`x[y,z]`", "Essentials",
+                 "INDIRECT",                                               "`get`", "Essentials",
+                      "INT",      "`as.integer`(not for negative numbers),`floor`", "Arithmetic",
+                "INTERCEPT",           "first element of `coef` of an `lm` object", "Statistics",
+                "ISLOGICAL",                                        "`is.logical`",    "Boolean",
+                     "ISNA",                                             "`is.na`",    "Boolean",
+                 "ISNUMBER",                                        "`is.numeric`",    "Boolean",
+                   "ISTEXT",                                      "`is.character`",    "Boolean",
+                     "KURT",                 "`kurtosis` in the `moments` package", "Statistics",
+                    "LARGE",                                              "`sort`", "Statistics",
+                      "LCM",                   "`scm` in the `schoolmath` package", "Arithmetic",
+                     "LEFT",                                            "`substr`",       "Text",
+              "LEN, LENGTH",                                             "`nchar`",       "Text",
+                   "LINEST",                                                "`lm`", "Statistics",
+                  "LN, LOG",                                               "`log`", "Arithmetic",
+                    "LOG10",                                             "`log10`", "Arithmetic",
+                   "LOGINV",                                            "`qlnorm`", "Statistics",
+              "LOGNORMDIST",                                            "`plnorm`", "Statistics",
+                    "LOWER",                                           "`tolower`",       "Text",
+                    "MATCH",                                     "`match`,`which`", "Essentials",
+                      "MAX",                            "`max` (sometimes `pmax`)", "Arithmetic",
+                  "MDETERM",                                               "`det`", "Arithmetic",
+                   "MEDIAN",                                            "`median`", "Arithmetic",
+                      "MID",                                            "`substr`",       "Text",
+                      "MIN",                            "`min` (sometimes `pmin`)", "Arithmetic",
+                 "MINVERSE",                                             "`solve`", "Arithmetic",
+                    "MMULT",                                               "`%*%`", "Arithmetic",
+                      "MOD",                                                "`%%`", "Arithmetic",
+                     "MODE",            "`as.numeric(names(which.max(table(x))))`", "Arithmetic",
+                    "MUNIT",                                              "`diag`", "Arithmetic",
+                        "N",                                        "`as.numeric`", "Arithmetic",
+             "NEGBINOMDIST",                                           "`dnbinom`", "Statistics",
+      "NORMDIST, NORMSDIST",            "`pnorm` when cumulative,`dnorm` when not", "Statistics",
+        "NORMINV, NORMSINV",                                             "`qnorm`", "Statistics",
+                      "NOT",                                                 "`!`",    "Boolean",
+                      "NOW",                                   "`date`,`Sys.time`", "Essentials",
+                       "OR",                                      "`|`,`||`,`any`",    "Boolean",
+                  "PEARSON",                                               "`cor`", "Statistics",
+               "PERCENTILE",                                          "`quantile`", "Statistics",
+              "PERCENTRANK",                                              "`ecdf`", "Statistics",
+                   "PERMUT",          "`function(n,k) {choose(n,k)*factorial(k)}`", "Arithmetic",
+             "PERMUTATIONA",                                               "`n^k`", "Arithmetic",
+                      "PHI",                                             "`dnorm`", "Statistics",
+                  "POISSON",             "`ppois` when cumulatic,`dpois` when not", "Statistics",
+                    "POWER",                                                 "`^`", "Arithmetic",
+                     "PROB",                                              "`ecdf`", "Statistics",
+                  "PRODUCT",                                              "`prod`", "Arithmetic",
+                   "PROPER",                                           "`toupper`",       "Text",
+                 "QUARTILE",                                          "`quantile`", "Arithmetic",
+                 "QUOTIENT",                                               "`%/%`", "Arithmetic",
+                     "RAND",                                             "`runif`", "Arithmetic",
+              "RANDBETWEEN",                                            "`sample`", "Arithmetic",
+                     "RANK",                                              "`rank`", "Essentials",
+                  "REPLACE",                                        "`sub`,`gsub`",       "Text",
+                     "REPT",                       "`rep` and `paste` or `paste0`",       "Text",
+                    "RIGHT",                                         "`substring`",       "Text",
+                    "ROUND",                                             "`round`", "Arithmetic",
+                "ROUNDDOWN",                                             "`floor`", "Arithmetic",
+                  "ROUNDUP",                                           "`ceiling`", "Arithmetic",
+                      "ROW",                                     "`row`,`:`,`seq`", "Essentials",
+                     "ROWS",                                              "`nrow`", "Essentials",
+                      "RSQ",                            "`summary` of `lm` object", "Statistics",
+                   "SEARCH",                                    "`regexpr`,`grep`",       "Text",
+                     "SIGN",                                              "`sign`", "Arithmetic",
+                     "SKEW",                 "`skewness` in the `moments` package", "Statistics",
+                    "SLOPE",                            "in `coef` of `lm` object", "Statistics",
+                    "SMALL",                                              "`sort`", "Arithmetic",
+                     "SQRT",                                              "`sqrt`", "Arithmetic",
+              "STANDARDIZE",                                             "`scale`",  "Statitics",
+               "STD, STDEV",                                                "`sd`", "Arithmetic",
+                    "STEYX",                         "`predict` on an `lm` object", "Statistics",
+                   "STRING",                        "`format`,`sprintf`,`formatC`",       "Text",
+               "SUBSTITUTE",                                "`sub`,`gsub`,`paste`", "Essentials",
+               "SUM, SUMIF",                                               "`sum`", "Arithmetic",
+               "SUMPRODUCT",                                         "`crossprod`", "Arithmetic",
+                    "TDIST",                                                "`pt`", "Statistics",
+                     "TEXT",                        "`format`,`sprintf`,`formatC`",       "Text",
+                     "TINV",                                 "`abs(qt(x/2,data))`", "Statistics",
+                    "TODAY",                                          "`Sys.Date`", "Essentials",
+                "TRANSPOSE",                                                 "`t`", "Arithmetic",
+                    "TREND",                          "`fitted` of an `lm` object", "Statistics",
+                     "TRIM",                                               "`sub`", "Essentials",
+                 "TRIMMEAN",                                 "`mean(x,trim=tr/2)`", "Arithmetic",
+                    "TRUNC",                                             "`trunc`", "Essentials",
+                    "TTEST",                                            "`t.test`", "Statistics",
+                     "TYPE",                             "`typeof`,`mode`,`class`", "Essentials",
+                    "UPPER",                                           "`toupper`",       "Text",
+                    "VALUE",                                        "`as.numeric`", "Arithmetic",
+                      "VAR",                                               "`var`", "Essentials",
+                  "VLOOKUP",                                     "`match`,`merge`", "Essentials",
+                  "WEEKDAY",                                          "`weekdays`", "Essentials",
+                  "WEIBULL",      "`pweibull` when cumulative,`dweibull` when not", "Statistics",
+                    "ZTEST",                                             "`pnorm`", "Statistics"
+  )
+
+
+tmpfile <- tempfile(fileext = ".md")
+cat(
+  "---",
+  "mainfont: 'Source Sans Pro'",
+  "monofont: 'Source Code Pro'",
+  "geometry: 'margin=0.5in'",
+  "urlcolor: magenta",
+  "---",
+  "",
+  "# Common Excel Functions in R",
+  "",
+  "The following table is from [How to Use R With Excel by Alyssa Columbus](https://rpubs.com/acolumbus/how-to-use-r-with-excel).",
+  "",
+  knitr::kable(common_excel_functions, format = "markdown", escape = FALSE),
+  sep = "\n",
+  file = tmpfile
+)
+
+fs::dir_create(here::here("materials/session-extra-03"))
+system(paste("pandoc", tmpfile, "--pdf-engine xelatex",
+             "--template /Library/Frameworks/R.framework/Versions/3.5/Resources/library/rmarkdown/rmd/latex/default-1.17.0.2.tex",
+             "--output materials/session-extra-03/common-excel-functions.pdf"))
+
+common_excel_functions %>% 
+  mutate(`R Function` = str_replace_all(`R Function`, "`(.+?)`", "<code>\\1</code>")) %>% 
+  DT::datatable(escape = FALSE, filter = "top", rownames = FALSE)
+```
+
+
+## Tasks
+
+1. Filter two ~~sheets~~ data sets to include only patients that appear in both.
+
+1. Create a grouping variable by extracting part of a string from a text field.
+
+1. Extract the first or last *N* characters from a string.
+
+1. Count the number of unique entries in a column and compare to the overall total number of rows.
+
+1. Format dates: extract the date portion of a date-time and remove outlier or missing dates.
+
+1. Add several columns together into a `Total` column.
+
+
+## Data
+
+```{r data-prep, include=FALSE}
+icd10_codes <- c("C43.9 Malignant melanoma of skin, unspecified", "C34.90 Malignant neoplasm of unsp part of unsp bronchus or lung", "C73 Malignant neoplasm of thyroid gland", "C16.0 Malignant neoplasm of cardia", "C20 Malignant neoplasm of rectum", "I82.C11 Acute embolism and thrombosis of right internal jugular vein", "I82.C19 Acute embolism and thrombosis of unsp internal jugular vein", "C18.9 Malignant neoplasm of colon, unspecified", "I82.C12 Acute embolism and thrombosis of left internal jugular vein", "C43.51 Malignant melanoma of anal skin", "C76.0 Malignant neoplasm of head, face and neck", "C07 Malignant neoplasm of parotid gland", "C34.92 Malignant neoplasm of unsp part of left bronchus or lung", "C43.30 Malignant melanoma of unspecified part of face", "C03.9 Malignant neoplasm of gum, unspecified", "C43.59 Malignant melanoma of other part of trunk", "C30.0 Malignant neoplasm of nasal cavity", "C31.0 Malignant neoplasm of maxillary sinus", "C34.11 Malignant neoplasm of upper lobe, right bronchus or lung", "C43.11 Malignant melanoma of right eyelid, including canthus", "C43.61 Malignant melanoma of right upper limb, including shoulder", "C05.2 Malignant neoplasm of uvula", "C64.9 Malignant neoplasm of unsp kidney, except renal pelvis", "C43.39 Malignant melanoma of other parts of face", "C16.9 Malignant neoplasm of stomach, unspecified", "C18.8 Malignant neoplasm of overlapping sites of colon", "C03.1 Malignant neoplasm of lower gum", "C43.4 Malignant melanoma of scalp and neck", "C43.8 Malignant melanoma of overlapping sites of skin", "C43.72 Malignant melanoma of left lower limb, including hip", "C34.32 Malignant neoplasm of lower lobe, left bronchus or lung", "C34.31 Malignant neoplasm of lower lobe, right bronchus or lung", "C83.19 Mantle cell lymphoma, extranodal and solid organ sites", "C81.90 Hodgkin lymphoma, unspecified, unspecified site", "C81.98 Hodgkin lymphoma, unspecified, lymph nodes of multiple sites", "C83.30 Diffuse large B-cell lymphoma, unspecified site", "C85.80 Oth types of non-Hodgkin lymphoma, unspecified site", "C85.90 Non-Hodgkin lymphoma, unspecified, unspecified site", "Z85.71 Personal history of Hodgkin lymphoma", "Z85.72 Personal history of non-Hodgkin lymphomas", "C34.91 Malignant neoplasm of unsp part of right bronchus or lung", "C43.21 Malignant melanoma of right ear and external auricular canal", "C43.10 Malignant melanoma of unspecified eyelid, including canthus", "C83.31 Diffuse large B-cell lymphoma, nodes of head, face, and neck", "C83.36 Diffuse large B-cell lymphoma, intrapelvic lymph nodes", "C83.39 Diffuse large B-cell lymphoma, extrnod and solid organ sites", "C83.50 Lymphoblastic (diffuse) lymphoma, unspecified site", "C83.51 Lymphoblastic lymphoma, nodes of head, face, and neck", "C85.91 Non-Hodgkin lymphoma, unsp, nodes of head, face, and neck", "C85.99 Non-Hodgkin lymphoma, unsp, extranodal and solid organ sites", "C19 Malignant neoplasm of rectosigmoid junction", "C32.0 Malignant neoplasm of glottis", "C43.31 Malignant melanoma of nose", "C30.1 Malignant neoplasm of middle ear", "C09.9 Malignant neoplasm of tonsil, unspecified", "C34.12 Malignant neoplasm of upper lobe, left bronchus or lung", "C01 Malignant neoplasm of base of tongue", "C06.1 Malignant neoplasm of vestibule of mouth", "C34.81 Malignant neoplasm of ovrlp sites of right bronchus and lung", "C34.2 Malignant neoplasm of middle lobe, bronchus or lung", "C34.80 Malignant neoplasm of ovrlp sites of unsp bronchus and lung", "C43.62 Malignant melanoma of left upper limb, including shoulder")
+
+cancer_therapies_table <- readr::read_csv("https://crn.cancer.gov/resources/ctcodes-procedures.csv") %>% 
+  filter(!str_detect(DESCRIPTION, "[a-z]")) %>%
+  group_by(CHEMOCAT) %>%
+  sample_n(1) %>% 
+  ungroup()
+
+diagnoses <- 
+  data_frame(
+    MRN = sample(seq(100000, 999999), 100),
+    `Patient ID` = sprintf("PATIENT-%08d", sample(seq(10000, 99999), 100)),
+    `Birth Date` = as.Date(sample(seq(0, 2000*365), 100), origin = "1920-01-01")
+  ) %>% 
+  mutate(
+    `Birth Date` = strftime(`Birth Date`, "%w/%e/%y 12:00:00 AM", tz = "UTC"),
+    `Birth Date` = str_replace(`Birth Date`, "(/) (\\d)", "\\1\\2"),
+    `ICD10 Code` = purrr::map(MRN, ~ sample(icd10_codes, sample(1:4, 1)))
+  ) %>% 
+  tidyr::unnest() %>% 
+  mutate(
+    `Admission Date` = as.Date(sample(seq(0, 18 * 365), nrow(.)), origin = "2000-01-01")
+  ) %>% 
+  select(MRN, `Patient ID`, contains("Date"), everything()) %>% 
+  arrange(MRN, `Admission Date`)
+
+therapies <-
+  diagnoses %>% 
+    sample_frac(0.66) %>% 
+    select(MRN, `Patient ID`, `Admission Date`) %>% 
+    mutate(
+      therapy = map(`Admission Date`, function(dt) {
+        n <- rbinom(1, 4, 0.25) + 1
+        bind_cols(
+          data_frame(`Therapy Date` = dt + sample(0:84, n)),
+          sample_n(cancer_therapies_table, n, replace = TRUE) %>% 
+            select(1:4)
+        )
+      })
+    ) %>% 
+  tidyr::unnest(therapy) %>%
+  arrange(`Admission Date`, `Therapy Date`)
+
+writexl::write_xlsx(list(
+  Diagnoses = diagnoses,
+  Therapies = therapies
+), path = here::here("materials", "session-extra-03", "data-export-example.xlsx"))
+```
+
+I've generated fake example data to be used for the above tasks.
+There are two data sets stored as sheets in the file [data-export-example.xlsx](materials/session-extra-03/data-export-example.xlsx).
+
+### Example Data {.tabset}
+
+#### Diagnoses
+
+```{r echo=FALSE, results='asis'}
+diagnoses %>% 
+  head() %>% 
+  knitr::kable()
+```
+
+#### Therapies
+
+```{r echo=FALSE, results='asis'}
+therapies %>% 
+  head() %>% 
+  knitr::kable()
+```
+
+#### Import Data
+
+```r
+diagnoses <- readxl::read_xlsx(
+  paste0("https://gerkelab.github.io/core-r-course/",
+         "materials/session-extra-03/", "
+         data-export-example.xlsx"), 
+  sheet = "Diagnoses"
+)
+
+therapies <- readxl::read_xlsx(
+  paste0("https://gerkelab.github.io/core-r-course/",
+         "materials/session-extra-03/",
+         "data-export-example.xlsx"), 
+  sheet = "Therapies"
+)
+```
+
+## Package Spotlight: `writexl`
+
+[writexl]{.pkg} is a relatively new package that can be used to write data frames from R into Excel `.xlsx` files.
+
+```{r, eval=FALSE, prompt = FALSE}
+install.packages("writexl")
+```
+
+You can write an Excel file from a data frame in the same way you use `write_csv()`.
+
+```{r, eval=FALSE, prompt = FALSE}
+library(writexl)
+
+write_xlsx(diagnoses, "diagnoses.xlsx")
+```
+
+You can also save multiple data frames into a single Excel file as different sheets by using a named list.
+
+```{r, eval=FALSE, prompt = FALSE}
+write_xlsx(
+  list(
+    Diagnoses = diagnoses,
+    Therapies = therapies
+  ),
+  "data-export-example.xlsx"
+)
+```
+
+
+## Package Spotlight: `esquisse`
+
+[esquisse]{.pkg} is an RStudio addin the lets you build [ggplot2]{.pkg} plots using a graphical interface.
+Learn more at <https://github.com/dreamRs/esquisse/>.
+
+```r
+install.packages("esquisse")
+```
+
+<img src="https://github.com/dreamRs/esquisse/raw/master/man/figures/esquisse.gif" width="450px">

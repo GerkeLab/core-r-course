@@ -32,6 +32,8 @@ navbar:
           href: slides/rmarkdown.html
         - text: "Extra - Replace Excel"
           href: session_extra_03.html
+        - text: "Extra - Project Template"
+          href: session_extra_04.html
     - text: "Materials"
       menu:
         - text: "Session 1"

@@ -1,0 +1,110 @@
+---
+title: Extra - Project Template
+date: "November 5"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(comment = "", prompt = TRUE)
+set.seed(42)
+```
+
+## Project Template
+
+### Why Use a Project Template?
+
+**Your collaborators** and **future you** will thank you:
+
+- Easier to jump into someone else's project
+
+- Easier to share code
+
+- Feel more confident about your results
+
+- Which script did I run to import the data?
+
+- If I update the data, how do I re-run the processing?
+
+- Which script do I tweak to make an adjustment?
+
+- Where did I *get* the data from in the first place?
+
+
+### What Goes into a Typical Project?
+
+Jump into our [Google Doc whiteboard](https://docs.google.com/document/d/1WXVLBVE3J4EOWhc0m0S2uvTD8HyWiY4BP95OygBEs8Q/edit?usp=sharing).
+
+### Project Principles
+
+1. Use common folder names to put things in a consistent place
+
+1. Never overwrite your source data
+
+1. Document your process with **code** or **words**
+
+1. If you have multiple scripts, use `00_`, `01_`, etc. to indicate the order they should run.
+
+### Project Template Layout
+
+<details><summary>Project Template Starter</summary>
+
+- <i class="em em-open_file_folder"></i> New Project
+  - <i class="em em-file_folder"></i> code
+  - <i class="em em-open_file_folder"></i> data
+    - <i class="em em-file_folder"></i> raw
+    - <i class="em em-file_folder"></i> processed
+  - <i class="em em-file_folder"></i> deliverable
+  - <i class="em em-bookmark_tabs"></i> README.Rmd
+    - Analyst and Requester
+    - Data Request
+    - Document external data sources
+    - Document project process
+
+</details>
+
+## Project
+
+Create a new project and use it to complete the following task.
+
+> **Data Request:** The PI would like to know the number of injections by drug that each patient received for injections given starting in 2010.
+
+Use the data from our [Excel sheets of diagnsoses and therapies](session_extra_03.html#data).
+
+```
+https://git.io/fpez6
+```
+
+<details><summary>Import Data Starter Script</summary>
+
+```r
+library(tidyverse)
+library(readxl)
+library(lubridate)
+
+diagnoses <- read_excel(_____, sheet = "Diagnoses") %>% 
+  mutate(`Birth Date` = mdy_hms(`Birth Date`))
+  
+therapies <- read_excel(_____, sheet = "Therapies") %>% 
+  mutate(
+    `Admission Date` = ____hms(`Admission Date`),
+    `Therapy Date` = ____hms(`Therapy Date`)
+  )
+```
+
+</details>
+
+|    MRN|Drug                |  n|
+|------:|:-------------------|--:|
+| 455461|AMIFOSTINE          |  6|
+| 172233|IXABEPILONE         |  4|
+| 172233|TENIPOSIDE          |  4|
+| 222829|PEMETREXED          |  4|
+| 295439|ABATACEPT           |  4|
+| 295439|LANREOTIDE          |  4|
+| 295439|MEDROXYPROGESTERONE |  4|
+
+Table: Example of requested data output.

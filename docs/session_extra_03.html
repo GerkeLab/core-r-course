@@ -406,6 +406,9 @@ div.tocify {
     <li>
       <a href="session_extra_03.html">Extra - Replace Excel</a>
     </li>
+    <li>
+      <a href="session_extra_04.html">Extra - Project Template</a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -619,19 +622,18 @@ div.tocify {
 </div>
 <div id="import-data" class="section level4">
 <h4>Import Data</h4>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">diagnoses &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_xlsx</span>(</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="kw">paste0</span>(<span class="st">&quot;https://gerkelab.github.io/core-r-course/&quot;</span>,</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">         <span class="st">&quot;materials/session-extra-03/&quot;</span>, </a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">         <span class="st">&quot;data-export-example.xlsx&quot;</span>), </a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="dt">sheet =</span> <span class="st">&quot;Diagnoses&quot;</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">)</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">therapies &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_xlsx</span>(</a>
-<a class="sourceLine" id="cb1-9" data-line-number="9">  <span class="kw">paste0</span>(<span class="st">&quot;https://gerkelab.github.io/core-r-course/&quot;</span>,</a>
-<a class="sourceLine" id="cb1-10" data-line-number="10">         <span class="st">&quot;materials/session-extra-03/&quot;</span>,</a>
-<a class="sourceLine" id="cb1-11" data-line-number="11">         <span class="st">&quot;data-export-example.xlsx&quot;</span>), </a>
-<a class="sourceLine" id="cb1-12" data-line-number="12">  <span class="dt">sheet =</span> <span class="st">&quot;Therapies&quot;</span></a>
-<a class="sourceLine" id="cb1-13" data-line-number="13">)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">data_file &lt;-<span class="st"> &quot;data-export_example.xlsx&quot;</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">download.file</span>(</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">  <span class="kw">paste0</span>(<span class="st">&quot;https://gerkelab.github.io/core-r-course/&quot;</span>,</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">         <span class="st">&quot;materials/session-extra-03/&quot;</span>, </a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">         <span class="st">&quot;data-export-example.xlsx&quot;</span>),</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">  data_file</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">)</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">diagnoses &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_xlsx</span>(data_file, <span class="dt">sheet =</span> <span class="st">&quot;Diagnoses&quot;</span>)</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">therapies &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_xlsx</span>(data_file, <span class="dt">sheet =</span> <span class="st">&quot;Therapies&quot;</span>)</a></code></pre></div>
 </div>
 </div>
 </div>

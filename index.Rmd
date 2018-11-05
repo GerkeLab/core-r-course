@@ -34,7 +34,7 @@ session_list <- tibble(
     "Working With Files", #9
     "R Markdown", #10
     "Replace Excel", #11
-    ""
+    "Project Template"
   ),
   Location = c("MKE-1308", rep("MKE-1022", 11)),
   `Start Time` = c(rep("09:15", 8), rep("1pm", 4)),
@@ -51,6 +51,7 @@ session_list[8, "Link"] <- "session_08.html"
 session_list[9, "Link"] <- "slides/working-with-files.html"
 session_list[10, "Link"] <- "slides/rmarkdown.html"
 session_list[11, "Link"] <- "session_extra_03.html"
+session_list[12, "Link"] <- "session_extra_04.html"
 ```
 
 <!-- Emoji: https://afeld.github.io/emoji-css/ -->
@@ -92,8 +93,6 @@ You can refer to the [dplyr]{.pkg} [cheat sheet](resources.html#cheat_sheets) or
 > If you would like to attend, plan to bring a laptop, as the sessions will be interactive. We ask that you install R, Rstudio, and the devtools package prior to the first day ([instructions available here](system-requirements.html)). Garrick can describe/answer any questions about that process in the first session; the reason for completing the task in advance is to ensure that no security permissions on your machine block you from getting up and running.
 </details>
 
-## Next Session
-
 ```{r results='asis'}
 next_session <- session_list %>%
   filter(Date > Sys.Date()) %>%
@@ -105,7 +104,10 @@ next_session <- session_list %>%
   ) %>% 
   select(-Topic, -n)
 
-knitr::kable(next_session, escape = FALSE)
+if (nrow(next_session)) {
+  cat("\n## Next Session", "\n\n")
+  print(knitr::kable(next_session, escape = FALSE))
+}
 ```
 
 ## Previous Sessions

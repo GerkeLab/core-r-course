@@ -519,56 +519,42 @@ div.tocify {
 <a class="sourceLine" id="cb2-5" data-line-number="5">diagnoses &lt;-<span class="st"> </span><span class="kw">read_excel</span>(_____, <span class="dt">sheet =</span> <span class="st">&quot;Diagnoses&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb2-6" data-line-number="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">Birth Date</span><span class="st">`</span> =<span class="st"> </span><span class="kw">mdy_hms</span>(<span class="st">`</span><span class="dt">Birth Date</span><span class="st">`</span>))</a>
 <a class="sourceLine" id="cb2-7" data-line-number="7">  </a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">therapies &lt;-<span class="st"> </span><span class="kw">read_excel</span>(_____, <span class="dt">sheet =</span> <span class="st">&quot;Therapies&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="st">  </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb2-10" data-line-number="10">    <span class="st">`</span><span class="dt">Admission Date</span><span class="st">`</span> =<span class="st"> </span><span class="kw">____hms</span>(<span class="st">`</span><span class="dt">Admission Date</span><span class="st">`</span>),</a>
-<a class="sourceLine" id="cb2-11" data-line-number="11">    <span class="st">`</span><span class="dt">Therapy Date</span><span class="st">`</span> =<span class="st"> </span><span class="kw">____hms</span>(<span class="st">`</span><span class="dt">Therapy Date</span><span class="st">`</span>)</a>
-<a class="sourceLine" id="cb2-12" data-line-number="12">  )</a></code></pre></div>
+<a class="sourceLine" id="cb2-8" data-line-number="8">therapies &lt;-<span class="st"> </span><span class="kw">read_excel</span>(_____, <span class="dt">sheet =</span> <span class="st">&quot;Therapies&quot;</span>)</a></code></pre></div>
 </details>
 <table>
 <caption>Example of requested data output.</caption>
 <thead>
 <tr class="header">
 <th align="right">MRN</th>
-<th align="left">Drug</th>
+<th align="left">CHEMOCAT</th>
 <th align="right">n</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">455461</td>
-<td align="left">AMIFOSTINE</td>
-<td align="right">6</td>
+<td align="right">161623</td>
+<td align="left">BELIMUMAB</td>
+<td align="right">2</td>
 </tr>
 <tr class="even">
-<td align="right">172233</td>
-<td align="left">IXABEPILONE</td>
-<td align="right">4</td>
+<td align="right">105705</td>
+<td align="left">LEUCOVORIN</td>
+<td align="right">1</td>
 </tr>
 <tr class="odd">
-<td align="right">172233</td>
-<td align="left">TENIPOSIDE</td>
-<td align="right">4</td>
+<td align="right">106355</td>
+<td align="left">ABARELIX</td>
+<td align="right">1</td>
 </tr>
 <tr class="even">
-<td align="right">222829</td>
-<td align="left">PEMETREXED</td>
-<td align="right">4</td>
+<td align="right">133111</td>
+<td align="left">CARFILZOMIB</td>
+<td align="right">1</td>
 </tr>
 <tr class="odd">
-<td align="right">295439</td>
-<td align="left">ABATACEPT</td>
-<td align="right">4</td>
-</tr>
-<tr class="even">
-<td align="right">295439</td>
-<td align="left">LANREOTIDE</td>
-<td align="right">4</td>
-</tr>
-<tr class="odd">
-<td align="right">295439</td>
-<td align="left">MEDROXYPROGESTERONE</td>
-<td align="right">4</td>
+<td align="right">161623</td>
+<td align="left">ALEMTUZUMAB</td>
+<td align="right">1</td>
 </tr>
 </tbody>
 </table>

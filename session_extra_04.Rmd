@@ -88,23 +88,17 @@ library(lubridate)
 diagnoses <- read_excel(_____, sheet = "Diagnoses") %>% 
   mutate(`Birth Date` = mdy_hms(`Birth Date`))
   
-therapies <- read_excel(_____, sheet = "Therapies") %>% 
-  mutate(
-    `Admission Date` = ____hms(`Admission Date`),
-    `Therapy Date` = ____hms(`Therapy Date`)
-  )
+therapies <- read_excel(_____, sheet = "Therapies")
 ```
 
 </details>
 
-|    MRN|Drug                |  n|
-|------:|:-------------------|--:|
-| 455461|AMIFOSTINE          |  6|
-| 172233|IXABEPILONE         |  4|
-| 172233|TENIPOSIDE          |  4|
-| 222829|PEMETREXED          |  4|
-| 295439|ABATACEPT           |  4|
-| 295439|LANREOTIDE          |  4|
-| 295439|MEDROXYPROGESTERONE |  4|
+|    MRN|CHEMOCAT    |  n|
+|------:|:-----------|--:|
+| 161623|BELIMUMAB   |  2|
+| 105705|LEUCOVORIN  |  1|
+| 106355|ABARELIX    |  1|
+| 133111|CARFILZOMIB |  1|
+| 161623|ALEMTUZUMAB |  1|
 
 Table: Example of requested data output.

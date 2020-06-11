@@ -98,7 +98,7 @@ It's a good idea to save your output files in a separate directory, like `output
 If you get an error like this
 
 ```{r, echo=FALSE, error=TRUE}
-write_csv(iris, "output_04/CancerRegistryPatients_export.csv")
+write_csv(mtcars, "output_04/CancerRegistryPatients_export.csv")
 ```
 
 it is most likely because the directory `output_04` doesn't exist in your current working directory.
